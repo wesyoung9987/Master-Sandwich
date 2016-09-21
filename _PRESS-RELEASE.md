@@ -26,10 +26,10 @@ Once the project moves into development, the press release can be used as a touc
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
 
 ## Problem ##
-  > Describe the problem your product solves.
+  > All too often our modile experience keeps us indoors and not connecting to the natural world around us.
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  > With Treasure Trek, you can stay connected with while you explore geography and play games invented by new friends.
 
 ## Quote from You ##
   Solve and create riddles in your area in order to become the riddle master.
