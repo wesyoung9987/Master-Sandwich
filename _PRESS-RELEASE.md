@@ -32,10 +32,10 @@ Once the project moves into development, the press release can be used as a touc
   > Describe how your product elegantly solves the problem.
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  Solve and create riddles in your area in order to become the riddle master.
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  Download the app in the app store to start exploring and solving riddles right away.
 
 ## Customer Quote ##
   > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
