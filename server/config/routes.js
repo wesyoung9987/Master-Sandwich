@@ -1,5 +1,5 @@
 var userHandler = require('../users/userHandler.js');
-var riddleHandler = require('../lists/riddleHandler.js');
+var riddleHandler = require('../riddles/riddleHandler.js');
 
 // export entire function to server.js
 module.exports = function(app, express) {
