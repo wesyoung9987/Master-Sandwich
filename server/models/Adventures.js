@@ -13,7 +13,9 @@ var AdventureSchema = new mongoose.Schema({
   riddle5: String,
   answer5: String,
   location: String,
-  user: {type: ObjectId, ref: 'User'}
+  photo: String,
+  date: { type: Date, default: Date.now },
+  user: { type: ObjectId, ref: 'User' }
 });
 
 var Adventure = mongoose.model('Adventure', AdventureSchema);
