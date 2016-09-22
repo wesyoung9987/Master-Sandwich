@@ -5,5 +5,6 @@ module.exports = {
 
   // TODO:
   // Set up server api methods for users here
+  // Coordinate w/ frontend and db
 
 };
