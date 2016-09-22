@@ -2,20 +2,10 @@ var mongoose = require('mongoose');
 
 var AdventureSchema = new mongoose.Schema({
   title: String,
-  riddle1: String,
-  answer1: String,
-  riddle2: String,
-  answer2: String,
-  riddle3: String,
-  answer3: String,
-  riddle4: String,
-  answer4: String,
-  riddle5: String,
-  answer5: String,
-  location: String,
-  photo: String,
+  adventure: [{riddle: String, answer: String, completed: { type: Boolean, default: false }, location: String, photo: String }],
   date: { type: Date, default: Date.now },
-  user: { type: ObjectId, ref: 'User' }
+  completedAll: { type: Boolean, default: false },
+  startingLocation: String
 });
 
 var Adventure = mongoose.model('Adventure', AdventureSchema);
