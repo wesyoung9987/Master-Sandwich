@@ -1,6 +1,16 @@
+# Dependencies
 node_modules/
 bower_components/
 *.log
 
+# Directories
 build/
 dist/
+
+# Floobits
+.floo
+.floobit
+.flooignore
+
+# Other
+.DS_Store
