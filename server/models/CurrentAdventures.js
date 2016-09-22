@@ -13,7 +13,10 @@ var CurrentAdventureSchema = new mongoose.Schema({
   riddle5: String,
   answer5: String,
   location: String,
-  owner: {type: ObjectId, ref: 'User'}
+  photo: String,
+  date: { type: Date, default: Date.now },
+  completed: { type: Boolean, default: false },
+  owner: { type: ObjectId, ref: 'User' }
 });
 
 var CurrentAdventure = mongoose.model('CurrentAdventure', CurrentAdventureSchema);
