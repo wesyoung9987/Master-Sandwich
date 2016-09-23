@@ -5,8 +5,7 @@ var mongoose = require('mongoose');
 var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/treasuretrek';
 
 // connect to the db
-// uncomment when db is ready
-// mongoose.connect(mongoURI);
+mongoose.connect(mongoURI);
 
 // set port
 var port = process.env.PORT || 1337;
