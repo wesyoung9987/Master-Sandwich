@@ -11,8 +11,8 @@ import {
   Text,
   View
 } from 'react-native';
-import Header from './src/components/Header';
-import Auth from './src/components/Auth';
+import Header from './src/components/auth/Header';
+import Auth from './src/components/auth/Auth';
 
 
 class TreasureTrek extends Component {
@@ -31,4 +31,3 @@ class TreasureTrek extends Component {
 
 
 AppRegistry.registerComponent('TreasureTrek', () => TreasureTrek);
-
