@@ -11,46 +11,24 @@ import {
   Text,
   View
 } from 'react-native';
+import Header from './src/components/Header';
+import Auth from './src/components/Auth';
+
 
 class TreasureTrek extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to TreasureTrek!
-        </Text>
-        <Text style={styles.instructions}>
-          Sign Up Now or Never!
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shaaaake for dev menu
-        </Text>
+      <View>
+        <Header welcomeText={'Welcome to TreasureTrek!'} />
+        <Auth authText={'Sign Up'} />
       </View>
+
     );
   }
 }
 
 
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    marginBottom: 5,
-    color: '#333333',
-  },
-});
 
 AppRegistry.registerComponent('TreasureTrek', () => TreasureTrek);
 
