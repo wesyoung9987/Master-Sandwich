@@ -108,6 +108,7 @@ module.exports = {
   },
 
   // DELETE
+  // Not MVP
   deleteAdventure:  function(req, res){},
 
   // GET
@@ -121,8 +122,19 @@ module.exports = {
   },
 
   // GET
+  // Expects userid parameter passed in url (/api/fetchAll/id)
+  // Returns array of all users in progress adventures in form of:
+  // {userId: 'userid', adventureId: adventureObj, completion: [], completed: boolean, date: date}
   fetchMyInProgressAdventures: function(req, res){
-    // Need user id
+    var userid = req.param.id;
+
+    UserAdventure.find({userId: userid})
+      .populate('adventureId')
+      .exec(function(err, adventures){
+        if (err) res.status(500).send({error: err});
+        else if (!adventures) res.status(500).send({error: "No Adventures"});
+        else res.json(adventures);
+      });
   },
 
   // GET
