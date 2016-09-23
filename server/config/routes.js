@@ -11,7 +11,7 @@ module.exports = function(app, express) {
   app.post('/api/signin', userHandler.signin);
   app.post('/api/signup', userHandler.signup);
 
-  app.get('/api/pickAd', adventureHandler.pickAdventure);
+  app.post('/api/pickAd', adventureHandler.pickAdventure);
   app.get('/api/forgetAd', adventureHandler.forgetAdventure);
   app.get('/api/createAd', adventureHandler.createAdventure);
   app.get('/api/deleteAd', adventureHandler.deleteAdventure);
