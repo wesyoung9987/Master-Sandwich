@@ -77,9 +77,34 @@ module.exports = {
   },
 
   // POST
+  // Expects {userid: 'userid', title: 'title', adventure: [], startingLocation: 'location'}
+  // Returns status 200 on success
   createAdventure:  function(req, res){
     var userid = req.body.userid;
+    var adventureObj = {
+      title: req.body.title
+      creator: userid,
+      adventure: req.body.adventure,
+      startingLocation: req.body.startingLocation
+    };
 
+    User.find({_id: userid}, function(err, user){
+      if (err) {
+        res.status(500).send({error: err});
+      } else {
+        if (!user) {
+          res.status(500).send({error: "No user found"});
+        } else {
+          Adventure.create(adventureObj, function(err, adventure){
+            if (err) {
+              res.status(500).send({error: err});
+            } else {
+              res.json(adventure);
+            }
+          });
+        }
+      }
+    });
   },
 
   // DELETE
