@@ -1,6 +1,6 @@
 var Adventure = require('../models/Adventures.js');
 var User = require('../models/Users.js');
-// var Join = require('../models/Join.js');
+var UserAdventure = require('../models/UserAdventure.js');
 
 /*
 User.findOne({_id: '57e549a121714a66a2d4419b'}, function(err, user){
@@ -33,19 +33,23 @@ module.exports = {
 
   // POST
   // Expects {userid: 'userid', adventureid: 'adventureid'}
-  // Only returns status 200
+  // Returns status 200 on success
   pickAdventure: function(req, res){
     var userid = req.body.userid;
     var adventureid = req.body.adventureid;
 
-    Adventure.findOne({_id: adventureid}, 'riddles', function(err, adventure){
+    Adventure.findOne({_id: adventureid}, 'adventure', function(err, adventure){
       if (err) {
         res.status(500).send({error: err});
       } else {
+        /*  When we make the number of riddles per adventure variable,
+            we will uncomment below and change the userAdventure model
+            completion property to an empty array.  Then add completion to the list of properties in the creat method below.
         var completion = adventure.riddles.map(function(riddle){
           return false;
         });
-        Join.create({userid: userid, adventureid: adventureid, completion: completion}, function(err, combo){
+        */
+        UserAdventure.create({userId: userid, adventureId: adventureid}, function(err, combo){
           if (err) {
             res.status(500).send({error: err});
           } else {
@@ -58,12 +62,12 @@ module.exports = {
 
   // DELETE
   // Expects {userid: 'userid', adventureid: 'adventureid'}
-  // Only returns status 200
+  // Returns status 200 on success
   forgetAdventure: function(req, res){
     var userid = req.body.userid;
     var adventureid = req.body.adventureid;
 
-    Join.remove({userid: userid, adventureid: adventureid}, function(err, result){
+    UserAdventure.remove({userid: userId, adventureid: adventureId}, function(err, result){
       if (err) {
         res.status(500).send({error: err});
       } else {
