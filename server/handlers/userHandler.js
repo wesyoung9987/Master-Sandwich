@@ -3,7 +3,9 @@ var User = require('../models/Users.js');
 // export entire object of methods to routes.js
 module.exports = {
 
-
+  // signin method
+  // expects {email: 'email@email.com', password: 'pass123'}
+  // returns {token: true} if successful (what should it return?)
   signin: function(req, res) {
     var email = req.body.email;
     var password = req.body.password;
@@ -29,7 +31,10 @@ module.exports = {
     });
   },
 
-
+  // signup method
+  // expects {email: 'email@email.com', password: 'pass123'} at minimum
+    // can contain more properties
+  // returns {token: true} if successful (what should it return?)
   signup: function(req, res){
     var email = req.body.email;
     var newUserObj = req.body
