@@ -11,7 +11,7 @@ module.exports = {
   checkJWT: function(req, res, next){
     var token = req.headers['x-access-token'];
     if (!token) {
-      exports.sendError("No Session", req, res);
+      module.exports.sendError("No Session", req, res);
     } else {
       req.user = jwt.decode(token, 'secret');
       next();
