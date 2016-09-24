@@ -77,7 +77,7 @@ module.exports = {
   },
 
   // POST
-  // Expects {userid: 'userid', title: 'title', adventure: [], startingLocation: 'location'}
+  // Expects {userid: 'userid', title: 'title', adventure: [riddles], startingLocation: 'location'}
   // Returns status 200 on success
   createAdventure:  function(req, res){
     var userid = req.body.userid;
@@ -122,7 +122,7 @@ module.exports = {
   },
 
   // GET
-  // Expects userid parameter passed in url (/api/fetchAll/id)
+  // Expects userid parameter passed in url (/api/fetchMine/id)
   // Returns array of all users in progress adventures in form of:
   // {userId: 'userid', adventureId: adventureObj, completion: [], completed: boolean, date: date}
   fetchMyInProgressAdventures: function(req, res){
@@ -138,8 +138,23 @@ module.exports = {
   },
 
   // GET
+  // Expects userid parameter passed in url (/api/fetchCreated/:id)
+  // Returns array of all adventures the user created in form of:
+  // {title: 'title', creator: 'userid', adventure: [riddles], date: date, startingLocation: 'location'}
   fetchMyCreatedAdventures: function(req, res){
-    // Need user id
+    var userid = req.param.id
+
+    Adventures.find({creator: userid}, function(err, adventures){
+      if (err) {
+        res.status(500).send({error: err});
+      } else {
+        if (!adventures) {
+          res.status(500).send({error: "No adventures"})
+        } else {
+          res.json(adventures);
+        }
+      }
+    })
   },
 
   // GET
