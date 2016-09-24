@@ -14,14 +14,14 @@ module.exports = function(app, express) {
   app.post('/api/signin', userHandler.signin);
   app.post('/api/signup', userHandler.signup);
 
-  app.post('/api/pickAd', adventureHandler.pickAdventure);
-  app.delete('/api/forgetAd', adventureHandler.forgetAdventure);
-  app.post('/api/createAd', adventureHandler.createAdventure);
-  app.delete('/api/deleteAd', adventureHandler.deleteAdventure);
+  app.post('/api/pickAd', helper.checkJWT, adventureHandler.pickAdventure);
+  app.delete('/api/forgetAd', helper.checkJWT, adventureHandler.forgetAdventure);
+  app.post('/api/createAd', helper.checkJWT, adventureHandler.createAdventure);
+  app.delete('/api/deleteAd', helper.checkJWT, adventureHandler.deleteAdventure);
   app.get('/api/fetchAll', helper.checkJWT, adventureHandler.fetchAllAdventures);
-  app.get('/api/fetchMine/:id', adventureHandler.fetchMyInProgressAdventures);
-  app.get('/api/fetchCreated/:id', adventureHandler.fetchMyCreatedAdventures);
-  app.get('/api/fetchRiddle', adventureHandler.fetchSingleRiddle);
+  app.get('/api/fetchMine', helper.checkJWT, adventureHandler.fetchMyInProgressAdventures);
+  app.get('/api/fetchCreated', helper.checkJWT, adventureHandler.fetchMyCreatedAdventures);
+  app.get('/api/fetchRiddle', helper.checkJWT, adventureHandler.fetchSingleRiddle);
 
   // just for testing
   app.get('/api/test', function(req, res){

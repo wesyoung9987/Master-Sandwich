@@ -1,6 +1,6 @@
 var jwt = require('jwt-simple');
 var User = require('../models/Users.js');
-var helper = require('./helpers.js');
+var helper = require('../config/helpers.js');
 
 // export entire object of methods to routes.js
 module.exports = {
@@ -25,8 +25,7 @@ module.exports = {
             } else { // signin success, session token?
               var token = jwt.encode(user, 'secret');
               res.json({
-                token: token,
-                userid: user['_id'] // what should be sent back on success?
+                userid: token // what should be sent back on success?
               });
             }
           });
@@ -58,8 +57,7 @@ module.exports = {
             } else { // signup success, session token?
               var token = jwt.encode(user, 'secret');
               res.json({
-                token: token,
-                userid: user['_id'] // what should be sent back on success?
+                userid: token // what should be sent back on success?
               });
             }
           });
