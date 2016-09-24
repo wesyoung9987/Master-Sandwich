@@ -4,7 +4,8 @@
   "description": "Location Based Treasure Hunt Native iOS App",
   "author": "Team Sandwich",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "mocha spec/*"
   },
   "license": "UNLICENSED",
   "private": true,
