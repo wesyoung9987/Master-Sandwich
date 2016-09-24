@@ -3,7 +3,7 @@ var assert = require('assert');
 describe('Mocha', function() {
   describe('#Mocha', function() {
 
-    // Having no callback for assertion tests will label the test as "pending",
+    // Having no callback for tests will label the test as "pending",
     // just as it would with tests with an "x" by it.
     // This system is good for writing speculative tests to be completed later.
     it('Someone should fill this test out'/*, function (){...}*/);
