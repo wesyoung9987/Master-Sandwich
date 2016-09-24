@@ -22,7 +22,7 @@ module.exports = {
               res.status(500).send({error: "Password Invalid"});
             } else { // signin success, session token?
               res.json({
-                token: true // what should be sent back on success?
+                userid: user['_id'] // what should be sent back on success?
               });
             }
           });
@@ -53,7 +53,7 @@ module.exports = {
               res.status(500).send({error: err});
             } else { // signup success, session token?
               res.json({
-                token: true // what should be sent back on success?
+                userid: user['_id'] // what should be sent back on success?
               });
             }
           });

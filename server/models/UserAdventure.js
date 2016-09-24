@@ -8,6 +8,6 @@ var UserAdventureSchema = new mongoose.Schema({
   date: { type: Date, default: Date.now }
 });
 
-var Adventure = mongoose.model('Adventure', AdventureSchema);
+var UserAdventure = mongoose.model('UserAdventure', UserAdventureSchema);
 
-module.exports = Adventure;
+module.exports = UserAdventure;
