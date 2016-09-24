@@ -15,7 +15,7 @@ module.exports = {
         console.log("db findOne signin err: ", err);
       } else {
         if (!user) { // notifies if user is not found
-          res.status(500).send({error: err});
+          res.status(500).send({error: "No User"});
         } else {
           user.comparePasswords(password, function(err, match){
             if (!match) { // notifies if password is invalid

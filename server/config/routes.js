@@ -12,9 +12,9 @@ module.exports = function(app, express) {
   app.post('/api/signup', userHandler.signup);
 
   app.post('/api/pickAd', adventureHandler.pickAdventure);
-  app.get('/api/forgetAd', adventureHandler.forgetAdventure);
-  app.get('/api/createAd', adventureHandler.createAdventure);
-  app.get('/api/deleteAd', adventureHandler.deleteAdventure);
+  app.delete('/api/forgetAd', adventureHandler.forgetAdventure);
+  app.post('/api/createAd', adventureHandler.createAdventure);
+  app.delete('/api/deleteAd', adventureHandler.deleteAdventure);
   app.get('/api/fetchAll', adventureHandler.fetchAllAdventures);
   app.get('/api/fetchMine/:id', adventureHandler.fetchMyInProgressAdventures);
   app.get('/api/fetchCreated/:id', adventureHandler.fetchMyCreatedAdventures);
