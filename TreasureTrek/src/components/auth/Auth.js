@@ -22,13 +22,20 @@ var Auth = React.createClass({
  // Update the local storage session
  // after sign up / sign in and refreshing session token
  async _onValueChange(item, selectedValue) {
-    // try {
-    //     await AsyncStorage.setItem(item, selectedValue);
-    // } catch (error) {
-    //     console.log('AsyncStorage error: ' + error.message);
-    // }
+    try {
+        await AsyncStorage.setItem(item, selectedValue);
+    } catch (error) {
+        console.log('AsyncStorage error: ' + error.message);
+    }
+    // Test AsyncStorage
+    var session = AsyncStorage.getItem(STORAGE_KEY);
+    console.log('stored session: ', session);
   },
 
+  // Clear Form
+  clearForm() {
+    this.setState({ input: null });
+  },
 
   // SignUp Handler
   userSignUp() {
@@ -49,13 +56,19 @@ var Auth = React.createClass({
       }).then(function (res){
         return res.json()
       }).then((data)=> {
-        console.log("Response data: ", data),
-        this._onValueChange(STORAGE_KEY, data.token),
-        AlertIOS.alert( "Signup Success!" )
-        this.props.navigator.push({
-          title: "Main Page",
-          component: Main
-        })
+        console.log("Response data: ", data.userid);
+        //Check for Valid Token
+        if (data.userid) {
+          this._onValueChange(STORAGE_KEY, data.userid);
+          AlertIOS.alert( "Signup Success!" );
+          this.props.navigator.push({
+            title: "Main Page",
+            component: Main
+          });
+        } else {
+          AlertIOS.alert( "Someone has that email. Signup with a new email or Login" );
+          this.clearForm();
+        }
       })
       .done();
     }
@@ -78,19 +91,31 @@ var Auth = React.createClass({
       }).then(function (res){
         return res.json()
       }).then((data)=> {
-        console.log("Response data: ", data),
-        this._onValueChange(STORAGE_KEY, data.token),
-        AlertIOS.alert( "Login Success!" )
+        console.log("Response data: ", data.userid);
+        if (data.userid) {
+          this._onValueChange(STORAGE_KEY, data.userid);
+          AlertIOS.alert( "Login Success!" );
+          this.props.navigator.push({
+              title: "Main Page",
+              component: Main
+          });
+        } else {
+          AlertIOS.alert( "Invalid Email/Password. Try again." );
+          this.clearForm();
+        }
       })
       .done();
     }
   },
 
+
+
   // Logout Handler
   async userLogout() {
     try {
         await AsyncStorage.removeItem(STORAGE_KEY);
-        AlertIOS.alert("Logout Success!")
+        AlertIOS.alert("Logout Success!");
+        this.clearForm();
     } catch (error) {
         console.log('AsyncStorage error: ' + error.message);
     }
