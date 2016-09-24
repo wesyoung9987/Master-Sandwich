@@ -1,6 +1,7 @@
 var Adventure = require('../models/Adventures.js');
 var User = require('../models/Users.js');
 var UserAdventure = require('../models/UserAdventure.js');
+var helper = require('./helpers.js');
 
 
 // export entire object of methods to routes.js
@@ -92,6 +93,7 @@ module.exports = {
   // No input required
   // Returns array of all adventures
   fetchAllAdventures: function(req, res){
+    console.log("USER: ", req.user);
     Adventure.find({})
       .then(function(adventures){
         res.json(adventures);

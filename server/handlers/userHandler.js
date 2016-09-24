@@ -1,4 +1,6 @@
+var jwt = require('jwt-simple');
 var User = require('../models/Users.js');
+var helper = require('./helpers.js');
 
 // export entire object of methods to routes.js
 module.exports = {
@@ -21,7 +23,9 @@ module.exports = {
             if (!match) { // notifies if password is invalid
               res.status(500).send({error: "Password Invalid"});
             } else { // signin success, session token?
+              var token = jwt.encode(user, 'secret');
               res.json({
+                token: token,
                 userid: user['_id'] // what should be sent back on success?
               });
             }
@@ -52,7 +56,9 @@ module.exports = {
               console.log("db create user err: ", err);
               res.status(500).send({error: err});
             } else { // signup success, session token?
+              var token = jwt.encode(user, 'secret');
               res.json({
+                token: token,
                 userid: user['_id'] // what should be sent back on success?
               });
             }
