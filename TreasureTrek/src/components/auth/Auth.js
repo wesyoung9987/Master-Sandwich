@@ -3,6 +3,9 @@ import React from 'react';
 import {Text, View, TextInput, AsyncStorage, TouchableHighlight, AlertIOS} from 'react-native';
 import t from 'tcomb-form-native';
 
+// App components
+import Main from '../main/Main.js'
+
 // Create Session Storage Key
 var STORAGE_KEY = 'id_token';
 
@@ -49,6 +52,10 @@ var Auth = React.createClass({
         console.log("Response data: ", data),
         this._onValueChange(STORAGE_KEY, data.token),
         AlertIOS.alert( "Signup Success!" )
+        this.props.navigator.push({
+          title: "Main Page",
+          component: Main
+        })
       })
       .done();
     }
@@ -99,6 +106,7 @@ var Auth = React.createClass({
                 <Form
                     ref="form"
                     type={Person}
+                    autoCorrect={false}
                 />
             </View>
             <View style={styles.row}>
