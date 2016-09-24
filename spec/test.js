@@ -16,7 +16,7 @@ describe('Mocha', function() {
     it('A new section for a new unit to test', function (){
       assert.equal("value", "value")
     })
-    it("An added test", function (){
+    xit("An added test", function (){
       assert.equal("runs before merge?", "runs before merge?")
     })
   })
