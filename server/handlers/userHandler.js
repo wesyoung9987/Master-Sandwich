@@ -1,28 +1,31 @@
+var jwt = require('jwt-simple');
 var User = require('../models/Users.js');
+var helper = require('../config/helpers.js');
 
 // export entire object of methods to routes.js
 module.exports = {
 
   // signin method
   // expects {email: 'email@email.com', password: 'pass123'}
-  // returns {token: true} if successful (what should it return?)
+  // returns {token: 'jwt_token_string'} if successful
   signin: function(req, res) {
     var email = req.body.email;
     var password = req.body.password;
 
     User.findOne({'email': email}, function(err, user){
       if (err) {
-        console.log("db findOne signin err: ", err);
+        helper.sendError(err, req, res);
       } else {
         if (!user) { // notifies if user is not found
-          res.status(500).send({error: "No User"});
+          helper.sendError("No User Found", req, res);
         } else {
           user.comparePasswords(password, function(err, match){
             if (!match) { // notifies if password is invalid
-              res.status(500).send({error: "Password Invalid"});
-            } else { // signin success, session token?
+              helper.sendError("Password Invalid", req, res);
+            } else { // signin success, sends jwt token
+              var token = jwt.encode(user, 'secret');
               res.json({
-                userid: user['_id'] // what should be sent back on success?
+                userid: token
               });
             }
           });
@@ -34,26 +37,25 @@ module.exports = {
   // signup method
   // expects {email: 'email@email.com', password: 'pass123'} at minimum
     // can contain more properties
-  // returns {token: true} if successful (what should it return?)
+  // returns {userid: 'jwt_token_string'} if successful
   signup: function(req, res){
     var email = req.body.email;
     var newUserObj = req.body
 
     User.findOne({'email': email}, function(err, user){
       if (err) { // notifies if error is thrown
-        console.log("db findOne signup err: ", err);
-        res.status(500).send({error: err});
+        helper.sendError(err, req, res);
       } else {
         if (user) { // notifies if email is already taken
-          res.status(500).send({error: "Email already taken"});
+          helper.sendError("Email already taken", req, res);
         } else {
           User.create(newUserObj, function(err, user){
             if (err) { // notifies if error is thrown
-              console.log("db create user err: ", err);
-              res.status(500).send({error: err});
-            } else { // signup success, session token?
+              helper.sendError(err, req, res);
+            } else { // signup success, sends jwt token
+              var token = jwt.encode(user, 'secret');
               res.json({
-                userid: user['_id'] // what should be sent back on success?
+                userid: token
               });
             }
           });

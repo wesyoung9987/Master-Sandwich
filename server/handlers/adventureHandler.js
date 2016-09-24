@@ -1,6 +1,7 @@
 var Adventure = require('../models/Adventures.js');
 var User = require('../models/Users.js');
 var UserAdventure = require('../models/UserAdventure.js');
+var helper = require('../config/helpers.js');
 
 
 // export entire object of methods to routes.js
@@ -8,27 +9,23 @@ module.exports = {
 
 
   // POST
-  // Expects {userid: 'userid', adventureid: 'adventureid'}
+  // Expects {adventureid: 'adventureid'}
   // Returns status 200 on success
   pickAdventure: function(req, res){
-    var userid = req.body.userid;
+    var userid = req.user._id
     var adventureid = req.body.adventureid;
 
     Adventure.findOne({_id: adventureid}, 'adventure', function(err, adventure){
       if (err) {
-        res.status(500).send({error: err});
+        helper.sendError(err, req, res);
       } else {
-        /*  When we make the number of riddles per adventure variable,
-            we will uncomment below and change the userAdventure model
-            completion property to an empty array.  Then add completion to the list of properties in the create method below.
-        */
         var completion = adventure.adventure.map(function(riddle){
           return false;
         });
 
         UserAdventure.create({userId: userid, adventureId: adventureid, completion: completion}, function(err, combo){
           if (err) {
-            res.status(500).send({error: err});
+            helper.sendError(err, req, res);
           } else {
             res.json(combo);
           }
@@ -38,15 +35,15 @@ module.exports = {
   },
 
   // DELETE
-  // Expects {userid: 'userid', adventureid: 'adventureid'}
+  // Expects {adventureid: 'adventureid'}
   // Returns status 200 on success
   forgetAdventure: function(req, res){
-    var userid = req.body.userid;
+    var userid = req.user._id;
     var adventureid = req.body.adventureid;
 
     UserAdventure.remove({userId: userid, adventureId: adventureid}, function(err, result){
       if (err) {
-        res.status(500).send({error: err});
+        helper.sendError(err, req, res);
       } else {
         res.json(result);
       }
@@ -54,10 +51,10 @@ module.exports = {
   },
 
   // POST
-  // Expects {userid: 'userid', title: 'title', adventure: [riddles], startingLocation: 'location'}
+  // Expects {title: 'title', adventure: [riddles], startingLocation: 'location'}
   // Returns status 200 on success
   createAdventure:  function(req, res){
-    var userid = req.body.userid;
+    var userid = req.user._id;
     var adventureObj = {
       title: req.body.title,
       creator: userid,
@@ -65,16 +62,16 @@ module.exports = {
       startingLocation: req.body.startingLocation
     };
 
-    User.find({_id: userid}, function(err, user){
+    User.findOne({_id: userid}, function(err, user){
       if (err) {
-        res.status(500).send({error: err});
+        helper.sendError(err, req, res);
       } else {
         if (!user) {
-          res.status(500).send({error: "No user found"});
+          helper.sendError("No user found", req, res);
         } else {
           Adventure.create(adventureObj, function(err, adventure){
             if (err) {
-              res.status(500).send({error: err});
+              helper.sendError(err, req, res);
             } else {
               res.json(adventure);
             }
@@ -99,31 +96,30 @@ module.exports = {
   },
 
   // GET
-  // Expects userid parameter passed in url (/api/fetchMine/id)
-  // Returns array of all users in progress adventures in form of:
+  // No input required
+  // Returns array of all user's in-progress adventures in form of:
   // {userId: 'userid', adventureId: adventureObj, completion: [], completed: boolean, date: date}
   fetchMyInProgressAdventures: function(req, res){
-    var userid = req.params.id;
+    var userid = req.user._id;
 
     UserAdventure.find({userId: userid})
       .populate('adventureId')
       .exec(function(err, adventures){
-        console.log("ADVENTURES: ", adventures);
-        if (err) res.status(500).send({error: err});
+        if (err) helper.sendError(err, req, res);
         else res.json(adventures);
       });
   },
 
   // GET
-  // Expects userid parameter passed in url (/api/fetchCreated/id)
+  // No input required
   // Returns array of all adventures the user created in form of:
   // {title: 'title', creator: 'userid', adventure: [riddles], date: date, startingLocation: 'location'}
   fetchMyCreatedAdventures: function(req, res){
-    var userid = req.params.id
+    var userid = req.user._id;
 
     Adventure.find({creator: userid}, function(err, adventures){
       if (err) {
-        res.status(500).send({error: err});
+        helper.sendError(err, req, res);
       } else {
         res.json(adventures);
       }
@@ -141,10 +137,10 @@ module.exports = {
 
     Adventure.findOne({_id: adventureid}, function(err, adventure){
       if (err) {
-        res.status(500).send({error: err});
+        helper.sendError(err, req, res);
       } else {
         if (!adventure) {
-          res.status(500).send({error: "No Adventure"});
+          helper.sendError("No Adventure", req, res);
         } else {
           res.json(adventure.adventure[riddleNumber]);
         }
