@@ -58,7 +58,7 @@ module.exports = {
   createAdventure:  function(req, res){
     var userid = req.body.userid;
     var adventureObj = {
-      title: req.body.title
+      title: req.body.title,
       creator: userid,
       adventure: req.body.adventure,
       startingLocation: req.body.startingLocation
