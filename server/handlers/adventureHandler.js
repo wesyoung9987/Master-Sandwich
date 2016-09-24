@@ -20,16 +20,17 @@ module.exports = {
       } else {
         /*  When we make the number of riddles per adventure variable,
             we will uncomment below and change the userAdventure model
-            completion property to an empty array.  Then add completion to the list of properties in the creat method below.
-        var completion = adventure.riddles.map(function(riddle){
+            completion property to an empty array.  Then add completion to the list of properties in the create method below.
+        */
+        var completion = adventure.adventure.map(function(riddle){
           return false;
         });
-        */
-        UserAdventure.create({userId: userid, adventureId: adventureid}, function(err, combo){
+
+        UserAdventure.create({userId: userid, adventureId: adventureid, completion: completion}, function(err, combo){
           if (err) {
             res.status(500).send({error: err});
           } else {
-            res.status(200);
+            res.json(combo);
           }
         });
       }
@@ -43,7 +44,7 @@ module.exports = {
     var userid = req.body.userid;
     var adventureid = req.body.adventureid;
 
-    UserAdventure.remove({userid: userId, adventureid: adventureId}, function(err, result){
+    UserAdventure.remove({userId: userid, adventureId: adventureid}, function(err, result){
       if (err) {
         res.status(500).send({error: err});
       } else {
@@ -102,33 +103,29 @@ module.exports = {
   // Returns array of all users in progress adventures in form of:
   // {userId: 'userid', adventureId: adventureObj, completion: [], completed: boolean, date: date}
   fetchMyInProgressAdventures: function(req, res){
-    var userid = req.param.id;
+    var userid = req.params.id;
 
     UserAdventure.find({userId: userid})
       .populate('adventureId')
       .exec(function(err, adventures){
+        console.log("ADVENTURES: ", adventures);
         if (err) res.status(500).send({error: err});
-        else if (!adventures) res.status(500).send({error: "No Adventures"});
         else res.json(adventures);
       });
   },
 
   // GET
-  // Expects userid parameter passed in url (/api/fetchCreated/:id)
+  // Expects userid parameter passed in url (/api/fetchCreated/id)
   // Returns array of all adventures the user created in form of:
   // {title: 'title', creator: 'userid', adventure: [riddles], date: date, startingLocation: 'location'}
   fetchMyCreatedAdventures: function(req, res){
-    var userid = req.param.id
+    var userid = req.params.id
 
-    Adventures.find({creator: userid}, function(err, adventures){
+    Adventure.find({creator: userid}, function(err, adventures){
       if (err) {
         res.status(500).send({error: err});
       } else {
-        if (!adventures) {
-          res.status(500).send({error: "No adventures"})
-        } else {
-          res.json(adventures);
-        }
+        res.json(adventures);
       }
     });
   },
@@ -139,8 +136,8 @@ module.exports = {
   // Returns a single riddle object
   // {riddle: 'text', answer: 'text', location: 'location'}
   fetchSingleRiddle: function(req, res){
-    var adventureid = req.param('id');
-    var riddleNumber = +req.param('num');
+    var adventureid = req.query.id;
+    var riddleNumber = +req.query.num;
 
     Adventure.findOne({_id: adventureid}, function(err, adventure){
       if (err) {
