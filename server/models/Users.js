@@ -8,10 +8,7 @@ var UserSchema = new mongoose.Schema({
   email: String,
   password: String,
   points: Number,
-  level: Number,
-  password: String,
-  myAdventures: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Adventure' }],
-  currentAdventures: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Adventure' }]
+  level: Number
 });
 
 UserSchema.methods.comparePasswords = function(enteredPassword, callback) {
