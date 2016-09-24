@@ -18,6 +18,6 @@ module.exports = function(app, express) {
   app.get('/api/fetchAll', adventureHandler.fetchAllAdventures);
   app.get('/api/fetchMine/:id', adventureHandler.fetchMyInProgressAdventures);
   app.get('/api/fetchCreated/:id', adventureHandler.fetchMyCreatedAdventures);
-  app.get('/api/fetchRiddle/:id', adventureHandler.fetchSingleRiddle);
+  app.get('/api/fetchRiddle', adventureHandler.fetchSingleRiddle);
 
 };

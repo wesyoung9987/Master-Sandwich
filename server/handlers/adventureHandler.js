@@ -2,30 +2,6 @@ var Adventure = require('../models/Adventures.js');
 var User = require('../models/Users.js');
 var UserAdventure = require('../models/UserAdventure.js');
 
-/*
-User.findOne({_id: '57e549a121714a66a2d4419b'}, function(err, user){
-  if (!user) console.log("NO USER");
-  else {
-    console.log("USER FOUND");
-    Adventure.create({title: "Ad2", creator: '57e549a121714a66a2d4419b'}, function(err, adventure){
-      if (err) console.log("ERR");
-      else console.log("ADVENTURE: ", adventure);
-    });
-  }
-});
-*/
-
-/*
-Adventure.find({})
-  .populate('creator')
-  .exec(function(err, adventures){
-    if (err) console.log("ERROR");
-    else if (!adventures) console.log("NO ADVENTURE");
-    else console.log("ADVENTURES: ", adventures);
-  })
-*/
-
-
 
 // export entire object of methods to routes.js
 module.exports = {
@@ -154,12 +130,29 @@ module.exports = {
           res.json(adventures);
         }
       }
-    })
+    });
   },
 
   // GET
+  // Expects adventure id and riddle # (zero index based) in url
+  // (/api/fetchRiddle?id=string&num=number)
+  // Returns a single riddle object
+  // {riddle: 'text', answer: 'text', location: 'location'}
   fetchSingleRiddle: function(req, res){
-    // Need adventure id
+    var adventureid = req.param('id');
+    var riddleNumber = +req.param('num');
+
+    Adventure.findOne({_id: adventureid}, function(err, adventure){
+      if (err) {
+        res.status(500).send({error: err});
+      } else {
+        if (!adventure) {
+          res.status(500).send({error: "No Adventure"});
+        } else {
+          res.json(adventure.adventure[riddleNumber]);
+        }
+      }
+    });
   }
 
 
