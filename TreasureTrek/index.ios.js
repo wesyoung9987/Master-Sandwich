@@ -4,28 +4,31 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   AppRegistry,
   StyleSheet,
   NavigatorIOS,
   Text,
   View
-} from 'react-native';
-import Header from './src/components/auth/Header';
-import Auth from './src/components/auth/Auth';
+} from 'react-native'
+
+// App components
+import Header from './src/components/auth/Header'
+import Auth from './src/components/auth/Auth'
+// Testing AllAdvens
+import AllAdvens from './src/components/allAdvens/AllAdvens'
 
 
 class TreasureTrek extends Component {
   render() {
     var authRoute = {
-      title: "Welcome to TreasureTrek",
-      component: Auth
+      title: "Welcome to All Adventures",
+      component: AllAdvens
     }
     return (
       // <View>
-      //   <Header welcomeText={'Welcome to TreasureTrek!'} />
-      //   <Auth authText={'Sign Up'} />
+      //   <AllAdvens/>
       // </View>
       <NavigatorIOS
         initialRoute ={ authRoute }
