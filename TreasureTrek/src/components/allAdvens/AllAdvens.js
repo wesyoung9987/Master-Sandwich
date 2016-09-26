@@ -7,21 +7,37 @@ import {
 } from 'react-native'
 
 // App components
-import Adven from './Adven'
+import AdvenLI from './AdvenLI'
 
-var dummy = ['one', 'two', 'three', 'four'];
+var dummy = [
+  {
+    name: "Adventure One",
+    text: "We're going on our first adventure"
+  },
+  {
+    name: "Adventure Two",
+    text: "We're going on our second adventure"
+  },
+  {
+    name: "Adventure Three",
+    text: "We're going on our third adventure"
+  }
+];
+
+var _dummy = ['one', 'two', 'three', 'four']
 
 export default class AllAdvens extends Component {
   constructor(props){
     super(props)
+    this.renderRowCB = this.renderRowCB.bind(this)
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       data: ds.cloneWithRows(dummy)
     }
   }
 
-  advensList(advens){
-    return <Adven key={}name={advens}/>
+  renderRowCB(adven){
+    return <AdvenLI nav={this.props.navigator} adven={adven}/>
   }
 
   render() {
@@ -30,8 +46,9 @@ export default class AllAdvens extends Component {
         <ListView
           style={{margin: 70}}
           automaticallyAdjustContentInsets={false}
+          property={"from list view"}
           dataSource={this.state.data}
-          renderRow={this.advensList}
+          renderRow={this.renderRowCB}
         />
       </View>
     );
