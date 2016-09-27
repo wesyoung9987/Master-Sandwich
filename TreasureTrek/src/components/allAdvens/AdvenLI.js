@@ -17,7 +17,9 @@ const AdvenLI = (props) => {
   }
 
   var toAdvenCard = function (){
-    props.nav.push(advenCardRoute)
+    props.nav.push(advenCardRoute);
+    console.log('PROPS.nav: ', props.nav);
+    console.log('PROPS: ', props)
   }
 
   // Optional button depending on how we structure list item

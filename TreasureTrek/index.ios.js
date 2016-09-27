@@ -11,20 +11,22 @@ import {
   NavigatorIOS,
   Text,
   View
-} from 'react-native'
+} from 'react-native';
 
 // App components
-import Header from './src/components/auth/Header'
-import Auth from './src/components/auth/Auth'
-// Testing AllAdvens
-import AllAdvens from './src/components/allAdvens/AllAdvens'
+import Header from './src/components/auth/Header';
+import Auth from './src/components/auth/Auth';
+
+// Test Routes
+import AllAdvens from './src/components/allAdvens/AllAdvens';
+import MyAdventures from './src/components/MyAdventures/myAdventuresContainer';
 
 
 class TreasureTrek extends Component {
   render() {
     var authRoute = {
-      title: "Welcome to All Adventures",
-      component: AllAdvens
+      title: "My Adventures",
+      component: MyAdventures
     }
     return (
       // <View>
