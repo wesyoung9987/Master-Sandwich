@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 
 // App components
-import AdvenLI from './AdvenLI'
+import AllAdventureLI from './AllAdventureLI'
 
 var dummy = [
   {
@@ -50,8 +50,8 @@ export default class AllAdvens extends Component {
 
 
   renderRowCB(adven){
-    console.log('Props.navigator: ', this.props)
-    return <AdvenLI nav={this.props} adven={adven}/>
+
+    return <AllAdventureLI nav={this.props.nav} adven={adven}/>
   }
 
   render() {
