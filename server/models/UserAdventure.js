@@ -5,7 +5,7 @@ var UserAdventureSchema = new mongoose.Schema({
   adventureId: { type: mongoose.Schema.Types.ObjectId, ref: 'Adventure' },
   completion: [],
   completed: { type: Boolean, default: false },
-  date: { type: Date, default: Date.now }
+  date: { type: Date, default: Date.now() }
 });
 
 var UserAdventure = mongoose.model('UserAdventure', UserAdventureSchema);
