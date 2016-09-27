@@ -50,8 +50,8 @@ export default class AllAdvens extends Component {
 
 
   renderRowCB(adven){
-    console.log('Props.navigator: ', this.props.navigator)
-    return <AdvenLI nav={this.props.navigator} adven={adven}/>
+    console.log('Props.navigator: ', this.props)
+    return <AdvenLI nav={this.props} adven={adven}/>
   }
 
   render() {

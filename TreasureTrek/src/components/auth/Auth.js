@@ -4,7 +4,9 @@ import {Text, View, TextInput, AsyncStorage, TouchableHighlight, AlertIOS} from 
 import t from 'tcomb-form-native';
 
 // App components
-import Main from '../main/Main.js'
+import Main from '../main/Main.js';
+import MenuButton from '../nav/MenuButton.js';
+import MyAdventures from '../MyAdventures/myAdventuresContainer';
 
 // Create Session Storage Key for AsyncStorage
 var STORAGE_KEY = 'id_token';
@@ -61,9 +63,14 @@ var Auth = React.createClass({
         if (data.userid) {
           this._onValueChange(STORAGE_KEY, data.userid);
           AlertIOS.alert( "Signup Success!" );
-          this.props.navigator.push({
-            title: "Main Page",
-            component: Main
+          // this.props.navigator.push({
+          //   title: "Main Page",
+          //   component: Main
+          // });
+          this.props.resetToRoute({
+            name: "My Adventures",
+            component: MyAdventures,
+            leftCorner: MenuButton
           });
         } else {
           AlertIOS.alert( "Someone has that email. Signup with a new email or Login" );
@@ -95,9 +102,14 @@ var Auth = React.createClass({
         if (data.userid) {
           this._onValueChange(STORAGE_KEY, data.userid);
           AlertIOS.alert( "Login Success!" );
-          this.props.navigator.push({
-              title: "Main Page",
-              component: Main
+          // this.props.navigator.push({
+          //     title: "Main Page",
+          //     component: Main
+          // });
+          this.props.resetToRoute({
+            name: "My Adventures",
+            component: MyAdventures,
+            leftCorner: MenuButton
           });
         } else {
           AlertIOS.alert( "Invalid Email/Password. Try again." );
@@ -140,9 +152,6 @@ var Auth = React.createClass({
                 </TouchableHighlight>
                 <TouchableHighlight style={styles.button} onPress={this.userLogin} underlayColor='#99d9f4'>
                     <Text style={styles.buttonText}>Login</Text>
-                </TouchableHighlight>
-                <TouchableHighlight style={styles.button} onPress={this.userLogout} underlayColor='#99d9f4'>
-                    <Text style={styles.buttonText}>Logout</Text>
                 </TouchableHighlight>
             </View>
 

@@ -6,17 +6,17 @@ import AdventureSolution from './AdventureSolution.js';
 const MyAdventureDetails = (props) => {
 
   const myAdventureRoute = {
-    title: props.myAdventure.name + " Card",
+    name: props.myAdventure.name + " Card",
     component: AdventureSolution,
     passProps: {
-      nav: props.nav,
+      //nav: props.nav,
       myAdventure: props.myAdventure
     }
   };
 
   var toAdventureSolution = function() {
     console.log('props: ', props)
-    props.nav.push(myAdventureRoute);
+    props.nav.toRoute(myAdventureRoute);
   }
 
   return (

@@ -64,11 +64,12 @@ export default class myAdventuresList extends Component {
   }
 
   renderRowCB(myAdventure){
-    console.log('this.props.nav: ', this.props.nav)
-    return <MyAdventureDetails nav={this.props.nav.navigator} myAdventure={myAdventure}/>
+    // console.log('this.props.nav: ', this.props.nav)
+    return <MyAdventureDetails nav={this.props.nav} myAdventure={myAdventure}/>
   }
 
   render() {
+    console.log("PROPS:",this.props);
     return (
       <View>
         <ListView
