@@ -9,7 +9,7 @@ const Header = (props) => {
   return (
     <View style={viewStyle}>
       <View>
-        <Image style={menuStyle} source={require('../../../resources/plus-button.png')} />
+        <Image style={menuStyle} source={require('../../../../resources/plus-button.png')} />
       </View>
       <View>
         <Text style={textStyle}>{'Create Adventure'}</Text>

@@ -9,13 +9,13 @@ const Header = (props) => {
   return (
     <View style={viewStyle}>
       <View>
-        <Image style={menuStyle} source={require('../../../resources/mobile-menu.png')} />
+        <Image style={menuStyle} source={require('../../../../resources/mobile-menu.png')} />
       </View>
       <View>
         <Text style={textStyle}>{props.headerText}</Text>
       </View>
       <View>
-        <Image style={userStyle} source={require('../../../resources/user-placeholder.png')} />
+        <Image style={userStyle} source={require('../../../../resources/user-placeholder.png')} />
       </View>
     </View>
   );
