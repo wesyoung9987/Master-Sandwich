@@ -11,8 +11,8 @@ import Header from './auth/Header';
 import Auth from './auth/Auth';
 
 // Test Routes
-import AllAdvens from './allAdvens/AllAdvens';
-import MyAdventures from './MyAdventures/myAdventuresContainer';
+// import AllAdvens from './allAdvens/AllAdvens';
+// import MyAdventures from './MyAdventures/myAdventuresContainer';
 
 
 class App extends Component {

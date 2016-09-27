@@ -2,31 +2,31 @@ import React from 'react';
 import {Text, View, TouchableHighlight} from 'react-native';
 
 // App components
-import AdvenCard from './AdvenCard'
+import AllAdventureDetail from './AllAdventureDetail'
 
 
 const AdvenLI = (props) => {
 
   const advenCardRoute = {
     name: props.adven.name + " Card",
-    component: AdvenCard,
+    component: AllAdventureDetail,
     passProps: {
       //nav: props.nav,
       adven: props.adven
     }
   }
 
-  var toAdvenCard = function (){
+  var toAllAdventureDetail = function (){
     props.nav.toRoute(advenCardRoute);
     console.log('PROPS.nav: ', props.nav);
     console.log('PROPS: ', props)
   }
 
   // Optional button depending on how we structure list item
-  // <Text onPress={toAdvenCard}>View Card</Text>
+  // <Text onPress={toAllAdventureDetail}>View Card</Text>
   return (
       <TouchableHighlight
-      onPress={toAdvenCard}
+      onPress={toAllAdventureDetail}
       underlayColor={'#00ffff'}>
         <View>
           <Text>{props.adven.name}</Text>
