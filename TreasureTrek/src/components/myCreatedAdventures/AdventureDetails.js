@@ -15,7 +15,7 @@ const AdventureDetail = ({ singleAdventure }) => {
         <Text style={dateStyle}>{'Created On: ' + date}</Text>
       </View>
       <View style={arrowsContainer}>
-        <Image style={arrowsStyle} source={require('../../../resources/double-arrows.png')} />
+        <Image style={arrowsStyle} source={require('../../../../resources/double-arrows.png')} />
       </View>
     </View>
   );
