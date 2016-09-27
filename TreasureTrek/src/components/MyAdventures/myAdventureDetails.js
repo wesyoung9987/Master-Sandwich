@@ -9,7 +9,7 @@ const MyAdventureDetails = (props) => {
     name: props.myAdventure.name + " Card",
     component: AdventureSolution,
     passProps: {
-      //nav: props.nav,
+      nav: props.nav,
       myAdventure: props.myAdventure
     }
   };
