@@ -1,13 +1,32 @@
 import React, {Component} from 'react';
 import {Text, View, TouchableHighlight} from 'react-native';
+import Submission from './Submission.js';
 
 const Riddle = (props) => {
+
+  const SubmissionRoute = {
+    name: "Your Solution",
+    component: Submission,
+    passProps: {
+      nav: props.nav,
+      riddle: props.riddle
+    }
+  };
+
+  var toSubmission = function() {
+    props.nav.toRoute(SubmissionRoute);
+  }
+
   return (
-    <View style={styles.listStyle}>
-      <Text style={styles.title}>Riddle # {props.num}</Text>
-      <Text>{props.riddle}</Text>
-      <Text style={styles.loc}>{props.loc}</Text>
-    </View>
+    <TouchableHighlight
+      onPress={toSubmission}
+      underlayColor={'#00ffff'}>
+      <View style={styles.listStyle}>
+        <Text style={styles.title}>Riddle # {props.num}</Text>
+        <Text>{props.riddle}</Text>
+        <Text style={styles.loc}>{props.loc}</Text>
+      </View>
+    </TouchableHighlight>
   );
 }
 
