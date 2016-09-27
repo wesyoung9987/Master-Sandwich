@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, TouchableHighlight} from 'react-native';
 
 // App components
 import AdvenCard from './AdvenCard'
@@ -11,6 +11,7 @@ const AdvenLI = (props) => {
     title: props.adven.name + " Card",
     component: AdvenCard,
     passProps: {
+      nav: props.nav,
       adven: props.adven
     }
   }
@@ -22,9 +23,14 @@ const AdvenLI = (props) => {
   // Optional button depending on how we structure list item
   // <Text onPress={toAdvenCard}>View Card</Text>
   return (
-      <View>
-        <Text onPress={toAdvenCard}>{props.adven.name}</Text>
-      </View>
+      <TouchableHighlight
+      onPress={toAdvenCard}
+      underlayColor={'#00ffff'}>
+        <View>
+          <Text>{props.adven.name}</Text>
+          <Text style={{ fontSize: 9 }}>{props.adven.details.location}</Text>
+        </View>
+      </TouchableHighlight>
     );
 };
 

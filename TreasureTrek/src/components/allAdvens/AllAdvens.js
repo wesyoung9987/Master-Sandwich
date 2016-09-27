@@ -11,16 +11,28 @@ import AdvenLI from './AdvenLI'
 
 var dummy = [
   {
-    name: "Adventure One",
-    text: "We're going on our first adventure"
+    adven_id: "1",
+    name: "Where'd sparkles go?",
+    details: {
+      location: "New York, CA",
+      OpeningRiddle: "Whatever the opening riddle is"
+    }
   },
   {
-    name: "Adventure Two",
-    text: "We're going on our second adventure"
+    adven_id: "2",
+    name: "Buried Treasure",
+    details: {
+      location: "Seattle, WA",
+      OpeningRiddle: "Whatever the opening riddle is"
+    }
   },
   {
-    name: "Adventure Three",
-    text: "We're going on our third adventure"
+    adven_id: "3",
+    name: "Catch me if you can!",
+    details: {
+      location: "Austin, TX",
+      OpeningRiddle: "Whatever the opening riddle is"
+    }
   }
 ];
 
