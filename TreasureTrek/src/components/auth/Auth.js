@@ -4,7 +4,8 @@ import {Text, View, TextInput, AsyncStorage, TouchableHighlight, AlertIOS} from 
 import t from 'tcomb-form-native';
 
 // App components
-import Main from '../main/Main.js'
+import Main from '../main/Main.js';
+import MenuButton from '../nav/MenuButton.js';
 
 // Create Session Storage Key for AsyncStorage
 var STORAGE_KEY = 'id_token';
@@ -95,10 +96,15 @@ var Auth = React.createClass({
         if (data.userid) {
           this._onValueChange(STORAGE_KEY, data.userid);
           AlertIOS.alert( "Login Success!" );
-          this.props.navigator.push({
-              title: "Main Page",
-              component: Main
-          });
+          // this.props.navigator.push({
+          //     title: "Main Page",
+          //     component: Main
+          // });
+          this.props.resetToRoute({
+            name: "Main",
+            component: Main,
+            leftCorner: MenuButton
+          })
         } else {
           AlertIOS.alert( "Invalid Email/Password. Try again." );
           this.clearForm();
