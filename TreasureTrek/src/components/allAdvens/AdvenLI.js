@@ -8,16 +8,16 @@ import AdvenCard from './AdvenCard'
 const AdvenLI = (props) => {
 
   const advenCardRoute = {
-    title: props.adven.name + " Card",
+    name: props.adven.name + " Card",
     component: AdvenCard,
     passProps: {
-      nav: props.nav,
+      //nav: props.nav,
       adven: props.adven
     }
   }
 
   var toAdvenCard = function (){
-    props.nav.push(advenCardRoute);
+    props.nav.toRoute(advenCardRoute);
     console.log('PROPS.nav: ', props.nav);
     console.log('PROPS: ', props)
   }

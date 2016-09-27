@@ -14,7 +14,7 @@ class Main extends Component {
   }
   render() {
     return (
-      <Text style={{marginTop: 200, alignSelf: 'center'}}>Welcome to the main page</Text>
+      <Text style={{marginTop: 200, alignSelf: 'center'}}>Create Adventures Will Go Here</Text>
     );
   }
 }

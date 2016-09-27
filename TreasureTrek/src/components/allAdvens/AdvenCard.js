@@ -8,7 +8,7 @@ const AdvenCard = (props) => {
   console.log(props)
 
   var routeAcceptView = {
-    title: "You accepted " + props.adven.name,
+    name: "You accepted " + props.adven.name,
     component: TempAcceptView,
     passProps: {
       adven: props.adven
@@ -16,7 +16,7 @@ const AdvenCard = (props) => {
   }
 
   var toAcceptView = function (){
-    props.nav.push(routeAcceptView)
+    props.toRoute(routeAcceptView)
   }
 
   return (
@@ -24,7 +24,7 @@ const AdvenCard = (props) => {
         <Text>{props.adven.details.OpeningRiddle}</Text>
         <Text>{props.adven.details.location}</Text>
         <TouchableHighlight style={style.button} onPress={toAcceptView}>
-          <Text>Accept</Text>
+          <Text style={style.text}>Accept</Text>
         </TouchableHighlight>
       </View>
     );
@@ -32,8 +32,11 @@ const AdvenCard = (props) => {
 
 var style = {
   button: {
-    textAlign: 'center',
-    color: '#ffffff'
+    alignItems: 'center'
+    // color: '#ffffff'
+  },
+  text: {
+    color: '#0000ff'
   }
 }
 

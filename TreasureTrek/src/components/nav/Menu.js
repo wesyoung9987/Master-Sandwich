@@ -49,8 +49,6 @@ class Menu extends Component {
     try {
         await AsyncStorage.removeItem(STORAGE_KEY);
         AlertIOS.alert("Logout Success!");
-        // console.log("PAGE?:", this.props);
-        // this.props.pageChange("login");
         this.props.resetToRoute({
           name: "Login",
           component: Auth
@@ -61,7 +59,6 @@ class Menu extends Component {
   }
 
   render() {
-    // console.log("STORE:",AsyncStorage.getItem(STORAGE_KEY));
 
     return (
       <View>
