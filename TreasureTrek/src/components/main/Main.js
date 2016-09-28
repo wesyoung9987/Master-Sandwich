@@ -4,6 +4,7 @@ import {
   Text,
   View
 } from 'react-native';
+import MyCreatedAdventures from '../myCreatedAdventures/myCreatedAdventures';
 
 // App components
 
@@ -14,7 +15,7 @@ class Main extends Component {
   }
   render() {
     return (
-      <Text style={{marginTop: 200, alignSelf: 'center'}}>Create Adventures Will Go Here</Text>
+      <MyCreatedAdventures/>
     );
   }
 }
