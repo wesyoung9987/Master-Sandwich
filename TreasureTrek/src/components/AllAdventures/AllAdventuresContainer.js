@@ -31,14 +31,14 @@ class AllAdventures extends Component {
     })
   }
 
-  componentWillMount(){
+  componentDidMount(){
     this.getAllAds()
   }
 
   render(){
     return (
       <View>
-      <AllAdventuresList nav={this.props} advens={this.state.adventures}></AllAdventuresList>
+        <AllAdventuresList nav={this.props} advens={this.state.adventures}></AllAdventuresList>
       </View>
     );
   }
