@@ -6,7 +6,7 @@ import AdventureSolution from './AdventureSolution.js';
 const MyAdventureDetails = (props) => {
 
   const myAdventureRoute = {
-    name: props.myAdventure.name + " Card",
+    name: "Riddle List",
     component: AdventureSolution,
     passProps: {
       nav: props.nav,
