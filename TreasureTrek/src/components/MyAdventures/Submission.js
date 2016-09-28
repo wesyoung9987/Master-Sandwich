@@ -27,6 +27,14 @@ var Submission = React.createClass({
             autoCorrect={false}
           />
         </View>
+        <View style={styles.row}>
+          <TouchableHighlight style={styles.button}
+            onPress={this.submitAnswer}
+            underlayColor='#99d9f4'
+          >
+            <Text style={styles.buttonText}>Submit</Text>
+          </TouchableHighlight>
+        </View>
       </View>
     );
   }
