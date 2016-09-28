@@ -1,101 +1,54 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, AsyncStorage, AlertIOS } from 'react-native';
 import AdventureDetail from './AdventureDetails';
 
 class AdventureList extends Component {
-  state = { adventures: [
-    {
-      id: 1,
-      title: 'Awesome Adventure',
-      creator: 5,
-      adventure: [],
-      date: Date.now(),
-      completedAll: false,
-      startingLocation: 'Some Location'
-    },
-    {
-      id: 2,
-      title: 'Golden Gate Bridge',
-      creator: 5,
-      adventure: [],
-      date: Date.now(),
-      completedAll: false,
-      startingLocation: 'Some Location'
-    },
-    {
-      id: 3,
-      title: 'Adventure Title Here',
-      creator: 5,
-      adventure: [],
-      date: Date.now(),
-      completedAll: false,
-      startingLocation: 'Some Location'
-    },
-    {
-      id: 4,
-      title: 'Adventure 4',
-      creator: 5,
-      adventure: [],
-      date: Date.now(),
-      completedAll: false,
-      startingLocation: 'Some Location'
-    },
-    {
-      id: 5,
-      title: 'Adventure 5',
-      creator: 5,
-      adventure: [],
-      date: Date.now(),
-      completedAll: false,
-      startingLocation: 'Some Location'
-    },
-    {
-      id: 6,
-      title: 'Adventure 6',
-      creator: 5,
-      adventure: [],
-      date: Date.now(),
-      completedAll: false,
-      startingLocation: 'Some Location'
-    },
-    {
-      id: 7,
-      title: 'Adventure 7',
-      creator: 5,
-      adventure: [],
-      date: Date.now(),
-      completedAll: false,
-      startingLocation: 'Some Location'
-    },
-    {
-      id: 8,
-      title: 'Adventure 8',
-      creator: 5,
-      adventure: [],
-      date: Date.now(),
-      completedAll: false,
-      startingLocation: 'Some Location'
-    },
-    {
-      id: 9,
-      title: 'Adventure 9',
-      creator: 5,
-      adventure: [],
-      date: Date.now(),
-      completedAll: false,
-      startingLocation: 'Some Location'
-    }
-  ] };
+  state = { adventures: [] };
 
-  // componentWillMount() {
-  //   axios.get('https://treasure-trek.herokuapp.com/api/fetchCreated')
-  //     .then(response => this.setState({ adventures: response.data }));
-  // }
+  componentWillMount () {
+    AsyncStorage.getItem('id_token')
+      .then(token=>{
+        fetch("https://treasure-trek.herokuapp.com/api/fetchCreated",{
+            method: "GET",
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'x-access-token': token
+            }
+        }).then(function (res){
+          return res.json()
+        }).then((data)=> {
+          // set state or do something else with data
+          this.setState({adventures: data});
+        }).catch((error) => {
+          console.log("ERROR:",error);
+          this.handleError();
+        }).done();
+      });
+  }
+
+  handleError () {
+    AsyncStorage.removeItem('id_token')
+      .then(()=>{
+        this.errorRedirectToLogin("No Session - Redirecting");
+      }).catch(error => {
+        console.log('AsyncStorage error: ' + error.message);
+        this.errorRedirectToLogin("Internal Error - Redirecting")
+      });
+  }
+
+  errorRedirectToLogin (message) {
+    AlertIOS.alert(message);
+    this.props.resetToRoute({
+      name: "Login",
+      component: Auth
+    });
+  }
 
   renderAdventures(){
     return this.state.adventures.map(singleAdventure =>
       // would be better to put item id as key instead of title if singleAdventure had id
-      <AdventureDetail key={singleAdventure.id} singleAdventure={singleAdventure} />
+      <AdventureDetail key={singleAdventure._id} singleAdventure={singleAdventure} />
     );
   }
 
