@@ -22,6 +22,7 @@ module.exports = function(app, express) {
   app.get('/api/fetchMine', helper.checkJWT, adventureHandler.fetchMyInProgressAdventures);
   app.get('/api/fetchCreated', helper.checkJWT, adventureHandler.fetchMyCreatedAdventures);
   app.get('/api/fetchRiddle', helper.checkJWT, adventureHandler.fetchSingleRiddle);
+  app.put('/api/updateProgress', helper.checkJWT, adventureHandler.updateProgress);
 
   // just for testing
   app.get('/api/test', function(req, res){
