@@ -7,7 +7,8 @@ import {
   View,
   AsyncStorage,
   AlertIOS,
-  TouchableHighlight
+  TouchableHighlight,
+  Image
 } from 'react-native';
 
 import Auth from '../auth/Auth';
@@ -31,7 +32,7 @@ class MenuButton extends Component {
     return (
       <View>
         <TouchableHighlight onPress={this.goToMenu.bind(this)}>
-          <Text>MENU</Text>
+          <Image style={{height: 40, width: 40, marginLeft: 10}} source={require('../../resources/mobile-menu-white.png')} />
         </TouchableHighlight>
       </View>
     );
