@@ -58,6 +58,7 @@ var Auth = React.createClass({
     console.log("REFS:",this.refs);
     var input = this.refs.form.getValue();
     if (input) {
+      this.setSpinner();
       fetch("https://treasure-trek.herokuapp.com/api/signup", {
         method: "POST",
         headers: {
@@ -71,6 +72,7 @@ var Auth = React.createClass({
       }).then(function (res){
         return res.json()
       }).then((data)=> {
+        this.setSpinner();
         //Check for Valid Token
         if (data.userid) {
           this._onValueChange(STORAGE_KEY, data.userid);
@@ -91,9 +93,9 @@ var Auth = React.createClass({
 
   // SignIn Handler
   userLogin() {
-    this.setSpinner();
     var input = this.refs.form.getValue();
     if (input) {
+      this.setSpinner();
       fetch("https://treasure-trek.herokuapp.com/api/signin", {
         method: "POST",
         headers: {
