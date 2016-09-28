@@ -22,7 +22,15 @@ var Person = t.struct({
   email: Email,
   password: t.String
 });
-console.log("AFETER");
+
+var options = {
+  fields: {
+    password: {
+      password: true,
+      secureTextEntry: true
+    }
+  }
+};
 
 // Auth Component Class
 var Auth = React.createClass({
@@ -140,6 +148,7 @@ var Auth = React.createClass({
                     ref="form"
                     type={Person}
                     autoCorrect={false}
+                    options={options}
                 />
             </View>
             <View style={styles.row}>
