@@ -15,15 +15,33 @@ const AdvenCard = (props) => {
     }
   }
 
-  var toAcceptView = function (){
-    props.toRoute(routeAcceptView)
+  // flow test
+  // var toAcceptView = function (){
+  //   props.toRoute(routeAcceptView)
+  // }
+
+  var advenAccept = function (){
+    console.log("Confirm ID: ", props.adven._id)
+    fetch("https://treasure-trek.herokuapp.com/api/pickAd", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        adventureid: props.adven._id
+      })
+    })
+    .catch(err => {
+      console.error("failed to send adventure accept: ", err)
+    })
   }
 
   return (
       <View style={{ margin: 70 }}>
         <Text>{props.adven.adventure[0].riddle}</Text>
         <Text>{props.adven.adventure[0].location}</Text>
-        <TouchableHighlight style={style.button} onPress={toAcceptView}>
+        <TouchableHighlight style={style.button} onPress={advenAccept}>
           <Text style={style.text}>Accept</Text>
         </TouchableHighlight>
       </View>
