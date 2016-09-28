@@ -14,6 +14,11 @@ var Submission = React.createClass({
     this.setState({input: null});
   },
 
+  submitAnswer() {
+    this.clearForm();
+
+  },
+
   render() {
     return (
       <View style={styles.container}>
