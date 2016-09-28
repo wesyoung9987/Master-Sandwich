@@ -89,7 +89,9 @@ module.exports = {
   // No input required
   // Returns array of all adventures
   fetchAllAdventures: function(req, res){
-    Adventure.find({})
+    var userid = req.user._id;
+
+    Adventure.find({creator: {$ne: userid}})
       .then(function(adventures){
         res.json(adventures);
       });
