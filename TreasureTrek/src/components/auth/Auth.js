@@ -1,6 +1,6 @@
 // Import libraries for making a component
 import React from 'react';
-import {Text, View, TextInput, AsyncStorage, TouchableHighlight, AlertIOS} from 'react-native';
+import {Text, View, TextInput, AsyncStorage, TouchableHighlight, AlertIOS, ActivityIndicator} from 'react-native';
 import t from 'tcomb-form-native';
 
 // App components
@@ -12,12 +12,25 @@ import MyCreatedAdventures from '../myCreatedAdventures/myCreatedAdventures';
 // Create Session Storage Key for AsyncStorage
 var STORAGE_KEY = 'id_token';
 
+var Email = t.refinement(t.String, string => {
+  return /^\w+@\w+\.\w+$/i.test(string);
+}, 'Email')
+
 var Form = t.form.Form;
 
 var Person = t.struct({
-  email: t.String,
+  email: Email,
   password: t.String
 });
+
+var options = {
+  fields: {
+    password: {
+      password: true,
+      secureTextEntry: true
+    }
+  }
+};
 
 // Auth Component Class
 var Auth = React.createClass({
@@ -42,9 +55,8 @@ var Auth = React.createClass({
 
   // SignUp Handler
   userSignUp() {
+    console.log("REFS:",this.refs);
     var input = this.refs.form.getValue();
-    console.log('$$$$ email: ', input.email)
-    console.log('$$$$ pass: ', input.password)
     if (input) {
       fetch("https://treasure-trek.herokuapp.com/api/signup", {
         method: "POST",
@@ -59,15 +71,10 @@ var Auth = React.createClass({
       }).then(function (res){
         return res.json()
       }).then((data)=> {
-        console.log("Response data: ", data.userid);
         //Check for Valid Token
         if (data.userid) {
           this._onValueChange(STORAGE_KEY, data.userid);
           AlertIOS.alert( "Signup Success!" );
-          // this.props.navigator.push({
-          //   title: "Main Page",
-          //   component: Main
-          // });
           this.props.resetToRoute({
             name: "My Adventures",
             component: MyAdventures,
@@ -84,6 +91,7 @@ var Auth = React.createClass({
 
   // SignIn Handler
   userLogin() {
+    this.setSpinner();
     var input = this.refs.form.getValue();
     if (input) {
       fetch("https://treasure-trek.herokuapp.com/api/signin", {
@@ -99,14 +107,10 @@ var Auth = React.createClass({
       }).then(function (res){
         return res.json()
       }).then((data)=> {
-        console.log("Response data: ", data.userid);
+        this.setSpinner();
         if (data.userid) {
           this._onValueChange(STORAGE_KEY, data.userid);
           AlertIOS.alert( "Login Success!" );
-          // this.props.navigator.push({
-          //     title: "Main Page",
-          //     component: Main
-          // });
           this.props.resetToRoute({
             name: "My Adventures",
             component: MyAdventures,
@@ -134,32 +138,49 @@ var Auth = React.createClass({
     }
   },
 
+  setSpinner() {
+    this.setState({
+      waiting: !this.state.waiting
+    });
+  },
+
+  componentWillMount() {
+    this.setState({
+      waiting: false
+    })
+  },
+
   render() {
+    console.log("STATE:",this.state);
     return (
-        <View style={styles.container}>
-            <View style={styles.row}>
-                <Text style={styles.title}>Signup/Login </Text>
-            </View>
-            <View style={styles.row}>
-                <Form
-                    ref="form"
-                    type={Person}
-                    autoCorrect={false}
-                />
-            </View>
-            <View style={styles.row}>
-                <TouchableHighlight style={styles.button} onPress={this.userSignUp} underlayColor='#99d9f4'>
-                    <Text style={styles.buttonText}>Signup</Text>
-                </TouchableHighlight>
-                <TouchableHighlight style={styles.button} onPress={this.userLogin} underlayColor='#99d9f4'>
-                    <Text style={styles.buttonText}>Login</Text>
-                </TouchableHighlight>
-            </View>
+      <View style={styles.container}>
+          <View style={styles.row}>
+              <Text style={styles.title}>Signup/Login </Text>
+          </View>
+          <View style={styles.row}>
+              <Form
+                  ref="form"
+                  type={Person}
+                  autoCorrect={false}
+                  options={options}
+              />
+          </View>
+          <View style={styles.row}>
+              <TouchableHighlight style={styles.button} onPress={this.userSignUp} underlayColor='#99d9f4'>
+                  <Text style={styles.buttonText}>Signup</Text>
+              </TouchableHighlight>
+              <TouchableHighlight style={styles.button} onPress={this.userLogin} underlayColor='#99d9f4'>
+                  <Text style={styles.buttonText}>Login</Text>
+              </TouchableHighlight>
+          </View>
+          <ActivityIndicator
+            animating={this.state.waiting}
+            size = "large"
+          />
+      </View>
 
-        </View>
 
-
-      );
+    );
   }
 });
 
