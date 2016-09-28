@@ -20,11 +20,6 @@ const AdvenCard = (props) => {
     }
   }
 
-  // flow test
-  // var toAcceptView = function (){
-  //   props.toRoute(routeAcceptView)
-  // }
-
   var advenAccept = function (){
     AsyncStorage.getItem('id_token')
       .then(token => {
