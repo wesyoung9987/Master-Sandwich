@@ -58,7 +58,7 @@ class myAdventuresContainer extends Component {
     // console.log("STATE:",this.state);
     return (
       <View style={styles.containerStyle}>
-        <MyAdventuresList nav={this.props}></MyAdventuresList>
+        <MyAdventuresList nav={this.props} adventures={this.state.adventures}></MyAdventuresList>
       </View>
     );
   }
