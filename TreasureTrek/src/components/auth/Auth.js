@@ -12,12 +12,17 @@ import MyCreatedAdventures from '../myCreatedAdventures/myCreatedAdventures';
 // Create Session Storage Key for AsyncStorage
 var STORAGE_KEY = 'id_token';
 
+var Email = t.refinement(t.String, string => {
+  return /^\w+@\w+\.\w+$/i.test(string);
+}, 'Email')
+
 var Form = t.form.Form;
 
 var Person = t.struct({
-  email: t.String,
+  email: Email,
   password: t.String
 });
+console.log("AFETER");
 
 // Auth Component Class
 var Auth = React.createClass({
@@ -42,9 +47,8 @@ var Auth = React.createClass({
 
   // SignUp Handler
   userSignUp() {
+    console.log("REFS:",this.refs);
     var input = this.refs.form.getValue();
-    console.log('$$$$ email: ', input.email)
-    console.log('$$$$ pass: ', input.password)
     if (input) {
       fetch("https://treasure-trek.herokuapp.com/api/signup", {
         method: "POST",
@@ -59,15 +63,10 @@ var Auth = React.createClass({
       }).then(function (res){
         return res.json()
       }).then((data)=> {
-        console.log("Response data: ", data.userid);
         //Check for Valid Token
         if (data.userid) {
           this._onValueChange(STORAGE_KEY, data.userid);
           AlertIOS.alert( "Signup Success!" );
-          // this.props.navigator.push({
-          //   title: "Main Page",
-          //   component: Main
-          // });
           this.props.resetToRoute({
             name: "My Adventures",
             component: MyAdventures,
@@ -99,14 +98,9 @@ var Auth = React.createClass({
       }).then(function (res){
         return res.json()
       }).then((data)=> {
-        console.log("Response data: ", data.userid);
         if (data.userid) {
           this._onValueChange(STORAGE_KEY, data.userid);
           AlertIOS.alert( "Login Success!" );
-          // this.props.navigator.push({
-          //     title: "Main Page",
-          //     component: Main
-          // });
           this.props.resetToRoute({
             name: "My Adventures",
             component: MyAdventures,
@@ -135,6 +129,7 @@ var Auth = React.createClass({
   },
 
   render() {
+    console.log("STATE:",this.state);
     return (
         <View style={styles.container}>
             <View style={styles.row}>
