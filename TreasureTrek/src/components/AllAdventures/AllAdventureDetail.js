@@ -1,5 +1,10 @@
 import React from 'react';
-import {Text, View, TouchableHighlight} from 'react-native';
+import {
+  Text,
+  View,
+  TouchableHighlight,
+  AsyncStorage
+} from 'react-native';
 
 // App components
 import TempAcceptView from './TempAcceptView'
@@ -21,20 +26,29 @@ const AdvenCard = (props) => {
   // }
 
   var advenAccept = function (){
-    console.log("Confirm ID: ", props.adven._id)
-    fetch("https://treasure-trek.herokuapp.com/api/pickAd", {
-      method: "POST",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        adventureid: props.adven._id
+    AsyncStorage.getItem('id_token')
+      .then(token => {
+        fetch("https://treasure-trek.herokuapp.com/api/pickAd", {
+          method: "POST",
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            "x-access-token": token
+          },
+          body: JSON.stringify({
+            adventureid: props.adven._id
+          })
+        })
+        .then(res => {
+          return res.json()
+        })
+        .then(json => {
+          console.log("Successfully sent Adventure accept: ", json)
+        })
+        .catch(err => {
+          console.error("failed to send adventure accept: ", err)
+        })
       })
-    })
-    .catch(err => {
-      console.error("failed to send adventure accept: ", err)
-    })
   }
 
   return (
