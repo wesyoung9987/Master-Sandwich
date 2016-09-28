@@ -1,9 +1,9 @@
 // Import a library to help create a component
 import React, { Component } from 'react';
-import { Text, View, TextInput, TouchableHighlight } from 'react-native';
+import { Text, View, TextInput, TouchableHighlight, AsyncStorage, AlertIOS } from 'react-native';
 import SubmitButton from './SubmitButton';
 
-var val = 0
+var val = 0;
 
 // Create a component
 class FormView extends Component {
@@ -15,6 +15,66 @@ class FormView extends Component {
     } else {
       return 'red';
     }
+  }
+// Expects {title: 'title', adventure: [riddles], startingLocation: 'location'}
+  async sendData(data){
+    form = {
+      title: data.title,
+      adventure: [
+        {
+          riddle: data.input3,
+          answer: data.input4,
+          location: data.input1
+        },
+        {
+          riddle: data.input7,
+          answer: data.input8,
+          location: data.input5
+        },
+        {
+          riddle: data.input11,
+          answer: data.input12,
+          location: data.input9
+        }
+      ],
+      startingLocation: data.input1
+    }
+
+    AsyncStorage.getItem('id_token')
+      .then(token=>{
+        fetch("https://treasure-trek.herokuapp.com/api/createAd",{
+          method: "POST",
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'x-access-token': token
+          },
+          body: JSON.stringify(form)
+        }).then(function (res){
+          return res.json()
+        }).catch((error) => {
+          console.log("ERROR:",error);
+          this.handleError();
+        }).done();
+      });
+  }
+
+  handleError () {
+    AsyncStorage.removeItem('id_token')
+      .then(()=>{
+        this.errorRedirectToLogin("No Session - Redirecting");
+      }).catch(error => {
+        console.log('AsyncStorage error: ' + error.message);
+        this.errorRedirectToLogin("Internal Error - Redirecting")
+      });
+  }
+
+  errorRedirectToLogin (message) {
+    AlertIOS.alert(message);
+    this.props.resetToRoute({
+      name: "Login",
+      component: Auth
+    });
   }
 
   render() {
@@ -67,27 +127,27 @@ class FormView extends Component {
         </View>
         <TextInput
           style={{height: 40, borderColor: 'gray', borderWidth: 1, borderRadius: 10, fontSize: 20, paddingLeft: 15, paddingRight: 15, marginTop: 10}}
-          onChangeText={(input1) => this.setState({input1})}
+          onChangeText={(input5) => this.setState({input5})}
           placeholder={'Latitude'}
           value={this.state.input5}
         />
         <TextInput
           style={{height: 40, borderColor: 'gray', borderWidth: 1, borderRadius: 10, fontSize: 20, paddingLeft: 15, paddingRight: 15, marginTop: 10}}
-          onChangeText={(input2) => this.setState({input2})}
+          onChangeText={(input6) => this.setState({input6})}
           placeholder={'Longitude'}
           value={this.state.input6}
         />
         <TextInput
           multiline = {true}
           style={{height: 120, borderColor: 'gray', borderWidth: 1, borderRadius: 10, fontSize: 20, paddingLeft: 15, paddingRight: 15, marginTop: 10}}
-          onChangeText={(input3) => this.setState({input3})}
+          onChangeText={(input7) => this.setState({input7})}
           placeholder={'Riddle'}
           value={this.state.input7}
         />
         <TextInput
           multiline = {true}
           style={{height: 120, borderColor: 'gray', borderWidth: 1, borderRadius: 10, fontSize: 20, paddingLeft: 15, paddingRight: 15, marginTop: 10}}
-          onChangeText={(input4) => this.setState({input4})}
+          onChangeText={(input8) => this.setState({input8})}
           placeholder={'Answer'}
           value={this.state.input8}
         />
@@ -97,31 +157,32 @@ class FormView extends Component {
         </View>
         <TextInput
           style={{height: 40, borderColor: 'gray', borderWidth: 1, borderRadius: 10, fontSize: 20, paddingLeft: 15, paddingRight: 15, marginTop: 10}}
-          onChangeText={(input1) => this.setState({input1})}
+          onChangeText={(input9) => this.setState({input9})}
           placeholder={'Latitude'}
           value={this.state.input9}
         />
         <TextInput
           style={{height: 40, borderColor: 'gray', borderWidth: 1, borderRadius: 10, fontSize: 20, paddingLeft: 15, paddingRight: 15, marginTop: 10}}
-          onChangeText={(input2) => this.setState({input2})}
+          onChangeText={(input10) => this.setState({input10})}
           placeholder={'Longitude'}
           value={this.state.input10}
         />
         <TextInput
           multiline = {true}
           style={{height: 120, borderColor: 'gray', borderWidth: 1, borderRadius: 10, fontSize: 20, paddingLeft: 15, paddingRight: 15, marginTop: 10}}
-          onChangeText={(input3) => this.setState({input3})}
+          onChangeText={(input11) => this.setState({input11})}
           placeholder={'Riddle'}
           value={this.state.input11}
         />
         <TextInput
           multiline = {true}
           style={{height: 120, borderColor: 'gray', borderWidth: 1, borderRadius: 10, fontSize: 20, paddingLeft: 15, paddingRight: 15, marginTop: 10}}
-          onChangeText={(input4) => this.setState({input4})}
+          onChangeText={(input12) => this.setState({input12})}
           placeholder={'Answer'}
           value={this.state.input12}
         />
         <TouchableHighlight underlayColor='#fafafa' onPress={() => {
+            this.sendData(this.state);
             this.setState({title: '', input1: '', input2: '', input3: '', input4: '', input5: '', input6: '', input7: '', input8: '', input9: '', input10: '', input11: '', input12: ''})
           }
         }>
