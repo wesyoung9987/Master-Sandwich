@@ -18,7 +18,7 @@ export default class AllAdvens extends Component {
 
   renderRowCB(advens){
     return advens.map(adven => {
-      return <AllAdventureLI nav={this.props.nav} adven={adven}/>
+      return <AllAdventureLI key={adven._id} nav={this.props.nav} adven={adven}/>
     })
   }
 
