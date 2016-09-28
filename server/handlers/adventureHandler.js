@@ -10,7 +10,7 @@ module.exports = {
 
   // POST
   // Expects {adventureid: 'adventureid'}
-  // Returns status 200 on success
+  // Returns the new entry in the UserAdventure table
   pickAdventure: function(req, res){
     var userid = req.user._id
     var adventureid = req.body.adventureid;
@@ -36,7 +36,7 @@ module.exports = {
 
   // DELETE
   // Expects {adventureid: 'adventureid'}
-  // Returns status 200 on success
+  // Returns the result of the deletion
   forgetAdventure: function(req, res){
     var userid = req.user._id;
     var adventureid = req.body.adventureid;
@@ -52,7 +52,7 @@ module.exports = {
 
   // POST
   // Expects {title: 'title', adventure: [riddles], startingLocation: 'location'}
-  // Returns status 200 on success
+  // Returns the created adventure object
   createAdventure:  function(req, res){
     var userid = req.user._id;
     var adventureObj = {
@@ -143,6 +143,40 @@ module.exports = {
           helper.sendError("No Adventure", req, res);
         } else {
           res.json(adventure.adventure[riddleNumber]);
+        }
+      }
+    });
+  },
+
+  // PUT
+  // Expects adventure id and riddle # (zero index based)
+    // {adventureid: 'adventureid', riddleNumber: #}
+  // Returns the result of the modification
+  updateProgress: function(req, res){
+    var userid = req.user._id;
+    var adventureid = req.body.adventureid;
+    var riddleNumber = typeof(req.body.riddleNumber)===Number ? req.body.riddleNumber : +req.body.riddleNumber;
+
+    UserAdventure.findOne({userId: userid, adventureId: adventureid}, function(err, combo){
+      if (err) {
+        helper.sendError(err, req, res);
+      } else {
+        if (!combo) {
+          helper.sendError("No user/adventure combination found", req, res);
+        } else {
+          combo.completion[riddleNumber] = true;
+          if (combo.completion.every(riddle=>riddle)) {
+            console.log("ITS COMPLETE!");
+            combo.completed = true;
+          }
+          console.log("COMBO.COMPLETION:", combo.completion);
+          UserAdventure.update({userId: userid, adventureId: adventureid}, {completion: combo.completion, completed: combo.completed}, function(err, result){
+            if (err) {
+              helper.sendError(err, req, res);
+            } else {
+              res.json(result);
+            }
+          });
         }
       }
     });
