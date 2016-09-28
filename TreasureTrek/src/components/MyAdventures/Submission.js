@@ -16,7 +16,15 @@ var Submission = React.createClass({
 
   submitAnswer() {
     this.clearForm();
+    var input = this.refs.form.getValue();
+    console.log('PROPS ', this.props.answer)
+    console.log('input ', input.solution)
+    if (input.solution === this.props.answer) {
+      AlertIOS.alert( "CORRECT!" );
+    } else {
+      AlertIOS.alert( "Nice guess, but wrong answer. Try again." );
 
+    }
   },
 
   render() {

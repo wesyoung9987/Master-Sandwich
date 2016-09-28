@@ -9,7 +9,9 @@ const Riddle = (props) => {
     component: Submission,
     passProps: {
       nav: props.nav,
-      riddle: props.riddle
+      riddle: props.riddle,
+      answer: props.answer,
+      num: props.num
     }
   };
 
