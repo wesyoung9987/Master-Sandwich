@@ -1,15 +1,8 @@
 import React from 'react';
-import {
-  Text,
-  View,
-  TouchableHighlight,
-  AsyncStorage
-} from 'react-native';
+import {Text, View, TouchableHighlight} from 'react-native';
 
 // App components
 import TempAcceptView from './TempAcceptView'
-import MenuButton from '../nav/MenuButton';
-import MyAdventures from '../MyAdventures/myAdventuresContainer';
 
 const AdvenCard = (props) => {
   console.log(props)
@@ -22,34 +15,26 @@ const AdvenCard = (props) => {
     }
   }
 
+  // flow test
+  // var toAcceptView = function (){
+  //   props.toRoute(routeAcceptView)
+  // }
+
   var advenAccept = function (){
-    AsyncStorage.getItem('id_token')
-      .then(token => {
-        fetch("https://treasure-trek.herokuapp.com/api/pickAd", {
-          method: "POST",
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            "x-access-token": token
-          },
-          body: JSON.stringify({
-            adventureid: props.adven._id
-          })
-        })
-        .then(res => {
-          return res.json()
-        })
-        .then(json => {
-          console.log("Successfully sent Adventure accept: ", json)
-          props.resetToRoute({
-            component: MyAdventures,
-            leftCorner: MenuButton
-          })
-        })
-        .catch(err => {
-          console.error("failed to send adventure accept: ", err)
-        })
+    console.log("Confirm ID: ", props.adven._id)
+    fetch("https://treasure-trek.herokuapp.com/api/pickAd", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        adventureid: props.adven._id
       })
+    })
+    .catch(err => {
+      console.error("failed to send adventure accept: ", err)
+    })
   }
 
   return (
