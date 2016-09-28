@@ -24,8 +24,8 @@ const MyAdventureDetails = (props) => {
       onPress={toAdventureSolution}
       underlayColor={'#00ffff'}>
       <View style={styles.listStyle}>
-        <Text style={{fontSize: 12}}>{props.myAdventure.name}</Text>
-        <Text style={{fontSize: 9}}>{props.myAdventure.details.location}</Text>
+        <Text style={{fontSize: 12}}>{props.myAdventure.adventureId.title}</Text>
+        <Text style={{fontSize: 9}}>{props.myAdventure.adventureId.startingLocation}</Text>
       </View>
     </TouchableHighlight>
   );

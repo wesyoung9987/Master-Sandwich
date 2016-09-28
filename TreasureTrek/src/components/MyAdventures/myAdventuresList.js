@@ -55,21 +55,27 @@ var _dummy = ['one', 'two', 'three', 'four']
 
 export default class myAdventuresList extends Component {
   constructor(props){
+
     super(props)
+    console.log('PROPS $$$ : ', props)
     this.renderRowCB = this.renderRowCB.bind(this)
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.props.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      data: ds.cloneWithRows(dummy)
+      //data: ds.cloneWithRows(this.props.adventures)
+      data: ds.cloneWithRows(this.props.adventures)
     }
   }
 
   renderRowCB(myAdventure){
     // console.log('this.props.nav: ', this.props.nav)
+    console.log('I RAN!!!!')
+    console.log('myAdventure: ', myAdventure);
     return <MyAdventureDetails nav={this.props.nav} myAdventure={myAdventure}/>
   }
 
   render() {
-    console.log("PROPS:",this.props);
+    console.log("PROPS.adventures:",this.props.adventures);
+    console.log('DS: ', this.props.ds);
     return (
       <View>
         <ListView
