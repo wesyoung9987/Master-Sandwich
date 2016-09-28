@@ -14,7 +14,7 @@ import Auth from '../auth/Auth';
 import Main from '../main/Main';
 import MenuButton from './MenuButton';
 import MyAdventures from '../MyAdventures/myAdventuresContainer';
-import AllAdventures from '../AllAdventures/AllAdventuresContainer';
+import AllAdventures from '../allAdventures/AllAdventuresContainer';
 
 var STORAGE_KEY = 'id_token';
 
