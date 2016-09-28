@@ -1,21 +1,20 @@
-// Import libraries for making a component
 import React from 'react';
 import { Text, View, Image } from 'react-native';
 
 // Make a componenet
-const Header = (props) => {
+const CreateAdventureHeader2 = (props) => {
   const { textStyle, viewStyle, menuStyle, userStyle } = styles;
 
   return (
     <View style={viewStyle}>
       <View>
-        <Image style={menuStyle} source={require('../../resources/mobile-menu.png')} />
+        <Image style={menuStyle} source={require('../../../resources/double-arrow-left.png')} />
       </View>
       <View>
-        <Text style={textStyle}>{props.headerText}</Text>
+        <Text style={textStyle}>{'Go Back'}</Text>
       </View>
       <View>
-        <Image style={userStyle} source={require('../../resources/user-placeholder.png')} />
+        <Image style={menuStyle} source={require('../../../resources/double-arrow-left.png')} />
       </View>
     </View>
   );
@@ -23,31 +22,30 @@ const Header = (props) => {
 
 const styles = {
   viewStyle: {
-    backgroundColor: '#DF7376',
     height: 80,
-    paddingTop: 30,
     shadowColor: '#000',
     shadowOffset: { width:0, height: 2 },
     shadowOpacity: 0.2,
     elevation: 2,
     flexDirection: 'row',
-    justifyContent: 'space-around'
-  },
-  textStyle: {
-    fontSize: 20,
-    color: 'white',
+    borderWidth: 2,
+    borderColor: '#7AAE62',
     justifyContent: 'center',
     alignItems: 'center'
   },
-  menuStyle: {
-    height: 40,
-    width: 40
+  textStyle: {
+    fontSize: 35,
+    color: '#7AAE62',
+    marginTop: 5,
+    marginRight: 55,
+    marginLeft: 55
   },
-  userStyle: {
-    height: 45,
-    width: 45
+  menuStyle: {
+    height: 50,
+    width: 50,
+    marginTop: 5
   }
 };
 
 // Make the component available to other parts of the app
-export default Header;
+export default CreateAdventureHeader2;

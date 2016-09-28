@@ -12,10 +12,9 @@ const AdventureDetail = ({ singleAdventure }) => {
     <View style={viewStyle}>
       <View style={detailsStyle}>
         <Text style={titleStyle}>{title}</Text>
-        <Text style={dateStyle}>{'Created On: ' + date}</Text>
       </View>
       <View style={arrowsContainer}>
-        <Image style={arrowsStyle} source={require('../../../../resources/double-arrows.png')} />
+        <Image style={arrowsStyle} source={require('../../resources/double-arrows.png')} />
       </View>
     </View>
   );
@@ -43,11 +42,7 @@ const styles = {
   titleStyle: {
     color: 'white',
     fontSize: 25,
-    fontWeight: '600',
-    textDecorationLine: 'underline'
-  },
-  dateStyle: {
-    color: 'white'
+    fontWeight: '600'
   },
   arrowsStyle: {
     height: 50,
