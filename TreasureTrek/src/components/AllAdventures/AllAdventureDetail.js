@@ -8,6 +8,8 @@ import {
 
 // App components
 import TempAcceptView from './TempAcceptView'
+import MenuButton from '../nav/MenuButton';
+import MyAdventures from '../MyAdventures/myAdventuresContainer';
 
 const AdvenCard = (props) => {
   console.log(props)
@@ -39,6 +41,10 @@ const AdvenCard = (props) => {
         })
         .then(json => {
           console.log("Successfully sent Adventure accept: ", json)
+          props.resetToRoute({
+            component: MyAdventures,
+            leftCorner: MenuButton
+          })
         })
         .catch(err => {
           console.error("failed to send adventure accept: ", err)
