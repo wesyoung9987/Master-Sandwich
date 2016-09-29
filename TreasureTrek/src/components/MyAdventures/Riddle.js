@@ -21,6 +21,14 @@ const Riddle = (props) => {
     props.nav.toRoute(SubmissionRoute);
   }
 
+  var status = function(bool) {
+    if (bool) {
+      return "COMPLETE";
+    } else {
+      return "UNSOLVED"
+    }
+  };
+
   return (
     <View>
       <TouchableHighlight
@@ -32,6 +40,9 @@ const Riddle = (props) => {
           <Text style={styles.loc}>{props.loc}</Text>
         </View>
       </TouchableHighlight>
+      <View>
+        <Text style={styles.status}>Status: {status(props.completion)}</Text>
+      </View>
     </View>
   );
 }
@@ -52,7 +63,7 @@ var styles = {
     padding: 10
   },
   loc : {
-    fontSize: 8,
+    fontSize: 10,
     fontFamily: 'Helvetica',
     fontWeight: 'bold',
     color: 'blue'
@@ -63,6 +74,15 @@ var styles = {
     marginRight: 10,
     borderColor: "#ddd",
     fontWeight: 'bold',
+    elevation: 1
+  },
+  status: {
+    fontSize: 14,
+    fontFamily: 'Helvetica',
+    fontWeight: 'bold',
+    color: 'red',
+    padding: 5,
+    marginLeft: 10,
     elevation: 1
   }
 };

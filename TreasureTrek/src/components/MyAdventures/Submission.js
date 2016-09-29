@@ -17,7 +17,7 @@ var Submission = React.createClass({
   },
 
   toRiddles() {
-    this.props.nav.toBack();
+    this.props.nav.reset();
   },
 
   submitAnswer() {
@@ -26,8 +26,6 @@ var Submission = React.createClass({
     console.log('PROPS: ', this.props)
     console.log('answer ', this.props.answer)
     console.log('input ', input.solution)
-    console.log('adventureid: ', this.props.id);
-    console.log('riddleNumber: ', this.props.num - 1);
     var riddleNumber = this.props.num - 1 ;
 
     if (input.solution === this.props.answer) {
@@ -49,6 +47,7 @@ var Submission = React.createClass({
             return res.json()
           }).then((data)=> {
             // Reroute Navigation To Home
+            this.props.completion = true;
             this.toRiddles();
             console.log('Posted! Data Response: ', data);
 
