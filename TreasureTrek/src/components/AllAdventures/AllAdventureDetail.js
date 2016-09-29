@@ -1,40 +1,45 @@
 import React from 'react';
-import {Text, View, TouchableHighlight} from 'react-native';
+import {
+  Text,
+  View,
+  TouchableHighlight,
+  AsyncStorage
+} from 'react-native';
 
 // App components
-import TempAcceptView from './TempAcceptView'
+import MenuButton from '../nav/MenuButton';
+import MyAdventures from '../MyAdventures/myAdventuresContainer';
 
-const AdvenCard = (props) => {
-  console.log(props)
-
-  var routeAcceptView = {
-    name: "You accepted " + props.adven.title,
-    component: TempAcceptView,
-    passProps: {
-      adven: props.adven
-    }
-  }
-
-  // flow test
-  // var toAcceptView = function (){
-  //   props.toRoute(routeAcceptView)
-  // }
+const AllAdventureDetail = (props) => {
 
   var advenAccept = function (){
-    console.log("Confirm ID: ", props.adven._id)
-    fetch("https://treasure-trek.herokuapp.com/api/pickAd", {
-      method: "POST",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        adventureid: props.adven._id
+    AsyncStorage.getItem('id_token')
+      .then(token => {
+        fetch("https://treasure-trek.herokuapp.com/api/pickAd", {
+          method: "POST",
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            "x-access-token": token
+          },
+          body: JSON.stringify({
+            adventureid: props.adven._id
+          })
+        })
+        .then(res => {
+          return res.json()
+        })
+        .then(json => {
+          console.log("Successfully sent Adventure accept: ", json)
+          props.resetToRoute({
+            component: MyAdventures,
+            leftCorner: MenuButton
+          })
+        })
+        .catch(err => {
+          console.error("failed to send adventure accept: ", err)
+        })
       })
-    })
-    .catch(err => {
-      console.error("failed to send adventure accept: ", err)
-    })
   }
 
   return (
@@ -58,4 +63,4 @@ var style = {
   }
 }
 
-export default AdvenCard
+export default AllAdventureDetail
