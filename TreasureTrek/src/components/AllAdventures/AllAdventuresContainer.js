@@ -37,7 +37,7 @@ class AllAdventures extends Component {
 
   render(){
     return (
-      <View>
+      <View style={{ flex: 1}}>
         <AllAdventuresList nav={this.props} advens={this.state.adventures}></AllAdventuresList>
       </View>
     );

@@ -1,6 +1,12 @@
 import { AppRegistry } from 'react-native';
 import App from './src/components/App';
 
+///////////////////////////////////////////////////////////
+/* This console setting is for demonstration purposes only
+   Highly encouraged to keep warnings enabled */
+// console.disableYellowBox = true;
+///////////////////////////////////////////////////////////
+
 AppRegistry.registerComponent('TreasureTrek', () => App);
 
 
