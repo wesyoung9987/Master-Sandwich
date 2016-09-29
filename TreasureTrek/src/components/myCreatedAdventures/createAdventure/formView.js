@@ -1,7 +1,8 @@
 // Import a library to help create a component
 import React, { Component } from 'react';
-import { Text, View, TextInput, TouchableHighlight, AsyncStorage, AlertIOS } from 'react-native';
+import { Text, View, TextInput, TouchableHighlight, AsyncStorage, Navigator } from 'react-native';
 import SubmitButton from './SubmitButton';
+import MyCreatedAdventures from '../myCreatedAdventures';
 
 var val = 0;
 
@@ -52,6 +53,8 @@ class FormView extends Component {
           body: JSON.stringify(form)
         }).then(function (res){
           return res.json()
+        }).then((data)=> {
+          console.log(data);
         }).catch((error) => {
           console.log("ERROR:",error);
           this.handleError();
@@ -83,8 +86,6 @@ class FormView extends Component {
       <View>
         <TextInput
           style={{height: 40, borderColor: 'gray', borderWidth: 1, borderRadius: 10, fontSize: 20, paddingLeft: 15, paddingRight: 15}}
-          onFocus={() => function(){ val++; this.changeColor(); this.setState()}}
-          onBlur={() => function(){ val--; this.changeColor(); this.setState()}}
           onChangeText={(title) => this.setState({title})}
           placeholder={'Adventure Name'}
           value={this.state.title}

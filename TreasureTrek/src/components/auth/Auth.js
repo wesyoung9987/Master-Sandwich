@@ -7,7 +7,6 @@ import t from 'tcomb-form-native';
 import Main from '../main/Main.js';
 import MenuButton from '../nav/MenuButton.js';
 import MyAdventures from '../MyAdventures/myAdventuresContainer';
-import MyCreatedAdventures from '../myCreatedAdventures/myCreatedAdventures';
 
 // Create Session Storage Key for AsyncStorage
 var STORAGE_KEY = 'id_token';
