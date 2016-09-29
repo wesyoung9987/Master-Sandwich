@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import {Text, View, TextInput, AsyncStorage, TouchableHighlight, AlertIOS} from 'react-native';
 import t from 'tcomb-form-native';
-
+import AdventureSolution from './AdventureSolution.js';
 // Riddle Submission Form
 var Form = t.form.Form;
 
 var Solution = t.struct({solution: t.String});
+
+//console.log('$$$$$$$$$', this.props.id);
 
 // Submission Component
 var Submission = React.createClass({
@@ -14,10 +16,15 @@ var Submission = React.createClass({
     this.setState({input: null});
   },
 
+  toRiddles() {
+    this.props.nav.toBack();
+  },
+
   submitAnswer() {
     this.clearForm();
     var input = this.refs.form.getValue();
-    console.log('PROPS ', this.props.answer)
+    console.log('PROPS: ', this.props)
+    console.log('answer ', this.props.answer)
     console.log('input ', input.solution)
     console.log('adventureid: ', this.props.id);
     console.log('riddleNumber: ', this.props.num - 1);
@@ -42,6 +49,7 @@ var Submission = React.createClass({
             return res.json()
           }).then((data)=> {
             // Reroute Navigation To Home
+            this.toRiddles();
             console.log('Posted! Data Response: ', data);
 
           }).catch((error)=> {
