@@ -34,7 +34,7 @@ const AllAdventureDetail = (props) => {
           props.resetToRoute({
             name: "My Adventures",
             component: MyAdventures,
-            leftCorner: MenuButton,
+            leftCorner: MenuButton
           })
         })
         .catch(err => {

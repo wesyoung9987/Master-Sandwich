@@ -13,7 +13,7 @@ import AllAdventureDetail from './AllAdventureDetail'
 const AdvenLI = (props) => {
 
   const advenCardRoute = {
-    name: props.adven.title + " Card",
+    name: props.adven.title,
     component: AllAdventureDetail,
     passProps: {
       adven: props.adven
