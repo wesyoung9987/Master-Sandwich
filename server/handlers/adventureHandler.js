@@ -88,12 +88,23 @@ module.exports = {
   // GET
   // No input required
   // Returns array of all adventures
+    // except ones you created
   fetchAllAdventures: function(req, res){
     var userid = req.user._id;
 
     Adventure.find({creator: {$ne: userid}})
       .then(function(adventures){
-        res.json(adventures);
+        // res.json(adventures);
+        UserAdventure.find({userId: userid}, 'adventureId')
+          .then(function(inwork){
+            inwork = inwork.map(function(ad){
+              return ad.adventureId.toString();
+            })
+            var availAds = adventures.filter(function(ad){
+              return !inwork.includes(ad._id.toString());
+            })
+            res.json(availAds);
+          })
       });
   },
 
