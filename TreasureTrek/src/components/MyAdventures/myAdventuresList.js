@@ -18,7 +18,7 @@ export default class myAdventuresList extends Component {
 
   renderRowCB(myAdventures){
     return myAdventures.map(myAdventure => {
-      return <MyAdventureDetails nav={this.props.nav} myAdventure={myAdventure}/>
+      return <View style={{flex:1}}><MyAdventureDetails nav={this.props.nav} myAdventure={myAdventure}/></View>
     })
   }
 

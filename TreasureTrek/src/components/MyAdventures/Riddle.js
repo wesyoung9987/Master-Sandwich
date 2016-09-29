@@ -11,7 +11,9 @@ const Riddle = (props) => {
       nav: props.nav,
       riddle: props.riddle,
       answer: props.answer,
-      num: props.num
+      num: props.num,
+      id: props.id,
+      completion: props.completion
     }
   };
 
@@ -20,15 +22,17 @@ const Riddle = (props) => {
   }
 
   return (
-    <TouchableHighlight
-      onPress={toSubmission}
-      underlayColor={'#00ffff'}>
-      <View style={styles.listStyle}>
-        <Text style={styles.title}>Riddle # {props.num}</Text>
-        <Text>{props.riddle}</Text>
-        <Text style={styles.loc}>{props.loc}</Text>
-      </View>
-    </TouchableHighlight>
+    <View>
+      <TouchableHighlight
+        onPress={toSubmission}
+        underlayColor={'#00ffff'}>
+        <View style={styles.listStyle}>
+          <Text style={styles.title}>Riddle # {props.num}</Text>
+          <Text>{props.riddle}</Text>
+          <Text style={styles.loc}>{props.loc}</Text>
+        </View>
+      </TouchableHighlight>
+    </View>
   );
 }
 
