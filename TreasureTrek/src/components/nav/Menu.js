@@ -16,6 +16,7 @@ import MenuButton from './MenuButton';
 import MyAdventures from '../MyAdventures/myAdventuresContainer';
 import AllAdventures from '../AllAdventures/AllAdventuresContainer';
 
+
 var STORAGE_KEY = 'id_token';
 
 class Menu extends Component {

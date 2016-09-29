@@ -20,14 +20,16 @@ const MyAdventureDetails = (props) => {
   }
 
   return (
-    <TouchableHighlight
-      onPress={toAdventureSolution}
-      underlayColor={'#00ffff'}>
-      <View style={styles.listStyle}>
-        <Text style={{fontSize: 12}}>{props.myAdventure.adventureId.title}</Text>
-        <Text style={{fontSize: 9}}>{props.myAdventure.adventureId.startingLocation}</Text>
-      </View>
-    </TouchableHighlight>
+    <View style={{flex:1}}>
+      <TouchableHighlight
+        onPress={toAdventureSolution}
+        underlayColor={'#00ffff'}>
+        <View style={styles.listStyle}>
+          <Text style={{fontSize: 12}}>{props.myAdventure.adventureId.title}</Text>
+          <Text style={{fontSize: 9}}>{props.myAdventure.adventureId.startingLocation}</Text>
+        </View>
+      </TouchableHighlight>
+    </View>
   );
 };
 
@@ -44,7 +46,8 @@ var styles = {
     marginLeft: 5,
     marginRight: 5,
     marginTop: 30,
-    padding: 10
+    padding: 10,
+    flex: 1
   }
 };
 

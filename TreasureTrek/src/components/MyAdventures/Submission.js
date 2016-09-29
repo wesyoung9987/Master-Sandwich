@@ -1,17 +1,83 @@
 import React, {Component} from 'react';
 import {Text, View, TextInput, AsyncStorage, TouchableHighlight, AlertIOS} from 'react-native';
 import t from 'tcomb-form-native';
-
+import AdventureSolution from './AdventureSolution.js';
 // Riddle Submission Form
 var Form = t.form.Form;
 
 var Solution = t.struct({solution: t.String});
+
+//console.log('$$$$$$$$$', this.props.id);
 
 // Submission Component
 var Submission = React.createClass({
 
   clearForm() {
     this.setState({input: null});
+  },
+
+  toRiddles() {
+    this.props.nav.reset();
+  },
+
+  submitAnswer() {
+    this.clearForm();
+    var input = this.refs.form.getValue();
+    console.log('PROPS: ', this.props)
+    console.log('answer ', this.props.answer)
+    console.log('input ', input.solution)
+    var riddleNumber = this.props.num - 1 ;
+
+    if (input.solution === this.props.answer) {
+      AlertIOS.alert( "CORRECT!" );
+      AsyncStorage.getItem('id_token')
+        .then(token=>{
+          fetch("https://treasure-trek.herokuapp.com/api/updateProgress", {
+            method: "PUT",
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'x-access-token': token
+            },
+            body: JSON.stringify({
+              adventureid: this.props.id,    //Adventure ID
+              riddleNumber: riddleNumber, //Riddle # is zero index based
+            })
+          }).then(function(res){
+            return res.json()
+          }).then((data)=> {
+            // Reroute Navigation To Home
+            this.props.completion = true;
+            this.toRiddles();
+            console.log('Posted! Data Response: ', data);
+
+          }).catch((error)=> {
+            console.error("ERROR: ", error);
+            this.handleError();
+          }).done();
+      });
+    } else {
+      AlertIOS.alert( "Nice guess, but wrong answer. Try again." );
+
+    }
+  },
+
+ handleError () {
+  AsyncStorage.removeItem('id_token')
+    .then(()=>{
+      this.errorRedirectToLogin("No Session - Redirecting");
+    }).catch(error => {
+      console.log('AsyncStorage error: ' + error.message);
+      this.errorRedirectToLogin("Internal Error - Redirecting")
+    });
+  },
+
+  errorRedirectToLogin (message) {
+    AlertIOS.alert(message);
+    this.props.resetToRoute({
+      name: "Login",
+      component: Auth
+    });
   },
 
   render() {
@@ -26,6 +92,14 @@ var Submission = React.createClass({
             type={Solution}
             autoCorrect={false}
           />
+        </View>
+        <View style={styles.row}>
+          <TouchableHighlight style={styles.button}
+            onPress={this.submitAnswer}
+            underlayColor='#99d9f4'
+          >
+            <Text style={styles.buttonText}>Submit</Text>
+          </TouchableHighlight>
         </View>
       </View>
     );
