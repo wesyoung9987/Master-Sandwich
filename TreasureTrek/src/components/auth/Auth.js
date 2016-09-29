@@ -27,7 +27,17 @@ var options = {
   fields: {
     password: {
       password: true,
-      secureTextEntry: true
+      secureTextEntry: true,
+      error: 'Enter a password',
+      placeholder: '********',
+      autoCapitalize: 'none',
+      autoCorrect: false
+    },
+    email: {
+      error: 'Enter a valid email',
+      placeholder: 'yourname@gmail.com',
+      autoCapitalize: 'none',
+      autoCorrect: false
     }
   }
 };
@@ -44,8 +54,8 @@ var Auth = React.createClass({
         console.log('AsyncStorage error: ' + error.message);
     }
     // Test AsyncStorage
-    var session = AsyncStorage.getItem(STORAGE_KEY);
-    console.log('stored session: ', session);
+    // var session = AsyncStorage.getItem(STORAGE_KEY);
+    // console.log('stored session: ', session);
   },
 
   // Clear Form
@@ -55,7 +65,6 @@ var Auth = React.createClass({
 
   // SignUp Handler
   userSignUp() {
-    console.log("REFS:",this.refs);
     var input = this.refs.form.getValue();
     if (input) {
       this.setSpinner();
@@ -76,7 +85,7 @@ var Auth = React.createClass({
         //Check for Valid Token
         if (data.userid) {
           this._onValueChange(STORAGE_KEY, data.userid);
-          AlertIOS.alert( "Signup Success!" );
+          // AlertIOS.alert( "Signup Success!" );
           this.props.resetToRoute({
             name: "My Adventures",
             component: MyAdventures,
@@ -112,7 +121,7 @@ var Auth = React.createClass({
         this.setSpinner();
         if (data.userid) {
           this._onValueChange(STORAGE_KEY, data.userid);
-          AlertIOS.alert( "Login Success!" );
+          // AlertIOS.alert( "Login Success!" );
           this.props.resetToRoute({
             name: "My Adventures",
             component: MyAdventures,
@@ -153,7 +162,6 @@ var Auth = React.createClass({
   },
 
   render() {
-    console.log("STATE:",this.state);
     return (
       <View style={styles.container}>
           <View style={styles.row}>
@@ -163,7 +171,6 @@ var Auth = React.createClass({
               <Form
                   ref="form"
                   type={Person}
-                  autoCorrect={false}
                   options={options}
               />
           </View>
