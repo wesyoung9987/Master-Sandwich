@@ -18,6 +18,8 @@ const AddAdventure = (props) => {
     <Navigator
       initialRoute={routes[0]}
       initialRouteStack={routes}
+      configureScene={(route, routeStack) =>
+        Navigator.SceneConfigs.HorizontalSwipeJump}
       renderScene={(route, navigator) =>
       <View style={{ flex: 1 }}>
         <TouchableHighlight underlayColor='#fafafa' onPress={() => {

@@ -15,6 +15,7 @@ import Main from '../main/Main';
 import MenuButton from './MenuButton';
 import MyAdventures from '../MyAdventures/myAdventuresContainer';
 import AllAdventures from '../AllAdventures/AllAdventuresContainer';
+import MyCreatedAdventures from '../myCreatedAdventures/myCreatedAdventures';
 
 
 var STORAGE_KEY = 'id_token';
@@ -41,7 +42,7 @@ class Menu extends Component {
   toCreateAds () {
     this.props.resetToRoute({
       name: "Create Adventures",
-      component: Main, // Swap out w/ CreateAdventures Component
+      component: MyCreatedAdventures,
       leftCorner: MenuButton
     });
   }

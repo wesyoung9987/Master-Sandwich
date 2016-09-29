@@ -1,13 +1,18 @@
 // Import a library to help create a component
 import React, { Component } from 'react';
-import { Text, View, TextInput, TouchableHighlight, AsyncStorage, AlertIOS } from 'react-native';
+import { Text, View, TextInput, TouchableHighlight, AsyncStorage, Navigator } from 'react-native';
 import SubmitButton from './SubmitButton';
+import MyCreatedAdventures from '../myCreatedAdventures';
+import AdventureSubmited from './AdventureSubmited';
 
 var val = 0;
 
 // Create a component
 class FormView extends Component {
-  state = {title: '', input1: '', input2: '', input3: '', input4: '', input5: '', input6: '', input7: '', input8: '', input9: '', input10: '', input11: '', input12: ''};
+
+
+
+  state = {title: '', input1: '', input2: '', input3: '', input4: '', input5: '', input6: '', input7: '', input8: '', input9: '', input10: '', input11: '', input12: '', canSubmit: true, routes: [{view: <SubmitButton/>, index: 0}]};
 
   changeColor(){
     if(val === 0){
@@ -52,6 +57,8 @@ class FormView extends Component {
           body: JSON.stringify(form)
         }).then(function (res){
           return res.json()
+        }).then((data)=> {
+          console.log(data);
         }).catch((error) => {
           console.log("ERROR:",error);
           this.handleError();
@@ -83,8 +90,6 @@ class FormView extends Component {
       <View>
         <TextInput
           style={{height: 40, borderColor: 'gray', borderWidth: 1, borderRadius: 10, fontSize: 20, paddingLeft: 15, paddingRight: 15}}
-          onFocus={() => function(){ val++; this.changeColor(); this.setState()}}
-          onBlur={() => function(){ val--; this.changeColor(); this.setState()}}
           onChangeText={(title) => this.setState({title})}
           placeholder={'Adventure Name'}
           value={this.state.title}
@@ -181,15 +186,19 @@ class FormView extends Component {
           placeholder={'Answer'}
           value={this.state.input12}
         />
-        <TouchableHighlight underlayColor='#fafafa' onPress={() => {
-            this.sendData(this.state);
-            this.setState({title: '', input1: '', input2: '', input3: '', input4: '', input5: '', input6: '', input7: '', input8: '', input9: '', input10: '', input11: '', input12: ''})
-          }
-        }>
-          <View>
-            <SubmitButton/>
-          </View>
-        </TouchableHighlight>
+
+          <TouchableHighlight underlayColor='#fafafa' onPress={() => {
+            if(this.state.canSubmit === true){
+              this.sendData(this.state);
+            }
+            this.setState({title: '', input1: '', input2: '', input3: '', input4: '', input5: '', input6: '', input7: '', input8: '', input9: '', input10: '', input11: '', input12: '', canSubmit: false, routes: [{view: <SubmitButton/>, index: 0}, {view: <AdventureSubmited/>, index: 1}]})
+            }
+          }>
+            <View>
+              {this.state.routes[this.state.routes.length - 1].view}
+            </View>
+          </TouchableHighlight>
+
       </View>
 
     );
