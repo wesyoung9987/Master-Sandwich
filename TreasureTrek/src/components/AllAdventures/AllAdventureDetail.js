@@ -33,7 +33,8 @@ const AllAdventureDetail = (props) => {
           console.log("Successfully sent Adventure accept: ", json)
           props.resetToRoute({
             component: MyAdventures,
-            leftCorner: MenuButton
+            leftCorner: MenuButton,
+            name: "My Adventures"
           })
         })
         .catch(err => {
