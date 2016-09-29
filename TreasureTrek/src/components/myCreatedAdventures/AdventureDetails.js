@@ -22,7 +22,7 @@ const AdventureDetail = ({ singleAdventure }) => {
 
 const styles = {
   viewStyle: {
-    marginTop: 20,
+    //marginTop: 20,
     height: 80,
     shadowColor: '#000',
     shadowOffset: { width:0, height: 2 },
