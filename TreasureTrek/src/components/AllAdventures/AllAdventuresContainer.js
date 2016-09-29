@@ -27,7 +27,7 @@ class AllAdventures extends Component {
         self.setState({
           adventures: data
         })
-      })
+      }).catch(error => console.log("ERR:", error))
     })
   }
 

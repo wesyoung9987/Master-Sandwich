@@ -94,17 +94,17 @@ module.exports = {
 
     Adventure.find({creator: {$ne: userid}})
       .then(function(adventures){
-        // res.json(adventures);
-        UserAdventure.find({userId: userid}, 'adventureId')
-          .then(function(inwork){
-            inwork = inwork.map(function(ad){
-              return ad.adventureId.toString();
-            })
-            var availAds = adventures.filter(function(ad){
-              return !inwork.includes(ad._id.toString());
-            })
-            res.json(availAds);
-          })
+        res.json(adventures);
+        // UserAdventure.find({userId: userid}, 'adventureId')
+        //   .then(function(inwork){
+        //     inwork = inwork.map(function(ad){
+        //       return ad.adventureId.toString();
+        //     })
+        //     var availAds = adventures.filter(function(ad){
+        //       return !inwork.includes(ad._id.toString());
+        //     })
+        //     res.json(availAds);
+        //   })
       });
   },
 
@@ -179,10 +179,8 @@ module.exports = {
         } else {
           combo.completion[riddleNumber] = true;
           if (combo.completion.every(riddle=>riddle)) {
-            console.log("ITS COMPLETE!");
             combo.completed = true;
           }
-          console.log("COMBO.COMPLETION:", combo.completion);
           UserAdventure.update({userId: userid, adventureId: adventureid}, {completion: combo.completion, completed: combo.completed}, function(err, result){
             if (err) {
               helper.sendError(err, req, res);
