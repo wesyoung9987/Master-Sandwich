@@ -19,7 +19,8 @@ class App extends Component {
   render() {
     var firstRoute = {
       name: "Welcome",
-      component: Auth
+      component: Auth,
+      hideNavigationBar: true
     }
 
     return (

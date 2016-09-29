@@ -1,6 +1,14 @@
 // Import libraries for making a component
 import React from 'react';
-import {Text, View, TextInput, AsyncStorage, TouchableHighlight, AlertIOS, ActivityIndicator} from 'react-native';
+import {
+  Text,
+  View,
+  Image,
+  TextInput,
+  AsyncStorage,
+  TouchableHighlight,
+  AlertIOS,
+  ActivityIndicator} from 'react-native';
 import t from 'tcomb-form-native';
 
 // App components
@@ -162,18 +170,21 @@ var Auth = React.createClass({
 
   render() {
     return (
-      <View style={styles.container}>
-          <View style={styles.row}>
-              <Text style={styles.title}>Signup/Login </Text>
-          </View>
-          <View style={styles.row}>
+      <Image style={{ flex: 1, resizeMode: 'cover'}}
+      source={require('../../resources/land-blue.png')}>
+        <View style={styles.container}>
+          <ActivityIndicator
+          animating={this.state.waiting}
+          size = "large"
+          />
+          <View>
               <Form
                   ref="form"
                   type={Person}
                   options={options}
               />
           </View>
-          <View style={styles.row}>
+          <View>
               <TouchableHighlight style={styles.button} onPress={this.userSignUp} underlayColor='#99d9f4'>
                   <Text style={styles.buttonText}>Signup</Text>
               </TouchableHighlight>
@@ -181,13 +192,8 @@ var Auth = React.createClass({
                   <Text style={styles.buttonText}>Login</Text>
               </TouchableHighlight>
           </View>
-          <ActivityIndicator
-            animating={this.state.waiting}
-            size = "large"
-          />
-      </View>
-
-
+        </View>
+      </Image>
     );
   }
 });
@@ -218,14 +224,13 @@ const styles = {
   },
   container: {
     justifyContent: 'center',
-    marginTop: 50,
+    marginTop: 340,
     padding: 20,
-    backgroundColor: '#ffffff',
+    backgroundColor: 'rgba(52,52,52,0)'
   },
   title: {
     fontSize: 30,
-    alignSelf: 'center',
-    marginBottom: 30
+    alignSelf: 'center'
   },
   buttonText: {
     fontSize: 18,
@@ -238,7 +243,7 @@ const styles = {
     borderColor: '#48BBEC',
     borderWidth: 1,
     borderRadius: 8,
-    marginBottom: 10,
+    marginBottom: 5,
     alignSelf: 'stretch',
     justifyContent: 'center'
   },
