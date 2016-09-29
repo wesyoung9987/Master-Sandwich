@@ -35,7 +35,6 @@ const AllAdventureDetail = (props) => {
             name: "My Adventures",
             component: MyAdventures,
             leftCorner: MenuButton,
-            name: "My Adventures"
           })
         })
         .catch(err => {
