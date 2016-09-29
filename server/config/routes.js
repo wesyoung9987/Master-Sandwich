@@ -5,11 +5,8 @@ var jwt = require('jwt-simple');
 
 
 // export entire function to server.js
-module.exports = function(app, express) {
+module.exports = function(app) {
 
-  // TODO:
-  // fill out api requests
-  // direct to correct server method
 
   app.post('/api/signin', userHandler.signin);
   app.post('/api/signup', userHandler.signup);
@@ -24,12 +21,5 @@ module.exports = function(app, express) {
   app.get('/api/fetchRiddle', helper.checkJWT, adventureHandler.fetchSingleRiddle);
   app.put('/api/updateProgress', helper.checkJWT, adventureHandler.updateProgress);
 
-  // just for testing
-  app.get('/api/test', function(req, res){
-    var token = req.headers['x-access-token']
-    var user = jwt.decode(token, 'secret');
-    console.log("USER: ", user);
-    res.json({user: user});
-  })
 
 };

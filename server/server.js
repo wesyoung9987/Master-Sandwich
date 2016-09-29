@@ -6,10 +6,10 @@ var routes = require('./config/routes.js');
 var app = express();
 
 // set middleware
-middleware(app, express);
+middleware(app);
 
 //set routes
-routes(app, express);
+routes(app);
 
 // export app to index.js
 module.exports = app;

@@ -1,8 +1,9 @@
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
+var express = require('express');
 
 // export entire function to server.js
-module.exports = function(app, express) {
+module.exports = function(app) {
 
   // apply morgan to display server interactions in terminal
   app.use(morgan('dev'));
