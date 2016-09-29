@@ -24,6 +24,7 @@ class myAdventuresContainer extends Component {
           return res.json()
         }).then((data)=> {
           // set state or do something else with data
+          console.log('GET data: ', data)
           this.setState({adventures: data});
         }).catch((error) => {
           console.log("ERROR:",error);
