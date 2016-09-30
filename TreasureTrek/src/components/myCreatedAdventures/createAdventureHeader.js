@@ -27,13 +27,13 @@ const styles = {
     elevation: 2,
     flexDirection: 'row',
     borderWidth: 2,
-    borderColor: '#7AAE62'
+    borderColor: '#ed1558'
   },
   textStyle: {
-    fontSize: 35,
-    color: '#7AAE62',
+    fontSize: 20,
+    color: '#ed1558',
     marginLeft: 20,
-    marginTop: 13
+    marginTop: 13,
   },
   menuStyle: {
     height: 50,

@@ -30,8 +30,8 @@ const styles = {
     elevation: 2,
     flexDirection: 'row',
     borderWidth: 2,
-    borderColor: '#7AAE62',
-    backgroundColor: '#A0C98E'
+    borderColor: 'white',
+    backgroundColor: '#ed1558'
   },
   detailsStyle: {
     flexDirection: 'column',
@@ -41,12 +41,12 @@ const styles = {
   },
   titleStyle: {
     color: 'white',
-    fontSize: 25,
+    fontSize: 18,
     fontWeight: '600'
   },
   arrowsStyle: {
-    height: 50,
-    width: 50
+    height: 25,
+    width: 25
   },
   arrowsContainer: {
     flexDirection: 'column',
