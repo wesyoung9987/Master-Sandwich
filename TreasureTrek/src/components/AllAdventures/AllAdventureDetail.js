@@ -45,9 +45,11 @@ const AllAdventureDetail = (props) => {
   }
 
   return (
-      <View style={style.container}>
-        <Text>Opening Riddle: {props.adven.adventure[0].riddle}</Text>
-        <Text>Starting Location: {props.adven.adventure[0].location}</Text>
+      <View>
+        <View style={style.card}>
+          <Text>Opening Riddle: {props.adven.adventure[0].riddle}</Text>
+          <Text>Starting Location: {props.adven.adventure[0].location}</Text>
+        </View>
         <TouchableHighlight style={style.button} onPress={advenAccept}>
           <Text style={style.text}>Accept</Text>
         </TouchableHighlight>
@@ -56,24 +58,30 @@ const AllAdventureDetail = (props) => {
 };
 
 var style = {
-  contianer: {
-    margin: 70,
+  card: {
+    padding: 5,
+    margin: 5,
+    alignSelf: 'stretch',
     height: 80,
-    shadowColor: '#000',
-    shadowOffset: { width:0, height: 2 },
-    shadowOpacity: 0.2,
-    elevation: 2,
-    flexDirection: 'row',
+    borderRadius: 8,
     borderWidth: 2,
-    borderColor: 'black',
-    backgroundColor: '#A0C98E'
+    flex: 1,
+    borderColor: 'gray'
   },
   button: {
-    alignItems: 'center'
-    // color: '#ffffff'
+    height: 36,
+    backgroundColor: '#48BBEC',
+    borderColor: '#48BBEC',
+    borderWidth: 1,
+    borderRadius: 8,
+    margin: 5,
+    // alignSelf: 'stretch',
+    justifyContent: 'center'
   },
   text: {
-    color: '#0000ff'
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center'
   }
 }
 
