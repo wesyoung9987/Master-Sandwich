@@ -58,8 +58,10 @@ class myAdventuresContainer extends Component {
   render () {
     // console.log("STATE:",this.state);
     return (
-      <View style={styles.containerStyle}>
-        <MyAdventuresList nav={this.props} adventures={this.state.adventures}></MyAdventuresList>
+      <View style={{flex:1}} >
+        <View style={styles.containerStyle}>
+          <MyAdventuresList nav={this.props} adventures={this.state.adventures}></MyAdventuresList>
+        </View>
       </View>
     );
   }
@@ -79,7 +81,8 @@ const styles = {
     elevation: 1,
     marginLeft: 5,
     marginRight: 5,
-    marginTop: 75
+    marginTop: 75,
+    flex:1
   }
 };
 
