@@ -32,6 +32,7 @@ const AllAdventureDetail = (props) => {
         .then(json => {
           console.log("Successfully sent Adventure accept: ", json)
           props.resetToRoute({
+            name: "My Adventures",
             component: MyAdventures,
             leftCorner: MenuButton,
             name: "My Adventures"
@@ -44,9 +45,9 @@ const AllAdventureDetail = (props) => {
   }
 
   return (
-      <View style={{ margin: 70 }}>
-        <Text>{props.adven.adventure[0].riddle}</Text>
-        <Text>{props.adven.adventure[0].location}</Text>
+      <View style={style.container}>
+        <Text>Opening Riddle: {props.adven.adventure[0].riddle}</Text>
+        <Text>Starting Location: {props.adven.adventure[0].location}</Text>
         <TouchableHighlight style={style.button} onPress={advenAccept}>
           <Text style={style.text}>Accept</Text>
         </TouchableHighlight>
@@ -55,6 +56,18 @@ const AllAdventureDetail = (props) => {
 };
 
 var style = {
+  contianer: {
+    margin: 70,
+    height: 80,
+    shadowColor: '#000',
+    shadowOffset: { width:0, height: 2 },
+    shadowOpacity: 0.2,
+    elevation: 2,
+    flexDirection: 'row',
+    borderWidth: 2,
+    borderColor: 'black',
+    backgroundColor: '#A0C98E'
+  },
   button: {
     alignItems: 'center'
     // color: '#ffffff'
