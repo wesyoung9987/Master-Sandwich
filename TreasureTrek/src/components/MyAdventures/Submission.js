@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {Text, View, TextInput, AsyncStorage, TouchableHighlight, AlertIOS} from 'react-native';
 import t from 'tcomb-form-native';
-import AdventureSolution from './AdventureSolution.js';
+import AdventureSolution from './AdventureSolution';
+import MyAdventures from './myAdventuresContainer';
+import MenuButton from '../nav/MenuButton'
 // Riddle Submission Form
 var Form = t.form.Form;
 
@@ -17,7 +19,12 @@ var Submission = React.createClass({
   },
 
   toRiddles() {
-    this.props.nav.reset();
+    //this.props.nav.reset();
+    this.props.resetToRoute({
+      name: "My Adventures",
+      component: MyAdventures,
+      leftCorner: MenuButton
+    });
   },
 
   submitAnswer() {

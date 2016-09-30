@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, TouchableHighlight} from 'react-native';
+import {Text, View, TouchableHighlight, Image, Linking} from 'react-native';
 import AdventureSolution from './AdventureSolution.js';
 
 
@@ -20,13 +20,18 @@ const MyAdventureDetails = (props) => {
   }
 
   return (
-    <View style={{flex:1}}>
+    <View>
       <TouchableHighlight
         onPress={toAdventureSolution}
         underlayColor={'#00ffff'}>
-        <View style={styles.listStyle}>
-          <Text style={{fontSize: 12}}>{props.myAdventure.adventureId.title}</Text>
-          <Text style={{fontSize: 9}}>{props.myAdventure.adventureId.startingLocation}</Text>
+        <View style={styles.viewStyle}>
+          <View style={styles.detailsStyle}>
+            <Text style={styles.titleStyle}>{props.myAdventure.adventureId.title}</Text>
+            <Text style={{fontSize: 9}}>{props.myAdventure.adventureId.startingLocation}</Text>
+          </View>
+          <View style={styles.arrowsContainer}>
+            <Image style={styles.arrowsStyle} source={require('../../resources/red-arrow.png')} />
+          </View>
         </View>
       </TouchableHighlight>
     </View>
@@ -34,20 +39,31 @@ const MyAdventureDetails = (props) => {
 };
 
 var styles = {
-  listStyle : {
+  viewStyle: {
+    flexDirection: 'row',
     borderWidth: 1,
-    borderRadius: 2,
     borderColor: '#ddd',
-    //shadowColor: '#000',
-    //shadowOffset: {width: 0, height: 3},
-    //shadowOpacity: 0.3,
-    //shadowRadius: 2,
-    elevation: 1,
-    marginLeft: 5,
-    marginRight: 5,
-    marginTop: 30,
-    padding: 10,
-    flex: 1
+    padding: 10
+  },
+  detailsStyle: {
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    marginLeft: 12,
+    width: 285
+  },
+  titleStyle: {
+    //color: 'white',
+    fontSize: 14,
+    //fontWeight: '600'
+  },
+  arrowsStyle: {
+    height: 25,
+    width: 25
+  },
+  arrowsContainer: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 };
 

@@ -24,6 +24,7 @@ class myAdventuresContainer extends Component {
           return res.json()
         }).then((data)=> {
           // set state or do something else with data
+          console.log('GET data: ', data)
           this.setState({adventures: data});
         }).catch((error) => {
           console.log("ERROR:",error);
@@ -57,8 +58,10 @@ class myAdventuresContainer extends Component {
   render () {
     // console.log("STATE:",this.state);
     return (
-      <View style={styles.containerStyle}>
-        <MyAdventuresList nav={this.props} adventures={this.state.adventures}></MyAdventuresList>
+      <View style={{flex:1}} >
+        <View style={styles.containerStyle}>
+          <MyAdventuresList nav={this.props} adventures={this.state.adventures}></MyAdventuresList>
+        </View>
       </View>
     );
   }
@@ -78,7 +81,8 @@ const styles = {
     elevation: 1,
     marginLeft: 5,
     marginRight: 5,
-    marginTop: 75
+    marginTop: 75,
+    flex:1
   }
 };
 
