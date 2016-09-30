@@ -20,49 +20,30 @@ const MyAdventureDetails = (props) => {
   }
 
   return (
-    <View style={{flex:1}}>
+    <View>
       <TouchableHighlight
         onPress={toAdventureSolution}
         underlayColor={'#00ffff'}>
-        <View style={styles.listStyle}>
-          <View>
-            <Text style={{fontSize: 12}}>{props.myAdventure.adventureId.title}</Text>
+        <View style={styles.viewStyle}>
+          <View style={styles.detailsStyle}>
+            <Text style={styles.titleStyle}>{props.myAdventure.adventureId.title}</Text>
             <Text style={{fontSize: 9}}>{props.myAdventure.adventureId.startingLocation}</Text>
           </View>
+          <View style={styles.arrowsContainer}>
+            <Image style={styles.arrowsStyle} source={require('../../resources/red-arrow.png')} />
+          </View>
         </View>
-
       </TouchableHighlight>
     </View>
   );
 };
 
 var styles = {
-  listStyle : {
-    borderWidth: 1,
-    borderRadius: 2,
-    borderColor: '#ddd',
-    //shadowColor: '#000',
-    //shadowOffset: {width: 0, height: 3},
-    //shadowOpacity: 0.3,
-    //shadowRadius: 2,
-    elevation: 1,
-    marginLeft: 5,
-    marginRight: 5,
-    marginTop: 30,
-    padding: 10,
-    flex: 1
-  },
   viewStyle: {
-    //marginTop: 20,
-    height: 80,
-    shadowColor: '#000',
-    shadowOffset: { width:0, height: 2 },
-    shadowOpacity: 0.2,
-    elevation: 2,
     flexDirection: 'row',
-    borderWidth: 2,
-    borderColor: '#7AAE62',
-    backgroundColor: '#A0C98E'
+    borderWidth: 1,
+    borderColor: '#ddd',
+    padding: 10
   },
   detailsStyle: {
     flexDirection: 'column',
@@ -71,13 +52,13 @@ var styles = {
     width: 285
   },
   titleStyle: {
-    color: 'white',
-    fontSize: 25,
-    fontWeight: '600'
+    //color: 'white',
+    fontSize: 14,
+    //fontWeight: '600'
   },
   arrowsStyle: {
-    height: 50,
-    width: 50
+    height: 25,
+    width: 25
   },
   arrowsContainer: {
     flexDirection: 'column',
