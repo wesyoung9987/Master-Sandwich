@@ -36,7 +36,7 @@ const AdvenLI = (props) => {
             <Text style={{ fontSize: 9 }}>{props.adven.startingLocation}</Text>
           </View>
           <View style={arrowsContainer}>
-            <Image style={arrowsStyle} source={require('../../resources/double-arrows.png')} />
+            <Image style={arrowsStyle} source={require('../../resources/red-arrow.png')} />
           </View>
         </View>
       </TouchableHighlight>
@@ -46,16 +46,11 @@ const AdvenLI = (props) => {
 
 const styles = {
   viewStyle: {
-    //marginTop: 20,
-    height: 80,
-    shadowColor: '#000',
-    shadowOffset: { width:0, height: 2 },
-    shadowOpacity: 0.2,
-    elevation: 2,
     flexDirection: 'row',
-    borderWidth: 2,
-    borderColor: '#7AAE62',
-    backgroundColor: '#A0C98E'
+    borderWidth: 1,
+    borderRadius: 2,
+    borderColor: '#ddd',
+    padding: 10
   },
   detailsStyle: {
     flexDirection: 'column',
