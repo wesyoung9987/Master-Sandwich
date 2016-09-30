@@ -48,7 +48,6 @@ const styles = {
   viewStyle: {
     flexDirection: 'row',
     borderWidth: 1,
-    borderRadius: 2,
     borderColor: '#ddd',
     padding: 10
   },
@@ -60,7 +59,6 @@ const styles = {
   },
   titleStyle: {
     fontSize: 14,
-    fontWeight: '600'
   },
   arrowsStyle: {
     height: 25,
