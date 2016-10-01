@@ -9,6 +9,7 @@ var expect = chai.expect;
 var app = require('../server/server')
 var db = require('mongoose').connect('mongodb://localhost/treasuretrek')
 var User = require('../server/models/Users')
+var jwt = require('jwt-simple')
 
 var users = require('./testData')
 
@@ -33,7 +34,7 @@ describe('#Database', function(){
     })
   })
 
-  it('Should return a valid user', function(done){
+  it('Should create user in db', function(done){
     // Populate Database
     User.create(users.jack, function (err, user){
       expect(user._id).to.exist
@@ -50,7 +51,7 @@ describe('#Database', function(){
 
 describe('#API', function (){
 
-  afterEach(clearUserTable)
+  after(clearUserTable)
 
   it('Should return 404 for invalid API calls', function (done){
     request(app)
@@ -59,15 +60,25 @@ describe('#API', function (){
       .end(done)
   });
 
-  it('Should sign user up', function (done){
+  it('Should signup new user', function (done){
     request(app)
       .post('/api/signup')
+      .send(users.jack)
+      .expect(200)
+      .end(done)
+  })
+
+  it('Should receive token of userid at signin', function (done){
+    User.findOne({first: "Jack"}, function (err, user){
+      request(app)
+      .post('/api/signin')
       .send(users.jack)
       .expect(function (res){
         console.log(res.body)
       })
+      .expect(200, {userid: jwt.encode(user, 'secret')})
       .end(done)
+    })
   })
-
 
 })
