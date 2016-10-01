@@ -37,7 +37,7 @@ class UserProfile extends Component {
   render(){
     return (
       <View>
-        <Image style={styles.imageStyle} source={require('../../resources/placeholder.jpg')} />
+        <Image style={styles.imageStyle} source={require('../../resources/placeholder.png')} />
       </View>
     );
   }
@@ -46,9 +46,8 @@ class UserProfile extends Component {
 const styles = {
   imageContainer: {
     height: 300,
-    width: 300,
-
-  }
+    width: 300
+  },
   imageStyle: {
     height: 300,
     width: 300,
