@@ -23,11 +23,11 @@ describe('#Database', function(){
       }
       done()
     })
-
-    it('Should only create valid user'/*, function (done){
-      // Enforce data structure for User model
-    }*/)
   })
+
+  it('Should only create valid user'/*, function (done){
+    // Enforce data structure for User model
+  }*/)
 })
 
 describe('#API', function (){
