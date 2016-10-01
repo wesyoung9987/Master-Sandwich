@@ -30,13 +30,13 @@ class AdventureSolution extends Component {
           'Content-Type': 'application/json',
           'x-access-token': token
         },
-        body: JSON.stringify({adventureid: props.myAdventure.adventureId._id})
+        body: JSON.stringify({adventureid: this.props.myAdventure.adventureId._id})
       }).then(function(res){
         return res.json()
       }).then((data)=>{
         console.log('Deleted! Data Response: ', data);
         AlertIOS.alert('Adventure Deleted');
-        props.nav.resetToRoute({
+        this.props.nav.resetToRoute({
             name: "My Adventures",
             component: MyAdventures,
             leftCorner: MenuButton,
@@ -61,7 +61,7 @@ class AdventureSolution extends Component {
 
   errorRedirectToLogin (message) {
     AlertIOS.alert(message);
-    props.nav.resetToRoute({
+    this.props.nav.resetToRoute({
       name: "Login",
       component: Auth
     });
@@ -106,7 +106,6 @@ class AdventureSolution extends Component {
   }
 
   render () {
-    console.log("STATE",this.state);
     return (
       <View style={{ flex: 1, marginTop:5 }}>
         <View style={{marginLeft: 100, marginRight: 100}}>
@@ -114,9 +113,7 @@ class AdventureSolution extends Component {
             <Text style={styles.buttonText}>{this.state.toggletext}</Text>
           </TouchableHighlight>
         </View>
-
         {this.state.mapview ? this.showMap() : this.showList()}
-
       </View>
     );
   }
@@ -145,7 +142,7 @@ var styles = {
   },
 }
 
-/*
+/* Previous List Components (for reference):
 <Riddle num={1} completion={props.myAdventure.completion[0]} id={props.myAdventure.adventureId._id} nav={props.nav} loc={props.myAdventure.adventureId.adventure[0].location} riddle={props.myAdventure.adventureId.adventure[0].riddle} answer={props.myAdventure.adventureId.adventure[0].answer}></Riddle>
 <Riddle num={2} completion={props.myAdventure.completion[1]} id={props.myAdventure.adventureId._id} nav={props.nav} loc={props.myAdventure.adventureId.adventure[1].location} riddle={props.myAdventure.adventureId.adventure[1].riddle} answer={props.myAdventure.adventureId.adventure[1].answer}></Riddle>
 <Riddle num={3} completion={props.myAdventure.completion[2]} id={props.myAdventure.adventureId._id} nav={props.nav} loc={props.myAdventure.adventureId.adventure[2].location} riddle={props.myAdventure.adventureId.adventure[2].riddle} answer={props.myAdventure.adventureId.adventure[2].answer}></Riddle>
