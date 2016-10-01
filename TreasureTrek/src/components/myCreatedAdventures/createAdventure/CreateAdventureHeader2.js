@@ -22,28 +22,28 @@ const CreateAdventureHeader2 = (props) => {
 
 const styles = {
   viewStyle: {
-    height: 80,
     shadowColor: '#000',
     shadowOffset: { width:0, height: 2 },
     shadowOpacity: 0.2,
     elevation: 2,
     flexDirection: 'row',
     borderWidth: 2,
-    borderColor: '#7AAE62',
+    borderColor: '#ed1558',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: 12.3
   },
   textStyle: {
-    fontSize: 35,
-    color: '#7AAE62',
-    marginTop: 5,
+    fontSize: 20,
+    color: '#ed1558',
+
     marginRight: 55,
     marginLeft: 55
   },
   menuStyle: {
-    height: 50,
-    width: 50,
-    marginTop: 5
+    height: 25,
+    width: 25,
+
   }
 };
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, AsyncStorage, AlertIOS } from 'react-native';
 import AdventureDetail from './AdventureDetails';
+import Collapsible from 'react-native-collapsible';
 
 class AdventureList extends Component {
   state = { adventures: [] };
@@ -46,6 +47,7 @@ class AdventureList extends Component {
   }
 
   renderAdventures(){
+    this.componentWillMount();
     return this.state.adventures.map(singleAdventure =>
       // would be better to put item id as key instead of title if singleAdventure had id
       <AdventureDetail key={singleAdventure._id} singleAdventure={singleAdventure} />
@@ -53,7 +55,6 @@ class AdventureList extends Component {
   }
 
   render() {
-    console.log(this.state);
 
     return (
       <ScrollView>

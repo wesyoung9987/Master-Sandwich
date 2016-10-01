@@ -96,7 +96,7 @@ class FormView extends Component {
         />
         <View style={{justifyContent: 'center',
   alignItems: 'center', marginTop: 10}}>
-          <Text style={{color: '#7AAE62', fontSize: 30}}>Riddle 1</Text>
+          <Text style={{color: '#24CCFD', fontSize: 20}}>Riddle 1</Text>
         </View>
         <TextInput
           style={{height: 40, borderColor: 'gray', borderWidth: 1, borderRadius: 10, fontSize: 20, paddingLeft: 15, paddingRight: 15, marginTop: 10}}
@@ -128,7 +128,7 @@ class FormView extends Component {
         />
         <View style={{justifyContent: 'center',
   alignItems: 'center', marginTop: 10}}>
-          <Text style={{color: '#7AAE62', fontSize: 30}}>Riddle 2</Text>
+          <Text style={{color: '#24CCFD', fontSize: 20}}>Riddle 2</Text>
         </View>
         <TextInput
           style={{height: 40, borderColor: 'gray', borderWidth: 1, borderRadius: 10, fontSize: 20, paddingLeft: 15, paddingRight: 15, marginTop: 10}}
@@ -158,7 +158,7 @@ class FormView extends Component {
         />
         <View style={{justifyContent: 'center',
   alignItems: 'center', marginTop: 10}}>
-          <Text style={{color: '#7AAE62', fontSize: 30}}>Riddle 3</Text>
+          <Text style={{color: '#24CCFD', fontSize: 20}}>Riddle 3</Text>
         </View>
         <TextInput
           style={{height: 40, borderColor: 'gray', borderWidth: 1, borderRadius: 10, fontSize: 20, paddingLeft: 15, paddingRight: 15, marginTop: 10}}

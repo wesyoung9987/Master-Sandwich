@@ -19,24 +19,25 @@ const SubmitButton = () => {
 const styles = {
   viewStyle: {
     marginTop: 20,
-    height: 80,
     shadowColor: '#000',
     shadowOffset: { width:0, height: 2 },
     shadowOpacity: 0.2,
     elevation: 2,
     flexDirection: 'row',
     borderWidth: 2,
-    borderColor: '#d13539',
-    backgroundColor: '#DF7376',
+    borderColor: '#ed1558',
+    backgroundColor: 'white',
     marginBottom: 20,
     borderRadius: 10,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: 12.3
   },
   titleStyle: {
     color: 'white',
-    fontSize: 40,
+    fontSize: 20,
     fontWeight: '600',
+    color: '#ed1558'
   }
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Image, Linking } from 'react-native';
+import { Text, View, Image, Linking, TouchableHighlight } from 'react-native';
 
 
 const AdventureDetail = ({ singleAdventure }) => {
@@ -9,29 +9,33 @@ const AdventureDetail = ({ singleAdventure }) => {
   } = styles;
 
   return (
-    <View style={viewStyle}>
-      <View style={detailsStyle}>
-        <Text style={titleStyle}>{title}</Text>
+    <TouchableHighlight onPress={() => {
+      return 1;
+    }}>
+      <View style={viewStyle}>
+        <View style={detailsStyle}>
+          <Text style={titleStyle}>{title}</Text>
+        </View>
+        <View style={arrowsContainer}>
+          <Image style={arrowsStyle} source={require('../../resources/double-arrows.png')} />
+        </View>
       </View>
-      <View style={arrowsContainer}>
-        <Image style={arrowsStyle} source={require('../../resources/double-arrows.png')} />
-      </View>
-    </View>
+    </TouchableHighlight>
   );
 };
 
 const styles = {
   viewStyle: {
-    //marginTop: 20,
-    height: 80,
+    // height: 80,
     shadowColor: '#000',
     shadowOffset: { width:0, height: 2 },
     shadowOpacity: 0.2,
     elevation: 2,
     flexDirection: 'row',
-    borderWidth: 2,
-    borderColor: '#7AAE62',
-    backgroundColor: '#A0C98E'
+    borderWidth: 1,
+    borderColor: 'white',
+    backgroundColor: '#24CCFD',
+    padding: 10
   },
   detailsStyle: {
     flexDirection: 'column',
@@ -41,12 +45,12 @@ const styles = {
   },
   titleStyle: {
     color: 'white',
-    fontSize: 25,
+    fontSize: 14,
     fontWeight: '600'
   },
   arrowsStyle: {
-    height: 50,
-    width: 50
+    height: 25,
+    width: 25
   },
   arrowsContainer: {
     flexDirection: 'column',
