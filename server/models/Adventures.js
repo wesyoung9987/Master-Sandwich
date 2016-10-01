@@ -7,8 +7,8 @@ var AdventureSchema = new mongoose.Schema({
     riddle: String,
     answer: String,
     location: String,
-    longitude: String, // Maybe number, depends on google api
-    latitude: String, // Maybe number, depends on google api
+    longitude: Number, // Maybe number, depends on google api
+    latitude: Number, // Maybe number, depends on google api
     photo: String
   }],
   date: { type: Date, default: Date.now() },

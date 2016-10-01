@@ -1,14 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {AsyncStorage, AlertIOS, Text, View, TouchableHighlight, ScrollView} from 'react-native';
 import Riddle from './Riddle.js'
 import MyAdventures from './myAdventuresContainer'
 import MenuButton from '../nav/MenuButton';
+import MapScreen from './MapScreen';
 
 
-const AdventureSolution = (props) => {
+class AdventureSolution extends Component {
 
-  const deleteAdventure = function() {
-  AsyncStorage.getItem('id_token')
+  constructor(props) {
+    super(props);
+    this.state = {
+      riddles: props.myAdventure.adventureId.adventure,
+      completion: props.myAdventure.completion,
+      id: props.myAdventure.adventureId._id,
+      startingLocation: props.myAdventure.adventureId.startingLocation,
+      mapview: false,
+      toggletext: "To Map"
+    };
+  }
+
+  deleteAdventure () {
+    AsyncStorage.getItem('id_token')
     .then(token=>{
       fetch("https://treasure-trek.herokuapp.com/api/forgetAd",{
         method: "DELETE",
@@ -17,13 +30,13 @@ const AdventureSolution = (props) => {
           'Content-Type': 'application/json',
           'x-access-token': token
         },
-        body: JSON.stringify({adventureid: props.myAdventure.adventureId._id})
+        body: JSON.stringify({adventureid: this.props.myAdventure.adventureId._id})
       }).then(function(res){
         return res.json()
       }).then((data)=>{
         console.log('Deleted! Data Response: ', data);
         AlertIOS.alert('Adventure Deleted');
-        props.nav.resetToRoute({
+        this.props.nav.resetToRoute({
             name: "My Adventures",
             component: MyAdventures,
             leftCorner: MenuButton,
@@ -34,9 +47,9 @@ const AdventureSolution = (props) => {
         handleError();
       }).done();
     });
-}
+  }
 
-  const handleError = function() {
+  handleError () {
     AsyncStorage.removeItem('id_token')
       .then(()=>{
         errorRedirectToLogin("No Session - Redirecting");
@@ -46,33 +59,65 @@ const AdventureSolution = (props) => {
       });
   }
 
- const errorRedirectToLogin = function(message) {
+  errorRedirectToLogin (message) {
     AlertIOS.alert(message);
-    props.nav.resetToRoute({
+    this.props.nav.resetToRoute({
       name: "Login",
       component: Auth
     });
   }
 
-  return (
-      <View style={{ flex: 1, marginTop:75 }}>
-        <ScrollView>
-          <Text>
-          Starting Location: {props.myAdventure.adventureId.startingLocation}</Text>
+  showList () {
+    return (
+      <ScrollView>
+        <Text>
+          Starting Location: {this.state.startingLocation}
+        </Text>
+        {this.state.riddles.map((riddle, index) => {
+          return (<Riddle num={index+1} key={index.toString()} completion={this.state.completion[index]} id={this.state.id} nav={this.props.nav} loc={riddle.location} riddle={riddle.riddle} answer={riddle.answer} />);
+        })}
+        <View style={styles.giveup}>
+          <TouchableHighlight style={styles.button} onPress={this.deleteAdventure.bind(this)}  underlayColor='#00ffff'>
+              <Text  style={styles.buttonText}> Give Up? </Text>
+          </TouchableHighlight>
+        </View>
+      </ScrollView>
+    );
+  }
 
-          <Riddle num={1} completion={props.myAdventure.completion[0]} id={props.myAdventure.adventureId._id} nav={props.nav} loc={props.myAdventure.adventureId.adventure[0].location} riddle={props.myAdventure.adventureId.adventure[0].riddle} answer={props.myAdventure.adventureId.adventure[0].answer}></Riddle>
-          <Riddle num={2} completion={props.myAdventure.completion[1]} id={props.myAdventure.adventureId._id} nav={props.nav} loc={props.myAdventure.adventureId.adventure[1].location} riddle={props.myAdventure.adventureId.adventure[1].riddle} answer={props.myAdventure.adventureId.adventure[1].answer}></Riddle>
-          <Riddle num={3} completion={props.myAdventure.completion[2]} id={props.myAdventure.adventureId._id} nav={props.nav} loc={props.myAdventure.adventureId.adventure[2].location} riddle={props.myAdventure.adventureId.adventure[2].riddle} answer={props.myAdventure.adventureId.adventure[2].answer}></Riddle>
-          <View style={styles.giveup}>
-            <TouchableHighlight style={styles.button} onPress={deleteAdventure}  underlayColor='#00ffff'>
-                <Text  style={styles.buttonText}> Give Up? </Text>
-            </TouchableHighlight>
-          </View>
+  showMap () {
+    return (
+      <MapScreen riddles={this.state.riddles}/>
+    );
+  }
 
-        </ScrollView>
+  toggleMap () {
+    if (this.state.mapview) {
+      this.setState({
+        mapview: !this.state.mapview,
+        toggletext: 'To Map'
+      });
+    } else {
+      this.setState({
+        mapview: !this.state.mapview,
+        toggletext: 'To List'
+      });
+    }
+  }
 
+  render () {
+    return (
+      <View style={{ flex: 1, marginTop:5 }}>
+        <View style={{marginLeft: 100, marginRight: 100}}>
+          <TouchableHighlight style={styles.button} onPress={this.toggleMap.bind(this)}>
+            <Text style={styles.buttonText}>{this.state.toggletext}</Text>
+          </TouchableHighlight>
+        </View>
+        {this.state.mapview ? this.showMap() : this.showList()}
       </View>
     );
+  }
+
 };
 
 var styles = {
@@ -96,5 +141,11 @@ var styles = {
     alignSelf: 'center'
   },
 }
+
+/* Previous List Components (for reference):
+<Riddle num={1} completion={props.myAdventure.completion[0]} id={props.myAdventure.adventureId._id} nav={props.nav} loc={props.myAdventure.adventureId.adventure[0].location} riddle={props.myAdventure.adventureId.adventure[0].riddle} answer={props.myAdventure.adventureId.adventure[0].answer}></Riddle>
+<Riddle num={2} completion={props.myAdventure.completion[1]} id={props.myAdventure.adventureId._id} nav={props.nav} loc={props.myAdventure.adventureId.adventure[1].location} riddle={props.myAdventure.adventureId.adventure[1].riddle} answer={props.myAdventure.adventureId.adventure[1].answer}></Riddle>
+<Riddle num={3} completion={props.myAdventure.completion[2]} id={props.myAdventure.adventureId._id} nav={props.nav} loc={props.myAdventure.adventureId.adventure[2].location} riddle={props.myAdventure.adventureId.adventure[2].riddle} answer={props.myAdventure.adventureId.adventure[2].answer}></Riddle>
+*/
 
 export default AdventureSolution;

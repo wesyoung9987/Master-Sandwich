@@ -94,14 +94,14 @@ module.exports = {
 
     Adventure.find({creator: {$ne: userid}})
       .then(function(adventures){
-        res.json(adventures);
+        res.json(adventures); // comment this out when uncommenting below
         // UserAdventure.find({userId: userid}, 'adventureId')
         //   .then(function(inwork){
         //     inwork = inwork.map(function(ad){
         //       return ad.adventureId.toString();
         //     })
         //     var availAds = adventures.filter(function(ad){
-        //       return !inwork.includes(ad._id.toString());
+        //       return inwork.indexOf(ad._id.toString())===-1;
         //     })
         //     res.json(availAds);
         //   })
@@ -178,7 +178,9 @@ module.exports = {
           helper.sendError("No user/adventure combination found", req, res);
         } else {
           combo.completion[riddleNumber] = true;
-          if (combo.completion.every(riddle=>riddle)) {
+          if (combo.completion.every(function(riddle){
+            return riddle;
+          })) {
             combo.completed = true;
           }
           UserAdventure.update({userId: userid, adventureId: adventureid}, {completion: combo.completion, completed: combo.completed}, function(err, result){

@@ -29,17 +29,20 @@ class FormView extends Component {
         {
           riddle: data.input3,
           answer: data.input4,
-          location: data.input1
+          latitude: Number(data.input1),
+          longitude: Number(data.input2)
         },
         {
           riddle: data.input7,
           answer: data.input8,
-          location: data.input5
+          latitude: Number(data.input5),
+          longitude: Number(data.input6)
         },
         {
           riddle: data.input11,
           answer: data.input12,
-          location: data.input9
+          latitude: Number(data.input9),
+          longitude: Number(data.input10)
         }
       ],
       startingLocation: data.input1
