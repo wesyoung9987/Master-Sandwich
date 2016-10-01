@@ -7,7 +7,8 @@ import {
   View,
   AsyncStorage,
   AlertIOS,
-  TouchableHighlight
+  TouchableHighlight,
+  Image
 } from 'react-native';
 
 import Auth from '../auth/Auth';
@@ -64,7 +65,6 @@ class Menu extends Component {
 
     return (
       <View>
-        <Text style={{marginTop: 200, alignSelf: 'center'}}>Choose A Route!</Text>
         <TouchableHighlight style={styles.button} onPress={this.toMyAds.bind(this)} underlayColor='#99d9f4'>
             <Text style={styles.buttonText}>My Adventures</Text>
         </TouchableHighlight>
@@ -77,6 +77,7 @@ class Menu extends Component {
         <TouchableHighlight style={styles.button} onPress={this.userLogout.bind(this)} underlayColor='#99d9f4'>
             <Text style={styles.buttonText}>Logout</Text>
         </TouchableHighlight>
+
       </View>
     );
   }
@@ -126,15 +127,16 @@ const styles = {
     alignSelf: 'center'
   },
   button: {
-    height: 36,
+    height: 45,
     backgroundColor: '#48BBEC',
-    borderColor: '#48BBEC',
+    borderColor: 'white',
     borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 10,
+
     alignSelf: 'stretch',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    zIndex: 1
   },
+
 }
 
 export default Menu;

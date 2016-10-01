@@ -22,16 +22,16 @@ const AdventureDetail = ({ singleAdventure }) => {
 
 const styles = {
   viewStyle: {
-    //marginTop: 20,
-    height: 80,
+    // height: 80,
     shadowColor: '#000',
     shadowOffset: { width:0, height: 2 },
     shadowOpacity: 0.2,
     elevation: 2,
     flexDirection: 'row',
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: 'white',
-    backgroundColor: '#ed1558'
+    backgroundColor: '#24CCFD',
+    padding: 10
   },
   detailsStyle: {
     flexDirection: 'column',
@@ -41,7 +41,7 @@ const styles = {
   },
   titleStyle: {
     color: 'white',
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: '600'
   },
   arrowsStyle: {

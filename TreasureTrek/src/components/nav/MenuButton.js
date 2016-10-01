@@ -8,7 +8,8 @@ import {
   AsyncStorage,
   AlertIOS,
   TouchableHighlight,
-  Image
+  Image,
+  Navigator
 } from 'react-native';
 
 import Auth from '../auth/Auth';
@@ -21,7 +22,8 @@ class MenuButton extends Component {
   goToMenu () {
     this.props.toRoute({
       name: "Menu",
-      component: Menu
+      component: Menu,
+      sceneConfig: Navigator.SceneConfigs.FloatFromLeft
     });
   }
 
