@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Image, Linking } from 'react-native';
+import { Text, View, Image, Linking, TouchableHighlight } from 'react-native';
 
 
 const AdventureDetail = ({ singleAdventure }) => {
@@ -9,14 +9,18 @@ const AdventureDetail = ({ singleAdventure }) => {
   } = styles;
 
   return (
-    <View style={viewStyle}>
-      <View style={detailsStyle}>
-        <Text style={titleStyle}>{title}</Text>
+    <TouchableHighlight onPress={() => {
+      return 1;
+    }}>
+      <View style={viewStyle}>
+        <View style={detailsStyle}>
+          <Text style={titleStyle}>{title}</Text>
+        </View>
+        <View style={arrowsContainer}>
+          <Image style={arrowsStyle} source={require('../../resources/double-arrows.png')} />
+        </View>
       </View>
-      <View style={arrowsContainer}>
-        <Image style={arrowsStyle} source={require('../../resources/double-arrows.png')} />
-      </View>
-    </View>
+    </TouchableHighlight>
   );
 };
 
