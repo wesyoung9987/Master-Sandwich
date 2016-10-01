@@ -16,7 +16,7 @@ class AdventureSolution extends Component {
       id: props.myAdventure.adventureId._id,
       startingLocation: props.myAdventure.adventureId.startingLocation,
       mapview: false,
-      toggletext: "Map"
+      toggletext: "To Map"
     };
   }
 
@@ -95,12 +95,12 @@ class AdventureSolution extends Component {
     if (this.state.mapview) {
       this.setState({
         mapview: !this.state.mapview,
-        toggletext: 'Map'
+        toggletext: 'To Map'
       });
     } else {
       this.setState({
         mapview: !this.state.mapview,
-        toggletext: 'List'
+        toggletext: 'To List'
       });
     }
   }
@@ -109,10 +109,11 @@ class AdventureSolution extends Component {
     console.log("STATE",this.state);
     return (
       <View style={{ flex: 1, marginTop:5 }}>
-
-        <TouchableHighlight style={styles.button} onPress={this.toggleMap.bind(this)}>
-          <Text>{this.state.toggletext}</Text>
-        </TouchableHighlight>
+        <View style={{marginLeft: 100, marginRight: 100}}>
+          <TouchableHighlight style={styles.button} onPress={this.toggleMap.bind(this)}>
+            <Text style={styles.buttonText}>{this.state.toggletext}</Text>
+          </TouchableHighlight>
+        </View>
 
         {this.state.mapview ? this.showMap() : this.showList()}
 
