@@ -17,6 +17,12 @@ var clearUserTable = function(done){
   User.remove({}, done)
 }
 
+var users = require('./testData')
+
+var clearUserTable = function(done){
+  User.remove({}, done)
+}
+
 describe('#Database', function(){
 
   afterEach(clearUserTable)
@@ -34,7 +40,11 @@ describe('#Database', function(){
     })
   })
 
+<<<<<<< 618488d9bef59b36989b7df342b1b0795a38c05b
   it('Should create user in db', function(done){
+=======
+  it('Should return a valid user', function(done){
+>>>>>>> (test) setup db test
     // Populate Database
     User.create(users.jack, function (err, user){
       expect(user._id).to.exist
@@ -51,7 +61,11 @@ describe('#Database', function(){
 
 describe('#API', function (){
 
+<<<<<<< 618488d9bef59b36989b7df342b1b0795a38c05b
   after(clearUserTable)
+=======
+  afterEach(clearUserTable)
+>>>>>>> (test) setup db test
 
   it('Should return 404 for invalid API calls', function (done){
     request(app)
@@ -60,6 +74,7 @@ describe('#API', function (){
       .end(done)
   });
 
+<<<<<<< 618488d9bef59b36989b7df342b1b0795a38c05b
   it('Should signup new user', function (done){
     request(app)
       .post('/api/signup')
@@ -80,5 +95,17 @@ describe('#API', function (){
       .end(done)
     })
   })
+=======
+  it('Should sign user up', function (done){
+    request(app)
+      .post('/api/signup')
+      .send(users.jack)
+      .expect(function (res){
+        console.log(res.body)
+      })
+      .end(done)
+  })
+
+>>>>>>> (test) setup db test
 
 })
