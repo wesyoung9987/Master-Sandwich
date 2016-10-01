@@ -10,6 +10,7 @@
     "react-native": "0.33.0",
     "react-native-accordion": "^1.0.1",
     "react-native-collapsible": "^0.7.0",
+    "react-native-maps": "^0.8.2",
     "react-native-simple-router": "^0.11.1",
     "tcomb-form-native": "^0.6.1"
   }
