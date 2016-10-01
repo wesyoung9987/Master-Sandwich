@@ -10,12 +10,15 @@ var app = require('../server/server')
 var db = require('mongoose').connect('mongodb://localhost/treasuretrek')
 var User = require('../server/models/Users')
 var jwt = require('jwt-simple')
+<<<<<<< 8961efae3e9de8a1eb033b942519abf9d7d637f8
 
 var users = require('./testData')
 
 var clearUserTable = function(done){
   User.remove({}, done)
 }
+=======
+>>>>>>> (test)
 
 var users = require('./testData')
 
@@ -40,11 +43,15 @@ describe('#Database', function(){
     })
   })
 
+<<<<<<< 8961efae3e9de8a1eb033b942519abf9d7d637f8
 <<<<<<< 618488d9bef59b36989b7df342b1b0795a38c05b
   it('Should create user in db', function(done){
 =======
   it('Should return a valid user', function(done){
 >>>>>>> (test) setup db test
+=======
+  it('Should create user in db', function(done){
+>>>>>>> (test)
     // Populate Database
     User.create(users.jack, function (err, user){
       expect(user._id).to.exist
@@ -61,11 +68,15 @@ describe('#Database', function(){
 
 describe('#API', function (){
 
+<<<<<<< 8961efae3e9de8a1eb033b942519abf9d7d637f8
 <<<<<<< 618488d9bef59b36989b7df342b1b0795a38c05b
   after(clearUserTable)
 =======
   afterEach(clearUserTable)
 >>>>>>> (test) setup db test
+=======
+  after(clearUserTable)
+>>>>>>> (test)
 
   it('Should return 404 for invalid API calls', function (done){
     request(app)
@@ -74,6 +85,7 @@ describe('#API', function (){
       .end(done)
   });
 
+<<<<<<< 8961efae3e9de8a1eb033b942519abf9d7d637f8
 <<<<<<< 618488d9bef59b36989b7df342b1b0795a38c05b
   it('Should signup new user', function (done){
     request(app)
@@ -97,15 +109,32 @@ describe('#API', function (){
   })
 =======
   it('Should sign user up', function (done){
+=======
+  it('Should signup new user', function (done){
+>>>>>>> (test)
     request(app)
       .post('/api/signup')
+      .send(users.jack)
+      .expect(200)
+      .end(done)
+  })
+
+  it('Should receive token of userid at signin', function (done){
+    User.findOne({first: "Jack"}, function (err, user){
+      request(app)
+      .post('/api/signin')
       .send(users.jack)
       .expect(function (res){
         console.log(res.body)
       })
+      .expect(200, {userid: jwt.encode(user, 'secret')})
       .end(done)
+    })
   })
 
+<<<<<<< 8961efae3e9de8a1eb033b942519abf9d7d637f8
 >>>>>>> (test) setup db test
 
+=======
+>>>>>>> (test)
 })
