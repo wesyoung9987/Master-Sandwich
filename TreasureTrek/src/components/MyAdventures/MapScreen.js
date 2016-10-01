@@ -14,7 +14,7 @@ class MapScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      adventures: props.adventures,
+      riddles: props.riddles,
       region: {
         latitude: 37.78825,
         longitude: -122.4324,
@@ -31,7 +31,26 @@ class MapScreen extends Component {
   }
 
   placeMarkers () {
-    return
+    return this.state.riddles.map((riddle, i) => {
+      if (riddle.latitude) {
+        var latitude = typeof riddle.latitude==='Number' ? riddle.latitude : 37.78825;
+      } else {
+        var latitude = 37.78825;
+      }
+      if (riddle.longitude) {
+        var longitude = typeof riddle.longitude==='Number' ? riddle.longitude : -122.4324;
+      } else {
+        var longitude = -122.4324;
+      }
+      return (
+        <MapView.Marker
+          coordinate={{latitude, longitude}}
+          title={'Riddle # '+(i+1)}
+          description={riddle.riddle}
+          key={i.toString()}
+        />
+      );
+    })
   }
 
   onRegionChange(region) {
@@ -60,21 +79,6 @@ class MapScreen extends Component {
 };
 
 const styles = {
-  // containerStyle: {
-  //   flex: 1,
-  //   borderWidth: 1,
-  //   borderRadius: 2,
-  //   borderColor: '#ddd',
-  //   borderBottomWidth: 0,
-  //   //shadowColor: '#000',
-  //   //shadowOffset: {width: 0, height: 2},
-  //   //shadowOpacity: 0.1,
-  //   //shadowRadius: 2,
-  //   elevation: 1
-  //   //marginLeft: 5,
-  //   //marginRight: 5,
-  //   //marginTop: 75,
-  // },
   mapStyle: {
     width: 350,
     height: 350

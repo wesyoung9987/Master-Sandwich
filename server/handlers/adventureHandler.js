@@ -178,7 +178,9 @@ module.exports = {
           helper.sendError("No user/adventure combination found", req, res);
         } else {
           combo.completion[riddleNumber] = true;
-          if (combo.completion.every(riddle=>riddle)) {
+          if (combo.completion.every(function(riddle){
+            return riddle;
+          })) {
             combo.completed = true;
           }
           UserAdventure.update({userId: userid, adventureId: adventureid}, {completion: combo.completion, completed: combo.completed}, function(err, result){
