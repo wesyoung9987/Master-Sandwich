@@ -62,7 +62,18 @@ module.exports = {
         }
       }
     });
-  }
+  },
 
+  fetchMyInfo: function(req, res){
+    var userid = req.user._id;
+
+    User.findOne({_id: userid}, function(err, user){
+      if(err){
+        helper.sendError(err, req, res);
+      } else {
+        res.json(user);
+      }
+    })
+  }
 
 };
