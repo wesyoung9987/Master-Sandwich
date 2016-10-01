@@ -17,6 +17,7 @@ import MenuButton from './MenuButton';
 import MyAdventures from '../MyAdventures/myAdventuresContainer';
 import AllAdventures from '../AllAdventures/AllAdventuresContainer';
 import MyCreatedAdventures from '../myCreatedAdventures/myCreatedAdventures';
+import UserProfile from '../UserProfile/ProfileMain';
 
 
 var STORAGE_KEY = 'id_token';
@@ -48,6 +49,14 @@ class Menu extends Component {
     });
   }
 
+  toMyProfile () {
+    this.props.resetToRoute({
+      name: "My Profile",
+      component: UserProfile,
+      leftCorner: MenuButton
+    });
+  }
+
   async userLogout() {
     try {
         await AsyncStorage.removeItem(STORAGE_KEY);
@@ -73,6 +82,9 @@ class Menu extends Component {
         </TouchableHighlight>
         <TouchableHighlight style={styles.button} onPress={this.toCreateAds.bind(this)} underlayColor='#99d9f4'>
             <Text style={styles.buttonText}>Create Adventures</Text>
+        </TouchableHighlight>
+        <TouchableHighlight style={styles.button} onPress={this.toMyProfile.bind(this)} underlayColor='#99d9f4'>
+            <Text style={styles.buttonText}>My Profile</Text>
         </TouchableHighlight>
         <TouchableHighlight style={styles.button} onPress={this.userLogout.bind(this)} underlayColor='#99d9f4'>
             <Text style={styles.buttonText}>Logout</Text>

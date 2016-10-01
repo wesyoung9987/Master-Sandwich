@@ -11,6 +11,8 @@ module.exports = function(app) {
   app.post('/api/signin', userHandler.signin);
   app.post('/api/signup', userHandler.signup);
 
+  app.get('/api/myInfo', helper.checkJWT, userHandler.fetchMyInfo);
+
   app.post('/api/pickAd', helper.checkJWT, adventureHandler.pickAdventure);
   app.delete('/api/forgetAd', helper.checkJWT, adventureHandler.forgetAdventure);
   app.post('/api/createAd', helper.checkJWT, adventureHandler.createAdventure);
