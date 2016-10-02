@@ -12,6 +12,8 @@
     "react-native-collapsible": "^0.7.0",
     "react-native-maps": "^0.8.2",
     "react-native-simple-router": "^0.11.1",
-    "tcomb-form-native": "^0.6.1"
+    "react-native-uploader": "0.0.9",
+    "tcomb-form-native": "^0.6.1",
+    "undefined": "^0.1.0"
   }
 }
