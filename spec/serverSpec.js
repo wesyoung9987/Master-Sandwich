@@ -119,14 +119,14 @@ describe('#API', function (){
       .end(done)
   })
 
+  // Testing jwt tokenization for local dev purposes only as it requires
+  // exposing the matching server side jwt salt
   it('Should receive token of userid at signin', function (done){
     User.findOne({first: "Jack"}, function (err, user){
       request(app)
       .post('/api/signin')
       .send(users.jack)
-      .expect(function (res){
-        console.log(res.body)
-      })
+      // TODO: Remove jwt token test for live servers
       .expect(200, {userid: jwt.encode(user, 'secret')})
       .end(done)
     })
