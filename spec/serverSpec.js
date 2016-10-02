@@ -1,4 +1,4 @@
-// Test System
+// Local testing
 var request = require('supertest')
 var chai = require('chai');
 var assert = chai.assert;
@@ -16,8 +16,7 @@ var users = require('./testData')
 var clearUserTable = function(done){
   User.remove({}, done)
 }
-
-describe('#Database', function(){
+xdescribe('Local #Database', function(){
 
   afterEach(clearUserTable)
 
@@ -49,7 +48,7 @@ describe('#Database', function(){
 
 
 
-describe('#API', function (){
+xdescribe('Local #API', function (){
 
   after(clearUserTable)
 
