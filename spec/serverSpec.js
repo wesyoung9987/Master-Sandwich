@@ -16,7 +16,7 @@ var users = require('./testData')
 var clearUserTable = function(done){
   User.remove({}, done)
 }
-xdescribe('Local #Database', function(){
+describe('Local #Database', function(){
 
   afterEach(clearUserTable)
 
@@ -48,7 +48,7 @@ xdescribe('Local #Database', function(){
 
 
 
-xdescribe('Local #API', function (){
+describe('Local #API', function (){
 
   after(clearUserTable)
 
