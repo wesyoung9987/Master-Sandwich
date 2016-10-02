@@ -10,6 +10,7 @@ var app = require('../server/server')
 var db = require('mongoose').connect('mongodb://localhost/treasuretrek')
 var User = require('../server/models/Users')
 var jwt = require('jwt-simple')
+<<<<<<< HEAD
 <<<<<<< 8961efae3e9de8a1eb033b942519abf9d7d637f8
 
 var users = require('./testData')
@@ -19,6 +20,8 @@ var clearUserTable = function(done){
 }
 =======
 >>>>>>> (test)
+=======
+>>>>>>> a1f4afbb37e86b6be65ee0d346313fe69539d42e
 
 var users = require('./testData')
 
@@ -43,6 +46,7 @@ describe('#Database', function(){
     })
   })
 
+<<<<<<< HEAD
 <<<<<<< 8961efae3e9de8a1eb033b942519abf9d7d637f8
 <<<<<<< 618488d9bef59b36989b7df342b1b0795a38c05b
   it('Should create user in db', function(done){
@@ -52,6 +56,9 @@ describe('#Database', function(){
 =======
   it('Should create user in db', function(done){
 >>>>>>> (test)
+=======
+  it('Should create user in db', function(done){
+>>>>>>> a1f4afbb37e86b6be65ee0d346313fe69539d42e
     // Populate Database
     User.create(users.jack, function (err, user){
       expect(user._id).to.exist
@@ -68,6 +75,7 @@ describe('#Database', function(){
 
 describe('#API', function (){
 
+<<<<<<< HEAD
 <<<<<<< 8961efae3e9de8a1eb033b942519abf9d7d637f8
 <<<<<<< 618488d9bef59b36989b7df342b1b0795a38c05b
   after(clearUserTable)
@@ -77,6 +85,9 @@ describe('#API', function (){
 =======
   after(clearUserTable)
 >>>>>>> (test)
+=======
+  after(clearUserTable)
+>>>>>>> a1f4afbb37e86b6be65ee0d346313fe69539d42e
 
   it('Should return 404 for invalid API calls', function (done){
     request(app)
@@ -85,8 +96,11 @@ describe('#API', function (){
       .end(done)
   });
 
+<<<<<<< HEAD
 <<<<<<< 8961efae3e9de8a1eb033b942519abf9d7d637f8
 <<<<<<< 618488d9bef59b36989b7df342b1b0795a38c05b
+=======
+>>>>>>> a1f4afbb37e86b6be65ee0d346313fe69539d42e
   it('Should signup new user', function (done){
     request(app)
       .post('/api/signup')
@@ -107,6 +121,7 @@ describe('#API', function (){
       .end(done)
     })
   })
+<<<<<<< HEAD
 =======
   it('Should sign user up', function (done){
 =======
@@ -137,4 +152,7 @@ describe('#API', function (){
 
 =======
 >>>>>>> (test)
+=======
+
+>>>>>>> a1f4afbb37e86b6be65ee0d346313fe69539d42e
 })
