@@ -1,18 +1,28 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   Text,
   View,
   TouchableHighlight,
-  AsyncStorage
+  AsyncStorage,
+  ScrollView
 } from 'react-native';
 
 // App components
 import MenuButton from '../nav/MenuButton';
 import MyAdventures from '../MyAdventures/myAdventuresContainer';
+import MapScreen from './MapScreen'
 
-const AllAdventureDetail = (props) => {
+var AllAdventureDetail = function (props) {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     riddles: props.adven,
+  //     id: props.adven._id,
+  //     mapview: false
+  //   };
+  // }
 
-  var advenAccept = function (){
+  var advenAccept = function(){
     AsyncStorage.getItem('id_token')
       .then(token => {
         fetch("https://treasure-trek.herokuapp.com/api/pickAd", {
@@ -43,29 +53,41 @@ const AllAdventureDetail = (props) => {
       })
   }
 
-  return (
-      <View>
-        <View style={style.card}>
-          <Text>Opening Riddle: {props.adven.adventure[0].riddle}</Text>
-          <Text>Starting Location: {props.adven.adventure[0].location}</Text>
+  var showList = function() {
+    return props.adven.adventure.map((riddle, index) => {
+      var riddleNum = index+1
+      return (
+        <View key={riddleNum} style={style.listStyle}>
+          <Text style={{ fontSize: 14 }}>{riddleNum} : {riddle.riddle}</Text>
+          <Text style={style.loc}>{riddle.location}</Text>
         </View>
-        <TouchableHighlight style={style.button} onPress={advenAccept}>
-          <Text style={style.text}>Accept</Text>
-        </TouchableHighlight>
+      );
+    })
+  }
+
+
+  return (
+    <View>
+      <View style={style.map}>
+        <MapScreen riddles={props.adven.adventure}/>
       </View>
-    );
+      <ScrollView>
+      {showList()}
+        <View>
+          <TouchableHighlight style={style.button} onPress={advenAccept}>
+            <Text style={style.buttonText}>Accept</Text>
+          </TouchableHighlight>
+        </View>
+      </ScrollView>
+    </View>
+  );
+
 };
 
 var style = {
-  card: {
-    padding: 5,
-    margin: 5,
-    alignSelf: 'stretch',
-    height: 80,
-    borderRadius: 8,
-    borderWidth: 2,
-    flex: 1,
-    borderColor: 'gray'
+  map: {
+    margin: 10,
+    alignItems: 'center'
   },
   button: {
     height: 36,
@@ -73,14 +95,43 @@ var style = {
     borderColor: '#48BBEC',
     borderWidth: 1,
     borderRadius: 8,
-    margin: 5,
-    // alignSelf: 'stretch',
-    justifyContent: 'center'
+    marginBottom: 10,
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    margin: 20,
+    padding: 20
   },
-  text: {
+  buttonText: {
     fontSize: 18,
     color: 'white',
     alignSelf: 'center'
+  },
+  // imported from MyAdventuresDetail
+  // **USING**
+  listStyle : {
+    borderWidth: 1,
+    borderRadius: 2,
+    borderColor: '#ddd',
+    elevation: 1,
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 5,
+    padding: 5,
+  },
+  // **USING**
+  loc : {
+    fontSize: 10,
+    fontFamily: 'Helvetica',
+    fontWeight: 'bold',
+    color: 'gray'
+  },
+  title: {
+    padding: 5,
+    marginLeft: 5,
+    marginRight: 5,
+    fontWeight: 'bold',
+    elevation: 1,
+    flexDirection: 'column'
   }
 }
 

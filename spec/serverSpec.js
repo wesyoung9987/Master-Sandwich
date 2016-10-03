@@ -67,15 +67,18 @@ describe('Local #API', function (){
       .end(done)
   })
 
-  // Testing jwt tokenization for local dev purposes only as it requires
-  // exposing the matching server side jwt salt
-  it('Should receive token of userid at signin', function (done){
+  // Let's get our token at sign in, then do another API call that requirements
+  // a valid jwt token
+  it('Should receive valid token of userid at signin', function (done){
+    // TODO: Refactor token validity test to not require db call and
+    // subsequently jwt encoding
     User.findOne({first: "Jack"}, function (err, user){
       request(app)
       .post('/api/signin')
       .send(users.jack)
-      // TODO: Remove jwt token test for live servers
-      .expect(200, {userid: jwt.encode(user, 'secret')})
+      // Decoding here is unnecessary. Instead, make another API call that 
+      // requires token to test for validity
+      .expect(200/*, {userid: jwt.encode(user, 'secret')}*/)
       .end(done)
     })
   })
