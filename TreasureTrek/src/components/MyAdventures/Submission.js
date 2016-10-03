@@ -90,8 +90,9 @@ var Submission = React.createClass({
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.row}>
-          <Text style={styles.title}>Enter Answer</Text>
+        <View style={styles.riddleContainer}>
+          <Text style={styles.title}>Riddle Details</Text>
+          <Text style={styles.riddle}> {this.props.riddle} </Text>
         </View>
         <View style={styles.row}>
           <Form
@@ -144,8 +145,22 @@ const styles = {
     padding: 20,
     backgroundColor: '#ffffff',
   },
+  riddleContainer: {
+    justifyContent: 'center',
+    marginTop: 50,
+    marginBottom: 50,
+    padding: 20,
+    backgroundColor: '#ffffff',
+  },
+  riddle: {
+    fontSize: 16,
+    alignSelf: 'center',
+    marginBottom: 30,
+    font: 'Helvetica',
+    padding: 5
+  },
   title: {
-    fontSize: 30,
+    fontSize: 32,
     alignSelf: 'center',
     marginBottom: 30
   },
