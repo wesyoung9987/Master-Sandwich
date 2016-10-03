@@ -9,6 +9,7 @@ import {
 // App components
 import MenuButton from '../nav/MenuButton';
 import MyAdventures from '../MyAdventures/myAdventuresContainer';
+import MapScreen from './MapScreen'
 
 const AllAdventureDetail = (props) => {
 
@@ -43,12 +44,11 @@ const AllAdventureDetail = (props) => {
       })
   }
 
+  // <Text>Opening Riddle: {props.adven.adventure[0].riddle}</Text>
+  // <Text>Starting Location: {props.adven.adventure[0].location}</Text>
   return (
       <View>
-        <View style={style.card}>
-          <Text>Opening Riddle: {props.adven.adventure[0].riddle}</Text>
-          <Text>Starting Location: {props.adven.adventure[0].location}</Text>
-        </View>
+        <MapScreen riddles={[]}/>
         <TouchableHighlight style={style.button} onPress={advenAccept}>
           <Text style={style.text}>Accept</Text>
         </TouchableHighlight>
@@ -73,8 +73,8 @@ var style = {
     borderColor: '#48BBEC',
     borderWidth: 1,
     borderRadius: 8,
-    margin: 5,
-    // alignSelf: 'stretch',
+    marginBottom: 10,
+    alignSelf: 'stretch',
     justifyContent: 'center'
   },
   text: {
