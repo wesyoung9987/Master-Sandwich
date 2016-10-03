@@ -57,9 +57,9 @@ var AllAdventureDetail = function (props) {
     return props.adven.adventure.map((riddle, index) => {
       var riddleNum = index+1
       return (
-        <View key={riddleNum}>
+        <View key={riddleNum} style={style.listStyle}>
           <Text style={{ fontSize: 14 }}>{riddleNum} : {riddle.riddle}</Text>
-          <Text style={{ fontSize: 9 }}>{riddle.location}</Text>
+          <Text style={style.loc}>{riddle.location}</Text>
         </View>
       );
     })
@@ -68,12 +68,14 @@ var AllAdventureDetail = function (props) {
 
   return (
     <View>
-      <MapScreen riddles={props.adven.adventure}/>
+      <View style={style.map}>
+        <MapScreen riddles={props.adven.adventure}/>
+      </View>
       <ScrollView>
       {showList()}
-        <View style={style.buttonContainer}>
+        <View>
           <TouchableHighlight style={style.button} onPress={advenAccept}>
-            <Text style={style.text}>Accept</Text>
+            <Text style={style.buttonText}>Accept</Text>
           </TouchableHighlight>
         </View>
       </ScrollView>
@@ -83,15 +85,9 @@ var AllAdventureDetail = function (props) {
 };
 
 var style = {
-  card: {
-    padding: 5,
-    margin: 5,
-    alignSelf: 'stretch',
-    height: 80,
-    borderRadius: 8,
-    borderWidth: 2,
-    flex: 1,
-    borderColor: 'gray'
+  map: {
+    margin: 10,
+    alignItems: 'center'
   },
   button: {
     height: 36,
@@ -101,16 +97,41 @@ var style = {
     borderRadius: 8,
     marginBottom: 10,
     alignSelf: 'stretch',
-    justifyContent: 'center'
-  },
-  buttonContainer: {
+    justifyContent: 'center',
     margin: 20,
     padding: 20
   },
-  text: {
+  buttonText: {
     fontSize: 18,
     color: 'white',
     alignSelf: 'center'
+  },
+  // imported from MyAdventuresDetail
+  // **USING**
+  listStyle : {
+    borderWidth: 1,
+    borderRadius: 2,
+    borderColor: '#ddd',
+    elevation: 1,
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 5,
+    padding: 5,
+  },
+  // **USING**
+  loc : {
+    fontSize: 10,
+    fontFamily: 'Helvetica',
+    fontWeight: 'bold',
+    color: 'gray'
+  },
+  title: {
+    padding: 5,
+    marginLeft: 5,
+    marginRight: 5,
+    fontWeight: 'bold',
+    elevation: 1,
+    flexDirection: 'column'
   }
 }
 
