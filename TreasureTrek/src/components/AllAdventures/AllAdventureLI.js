@@ -30,16 +30,16 @@ const AdvenLI = (props) => {
     <TouchableHighlight
     onPress={toAllAdventureDetail}
     underlayColor={'#00ffff'}>
-        <View style={viewStyle}>
-          <View style={detailsStyle}>
-            <Text style={titleStyle}>{props.adven.title}</Text>
-            <Text style={{ fontSize: 9 }}>{props.adven.startingLocation}</Text>
-          </View>
-          <View style={arrowsContainer}>
-            <Image style={arrowsStyle} source={require('../../resources/red-arrow.png')} />
-          </View>
+      <View style={viewStyle}>
+        <View style={detailsStyle}>
+          <Text style={titleStyle}>{props.adven.title}</Text>
+          <Text style={{ fontSize: 9 }}>{props.adven.startingLocation}</Text>
         </View>
-      </TouchableHighlight>
+        <View style={arrowsContainer}>
+          <Image style={arrowsStyle} source={require('../../resources/red-arrow.png')} />
+        </View>
+      </View>
+    </TouchableHighlight>
     );
 };
 

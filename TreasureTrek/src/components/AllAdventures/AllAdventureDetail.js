@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   Text,
   View,
   TouchableHighlight,
-  AsyncStorage
+  AsyncStorage,
+  ScrollView
 } from 'react-native';
 
 // App components
@@ -11,9 +12,17 @@ import MenuButton from '../nav/MenuButton';
 import MyAdventures from '../MyAdventures/myAdventuresContainer';
 import MapScreen from './MapScreen'
 
-const AllAdventureDetail = (props) => {
+export default class AllAdventureDetail extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      riddles: props.adven,
+      id: props.adven._id,
+      mapview: false
+    };
+  }
 
-  var advenAccept = function (){
+  advenAccept(){
     AsyncStorage.getItem('id_token')
       .then(token => {
         fetch("https://treasure-trek.herokuapp.com/api/pickAd", {
@@ -44,16 +53,33 @@ const AllAdventureDetail = (props) => {
       })
   }
 
+  showList() {
+    return (
+      <ScrollView>
+        {this.props.adven.adventure.map((riddle, index) => {
+          var riddleNum = index+1
+          return (<Riddle key={riddleNum} id={this.props.aden._id} nav={this.props.nav} loc={riddle.location} riddle={riddle.riddle} answer={riddle.answer} />);
+        })}
+        <View style={styles.buttonContainer}>
+          <TouchableHighlight style={style.button} onPress={advenAccept}>
+            <Text style={style.text}>Accept</Text>
+          </TouchableHighlight>
+        </View>
+      </ScrollView>
+    );
+  }
+
   // <Text>Opening Riddle: {props.adven.adventure[0].riddle}</Text>
   // <Text>Starting Location: {props.adven.adventure[0].location}</Text>
-  return (
+  render(){
+    console.log(this.props)
+    return (
       <View>
-        <MapScreen riddles={[]}/>
-        <TouchableHighlight style={style.button} onPress={advenAccept}>
-          <Text style={style.text}>Accept</Text>
-        </TouchableHighlight>
+        <MapScreen riddles={this.props.adven.adventure}/>
+
       </View>
     );
+  }
 };
 
 var style = {
@@ -77,11 +103,13 @@ var style = {
     alignSelf: 'stretch',
     justifyContent: 'center'
   },
+  buttonContainer: {
+    margin: 20,
+    padding: 20
+  },
   text: {
     fontSize: 18,
     color: 'white',
     alignSelf: 'center'
   }
 }
-
-export default AllAdventureDetail
