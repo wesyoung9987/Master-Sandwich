@@ -70,9 +70,6 @@ class AdventureSolution extends Component {
   showList () {
     return (
       <ScrollView>
-        <Text>
-          Starting Location: {this.state.startingLocation}
-        </Text>
         {this.state.riddles.map((riddle, index) => {
           return (<Riddle num={index+1} key={index.toString()} completion={this.state.completion[index]} id={this.state.id} nav={this.props.nav} loc={riddle.location} riddle={riddle.riddle} answer={riddle.answer} />);
         })}
@@ -91,29 +88,15 @@ class AdventureSolution extends Component {
     );
   }
 
-  toggleMap () {
-    if (this.state.mapview) {
-      this.setState({
-        mapview: !this.state.mapview,
-        toggletext: 'To Map'
-      });
-    } else {
-      this.setState({
-        mapview: !this.state.mapview,
-        toggletext: 'To List'
-      });
-    }
-  }
-
   render () {
     return (
       <View style={{ flex: 1, marginTop:5 }}>
-        <View style={{marginLeft: 100, marginRight: 100}}>
-          <TouchableHighlight style={styles.button} onPress={this.toggleMap.bind(this)}>
-            <Text style={styles.buttonText}>{this.state.toggletext}</Text>
-          </TouchableHighlight>
+        <View style={styles.map}>
+          <View>
+            {this.showMap()}
+          </View>
         </View>
-        {this.state.mapview ? this.showMap() : this.showList()}
+        {this.showList()}
       </View>
     );
   }
@@ -121,6 +104,9 @@ class AdventureSolution extends Component {
 };
 
 var styles = {
+  map: {
+    margin: 10
+  },
   giveup: {
     padding: 20,
     margin: 20
