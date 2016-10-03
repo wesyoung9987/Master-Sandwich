@@ -12,17 +12,17 @@ import MenuButton from '../nav/MenuButton';
 import MyAdventures from '../MyAdventures/myAdventuresContainer';
 import MapScreen from './MapScreen'
 
-export default class AllAdventureDetail extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      riddles: props.adven,
-      id: props.adven._id,
-      mapview: false
-    };
-  }
+var AllAdventureDetail = function (props) {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     riddles: props.adven,
+  //     id: props.adven._id,
+  //     mapview: false
+  //   };
+  // }
 
-  advenAccept(){
+  var advenAccept = function(){
     AsyncStorage.getItem('id_token')
       .then(token => {
         fetch("https://treasure-trek.herokuapp.com/api/pickAd", {
@@ -53,9 +53,8 @@ export default class AllAdventureDetail extends Component {
       })
   }
 
-  showList() {
-    return this.props.adven.adventure.map((riddle, index) => {
-      console.log("All Adventure Riddle List: ", riddle)
+  var showList = function() {
+    return props.adven.adventure.map((riddle, index) => {
       var riddleNum = index+1
       return (
         <View key={riddleNum}>
@@ -66,24 +65,21 @@ export default class AllAdventureDetail extends Component {
     })
   }
 
-  // <Text>Opening Riddle: {props.adven.adventure[0].riddle}</Text>
-  // <Text>Starting Location: {props.adven.adventure[0].location}</Text>
-  render(){
-    console.log("Props from All Adven Detail: ", this.props)
-    return (
-      <View>
-        <MapScreen riddles={this.props.adven.adventure}/>
-        <ScrollView>
-        {this.showList()}
-          <View style={style.buttonContainer}>
-            <TouchableHighlight style={style.button} onPress={this.advenAccept}>
-              <Text style={style.text}>Accept</Text>
-            </TouchableHighlight>
-          </View>
-        </ScrollView>
-      </View>
-    );
-  }
+
+  return (
+    <View>
+      <MapScreen riddles={props.adven.adventure}/>
+      <ScrollView>
+      {showList()}
+        <View style={style.buttonContainer}>
+          <TouchableHighlight style={style.button} onPress={advenAccept}>
+            <Text style={style.text}>Accept</Text>
+          </TouchableHighlight>
+        </View>
+      </ScrollView>
+    </View>
+  );
+
 };
 
 var style = {
@@ -117,3 +113,5 @@ var style = {
     alignSelf: 'center'
   }
 }
+
+export default AllAdventureDetail
