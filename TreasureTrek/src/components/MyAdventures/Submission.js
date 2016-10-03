@@ -156,7 +156,7 @@ const styles = {
     fontSize: 16,
     alignSelf: 'center',
     marginBottom: 30,
-    font: 'Helvetica',
+    fontFamily: 'Helvetica',
     padding: 5
   },
   title: {
