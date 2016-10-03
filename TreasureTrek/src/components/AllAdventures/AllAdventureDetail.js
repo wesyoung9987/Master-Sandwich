@@ -54,29 +54,33 @@ export default class AllAdventureDetail extends Component {
   }
 
   showList() {
-    return (
-      <ScrollView>
-        {this.props.adven.adventure.map((riddle, index) => {
-          var riddleNum = index+1
-          return (<Riddle key={riddleNum} id={this.props.aden._id} nav={this.props.nav} loc={riddle.location} riddle={riddle.riddle} answer={riddle.answer} />);
-        })}
-        <View style={styles.buttonContainer}>
-          <TouchableHighlight style={style.button} onPress={advenAccept}>
-            <Text style={style.text}>Accept</Text>
-          </TouchableHighlight>
+    return this.props.adven.adventure.map((riddle, index) => {
+      console.log("All Adventure Riddle List: ", riddle)
+      var riddleNum = index+1
+      return (
+        <View key={riddleNum}>
+          <Text style={{ fontSize: 14 }}>{riddleNum} : {riddle.riddle}</Text>
+          <Text style={{ fontSize: 9 }}>{riddle.location}</Text>
         </View>
-      </ScrollView>
-    );
+      );
+    })
   }
 
   // <Text>Opening Riddle: {props.adven.adventure[0].riddle}</Text>
   // <Text>Starting Location: {props.adven.adventure[0].location}</Text>
   render(){
-    console.log(this.props)
+    console.log("Props from All Adven Detail: ", this.props)
     return (
       <View>
         <MapScreen riddles={this.props.adven.adventure}/>
-
+        <ScrollView>
+        {this.showList()}
+          <View style={style.buttonContainer}>
+            <TouchableHighlight style={style.button} onPress={this.advenAccept}>
+              <Text style={style.text}>Accept</Text>
+            </TouchableHighlight>
+          </View>
+        </ScrollView>
       </View>
     );
   }
