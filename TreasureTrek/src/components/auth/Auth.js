@@ -176,6 +176,7 @@ var Auth = React.createClass({
           <ActivityIndicator
           animating={this.state.waiting}
           size = "large"
+          color={"#e6005c"}
           />
           <View>
               <Form
@@ -222,11 +223,19 @@ const styles = {
     borderColor: 'gray',
     borderWidth: 1
   },
+  // container: {
+  //   justifyContent: 'center',
+  //   marginTop: 340,
+  //   padding: 20,
+  //   backgroundColor: 'rgba(52,52,52,0)'
+  // },
   container: {
-    justifyContent: 'center',
-    marginTop: 340,
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
     padding: 20,
-    backgroundColor: 'rgba(52,52,52,0)'
+    backgroundColor: 'rgba(52,52,52,0)',
+    marginBottom: 10
   },
   title: {
     fontSize: 30,
@@ -239,8 +248,8 @@ const styles = {
   },
   button: {
     height: 36,
-    backgroundColor: '#48BBEC',
-    borderColor: '#48BBEC',
+    backgroundColor: '#e6005c', // was #48BBEC
+    borderColor: '#e6005c', // was #48BBEC
     borderWidth: 1,
     borderRadius: 8,
     marginBottom: 5,
