@@ -62,7 +62,7 @@ class UserProfile extends Component {
       <View style={{ flex: 1}}>
         <View style={styles.imageContainer}>
 
-          <UserImage/>
+          <UserImage image={this.state.myInfo.username}/>
 
         </View>
         <View style={styles.fixToBottom}>

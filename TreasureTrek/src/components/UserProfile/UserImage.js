@@ -2,7 +2,11 @@ import React, { Component, StyleSheet, DeviceEventEmitter } from 'react';
 import { View, Text, AsyncStorage, Image } from 'react-native';
 
 class UserProfile extends Component {
-  state = {file: require('../../resources/placeholder.png')};
+  constructor(props){
+    super(props)
+  }
+
+  state = {file: this.props.image || require('../../resources/placeholder.png')};
 
   render(){
     return (
