@@ -77,7 +77,9 @@ class MapScreen extends Component {
       initRegion.longitudeDelta = delta*1.4;
       this.setState({region: initRegion});
 
-    }, error => console.log("ERR:", error)
+    }, error => {
+      console.log("ERR:", error)
+    }, {enableHighAccuracy: true, timeout: 5000, maximumAge: 0}
     )
   }
 

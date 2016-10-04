@@ -30,6 +30,7 @@ class MapScreen extends Component {
   initialView () {
     // console.log("INITIAL VIEW");
     navigator.geolocation.getCurrentPosition(position => {
+      console.log("POS:", position);
       let myLat = position.coords.latitude;
       let myLon = position.coords.longitude;
       let markLat = this.state.markerCoords.latitude;
@@ -52,7 +53,9 @@ class MapScreen extends Component {
         }
       }
       this.setState({region: initRegion});
-    }, error => console.log("ERR:", error)
+    }, error => {
+      console.log("ERR:", error)
+    }, {enableHighAccuracy: true, timeout: 5000, maximumAge: 0}
     )
   }
 
