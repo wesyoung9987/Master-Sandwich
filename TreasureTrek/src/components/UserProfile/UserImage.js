@@ -1,6 +1,5 @@
 import React, { Component, StyleSheet, DeviceEventEmitter } from 'react';
 import { View, Text, AsyncStorage, Image } from 'react-native';
-var RNUploader = require('NativeModules').RNUploader;
 
 class UserProfile extends Component {
   state = {file: require('../../resources/placeholder.png')};

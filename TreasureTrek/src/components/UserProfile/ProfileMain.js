@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, AsyncStorage, AlertIOS, Image, TouchableHighlight } from 'react-native';
 import UserImage from './UserImage';
+import UploadPicButton from './UpdatePicButton';
 
 class UserProfile extends Component {
+  constructor(props){
+    super(props)
+  }
 
   state = {
     myInfo: []
@@ -68,14 +72,14 @@ class UserProfile extends Component {
             </View>
             <View style={styles.contentStyle}>
 
-              <Text style={styles.textInfo}>15000</Text>
+              <Text style={styles.textInfo}>{this.state.myInfo.points || 0}</Text>
 
             </View>
 
           </View>
           <View style={styles.infoContainer}>
             <View style={styles.contentStyle}>
-              <Text style={styles.textInfo}>Level 5</Text>
+              <Text style={styles.textInfo}>Level {this.state.myInfo.level || 0}</Text>
             </View>
           </View>
           <View style={styles.infoContainer}>
@@ -98,15 +102,7 @@ class UserProfile extends Component {
               <Text style={styles.textInfo2}>Email: {this.state.myInfo.email}</Text>
             </View>
           </View>
-          <TouchableHighlight
-
-            underlayColor={'#00ffff'}>
-            <View style={styles.infoContainer2}>
-              <View style={styles.contentStyle}>
-                <Text style={styles.textInfo2}>Update Profile Picture</Text>
-              </View>
-            </View>
-          </TouchableHighlight>
+          <UploadPicButton nav={this.props}/>
         </View>
 
       </View>
