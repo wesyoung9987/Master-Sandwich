@@ -26,9 +26,9 @@ const styles = {
     backgroundColor: '#DF7376',
     height: 80,
     paddingTop: 30,
-    shadowColor: '#000',
-    shadowOffset: { width:0, height: 2 },
-    shadowOpacity: 0.2,
+    // shadowColor: '#000',
+    // shadowOffset: { width:0, height: 2 },
+    // shadowOpacity: 0.2,
     elevation: 2,
     flexDirection: 'row',
     justifyContent: 'space-around'

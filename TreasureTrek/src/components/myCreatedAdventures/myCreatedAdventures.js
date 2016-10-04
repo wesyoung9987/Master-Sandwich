@@ -5,10 +5,10 @@ import AddAdventure from './AddAdventure';
 import AdventureList from './AdventureList';
 
 // Create a component
-const MyCreatedAdventures = () => (
+const MyCreatedAdventures = (props) => (
   // flex 1 allows the view to scroll without bouncing back
   <View style={{ flex: 1 }}>
-    <AddAdventure />
+    <AddAdventure nav={props}/>
   </View>
 );
 

@@ -10,8 +10,8 @@ import CreateAdventureHeader2 from './createAdventure/CreateAdventureHeader2';
 const AddAdventure = (props) => {
 
   const routes = [
-    {view: <AdventureList/>, index: 0, header: <CreateAdventureHeader/>},
-    {view: <CreateAdventure/>, index: 1, header: <CreateAdventureHeader2/>}
+    {view: <AdventureList nav={props.nav}/>, index: 0, header: <CreateAdventureHeader/>},
+    {view: <CreateAdventure nav={props.nav}/>, index: 1, header: <CreateAdventureHeader2/>}
   ];
 
   return (

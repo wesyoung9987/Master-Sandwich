@@ -19,9 +19,9 @@ const SubmitButton = () => {
 const styles = {
   viewStyle: {
     marginTop: 20,
-    shadowColor: '#000',
-    shadowOffset: { width:0, height: 2 },
-    shadowOpacity: 0.2,
+    // shadowColor: '#000',
+    // shadowOffset: { width:0, height: 2 },
+    // shadowOpacity: 0.2,
     elevation: 2,
     flexDirection: 'row',
     borderWidth: 2,
