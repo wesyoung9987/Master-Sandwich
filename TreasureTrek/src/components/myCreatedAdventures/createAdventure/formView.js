@@ -316,7 +316,7 @@ class FormView extends Component {
 
   render() {
     // console.log(this.props);
-    console.log("STATE:", this.state);
+    // console.log("STATE:", this.state);
     return (
       <View>
         {this.showForm()}
