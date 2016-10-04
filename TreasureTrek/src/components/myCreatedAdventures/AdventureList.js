@@ -12,8 +12,6 @@ class AdventureList extends Component {
     }
   }
 
-  // state = { adventures: [] };
-
   componentWillMount () {
     AsyncStorage.getItem('id_token')
       .then(token=>{
@@ -63,7 +61,6 @@ class AdventureList extends Component {
   }
 
   render() {
-
     return (
       <ScrollView>
         {this.renderAdventures()}
