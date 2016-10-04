@@ -63,7 +63,8 @@ class Menu extends Component {
         AlertIOS.alert("Logout Success!");
         this.props.resetToRoute({
           name: "Login",
-          component: Auth
+          component: Auth,
+          hideNavigationBar: true
         })
     } catch (error) {
         console.log('AsyncStorage error: ' + error.message);

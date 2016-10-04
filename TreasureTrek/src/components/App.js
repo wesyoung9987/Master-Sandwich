@@ -20,7 +20,8 @@ class App extends Component {
     var firstRoute = {
       name: "Welcome",
       component: Auth,
-      hideNavigationBar: true
+      hideNavigationBar: true,
+      noStatusBar: true
     }
 
     return (

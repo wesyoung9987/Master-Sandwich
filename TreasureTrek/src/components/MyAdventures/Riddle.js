@@ -13,7 +13,8 @@ const Riddle = (props) => {
       answer: props.answer,
       num: props.num,
       id: props.id,
-      completion: props.completion
+      completion: props.completion,
+      updateCompletion: props.updateCompletion
     }
   };
 
