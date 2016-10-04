@@ -12,6 +12,7 @@ module.exports = function(app) {
   app.post('/api/signup', userHandler.signup);
 
   app.get('/api/myInfo', helper.checkJWT, userHandler.fetchMyInfo);
+  app.put('/api/savePhoto', helper.checkJWT, userHandler.savePhoto);
 
   app.post('/api/pickAd', helper.checkJWT, adventureHandler.pickAdventure);
   app.delete('/api/forgetAd', helper.checkJWT, adventureHandler.forgetAdventure);
