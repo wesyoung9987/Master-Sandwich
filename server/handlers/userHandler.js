@@ -74,6 +74,19 @@ module.exports = {
         res.json(user);
       }
     })
+  },
+
+  savePhoto: function(req, res){
+    var userid = req.user._id;
+    var body = req.body;
+
+    UserAdventure.update({_id: userid}, {username: body}, function(err, result){
+      if (err) {
+        helper.sendError(err, req, res);
+      } else {
+        res.json(result);
+      }
+    });
   }
 
 };
