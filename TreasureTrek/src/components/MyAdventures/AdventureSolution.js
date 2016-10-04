@@ -67,11 +67,19 @@ class AdventureSolution extends Component {
     });
   }
 
+  updateCompletion (index) {
+    var newArray = this.state.completion;
+    newArray[index] = true;
+    this.setState({
+      completion: newArray
+    });
+  }
+
   showList () {
     return (
       <ScrollView>
         {this.state.riddles.map((riddle, index) => {
-          return (<Riddle num={index+1} key={index.toString()} completion={this.state.completion[index]} id={this.state.id} nav={this.props.nav} loc={riddle.location} riddle={riddle.riddle} answer={riddle.answer} />);
+          return (<Riddle num={index+1} key={index.toString()} completion={this.state.completion[index]} id={this.state.id} nav={this.props.nav} loc={riddle.location} riddle={riddle.riddle} answer={riddle.answer} updateCompletion={this.updateCompletion.bind(this, index)}/>);
         })}
         <View style={styles.giveup}>
           <TouchableHighlight style={styles.button} onPress={this.deleteAdventure.bind(this)}  underlayColor='#00ffff'>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, TextInput, AsyncStorage, TouchableHighlight, AlertIOS} from 'react-native';
+import {Text, View, TextInput, AsyncStorage, TouchableHighlight, AlertIOS, ActivityIndicator} from 'react-native';
 import t from 'tcomb-form-native';
 import AdventureSolution from './AdventureSolution';
 import MyAdventures from './myAdventuresContainer';
@@ -14,17 +14,31 @@ var Solution = t.struct({solution: t.String});
 // Submission Component
 var Submission = React.createClass({
 
+
+  componentWillMount() {
+    this.setState({
+      waiting: false
+    });
+  },
+
+  setSpinner() {
+    this.setState({
+      waiting: !this.state.waiting
+    })
+  },
+
   clearForm() {
     this.setState({input: null});
   },
 
   toRiddles() {
     //this.props.nav.reset();
-    this.props.resetToRoute({
-      name: "My Adventures",
-      component: MyAdventures,
-      leftCorner: MenuButton
-    });
+    // this.props.resetToRoute({
+    //   name: "My Adventures",
+    //   component: MyAdventures,
+    //   leftCorner: MenuButton
+    // });
+    this.props.nav.toBack();
   },
 
   submitAnswer() {
@@ -36,6 +50,7 @@ var Submission = React.createClass({
     var riddleNumber = this.props.num - 1 ;
 
     if (input.solution === this.props.answer) {
+      this.setSpinner();
       AlertIOS.alert( "CORRECT!" );
       AsyncStorage.getItem('id_token')
         .then(token=>{
@@ -53,10 +68,13 @@ var Submission = React.createClass({
           }).then(function(res){
             return res.json()
           }).then((data)=> {
+            this.setSpinner();
             // Reroute Navigation To Home
             this.props.completion = true;
+            this.props.updateCompletion();
             this.toRiddles();
-            console.log('Posted! Data Response: ', data);
+
+            // console.log('Posted! Data Response: ', data);
 
           }).catch((error)=> {
             console.error("ERROR: ", error);
@@ -87,6 +105,41 @@ var Submission = React.createClass({
     });
   },
 
+  showInputField () {
+    return (
+      <View>
+        <View style={styles.row}>
+          <Form
+            ref="form"
+            type={Solution}
+            autoCorrect={false}
+            autoCapitalize={'none'}
+          />
+        </View>
+        {this.state.waiting ?
+          <ActivityIndicator /> :
+          <View style={styles.row}>
+            <TouchableHighlight style={styles.button}
+              onPress={this.submitAnswer}
+              underlayColor='#99d9f4'
+            >
+              <Text style={styles.buttonText}>Submit</Text>
+            </TouchableHighlight>
+          </View>
+        }
+      </View>
+    )
+  },
+
+  showAnswer () {
+    return (
+      <View>
+        <Text style={styles.riddle}> Answer: </Text>
+        <Text style={styles.riddle}> {this.props.answer} </Text>
+      </View>
+    )
+  },
+
   render() {
     return (
       <View style={styles.container}>
@@ -94,21 +147,9 @@ var Submission = React.createClass({
           <Text style={styles.title}>Riddle Details</Text>
           <Text style={styles.riddle}> {this.props.riddle} </Text>
         </View>
-        <View style={styles.row}>
-          <Form
-            ref="form"
-            type={Solution}
-            autoCorrect={false}
-          />
-        </View>
-        <View style={styles.row}>
-          <TouchableHighlight style={styles.button}
-            onPress={this.submitAnswer}
-            underlayColor='#99d9f4'
-          >
-            <Text style={styles.buttonText}>Submit</Text>
-          </TouchableHighlight>
-        </View>
+
+        {this.props.completion ? this.showAnswer() : this.showInputField()}
+
       </View>
     );
   }
