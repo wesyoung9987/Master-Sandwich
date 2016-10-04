@@ -1,16 +1,27 @@
 import React from 'react';
 import { Text, View, Image, Linking, TouchableHighlight } from 'react-native';
+import MyCreatedDetail from './MyCreatedDetail';
 
 
-const AdventureDetail = ({ singleAdventure }) => {
+const AdventureDetail = ({ singleAdventure, nav }) => {
+
   const { id, title, creator, adventure, date, completedAll, startingLocation } = singleAdventure;
+
   const {
     viewStyle, detailsStyle, titleStyle, dateStyle, arrowsStyle, arrowsContainer
   } = styles;
 
+  const DetailRoute = {
+    name: "Adventure",
+    component: MyCreatedDetail,
+    passProps: {
+      adven: singleAdventure
+    }
+  }
+
   return (
     <TouchableHighlight onPress={() => {
-      return 1;
+      nav.toRoute(DetailRoute);
     }}>
       <View style={viewStyle}>
         <View style={detailsStyle}>

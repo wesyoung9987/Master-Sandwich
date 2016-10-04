@@ -4,7 +4,13 @@ import AdventureDetail from './AdventureDetails';
 import Collapsible from 'react-native-collapsible';
 
 class AdventureList extends Component {
-  state = { adventures: [] };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      adventures: []
+    }
+  }
 
   componentWillMount () {
     AsyncStorage.getItem('id_token')
@@ -42,20 +48,19 @@ class AdventureList extends Component {
     AlertIOS.alert(message);
     this.props.resetToRoute({
       name: "Login",
-      component: Auth
+      component: Auth,
+      hideNavigationBar: true
     });
   }
 
   renderAdventures(){
-    this.componentWillMount();
     return this.state.adventures.map(singleAdventure =>
       // would be better to put item id as key instead of title if singleAdventure had id
-      <AdventureDetail key={singleAdventure._id} singleAdventure={singleAdventure} />
+      <AdventureDetail key={singleAdventure._id} singleAdventure={singleAdventure} nav={this.props.nav}/>
     );
   }
 
   render() {
-
     return (
       <ScrollView>
         {this.renderAdventures()}
