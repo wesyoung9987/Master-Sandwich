@@ -46,18 +46,19 @@ export default class App extends React.Component {
         var source;
 
         // You can display the image using either:
-        //source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
+        source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
 
         //Or:
-        if (Platform.OS === 'android') {
-          source = {uri: response.uri, isStatic: true};
-        } else {
-          source = {uri: response.uri.replace('file://', ''), isStatic: true};
-        }
+        // if (Platform.OS === 'android') {
+        //   source = {uri: response.uri, isStatic: true};
+        // } else {
+        //   source = {uri: response.uri.replace('file://', ''), isStatic: true};
+        // }
 
         this.setState({
-          avatarSource: source
+          avatarSource: {height: response.height, origURL: response.origURL, data: response.data, fileSize: response.fileSize }
         });
+        console.log('it is ',response)
       }
     });
   }
