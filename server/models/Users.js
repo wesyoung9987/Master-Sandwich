@@ -2,13 +2,14 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 
 var UserSchema = new mongoose.Schema({
-  first: String,
-  last: String,
-  username: String,
-  email: String,
-  password: String,
-  points: Number,
-  level: Number
+  photo: {type: String, default: 'photo'},
+  first: {type: String, default: 'John'},
+  last: {type: String, default: 'John'},
+  username: {type: String, default: 'John'},
+  email: {type: String, default: 'John'},
+  password: {type: String, default: 'John'},
+  points: {type: Number, default: 0},
+  level: {type: Number, default: 0}
 });
 
 UserSchema.methods.comparePasswords = function(enteredPassword, callback) {
