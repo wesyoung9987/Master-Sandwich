@@ -8,6 +8,31 @@
 //   points: Number,
 //   level: Number
 // }
+// Adventure Schema
+// {
+//   title: String,
+//   creator: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+//   adventure: [{
+//     riddle: String,
+//     answer: String,
+//     location: String,
+//     longitude: Number, // Maybe number, depends on google api
+//     latitude: Number, // Maybe number, depends on google api
+//     photo: String
+//   }],
+//   date: { type: Date, default: Date.now() },
+//   completedAll: { type: Boolean, default: false },
+//   startingLocation: String
+// }
+// UserAdventure Combo Schema
+// {
+//   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+//   adventureId: { type: mongoose.Schema.Types.ObjectId, ref: 'Adventure' },
+//   completion: [],
+//   completed: { type: Boolean, default: false },
+//   date: { type: Date, default: Date.now() }
+// }
+
 
 module.exports = {
   jack: {

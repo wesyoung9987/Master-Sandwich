@@ -8,8 +8,11 @@ var expect = chai.expect;
 // DB requirements
 var app = require('../server/server')
 var db = require('mongoose').connect('mongodb://localhost/treasuretrek')
-var User = require('../server/models/Users')
 var jwt = require('jwt-simple')
+// db models
+var User = require('../server/models/Users')
+var Adventure = require('../server/models/Adventures')
+var UserAdventure = require('../server/models/UserAdventure')
 
 var users = require('./testData')
 
@@ -20,6 +23,13 @@ var clearUserTable = function(done){
 // var addAdventure
 var createData = function (){
 
+}
+
+var createUsers = function(cb){
+  User.create(users.jack)
+    .exec(user => {
+      user._id
+    })
 }
 
 describe('#Database', function(){
@@ -50,6 +60,14 @@ describe('#Database', function(){
   it('Should only create valid user'/*, function (done){
     // Enforce valid data structure for User model
   }*/)
+
+  it('Should allow users to create an adventure', function (done){
+     User.create(users.jack, done)
+  })
+
+  it('Should allow users to accept an adventure', function (){
+
+  })
 })
 
 
@@ -103,11 +121,11 @@ describe('#API points', function (){
   before(createData)
   after(clearUserTable)
 
-  it('Should recive random points between 100-300 for every complete riddle',
+  it('Should receive random points between 100-300 for every complete riddle',
     function(done) {
 
 
 
-
+    done()
   })
 })
