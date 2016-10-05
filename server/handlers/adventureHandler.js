@@ -194,7 +194,7 @@ module.exports = {
               // CREATE POINTS
 
               // Create random point value for riddle
-              var random = Math.floor((Math.random()*200 + 100));
+              var points = Math.floor((Math.random()*200 + 100));
 
               // Add Points based on Adventure Complete
               /*
@@ -208,22 +208,18 @@ module.exports = {
                   console.log('TOTAL distance: ', total);
               }
               */
-              // Default points to 0
-              var points = 0;
               // ASSIGN Points and Level
               User.findOne({_id: userid}, function(err,user){
                 if (err) {
                   console.log('user error: ', err);
                 } else {
-                    user.points += random;
-                    points = user.points;
+                    user.points += points;
                     // Assuming 500 points per level:
                     var newLevel = Math.floor(user.points/500) + 1;
                     console.log('POINTS: ', user.points)
                     User.update({_id: userid}, {points: user.points, level: newLevel}, function(err, result){
                       if (err) console.error('user update error');
                       else {
-                        console.log('UPDATED POINTS: ', result);
                         //res.json(result);
                       }
                     });
