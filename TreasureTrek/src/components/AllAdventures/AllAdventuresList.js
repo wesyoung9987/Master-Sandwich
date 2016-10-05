@@ -32,12 +32,6 @@ export default class AllAdvens extends Component {
     })
   }
 
-  componentWillMount(){
-    this.setState({
-      filtered: this.props.advens
-    })
-  }
-
   render() {
     var filtered = this.props.advens.filter(adventure => {
         return adventure.title
