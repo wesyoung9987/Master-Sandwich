@@ -193,8 +193,6 @@ module.exports = {
             } else {
               // CREATE POINTS
 
-
-
               // Create random point value for riddle
               var random = Math.floor((Math.random()*200 + 100));
 
@@ -209,17 +207,18 @@ module.exports = {
                   var total = distanceAB + distanceBC + distanceCA;
                   console.log('TOTAL distance: ', total);
               }
-
               */
 
-              // ASSIGN Points
+              // ASSIGN Points and Level
               User.findOne({_id: userid}, function(err,user){
                 if (err) {
                   console.log('user error: ', err);
                 } else {
                     user.points += random;
+                    // Assuming 500 points per level:
+                    var newLevel = Math.floor(user.points/500) + 1;
                     console.log('POINTS: ', user.points)
-                    User.update({_id: userid}, {points: user.points}, function(err, result){
+                    User.update({_id: userid}, {points: user.points, level: newLevel}, function(err, result){
                       if (err) console.error('user update error');
                       else {
                         console.log('UPDATED POINTS: ', result);
