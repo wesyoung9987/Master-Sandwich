@@ -64,9 +64,11 @@ module.exports = {
     });
   },
 
+  // Need to refactor to only send back pertinent info (ex. not password)
   fetchMyInfo: function(req, res){
     var userid = req.user._id;
 
+    // No need to query db, all user info is in req.user
     User.findOne({_id: userid}, function(err, user){
       if(err){
         helper.sendError(err, req, res);
