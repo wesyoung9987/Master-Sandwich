@@ -68,7 +68,7 @@ export default class App extends React.Component {
       return;
     }
     var sendPhoto = this.state.avatarSource.uri;
-    console.log('image is ', sendPhoto)
+
     AsyncStorage.getItem('id_token')
       .then(token=>{
         fetch("https://treasure-trek.herokuapp.com/api/savePhoto",{

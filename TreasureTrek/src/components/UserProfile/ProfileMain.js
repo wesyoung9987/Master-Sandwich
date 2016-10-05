@@ -79,22 +79,22 @@ class UserProfile extends Component {
           </View>
           <View style={styles.infoContainer}>
             <View style={styles.contentStyle}>
-              <Text style={styles.textInfo}>Level {this.state.myInfo.level || 0}</Text>
+              <Text style={styles.textInfo}>Level {Math.floor(this.state.myInfo.points / 500) || 0}</Text>
             </View>
           </View>
           <View style={styles.infoContainer}>
             <View style={styles.contentStyle}>
-              <Text style={styles.textInfo}>500 Coins to Next Level</Text>
+              <Text style={styles.textInfo}>{Math.floor(this.state.myInfo.points / 500) * 500 + 500 - this.state.myInfo.points} Coins to Next Level</Text>
             </View>
           </View>
           <View style={styles.infoContainer}>
             <View style={styles.contentStyle}>
-              <Text style={styles.textInfo}>Adventures in Progress: 3</Text>
+              <Text style={styles.textInfo}>Adventures in Progress: {this.state.myInfo.current || 0}</Text>
             </View>
           </View>
           <View style={styles.infoContainer}>
             <View style={styles.contentStyle}>
-              <Text style={styles.textInfo}>Created Adventures: 7</Text>
+              <Text style={styles.textInfo}>Created Adventures: {this.state.myInfo.created || 0}</Text>
             </View>
           </View>
           <View style={styles.infoContainer2}>
