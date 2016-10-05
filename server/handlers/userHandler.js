@@ -37,7 +37,7 @@ module.exports = {
   },
 
   // signup method
-  // expects {email: 'email@email.com', password: 'pass123'} at minimum
+  // expects {username: 'username, email: 'email@email.com', password: 'pass123'} at minimum
     // can contain more properties
   // returns {userid: 'jwt_token_string'} if successful
   signup: function(req, res){

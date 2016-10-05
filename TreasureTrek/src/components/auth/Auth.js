@@ -31,6 +31,7 @@ var Signin = t.struct({
 });
 
 var Signup = t.struct({
+  username: t.String,
   email: Email,
   password: t.String
 });
@@ -48,6 +49,12 @@ var options = {
     email: {
       error: 'Enter a valid email',
       placeholder: 'yourname@gmail.com',
+      autoCapitalize: 'none',
+      autoCorrect: false
+    },
+    username: {
+      error: 'Enter a username',
+      placeholder: 'yourusername',
       autoCapitalize: 'none',
       autoCorrect: false
     }
@@ -87,6 +94,7 @@ var Auth = React.createClass({
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          username: input.username,
           email: input.email,
           password: input.password
         })
@@ -171,7 +179,7 @@ var Auth = React.createClass({
     this.setState({
       onSignup: !this.state.onSignup
     });
-  }
+  },
 
   componentWillMount() {
     this.setState({
@@ -198,11 +206,16 @@ var Auth = React.createClass({
               />
           </View>
           <View>
-              <TouchableHighlight style={styles.button} onPress={this.userSignUp} underlayColor='#99d9f4'>
-                  <Text style={styles.buttonText}>Signup</Text>
+              <TouchableHighlight style={styles.button} onPress={this.state.onSignup ? this.userSignUp : this.userLogin} underlayColor='#99d9f4'>
+                  <Text style={styles.buttonText}>{this.state.onSignup ? 'Signup' : 'Login'}</Text>
               </TouchableHighlight>
-              <TouchableHighlight style={styles.button} onPress={this.userLogin} underlayColor='#99d9f4'>
-                  <Text style={styles.buttonText}>Login</Text>
+              <TouchableHighlight style={styles.button} onPress={this.toggleSignup} underlayColor='#99d9f4'>
+                <View style={styles.viewStyle}>
+                  <Text style={styles.buttonText}>{this.state.onSignup ? 'To Login ' : 'To Signup '}</Text>
+                  <View style={styles.arrowsContainer}>
+                    <Image style={styles.arrowsStyle} source={require('../../resources/double-arrows.png')} />
+                  </View>
+                </View>
               </TouchableHighlight>
           </View>
         </View>
@@ -268,6 +281,22 @@ const styles = {
     alignSelf: 'stretch',
     justifyContent: 'center'
   },
+  arrowsStyle: {
+    height: 25,
+    width: 25
+  },
+  arrowsContainer: {
+    //flexDirection: 'column',
+    //justifyContent: 'center',
+    //alignItems: 'center'
+  },
+  viewStyle: {
+    flexDirection: 'row',
+    // borderWidth: 1,
+    // borderColor: '#ddd',
+    //padding: 10,
+    alignSelf: 'center'
+  }
 }
 
 // Make componenet available for other parts of the app
