@@ -11,6 +11,7 @@ module.exports = function(app) {
   app.post('/api/signin', userHandler.signin);
   app.post('/api/signup', userHandler.signup);
 
+  app.get('/api/topScores/:num', helper.checkJWT, userHandler.fetchTopScores);
   app.get('/api/myInfo', helper.checkJWT, userHandler.fetchMyInfo);
   app.put('/api/savePhoto', helper.checkJWT, userHandler.savePhoto);
 
