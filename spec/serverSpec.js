@@ -16,27 +16,27 @@ var users = require('./testData')
 var clearUserTable = function(done){
   User.remove({}, done)
 }
-describe('Local #Database', function(){
+describe('#Database', function(){
 
   afterEach(clearUserTable)
-
-  it('Should not create invalid user', function (done){
-    var badUser = {nine: "jack"}
-    User.create(badUser)
-    User.findOne({nine: "jack"}, function (err, user){
-      if (err){
-        console.error("Error in find user: ", err)
-      } else {
-        assert.equal(user, null)
-      }
-      done()
-    })
-  })
 
   it('Should create user in db', function(done){
     // Populate Database
     User.create(users.jack, function (err, user){
       expect(user._id).to.exist
+      done()
+    })
+  })
+
+  it('Should not create invalid user', function (done){
+    var badUser = {fakeProperty: "jack"}
+    User.create(badUser)
+    User.findOne({fakeProperty: "jack"}, function (err, user){
+      if (err){
+        console.error("Error in find user: ", err)
+      } else {
+        assert.equal(user, null)
+      }
       done()
     })
   })
@@ -48,7 +48,7 @@ describe('Local #Database', function(){
 
 
 
-describe('Local #API', function (){
+describe('#API', function (){
 
   after(clearUserTable)
 
@@ -67,20 +67,27 @@ describe('Local #API', function (){
       .end(done)
   })
 
-  // Let's get our token at sign in, then do another API call that requirements
-  // a valid jwt token
   it('Should receive valid token of userid at signin', function (done){
-    // TODO: Refactor token validity test to not require db call and
-    // subsequently jwt encoding
-    User.findOne({first: "Jack"}, function (err, user){
-      request(app)
+    // Let's signin first to get token, then hit another endpoint that
+    // requires received id
+    request(app)
       .post('/api/signin')
       .send(users.jack)
-      // Decoding here is unnecessary. Instead, make another API call that 
-      // requires token to test for validity
-      .expect(200/*, {userid: jwt.encode(user, 'secret')}*/)
-      .end(done)
-    })
+      .expect(200)
+      .end(function(err, res){
+        if (err) {
+          done(err, null)
+        } else {
+          // Second call to endpoint requiring valid token using received token
+          var token = res.body.userid;
+          request(app)
+            .get('/api/fetchAll')
+            .set('x-access-token', token)
+            .expect(200)
+            .end(done)
+        }
+      })
+
   })
 
 })
