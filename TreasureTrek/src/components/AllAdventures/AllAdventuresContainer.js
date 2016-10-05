@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, AsyncStorage } from 'react-native';
+import { View, Text, TextInput, AsyncStorage } from 'react-native';
 import AllAdventuresList from './AllAdventuresList.js';
 
 class AllAdventures extends Component {
@@ -23,7 +23,6 @@ class AllAdventures extends Component {
       })
       .then(res => res.json())
       .then(data => {
-        console.log("AllAdventures: ", data)
         self.setState({
           adventures: data
         })
@@ -36,9 +35,12 @@ class AllAdventures extends Component {
   }
 
   render(){
+    console.log("Containter All Adventures: ", this.state.adventures)
     return (
       <View style={{ flex: 1}}>
-        <AllAdventuresList nav={this.props} advens={this.state.adventures}></AllAdventuresList>
+        <AllAdventuresList
+          nav={this.props}
+          advens={this.state.adventures}/>
       </View>
     );
   }
