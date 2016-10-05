@@ -4,6 +4,7 @@ import {
   StyleSheet,
   ListView,
   Text,
+  TextInput,
   View
 } from 'react-native'
 
@@ -14,6 +15,15 @@ import MyAdventureDetails from './myAdventureDetails.js'
 export default class myAdventuresList extends Component {
   constructor(props){
     super(props)
+    this.state = {
+      query: ''
+    }
+  }
+
+  filter(e){
+    this.setState({
+      query: e.nativeEvent.text,
+    })
   }
 
   renderRowCB(myAdventures){
@@ -23,10 +33,27 @@ export default class myAdventuresList extends Component {
   }
 
   render() {
+
+    var filtered = this.props.adventures.filter(adventure => {
+      return adventure.adventureId.title
+        .toLowerCase()
+        .indexOf(this.state.query.toLowerCase()) !== -1
+    })
+
     return (
-      <ScrollView>
-        {this.renderRowCB(this.props.adventures)}
-      </ScrollView>
+      <View>
+        <TextInput
+          value={this.state.query}
+          style={{ height: 20, margin: 10, borderColor: 'gray' }}
+          placeholder={"Search"}
+          onChange={this.filter.bind(this)}
+          autoCapitalize={'none'}
+          autoCorrect={false}
+        />
+        <ScrollView>
+          {this.renderRowCB(filtered)}
+        </ScrollView>
+      </View>
     );
   }
 }
