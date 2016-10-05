@@ -7,7 +7,8 @@ import {
   PixelRatio,
   TouchableOpacity,
   Image,
-  Platform
+  Platform,
+  AsyncStorage
 } from 'react-native';
 
 import ImagePicker from 'react-native-image-picker';
