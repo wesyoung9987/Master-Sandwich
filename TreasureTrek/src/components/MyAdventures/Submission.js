@@ -71,7 +71,9 @@ var Submission = React.createClass({
             // Reroute Navigation To Home
             this.props.completion = true;
             this.props.updateCompletion();
-            AlertIOS.alert( "CORRECT! \n \n " + {data} +" points!" );
+            console.log('Points Data Response Object: ', data);
+
+            AlertIOS.alert( "CORRECT! \n \n " + data + " points!" );
             this.toRiddles();
 
             // console.log('Posted! Data Response: ', data);
