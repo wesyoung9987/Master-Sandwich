@@ -1,6 +1,8 @@
 var jwt = require('jwt-simple');
 var User = require('../models/Users.js');
 var helper = require('../config/helpers.js');
+var Adventure = require('../models/Adventures.js');
+var UserAdventure = require('../models/UserAdventure.js');
 
 // export entire object of methods to routes.js
 module.exports = {
@@ -90,7 +92,23 @@ module.exports = {
       if(err){
         helper.sendError(err, req, res);
       } else {
-        res.json(user);
+        UserAdventure.find({userId: userid})
+          .populate('adventureId')
+          .exec(function(err, inProgress){
+            if (err){
+              helper.sendError(err, req, res);
+            } else {
+              Adventure.find({creator: userid}, function(err, myAdventures){
+                if (err) {
+                  helper.sendError(err, req, res);
+                } else {
+                  user.created = myAdventures.length;
+                  user.current = inProgress.length;
+                  res.json(user)
+                }
+              });
+            }
+          });
       }
     })
   },
