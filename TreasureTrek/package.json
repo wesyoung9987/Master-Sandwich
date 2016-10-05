@@ -17,5 +17,10 @@
     "tcomb-form-native": "^0.6.1",
     "undefined": "^0.1.0",
     "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "enzyme": "^2.4.1",
+    "mocha": "^3.1.0",
+    "react-native-mock": "^0.2.6"
   }
 }

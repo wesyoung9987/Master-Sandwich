@@ -13,14 +13,6 @@ import MyAdventures from '../MyAdventures/myAdventuresContainer';
 import MapScreen from './MapScreen'
 
 var AllAdventureDetail = function (props) {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     riddles: props.adven,
-  //     id: props.adven._id,
-  //     mapview: false
-  //   };
-  // }
 
   var advenAccept = function(){
     AsyncStorage.getItem('id_token')
