@@ -15,6 +15,7 @@
     "react-native-simple-router": "^0.11.1",
     "react-native-uploader": "0.0.9",
     "tcomb-form-native": "^0.6.1",
-    "undefined": "^0.1.0"
+    "undefined": "^0.1.0",
+    "underscore": "^1.8.3"
   }
 }

@@ -56,9 +56,9 @@ export default class App extends React.Component {
         // }
 
         this.setState({
-          avatarSource: {height: response.height, origURL: response.origURL, data: response.data, fileSize: response.fileSize }
+          avatarSource: source
         });
-        console.log('it is ',response)
+        console.log('it is ',this.state.avatarSource)
       }
     });
   }
@@ -67,11 +67,13 @@ export default class App extends React.Component {
     if(this.state.avatarSource === null){
       return;
     }
+    var sendPhoto = this.state.avatarSource.uri;
+    console.log('image is ', sendPhoto)
     AsyncStorage.getItem('id_token')
       .then(token=>{
         fetch("https://treasure-trek.herokuapp.com/api/savePhoto",{
             method: "PUT",
-            body: this.state.avatarSource,
+            body: JSON.stringify(sendPhoto),
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json',
