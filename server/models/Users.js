@@ -9,7 +9,7 @@ var UserSchema = new mongoose.Schema({
   email: {type: String, default: 'John'},
   password: {type: String, default: 'John'},
   points: {type: Number, default: 0},
-  level: {type: Number, default: 0}
+  level: {type: Number, default: 1}
 });
 
 UserSchema.methods.comparePasswords = function(enteredPassword, callback) {
