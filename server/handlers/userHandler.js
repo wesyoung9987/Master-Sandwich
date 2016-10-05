@@ -64,6 +64,23 @@ module.exports = {
     });
   },
 
+  // Retrieves top scores from db
+  // Expects the quantity specified in the url parameter
+    // Example: (/api/topScores/10) - will return top 10
+  // Returns array of objects
+    // [{username: 'username', points: #, level: #}]
+  fetchTopScores: function(req, res) {
+    var quantity = req.params.num;
+
+    User.find({},{username:1, points:1, level:1})
+    .sort({points: -1})
+    .limit(+quantity)
+    .then(function(data){
+      res.json(data);
+    });
+  },
+
+
   // Need to refactor to only send back pertinent info (ex. not password)
   fetchMyInfo: function(req, res){
     var userid = req.user._id;
