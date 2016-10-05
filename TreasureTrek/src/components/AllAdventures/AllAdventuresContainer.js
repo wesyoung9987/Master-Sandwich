@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, AsyncStorage } from 'react-native';
+import { View, Text, AsyncStorage } from 'react-native';
 import AllAdventuresList from './AllAdventuresList.js';
 
 class AllAdventures extends Component {

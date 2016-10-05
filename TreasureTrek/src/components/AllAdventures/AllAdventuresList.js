@@ -7,7 +7,6 @@ import {
   Text,
   View
 } from 'react-native'
-import SearchInput, { createFilter } from 'react-search-input'
 
 // App components
 import AllAdventureLI from './AllAdventureLI'
