@@ -25,7 +25,12 @@ var Email = t.refinement(t.String, string => {
 
 var Form = t.form.Form;
 
-var Person = t.struct({
+var Signin = t.struct({
+  email: Email,
+  password: t.String
+});
+
+var Signup = t.struct({
   email: Email,
   password: t.String
 });
@@ -162,10 +167,17 @@ var Auth = React.createClass({
     });
   },
 
+  toggleSignup() {
+    this.setState({
+      onSignup: !this.state.onSignup
+    });
+  }
+
   componentWillMount() {
     this.setState({
-      waiting: false
-    })
+      waiting: false,
+      onSignup: false
+    });
   },
 
   render() {
@@ -181,7 +193,7 @@ var Auth = React.createClass({
           <View>
               <Form
                   ref="form"
-                  type={Person}
+                  type={this.state.onSignup ? Signup : Signin}
                   options={options}
               />
           </View>
