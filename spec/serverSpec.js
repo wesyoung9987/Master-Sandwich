@@ -16,6 +16,12 @@ var users = require('./testData')
 var clearUserTable = function(done){
   User.remove({}, done)
 }
+
+// var addAdventure
+var createData = function (){
+
+}
+
 describe('#Database', function(){
 
   afterEach(clearUserTable)
@@ -48,7 +54,7 @@ describe('#Database', function(){
 
 
 
-describe('#API', function (){
+describe('#API signin/signup', function (){
 
   after(clearUserTable)
 
@@ -90,4 +96,18 @@ describe('#API', function (){
 
   })
 
+})
+
+describe('#API points', function (){
+
+  before(createData)
+  after(clearUserTable)
+
+  it('Should recive random points between 100-300 for every complete riddle',
+    function(done) {
+
+
+
+
+  })
 })

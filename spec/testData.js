@@ -23,5 +23,8 @@ module.exports = {
     username: "js",
     email: "jill@jill.com",
     password: "123"
+  },
+  adventure: {
+    // One created adventure
   }
 }
