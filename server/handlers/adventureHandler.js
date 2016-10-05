@@ -169,7 +169,11 @@ module.exports = {
     var userid = req.user._id;
     var adventureid = req.body.adventureid;
     var riddleNumber = typeof(req.body.riddleNumber)===Number ? req.body.riddleNumber : +req.body.riddleNumber;
+    //var coordinates = req.body.coordinates;
 
+
+
+    // Update Riddle to "Complete" Status
     UserAdventure.findOne({userId: userid, adventureId: adventureid}, function(err, combo){
       if (err) {
         helper.sendError(err, req, res);
@@ -187,6 +191,44 @@ module.exports = {
             if (err) {
               helper.sendError(err, req, res);
             } else {
+              // CREATE POINTS
+
+
+
+              // Create random point value for riddle
+              var random = Math.floor((Math.random()*200 + 100));
+
+              // Add Points based on Adventure Complete
+              /*
+              if (combo.completed === true) {
+                // Miles will be set inside Adventure Model
+                // Determine points based on total miles between riddles
+                  var distanceAB = helper.getDistance({latitute: coordinates[0].latitude, longitutde: coordinates[0].longitude}, {latitute: coordinates[1].latitude, longitutde: coordinates[1].longitude});
+                   var distanceBC = helper.getDistance({latitute: coordinates[1].latitude, longitutde: coordinates[1].longitude}, {latitute: coordinates[2].latitude, longitutde: coordinates[2].longitude});
+                    var distanceCA = helper.getDistance({latitute: coordinates[2].latitude, longitutde: coordinates[2].longitude}, {latitute: coordinates[0].latitude, longitutde: coordinates[0].longitude});
+                  var total = distanceAB + distanceBC + distanceCA;
+                  console.log('TOTAL distance: ', total);
+              }
+
+              */
+
+              // ASSIGN Points
+              User.findOne({_id: userid}, function(err,user){
+                if (err) {
+                  console.log('user error: ', err);
+                } else {
+                    user.points += random;
+                    console.log('POINTS: ', user.points)
+                    User.update({_id: userid}, {points: user.points}, function(err, result){
+                      if (err) console.error('user update error');
+                      else {
+                        console.log('UPDATED POINTS: ', result);
+                        //res.json(result);
+                      }
+                    });
+                }
+              });
+              // Return Result
               res.json(result);
             }
           });
