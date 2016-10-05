@@ -78,14 +78,16 @@ module.exports = {
 
   savePhoto: function(req, res){
     var userid = req.user._id;
-    var body = req.body;
+    var userPhoto = req.body;
 
-    UserAdventure.update({_id: userid}, {username: body}, function(err, result){
-      if (err) {
-        helper.sendError(err, req, res);
-      } else {
-        res.json(result);
-      }
+    User.findById(userid, function (err, user) {
+      if (err) return handleError(err);
+
+      user.username = userPhoto;
+      user.save(function (err, updatedUser) {
+        if (err) return handleError(err);
+        res.send(updatedUser);
+      });
     });
   }
 
