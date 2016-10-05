@@ -7,7 +7,6 @@ class MapScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      riddles: props.riddles,
       region: {
         latitude: 37.78825,
         longitude: -122.4324,
@@ -17,18 +16,16 @@ class MapScreen extends Component {
       markerCoords: {
         latitude: props.lat,
         longitude: props.lon
-      }
+      },
+      errorMsg: ""
     };
   }
 
   componentWillMount () {
-    // console.log("COMP WILL MOUNT");
     this.initialView();
   }
 
-
   initialView () {
-    // console.log("INITIAL VIEW");
     navigator.geolocation.getCurrentPosition(position => {
       let myLat = position.coords.latitude;
       let myLon = position.coords.longitude;
@@ -52,28 +49,36 @@ class MapScreen extends Component {
         }
       }
       this.setState({region: initRegion});
-    }, error => console.log("ERR:", error)
+      // Have to set region again at end of callstack to stick
+      setTimeout(this.onRegionChange.bind(this,initRegion),0);
+    }, error => {
+      console.log("ERR:", error)
+    }, {enableHighAccuracy: true, timeout: 5000, maximumAge: 0}
     )
   }
 
   onRegionChange(region) {
-    // console.log("UPDATE REGION");
     this.setState({ region });
   }
 
   updateLocation (e) {
-    // console.log("UPDATE MARKER");
-    // console.log("EVENTCOORDS:",e.nativeEvent.coordinate);
     this.setState({markerCoords: e.nativeEvent.coordinate});
   }
 
   setCoords () {
-    this.props.setCoords(this.state.markerCoords.latitude, this.state.markerCoords.longitude);
-    this.props.toBack();
+    let lat = this.state.markerCoords.latitude;
+    let lon = this.state.markerCoords.longitude;
+    if (lat && lon) {
+      this.props.setCoords(lat, lon);
+      this.props.toBack();
+    } else {
+      this.setState({
+        errorMsg: "Place a Marker!"
+      })
+    }
   }
 
   render () {
-    // console.log("REG:", this.state.region);
     return (
       <View style={{flex: 1, marginTop:5}}>
 
@@ -95,6 +100,7 @@ class MapScreen extends Component {
         <TouchableHighlight style={styles.button} onPress={this.setCoords.bind(this)}  underlayColor='#00ffff'>
             <Text  style={styles.buttonText}> Set Location </Text>
         </TouchableHighlight>
+        <Text style={styles.errorText}>{this.state.errorMsg}</Text>
 
       </View>
     );
@@ -127,6 +133,11 @@ var styles = {
     color: 'white',
     alignSelf: 'center'
   },
+  errorText: {
+    fontSize: 14,
+    color: 'red',
+    alignSelf: 'center'
+  }
 }
 
 export default MapScreen;

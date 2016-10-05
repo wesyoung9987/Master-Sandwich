@@ -94,17 +94,17 @@ module.exports = {
 
     Adventure.find({creator: {$ne: userid}})
       .then(function(adventures){
-        res.json(adventures); // comment this out when uncommenting below
-        // UserAdventure.find({userId: userid}, 'adventureId')
-        //   .then(function(inwork){
-        //     inwork = inwork.map(function(ad){
-        //       return ad.adventureId.toString();
-        //     })
-        //     var availAds = adventures.filter(function(ad){
-        //       return inwork.indexOf(ad._id.toString())===-1;
-        //     })
-        //     res.json(availAds);
-        //   })
+        // res.json(adventures); // comment this out when uncommenting below
+        UserAdventure.find({userId: userid}, 'adventureId')
+          .then(function(inwork){
+            inwork = inwork.map(function(ad){
+              return ad.adventureId.toString();
+            })
+            var availAds = adventures.filter(function(ad){
+              return inwork.indexOf(ad._id.toString())===-1;
+            })
+            res.json(availAds);
+          })
       });
   },
 
