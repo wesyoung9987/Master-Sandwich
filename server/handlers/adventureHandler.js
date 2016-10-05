@@ -208,13 +208,15 @@ module.exports = {
                   console.log('TOTAL distance: ', total);
               }
               */
-
+              // Default points to 0
+              var points = 0;
               // ASSIGN Points and Level
               User.findOne({_id: userid}, function(err,user){
                 if (err) {
                   console.log('user error: ', err);
                 } else {
                     user.points += random;
+                    points = user.points;
                     // Assuming 500 points per level:
                     var newLevel = Math.floor(user.points/500) + 1;
                     console.log('POINTS: ', user.points)
@@ -227,8 +229,8 @@ module.exports = {
                     });
                 }
               });
-              // Return Result
-              res.json(result);
+              // Return Points
+              res.json(points);
             }
           });
         }
