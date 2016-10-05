@@ -83,7 +83,8 @@ module.exports = {
     User.findById(userid, function (err, user) {
       if (err) return handleError(err);
 
-      user.username = userPhoto;
+      user.photo.data = userPhoto;
+      user.photo.contentType = 'image/png'
       user.save(function (err, updatedUser) {
         if (err) return handleError(err);
         res.send(updatedUser);
