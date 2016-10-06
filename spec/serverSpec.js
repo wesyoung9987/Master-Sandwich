@@ -20,24 +20,24 @@ var clearUserTable = function(done){
   User.remove({}, done)
 }
 
-// var addAdventure
-var createData = function (){
-
-}
-
 describe('#Database', function(){
 
-  afterEach(clearUserTable)
+  after(clearUserTable)
+  var jackId;
 
-  it('Should create user in db', function(done){
+  it('should create user in db', function(done){
     // Populate Database
-    User.create(users.jack, function (err, user){
-      expect(user._id).to.exist
-      done()
+    User.create(users.jack, function(err, user){
+      if (err) {
+        done(err, null)
+      } else {
+        jackId = user._id
+        done()
+      }
     })
   })
 
-  it('Should not create invalid user', function (done){
+  it('should not create invalid user', function (done){
     var badUser = {fakeProperty: "jack"}
     User.create(badUser)
     User.findOne({fakeProperty: "jack"}, function (err, user){
@@ -45,53 +45,43 @@ describe('#Database', function(){
         console.error("Error in find user: ", err)
       } else {
         assert.equal(user, null)
+        done()
       }
-      done()
     })
   })
 
-  it('Should only create valid user'/*, function (done){
+  it('should only create valid user'/*, function (done){
     // Enforce valid data structure for User model
   }*/)
 
-  it('Should allow users to create an adventure', function (done){
-     User.create(users.jack, done)
-  })
-
-  it('Should allow users to accept an adventure', function (done){
-    User.create(users.jack, function (err, user){
-      if (err) { done(err, null) }
-      users.adventure.creator = user._id
-      users.adventure.adventure = [users.riddle, users.riddle, users.riddle]
-      Adventure.create(users.adventure, done)
-    })
-  })
 })
-
-
 
 describe('#API signin/signup', function (){
 
-  after(clearUserTable)
+  ///////////// LIBRARY OF IDs FOR CALLS ////////////////////
+  var jackToken;
+  var adventureId;
+  var userAdventureId;
 
-  it('Should return 404 for invalid API calls', function (done){
+  it('should return 404 for invalid API calls', function (done){
     request(app)
       .get('/')
       .expect(404)
       .end(done)
   });
 
-  it('Should signup new user', function (done){
+  it('should signup new user', function (done){
     request(app)
       .post('/api/signup')
       .send(users.jack)
       .expect(200)
-      .end(done)
+      .end(done);
   })
 
-  it('Should receive valid token of userid at signin', function (done){
+  //////// GETS TOKEN HERE FOR USE WITH NEXT TESTS ////////////////////
+  it('should receive valid token of userid at signin', function (done){
     // Let's signin first to get token, then hit another endpoint that
-    // requires received id
+    // requires received token
     request(app)
       .post('/api/signin')
       .send(users.jack)
@@ -101,29 +91,40 @@ describe('#API signin/signup', function (){
           done(err, null)
         } else {
           // Second call to endpoint requiring valid token using received token
-          var token = res.body.userid;
+          jackToken = res.body.userid;
           request(app)
             .get('/api/fetchAll')
-            .set('x-access-token', token)
+            .set('x-access-token', jackToken)
             .expect(200)
             .end(done)
         }
       })
-
   })
+
+  it('should allow users to create an adventure', function (done){
+    // Expects {title: 'title', adventure: [riddles], startingLocation: 'location'}
+
+    request(app)
+      .post('/api/createAd')
+      .set('x-access-token', jackToken)
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .send(users.form)
+      .expect(function (res){
+        adventureId = res.body._id
+      })
+      .expect(200)
+      .end(done)
+  })
+
 
 })
 
-describe('#API points', function (){
+describe('#API Adventure Points', function (){
 
-  before(createData)
-  after(clearUserTable)
-
-  it('Should receive random points between 100-300 for every complete riddle',
-    function(done) {
-
-
-
+  it('should receive random points between 100-300 for every complete riddle',
+  function(done) {
     done()
   })
+
 })
