@@ -171,16 +171,13 @@ module.exports = {
     var riddleNumber = typeof(req.body.riddleNumber)===Number ? req.body.riddleNumber : +req.body.riddleNumber;
     //var coordinates = req.body.coordinates;
 
+    UserAdventure.findOne({userId: userid, adventureId: adventureid})
+      .populate('adventureId')
+      .exec(function(err, combo){
+        if (err) helper.sendError(err, req, res);
+        else if (!combo) helper.sendError("No user/adventure combination found", req, res);
+        else {
 
-
-    // Update Riddle to "Complete" Status
-    UserAdventure.findOne({userId: userid, adventureId: adventureid}, function(err, combo){
-      if (err) {
-        helper.sendError(err, req, res);
-      } else {
-        if (!combo) {
-          helper.sendError("No user/adventure combination found", req, res);
-        } else {
           combo.completion[riddleNumber] = true;
           if (combo.completion.every(function(riddle){
             return riddle;
@@ -193,21 +190,18 @@ module.exports = {
             } else {
               // CREATE POINTS
 
-              // Create random point value for riddle
-              var points = Math.floor((Math.random()*200 + 100));
+              // Generate random point value for riddle
+              var points = Math.floor((Math.random()*101 + 200));
 
-              // Add Points based on Adventure Complete
-              /*
-              if (combo.completed === true) {
-                // Miles will be set inside Adventure Model
-                // Determine points based on total miles between riddles
-                  var distanceAB = helper.getDistance({latitute: coordinates[0].latitude, longitutde: coordinates[0].longitude}, {latitute: coordinates[1].latitude, longitutde: coordinates[1].longitude});
-                   var distanceBC = helper.getDistance({latitute: coordinates[1].latitude, longitutde: coordinates[1].longitude}, {latitute: coordinates[2].latitude, longitutde: coordinates[2].longitude});
-                    var distanceCA = helper.getDistance({latitute: coordinates[2].latitude, longitutde: coordinates[2].longitude}, {latitute: coordinates[0].latitude, longitutde: coordinates[0].longitude});
-                  var total = distanceAB + distanceBC + distanceCA;
-                  console.log('TOTAL distance: ', total);
+              // Generate points for adventure completion
+              var riddleArr = combo.adventureId.adventure;
+              if (combo.completed && riddleArr[0].latitude) {
+                var centerCoords = helper.calcCenter(riddleArr);
+                var avgDistance = helper.calcAvgDistance(riddleArr, centerCoords);
+                var scoreMultiplier = helper.calcScoreMultiplier(avgDistance, riddleArr.length);
+                points += Math.floor(100 * scoreMultiplier);
               }
-              */
+
               // ASSIGN Points and Level
               User.findOne({_id: userid}, function(err,user){
                 if (err) {
@@ -216,7 +210,6 @@ module.exports = {
                     user.points += points;
                     // Assuming 500 points per level:
                     var newLevel = Math.floor(user.points/500) + 1;
-                    console.log('POINTS: ', user.points)
                     User.update({_id: userid}, {points: user.points, level: newLevel}, function(err, result){
                       if (err) console.error('user update error');
                       else {
@@ -229,10 +222,24 @@ module.exports = {
               res.json(points);
             }
           });
+
         }
-      }
-    });
+      });
+
   }
 
 
 };
+
+
+/*
+if (combo.completed === true) {
+  // Miles will be set inside Adventure Model
+  // Determine points based on total miles between riddles
+    var distanceAB = helper.getDistance({latitute: coordinates[0].latitude, longitutde: coordinates[0].longitude}, {latitute: coordinates[1].latitude, longitutde: coordinates[1].longitude});
+     var distanceBC = helper.getDistance({latitute: coordinates[1].latitude, longitutde: coordinates[1].longitude}, {latitute: coordinates[2].latitude, longitutde: coordinates[2].longitude});
+      var distanceCA = helper.getDistance({latitute: coordinates[2].latitude, longitutde: coordinates[2].longitude}, {latitute: coordinates[0].latitude, longitutde: coordinates[0].longitude});
+    var total = distanceAB + distanceBC + distanceCA;
+    console.log('TOTAL distance: ', total);
+}
+*/
