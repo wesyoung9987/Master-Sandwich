@@ -9,6 +9,17 @@ var Form = t.form.Form;
 
 var Solution = t.struct({solution: t.String});
 
+var options = {
+  fields: {
+    solution: {
+      error: 'Enter your answer!',
+      placeholder: 'answer',
+      autoCapitalize: 'none',
+      autoCorrect: false
+    }
+  }
+}
+
 //console.log('$$$$$$$$$', this.props.id);
 
 // Submission Component
@@ -44,48 +55,49 @@ var Submission = React.createClass({
   submitAnswer() {
     this.clearForm();
     var input = this.refs.form.getValue();
-    console.log('PROPS: ', this.props)
-    console.log('answer ', this.props.answer)
-    console.log('input ', input.solution)
-    var riddleNumber = this.props.num - 1 ;
+    if (input) {
+      console.log('PROPS: ', this.props)
+      console.log('answer ', this.props.answer)
+      console.log('input ', input.solution)
+      var riddleNumber = this.props.num - 1 ;
 
-    if (input.solution === this.props.answer) {
-      this.setSpinner();
-      AsyncStorage.getItem('id_token')
-        .then(token=>{
-          fetch("https://treasure-trek.herokuapp.com/api/updateProgress", {
-            method: "PUT",
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-              'x-access-token': token
-            },
-            body: JSON.stringify({
-              adventureid: this.props.id,    //Adventure ID
-              riddleNumber: riddleNumber, //Riddle # is zero index based
-            })
-          }).then(function(res){
-            return res.json()
-          }).then((data)=> {
-            this.setSpinner();
-            // Reroute Navigation To Home
-            this.props.completion = true;
-            this.props.updateCompletion();
-            console.log('Points Data Response Object: ', data);
+      if (input.solution === this.props.answer) {
+        this.setSpinner();
+        AsyncStorage.getItem('id_token')
+          .then(token=>{
+            fetch("https://treasure-trek.herokuapp.com/api/updateProgress", {
+              method: "PUT",
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'x-access-token': token
+              },
+              body: JSON.stringify({
+                adventureid: this.props.id,    //Adventure ID
+                riddleNumber: riddleNumber //Riddle # is zero index based
+              })
+            }).then(function(res){
+              return res.json()
+            }).then((data)=> {
+              this.setSpinner();
+              // Reroute Navigation To Home
+              this.props.completion = true;
+              this.props.updateCompletion();
+              console.log('Points Data Response Object: ', data);
 
-            AlertIOS.alert( "CORRECT! \n \n " + data + " points!" );
-            this.toRiddles();
+              AlertIOS.alert( "CORRECT! \n \n " + data + " points!" );
+              this.toRiddles();
 
-            // console.log('Posted! Data Response: ', data);
+              // console.log('Posted! Data Response: ', data);
 
-          }).catch((error)=> {
-            console.error("ERROR: ", error);
-            this.handleError();
-          }).done();
-      });
-    } else {
-      AlertIOS.alert( "Nice guess, but wrong answer. Try again." );
-
+            }).catch((error)=> {
+              console.error("ERROR: ", error);
+              this.handleError();
+            }).done();
+          });
+      } else {
+        AlertIOS.alert( "Nice guess, but wrong answer. Try again." );
+      }
     }
   },
 
@@ -114,8 +126,7 @@ var Submission = React.createClass({
           <Form
             ref="form"
             type={Solution}
-            autoCorrect={false}
-            autoCapitalize={'none'}
+            options={options}
           />
         </View>
         {this.state.waiting ?
