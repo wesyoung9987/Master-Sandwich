@@ -83,7 +83,6 @@ module.exports = {
   },
 
 
-  // Need to refactor to only send back pertinent info (ex. not password)
   fetchMyInfo: function(req, res){
     var userid = req.user._id;
 
@@ -102,9 +101,14 @@ module.exports = {
                 if (err) {
                   helper.sendError(err, req, res);
                 } else {
-                  user.created = myAdventures.length;
-                  user.current = inProgress.length;
-                  res.json(user)
+                  res.json({
+                    username: user.username,
+                    points: user.points,
+                    level: user.level,
+                    current: inProgress.length,
+                    created: myAdventures.length,
+                    photo: user.photo
+                  })
                 }
               });
             }
