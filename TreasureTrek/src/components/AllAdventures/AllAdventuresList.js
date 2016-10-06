@@ -38,7 +38,7 @@ export default class AllAdvens extends Component {
           .indexOf(this.state.query.toLowerCase()) !== -1
       })
     return (
-      <View>
+      <View style={{ flex: 1 }}>
           <TextInput
             value={this.state.query}
             style={{ height: 20, margin: 10, borderColor: 'gray' }}
