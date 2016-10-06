@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, AsyncStorage, AlertIOS } from 'react-native';
 import Header from './../auth/Header.js';
 import Auth from '../auth/Auth.js';
+import Scores from './score.js';
 
 class sbContainer extends Component {
 
@@ -12,7 +13,7 @@ class sbContainer extends Component {
   getScores () {
     AsyncStorage.getItem('id_token')
       .then(token=>{
-        fetch("https://treasure-trek.herokuapp.com/api/topScores:10",{
+        fetch("https://treasure-trek.herokuapp.com/api/topScores/:10",{
             method: "GET",
             headers: {
               'Accept': 'application/json',
@@ -59,7 +60,7 @@ class sbContainer extends Component {
     return (
       <View style={{flex:1}} >
         <View style={styles.containerStyle}>
-
+          <Scores scores={this.state.scores}/>
         </View>
       </View>
     );

@@ -18,7 +18,7 @@ import MyAdventures from '../MyAdventures/myAdventuresContainer';
 import AllAdventures from '../AllAdventures/AllAdventuresContainer';
 import MyCreatedAdventures from '../myCreatedAdventures/myCreatedAdventures';
 import UserProfile from '../UserProfile/ProfileMain';
-import Scoreboard from '../Scoreboard/sbContainer';
+import sbContainer from '../Scoreboard/sbContainer';
 
 
 var STORAGE_KEY = 'id_token';
@@ -61,7 +61,7 @@ class Menu extends Component {
    toScoreboard () {
     this.props.resetToRoute({
       name: "Scoreboard",
-      component: Scoreboard,
+      component: sbContainer,
       leftCorner: MenuButton
     });
   }
