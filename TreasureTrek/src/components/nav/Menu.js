@@ -18,6 +18,7 @@ import MyAdventures from '../MyAdventures/myAdventuresContainer';
 import AllAdventures from '../AllAdventures/AllAdventuresContainer';
 import MyCreatedAdventures from '../myCreatedAdventures/myCreatedAdventures';
 import UserProfile from '../UserProfile/ProfileMain';
+import Scoreboard from '../Scoreboard/sbContainer';
 
 
 var STORAGE_KEY = 'id_token';
@@ -57,6 +58,14 @@ class Menu extends Component {
     });
   }
 
+   toScoreboard () {
+    this.props.resetToRoute({
+      name: "Scoreboard",
+      component: Scoreboard,
+      leftCorner: MenuButton
+    });
+  }
+
   async userLogout() {
     try {
         await AsyncStorage.removeItem(STORAGE_KEY);
@@ -86,6 +95,9 @@ class Menu extends Component {
         </TouchableHighlight>
         <TouchableHighlight style={styles.button} onPress={this.toMyProfile.bind(this)} underlayColor='#99d9f4'>
             <Text style={styles.buttonText}>My Profile</Text>
+        </TouchableHighlight>
+        <TouchableHighlight style={styles.button} onPress={this.toScoreboard.bind(this)} underlayColor='#99d9f4'>
+            <Text style={styles.buttonText}>High Score</Text>
         </TouchableHighlight>
         <TouchableHighlight style={styles.button} onPress={this.userLogout.bind(this)} underlayColor='#99d9f4'>
             <Text style={styles.buttonText}>Logout</Text>
