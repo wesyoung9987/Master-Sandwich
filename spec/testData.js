@@ -33,8 +33,7 @@
 //   date: { type: Date, default: Date.now() }
 // }
 
-
-module.exports = {
+var data = {
   jack: {
     first: "Jack",
     last: "Ripper",
@@ -50,6 +49,18 @@ module.exports = {
     password: "123"
   },
   adventure: {
-    // One created adventure
+    title: "title",
+    creator: null, // requires valid userid
+    adventure: [],
+    startingLocation: 'Starting Location'
+  },
+  riddle: {
+    riddle: "Answer is 'answer'",
+    answer: "answer",
+    location: "location",
+    longitude: 1,
+    latitude: 1
   }
 }
+
+module.exports = data;

@@ -25,13 +25,6 @@ var createData = function (){
 
 }
 
-var createUsers = function(cb){
-  User.create(users.jack)
-    .exec(user => {
-      user._id
-    })
-}
-
 describe('#Database', function(){
 
   afterEach(clearUserTable)
@@ -65,8 +58,13 @@ describe('#Database', function(){
      User.create(users.jack, done)
   })
 
-  it('Should allow users to accept an adventure', function (){
-
+  it('Should allow users to accept an adventure', function (done){
+    User.create(users.jack, function (err, user){
+      if (err) { done(err, null) }
+      users.adventure.creator = user._id
+      users.adventure.adventure = [users.riddle, users.riddle, users.riddle]
+      Adventure.create(users.adventure, done)
+    })
   })
 })
 
