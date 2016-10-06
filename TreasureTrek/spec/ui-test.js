@@ -9,6 +9,6 @@ describe('Test runs', () => {
 
   it('Component should exists', () => {
     const wrapper = shallow(<AllAdvDetail />)
-    expect(wrapper.find(View))to.exist
+  s  expect(wrapper.find(View))to.exist
   })
 })
