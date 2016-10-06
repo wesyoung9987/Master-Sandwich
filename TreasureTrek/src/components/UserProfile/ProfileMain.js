@@ -9,7 +9,7 @@ class UserProfile extends Component {
   }
 
   state = {
-    myInfo: []
+    myInfo: {}
   };
 
   getMyInfo () {
@@ -79,7 +79,7 @@ class UserProfile extends Component {
           </View>
           <View style={styles.infoContainer}>
             <View style={styles.contentStyle}>
-              <Text style={styles.textInfo}>Level {Math.floor(this.state.myInfo.points / 500) || 0}</Text>
+              <Text style={styles.textInfo}>Level {this.state.myInfo.level || 0}</Text>
             </View>
           </View>
           <View style={styles.infoContainer}>
@@ -99,7 +99,7 @@ class UserProfile extends Component {
           </View>
           <View style={styles.infoContainer2}>
             <View style={styles.contentStyle}>
-              <Text style={styles.textInfo2}>Email: {this.state.myInfo.email}</Text>
+              <Text style={styles.textInfo2}>Username: {this.state.myInfo.username}</Text>
             </View>
           </View>
           <UploadPicButton nav={this.props}/>
