@@ -119,7 +119,7 @@ describe('#API signin/signup', function (){
     request(app)
       .post('/api/pickAd')
       .set('x-access-token', jillToken)
-      .send({ adventureid })
+      .send({ adventureid: adventureid })
       .expect(function (res){
         userAdventureId = res.body._id
       })
