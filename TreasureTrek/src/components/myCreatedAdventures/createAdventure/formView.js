@@ -84,7 +84,6 @@ class FormView extends Component {
         }).then(function (res){
           return res.json()
         }).then((data)=> {
-          // console.log(data);
           this.setState({title: '', where: '', failed: false, errorMsg: '', input1: '', input2: '', input3: '', input4: '', input5: '', input6: '', input7: '', input8: '', input9: '', input10: '', input11: '', input12: '', routes: [{view: <SubmitButton/>, index: 0}, {view: <AdventureSubmited/>, index: 1}]
           })
           this.redirectToStart();
