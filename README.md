@@ -1,6 +1,7 @@
-# TreasureTrek
-
-> TreasureTrek is a geocaching game where users geotag a series of challenges to create a location-based adventure for other users. Collect points to be to top adventurer in your area.
+# TreasureTrek 
+[![Build Status](https://travis-ci.org/Master-Sandwich/Master-Sandwich.svg?branch=master)](https://travis-ci.org/Master-Sandwich/Master-Sandwich)
+ 
+>TreasureTrek is a geocaching game where users geotag a series of challenges to create a location-based adventure for other users. Collect points to be to top adventurer in your area.
 
 ## Team
 
