@@ -2,12 +2,12 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 
 var UserSchema = new mongoose.Schema({
-  photo: { data: Buffer, contentType: String },
-  first: {type: String, default: 'John'},
-  last: {type: String, default: 'John'},
-  username: {type: String, default: 'John'},
-  email: {type: String, default: 'John'},
-  password: {type: String, default: 'John'},
+  photo: { data: String, default: 'photo' },
+  first: {type: String, default: ''},
+  last: {type: String, default: ''},
+  username: {type: String, default: ''},
+  email: {type: String, default: ''},
+  password: {type: String, default: ''},
   points: {type: Number, default: 0},
   level: {type: Number, default: 1}
 });
