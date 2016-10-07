@@ -119,13 +119,12 @@ module.exports = {
 
   savePhoto: function(req, res){
     var userid = req.user._id;
-    var userPhoto = req.body;
+    var userPhoto = req.body.photo;
 
     User.findById(userid, function (err, user) {
       if (err) return handleError(err);
 
-      user.photo.data = userPhoto;
-      user.photo.contentType = 'image/png'
+      user.photo = userPhoto;
       user.save(function (err, updatedUser) {
         if (err) return handleError(err);
         res.send(updatedUser);
