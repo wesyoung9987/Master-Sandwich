@@ -41,7 +41,7 @@ export default class myAdventuresList extends Component {
     })
 
     return (
-      <View>
+      <View style={{flex:1}}>
         <TextInput
           value={this.state.query}
           style={{ height: 20, margin: 10, borderColor: 'gray' }}
