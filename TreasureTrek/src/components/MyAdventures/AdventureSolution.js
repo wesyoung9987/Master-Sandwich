@@ -77,7 +77,7 @@ class AdventureSolution extends Component {
 
   showList () {
     return (
-      <ScrollView>
+      <ScrollView >
         {this.state.riddles.map((riddle, index) => {
           return (<Riddle num={index+1} key={index.toString()} completion={this.state.completion[index]} id={this.state.id} nav={this.props.nav} loc={riddle.location} riddle={riddle.riddle} answer={riddle.answer} updateCompletion={this.updateCompletion.bind(this, index)}/>);
         })}
@@ -92,19 +92,19 @@ class AdventureSolution extends Component {
 
   showMap () {
     return (
-      <MapScreen riddles={this.state.riddles}/>
+      <MapScreen riddles={this.state.riddles} />
     );
   }
 
   render () {
     return (
-      <View style={{ flex: 1, marginTop:5 }}>
+      <View style={{ flex: 1, marginTop:5, flexDirection: 'column', justifyContent: 'space-between'}}>
         <View style={styles.map}>
-          <View>
-            {this.showMap()}
-          </View>
+          {this.showMap()}
         </View>
+        <View>
         {this.showList()}
+        </View>
       </View>
     );
   }
@@ -113,11 +113,16 @@ class AdventureSolution extends Component {
 
 var styles = {
   map: {
-    margin: 10
+    margin: 5, // changed from 10
+    position: 'relative',
+    // borderColor: 'black',
+    // borderWidth: 1,
+    flex:1
   },
   giveup: {
     padding: 20,
-    margin: 20
+    marginLeft: 20,
+    marginRight: 20
   },
   button: {
     height: 36,
@@ -125,7 +130,7 @@ var styles = {
     borderColor: '#48BBEC',
     borderWidth: 1,
     borderRadius: 8,
-    marginBottom: 10,
+    marginBottom: 5, // changed from 10
     alignSelf: 'stretch',
     justifyContent: 'center'
   },
