@@ -133,6 +133,14 @@ export default class App extends React.Component {
     })
   }
 
+  redirectToStart () {
+    this.props.adven.resetToRoute({
+      name: "Create Adventures",
+      component: ProfileMain,
+      leftCorner: MenuButton
+    })
+  }
+
   render() {
     return (
       <View style={styles.container}>
