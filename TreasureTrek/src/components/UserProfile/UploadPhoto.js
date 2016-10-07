@@ -8,8 +8,11 @@ import {
   TouchableOpacity,
   Image,
   Platform,
+  DeviceEventEmitter,
   AsyncStorage
 } from 'react-native';
+
+import { RNS3 } from 'react-native-aws3'
 
 import ImagePicker from 'react-native-image-picker';
 
@@ -22,7 +25,7 @@ export default class App extends React.Component {
 
   selectPhotoTapped() {
     const options = {
-      quality: 1.0,
+      quality: 0.5,
       maxWidth: 500,
       maxHeight: 500,
       storageOptions: {
@@ -46,14 +49,14 @@ export default class App extends React.Component {
         var source;
 
         // You can display the image using either:
-        source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
+        // source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
 
         //Or:
-        // if (Platform.OS === 'android') {
-        //   source = {uri: response.uri, isStatic: true};
-        // } else {
-        //   source = {uri: response.uri.replace('file://', ''), isStatic: true};
-        // }
+        if (Platform.OS === 'android') {
+          source = {uri: response.uri, isStatic: true};
+        } else {
+          source = {uri: response.uri.replace('file://', ''), isStatic: true};
+        }
 
         this.setState({
           avatarSource: source
@@ -64,27 +67,56 @@ export default class App extends React.Component {
   }
 
   savePhoto(){
-    if(this.state.avatarSource === null){
-      return;
-    }
-    var sendPhoto = this.state.avatarSource.uri;
 
-    AsyncStorage.getItem('id_token')
-      .then(token=>{
-        fetch("https://treasure-trek.herokuapp.com/api/savePhoto",{
-            method: "PUT",
-            body: JSON.stringify(sendPhoto),
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-              'x-access-token': token
-            }
-        }).then(function (res){
-          return res.json()
-        }).catch((error) => {
-          console.log("ERROR:",error);
-        }).done();
-      });
+        if(this.state.avatarSource === null){
+          return;
+        }
+        var sendPhoto = this.state.avatarSource.uri;
+        console.log('here it is ', sendPhoto)
+        let file = {
+              uri: sendPhoto,
+              name: 'photo.jpg',
+              type: 'image/jpeg'
+          }
+
+
+        let opts = {
+            keyPrefix: 'photos/',
+            bucket: 'treasuretrek',
+            region: 'us-west-2',                             // optional: POST or PUT
+            accessKey: 'AKIAJVS47DQC4TBQJGKA',
+            secretKey: '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',
+            successActionStatus: 201
+        };
+
+
+        RNS3.put(file, opts).then(response => {
+          if(response.status !== 201){
+            throw new Error('Failed to upload image to S3', response);
+          }
+          console.log('*** BODY ***', response.body.postResponse.location);
+          AsyncStorage.getItem('id_token')
+            .then(token=>{
+              fetch("https://treasure-trek.herokuapp.com/api/savePhoto", {
+                method: "PUT",
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                  'x-access-token': token
+                },
+                body: JSON.stringify({photo: response.body.postResponse.location})
+              }).then(function(res){
+                return res.json()
+              }).then((data)=> {
+
+                console.log('Updated user: ', data);
+
+              }).catch((error)=> {
+                console.error("ERROR: ", error);
+              }).done();
+          });
+        })
+
   }
 
   render() {

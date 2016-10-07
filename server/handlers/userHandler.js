@@ -3,6 +3,7 @@ var User = require('../models/Users.js');
 var helper = require('../config/helpers.js');
 var Adventure = require('../models/Adventures.js');
 var UserAdventure = require('../models/UserAdventure.js');
+var fs = require('fs');
 
 // export entire object of methods to routes.js
 module.exports = {
@@ -92,23 +93,7 @@ module.exports = {
       if(err){
         helper.sendError(err, req, res);
       } else {
-        UserAdventure.find({userId: userid})
-          .populate('adventureId')
-          .exec(function(err, inProgress){
-            if (err){
-              helper.sendError(err, req, res);
-            } else {
-              Adventure.find({creator: userid}, function(err, myAdventures){
-                if (err) {
-                  helper.sendError(err, req, res);
-                } else {
-                  user.created = myAdventures.length;
-                  user.current = inProgress.length;
-                  res.json(user)
-                }
-              });
-            }
-          });
+        res.json(user);
       }
     })
   },
@@ -120,8 +105,7 @@ module.exports = {
     User.findById(userid, function (err, user) {
       if (err) return handleError(err);
 
-      user.photo.data = userPhoto;
-      user.photo.contentType = 'image/png'
+      user.photo = userPhoto;
       user.save(function (err, updatedUser) {
         if (err) return handleError(err);
         res.send(updatedUser);

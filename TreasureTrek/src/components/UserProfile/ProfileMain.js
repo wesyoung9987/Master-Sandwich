@@ -9,7 +9,9 @@ class UserProfile extends Component {
   }
 
   state = {
-    myInfo: []
+    myInfo: [],
+    createdAdventures: [],
+    inProgress: []
   };
 
   getMyInfo () {
@@ -28,6 +30,42 @@ class UserProfile extends Component {
           // set state or do something else with data
           console.log('GET data: ', data)
           this.setState({myInfo: data});
+        }).catch((error) => {
+          console.log("ERROR:",error);
+          this.handleError();
+        }).done();
+
+        fetch("https://treasure-trek.herokuapp.com/api/fetchMine",{
+            method: "GET",
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'x-access-token': token
+            }
+        }).then(function (res){
+          return res.json()
+        }).then((data)=> {
+          // set state or do something else with data
+          console.log('GET data2: ', data)
+          this.setState({inProgress: data});
+        }).catch((error) => {
+          console.log("ERROR:",error);
+          this.handleError();
+        }).done();
+
+        fetch("https://treasure-trek.herokuapp.com/api/fetchCreated",{
+            method: "GET",
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'x-access-token': token
+            }
+        }).then(function (res){
+          return res.json()
+        }).then((data)=> {
+          // set state or do something else with data
+          console.log('GET data3: ', data)
+          this.setState({createdAdventures: data});
         }).catch((error) => {
           console.log("ERROR:",error);
           this.handleError();
@@ -57,6 +95,11 @@ class UserProfile extends Component {
     this.getMyInfo();
   }
 
+  nextLevel (points) {
+    var num = points;
+    return Math.floor(num / 500) * 500 + 500 - num;
+  }
+
   render(){
     return (
       <View style={{ flex: 1}}>
@@ -79,22 +122,22 @@ class UserProfile extends Component {
           </View>
           <View style={styles.infoContainer}>
             <View style={styles.contentStyle}>
-              <Text style={styles.textInfo}>Level {Math.floor(this.state.myInfo.points / 500) || 0}</Text>
+              <Text style={styles.textInfo}>Level {this.state.myInfo.level || 0}</Text>
             </View>
           </View>
           <View style={styles.infoContainer}>
             <View style={styles.contentStyle}>
-              <Text style={styles.textInfo}>{Math.floor(this.state.myInfo.points / 500) * 500 + 500 - this.state.myInfo.points} Coins to Next Level</Text>
+              <Text style={styles.textInfo}>{this.nextLevel(this.state.myInfo.points)} Coins to Next Level</Text>
             </View>
           </View>
           <View style={styles.infoContainer}>
             <View style={styles.contentStyle}>
-              <Text style={styles.textInfo}>Adventures in Progress: {this.state.myInfo.current || 0}</Text>
+              <Text style={styles.textInfo}>Adventures in Progress: {this.state.inProgress.length || 0}</Text>
             </View>
           </View>
           <View style={styles.infoContainer}>
             <View style={styles.contentStyle}>
-              <Text style={styles.textInfo}>Created Adventures: {this.state.myInfo.created || 0}</Text>
+              <Text style={styles.textInfo}>Created Adventures: {this.state.createdAdventures.length || 0}</Text>
             </View>
           </View>
           <View style={styles.infoContainer2}>

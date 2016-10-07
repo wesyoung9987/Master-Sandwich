@@ -6,7 +6,7 @@ class UserProfile extends Component {
     super(props)
   }
 
-  state = {file: this.props.image || require('../../resources/placeholder.png')};
+  state = {file: {uri: 'https://treasuretrek.s3.amazonaws.com/photos%2Fphoto.jpg'} || require('../../resources/placeholder.png')};
 
   render(){
     return (
