@@ -62,7 +62,9 @@ class UserProfile extends Component {
       <View style={{ flex: 1}}>
         <View style={styles.imageContainer}>
 
-          <UserImage image={this.state.myInfo.username}/>
+          <View>
+            <Image style={styles.imageStyle2} source={{uri: this.state.myInfo.photo}} />
+          </View>
 
         </View>
         <View style={styles.fixToBottom}>
@@ -124,6 +126,11 @@ const styles = {
     height: 25,
     width: 25,
     marginRight: 10
+  },
+  imageStyle2: {
+    height: 250,
+    width: 250,
+    borderRadius: 125
   },
   textInfo: {
     color: 'white',
