@@ -30,12 +30,7 @@
 ## Requirements
 
 - see package.json for list of npm modules
-- Xcode 
- - React Native will use this for the Simulator feature to do hot-reloading during development. From the ./TreasureTrek directory, run:
- ```sh
- $ react-native run-ios
- ```
- 
+- Xcode (for iOS development)
 
 ## Development
 
@@ -50,6 +45,14 @@ $ cd TreasureTrek
 $ npm install
 ```
 You could very easily move TreasureTrek to it's own repo to and develop both independently.
+
+### iOS Development
+ React Native will launch Xcode's Simulator feature to do hot-reloading during development. From the ./TreasureTrek directory, run:
+ ```sh
+ $ react-native run-ios
+ ```
+ See React-Native [docs](https://facebook.github.io/react-native/)
+ 
 
 ### Tasks
 See [dev docs](https://docs.google.com/spreadsheets/d/1Rxp2hkRO4Y3Itg9LEKWfJBauFICQugJCVr8Qtqydybs/edit#gid=1085523730) for feature roadmap. 
