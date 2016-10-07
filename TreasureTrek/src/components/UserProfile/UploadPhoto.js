@@ -11,6 +11,7 @@ import {
   DeviceEventEmitter,
   AsyncStorage
 } from 'react-native';
+import Credenitals from './credentials';
 
 import { RNS3 } from 'react-native-aws3';
 
@@ -67,15 +68,18 @@ export default class App extends React.Component {
   }
 
   savePhoto(){
-
+    AsyncStorage.getItem('id_token')
+      .then(token=>{
         if(this.state.avatarSource === null){
           return;
         }
         var sendPhoto = this.state.avatarSource.uri;
         console.log('here it is ', sendPhoto)
+        console.log('here is the user ', this.props.user.username)
+        var photoName = this.props.user.username + '.jpg';
         let file = {
               uri: sendPhoto,
-              name: 'photo.jpg',
+              name: photoName,
               type: 'image/jpeg'
           }
 
@@ -83,9 +87,9 @@ export default class App extends React.Component {
         let opts = {
             keyPrefix: 'photos/',
             bucket: 'treasuretrek',
-            region: 'us-west-2',                             // optional: POST or PUT
-            accessKey: 'AKIAJVS47DQC4TBQJGKA',
-            secretKey: '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',
+            region: 'us-west-2',
+            accessKey: Credenitals.accessKey,
+            secretKey: Credenitals.secretKey,
             successActionStatus: 201
         };
 
@@ -95,8 +99,7 @@ export default class App extends React.Component {
             throw new Error('Failed to upload image to S3', response);
           }
           console.log('*** BODY ***', response.body.postResponse.location);
-          AsyncStorage.getItem('id_token')
-            .then(token=>{
+
               fetch("https://treasure-trek.herokuapp.com/api/savePhoto", {
                 method: "PUT",
                 headers: {
@@ -114,8 +117,9 @@ export default class App extends React.Component {
               }).catch((error)=> {
                 console.error("ERROR: ", error);
               }).done();
-          });
+
         })
+      });
 
   }
 
