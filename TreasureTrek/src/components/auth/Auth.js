@@ -192,40 +192,38 @@ var Auth = React.createClass({
     return (
       <View style={{flex:1}}>
 
-      <View style={{flex: 1, position: 'absolute', top: 0, bottom: 0,left: 0,right: 0}}>
-      <Image style={{flex: 1, resizeMode: 'cover', height: null, width: null}}
-      source={require('../../resources/land-blue.png')} />
-      </View>
-
-
-      <View style={styles.container}>
-        <ActivityIndicator
-        animating={this.state.waiting}
-        size = "large"
-        color={"#e6005c"}
-        />
-        <View>
-            <Form
-                ref="form"
-                type={this.state.onSignup ? Signup : Signin}
-                options={options}
-            />
+        <View style={{flex: 1, position: 'absolute', top: 0, bottom: 0,left: 0,right: 0}}>
+          <Image style={{flex: 1, resizeMode: 'cover', height: null, width: null}}
+            source={require('../../resources/land-blue.png')} />
         </View>
-        <View>
-            <TouchableHighlight style={styles.button} onPress={this.state.onSignup ? this.userSignUp : this.userLogin} underlayColor='#99d9f4'>
-                <Text style={styles.buttonText}>{this.state.onSignup ? 'Signup' : 'Login'}</Text>
-            </TouchableHighlight>
-            <TouchableHighlight style={styles.button} onPress={this.toggleSignup} underlayColor='#99d9f4'>
-              <View style={styles.viewStyle}>
-                <Text style={styles.buttonText}>{this.state.onSignup ? 'To Login ' : 'To Signup '}</Text>
-                <View style={styles.arrowsContainer}>
-                  <Image style={styles.arrowsStyle} source={require('../../resources/double-arrows.png')} />
+
+        <View style={styles.container}>
+          <ActivityIndicator
+          animating={this.state.waiting}
+          size = "large"
+          color={"#e6005c"}
+          />
+          <View>
+              <Form
+                  ref="form"
+                  type={this.state.onSignup ? Signup : Signin}
+                  options={options}
+              />
+          </View>
+          <View>
+              <TouchableHighlight style={styles.button} onPress={this.state.onSignup ? this.userSignUp : this.userLogin} underlayColor='#99d9f4'>
+                  <Text style={styles.buttonText}>{this.state.onSignup ? 'Signup' : 'Login'}</Text>
+              </TouchableHighlight>
+              <TouchableHighlight style={styles.button} onPress={this.toggleSignup} underlayColor='#99d9f4'>
+                <View style={styles.viewStyle}>
+                  <Text style={styles.buttonText}>{this.state.onSignup ? 'To Login ' : 'To Signup '}</Text>
+                  <View style={styles.arrowsContainer}>
+                    <Image style={styles.arrowsStyle} source={require('../../resources/double-arrows.png')} />
+                  </View>
                 </View>
-              </View>
-            </TouchableHighlight>
+              </TouchableHighlight>
+          </View>
         </View>
-      </View>
-
 
       </View>
     );
