@@ -12,6 +12,8 @@ import {
   AsyncStorage
 } from 'react-native';
 import Credenitals from './credentials';
+import ProfileMain from './ProfileMain';
+import MenuButton from '../nav/MenuButton.js'
 
 import { RNS3 } from 'react-native-aws3';
 
@@ -113,7 +115,7 @@ export default class App extends React.Component {
               }).then((data)=> {
 
                 console.log('Updated user: ', data);
-
+                this.redirectToStart();
               }).catch((error)=> {
                 console.error("ERROR: ", error);
               }).done();
@@ -121,6 +123,14 @@ export default class App extends React.Component {
         })
       });
 
+  }
+
+  redirectToStart () {
+    this.props.adven.resetToRoute({
+      name: "Create Adventures",
+      component: ProfileMain,
+      leftCorner: MenuButton
+    })
   }
 
   render() {

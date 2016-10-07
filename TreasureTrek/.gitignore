@@ -21,7 +21,7 @@ DerivedData
 *.ipa
 *.xcuserstate
 project.xcworkspace
-./src/components/UserProfile/credentials.js
+src/components/UserProfile/credentials.js
 
 # Android/IJ
 #
