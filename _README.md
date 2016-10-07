@@ -1,12 +1,12 @@
-# Project Name
+# TreasureTrek
 
-> Pithy project description
+> TreasureTrek is a geocaching game where users geotag a series of challenges to create a location-based adventure for other users. Collect points to be to top adventurer in your area.
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Kyle Van Vleck
+  - __Scrum Master__: Michael Daof
+  - __Development Team Members__: Wes Young, Ali Bhatti
 
 ## Table of Contents
 
@@ -20,31 +20,30 @@
 
 ## Usage
 
-> Some usage instructions
+* Signup with email. Choose username and password.
+Three Main Sections
+* "All Adventures" shows all adventures except user's
+* "My Adventures" shows all adventures user has accepted from "All Adventures" 
+* "Create Adventures" show list of adventures user has created and allows for user to create adventure
 
 ## Requirements
 
-- Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- see package.json for list of npm modules
+- Xcode for Simulator feature
 
 ## Development
 
 ### Installing Dependencies
 
-From within the root directory:
+The client files currently live together with the server files, so you'll have to do an install for both projects.
+From root directory:
 
 ```sh
-sudo npm install -g bower
-npm install
-bower install
+$ npm install
+$ cd TreasureTrek
+$ npm install
 ```
-
-### Roadmap
-
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+You could very easily move TreasureTrek to it's own repo to and develop both independently.
 
 
 ## Contributing
