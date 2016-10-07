@@ -89,8 +89,6 @@ class MapScreen extends Component {
 
   render () {
     return (
-
-
         <MapView
           style={styles.mapStyle}
           showsUserLocation={true}
@@ -100,8 +98,6 @@ class MapScreen extends Component {
         >
           {this.placeMarkers()}
         </MapView>
-
-
     );
   }
 };
