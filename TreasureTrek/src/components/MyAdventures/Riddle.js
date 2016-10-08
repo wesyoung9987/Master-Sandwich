@@ -64,11 +64,10 @@ const Riddle = (props) => {
         onPress={toSubmission}
         underlayColor={'#00ffff'}>
         <View style={styles.listStyle}>
-
-
+          <View style={styles.viewStyle}>
               {props.completion ? solvedStatus() : unsolvedStatus()}
-
         </View>
+      </View>
       </TouchableHighlight>
     </View>
   );
@@ -76,19 +75,9 @@ const Riddle = (props) => {
 
 var styles = {
   viewStyle: { // View holding two Texts and Image
-    // height: 80,
-    //shadowColor: '#000',
-    //shadowOffset: { width:0, height: 2 },
-    //shadowOpacity: 0.2,
     elevation: 2,
     flexDirection: 'row',
     justifyContent: 'space-between', // added justify
-    //borderWidth: 1,
-    //borderColor: 'white',
-    //backgroundColor: '#24CCFD',
-    //padding: 10
-    // borderColor: 'blue',
-    // borderWidth: 1,
     flex: 1
   },
   detailsStyle: {
@@ -102,8 +91,8 @@ var styles = {
     fontSize: 14,
     fontFamily: 'Helvetica',
     fontWeight: 'bold',
-    //padding: 5, // removed
-    //marginLeft: 10,
+    padding: 5,
+    marginLeft: 23,
     elevation: 1,
     flexDirection: 'column',
     justifyContent: 'center',
@@ -114,8 +103,8 @@ var styles = {
     fontSize: 14,
     fontFamily: 'Helvetica',
     fontWeight: 'bold',
-    //padding: 5, // removed
-    //marginLeft: 23,
+    padding: 5,
+    marginLeft: 23,
     elevation: 1,
     flexDirection: 'column',
     justifyContent: 'center',
@@ -150,10 +139,10 @@ var styles = {
     color: 'blue'
   },
   title: { // Riddle title text
-    //padding: 5, // removed
-    //marginLeft: 5, // removed
+    padding: 5,
+    marginLeft: 5, // removed
     //marginRight: 5, // removed
-    //borderColor: "#ddd",
+    borderColor: "#ddd",
     fontWeight: 'bold',
     elevation: 1,
     flexDirection: 'column'

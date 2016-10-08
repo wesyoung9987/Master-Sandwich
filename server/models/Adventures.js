@@ -13,7 +13,14 @@ var AdventureSchema = new mongoose.Schema({
   }],
   date: { type: Date, default: Date.now() },
   completedAll: { type: Boolean, default: false },
-  startingLocation: String
+  startingLocation: String,
+  stars: {
+    oneStar: {type: Number, default: 0},
+    twoStar: {type: Number, default: 0},
+    threeStar: {type: Number, default: 0},
+    fourStar: {type: Number, default: 0},
+    fiveStar: {type: Number, default: 0},
+  }
 });
 
 var Adventure = mongoose.model('Adventure', AdventureSchema);

@@ -11,7 +11,7 @@ import {
   DeviceEventEmitter,
   AsyncStorage
 } from 'react-native';
-import Credenitals from './credentials';
+import Credentials from './credentials';
 import ProfileMain from './ProfileMain';
 import MenuButton from '../nav/MenuButton.js'
 

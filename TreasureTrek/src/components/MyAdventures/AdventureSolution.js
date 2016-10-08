@@ -4,6 +4,7 @@ import Riddle from './Riddle.js'
 import MyAdventures from './myAdventuresContainer'
 import MenuButton from '../nav/MenuButton';
 import MapScreen from './MapScreen';
+import Reviews from '../Reviews/Reviews.js';
 
 
 class AdventureSolution extends Component {
@@ -15,8 +16,8 @@ class AdventureSolution extends Component {
       completion: props.myAdventure.completion,
       id: props.myAdventure.adventureId._id,
       startingLocation: props.myAdventure.adventureId.startingLocation,
-      mapview: false,
-      toggletext: "To Map"
+      showRiddleView: true,
+      toggletext: "See Reviews"
     };
   }
 
@@ -81,11 +82,7 @@ class AdventureSolution extends Component {
         {this.state.riddles.map((riddle, index) => {
           return (<Riddle num={index+1} key={index.toString()} completion={this.state.completion[index]} id={this.state.id} nav={this.props.nav} loc={riddle.location} riddle={riddle.riddle} answer={riddle.answer} updateCompletion={this.updateCompletion.bind(this, index)}/>);
         })}
-        <View style={styles.giveup}>
-          <TouchableHighlight style={styles.button} onPress={this.deleteAdventure.bind(this)}  underlayColor='#00ffff'>
-              <Text  style={styles.buttonText}> Give Up? </Text>
-          </TouchableHighlight>
-        </View>
+
       </ScrollView>
     );
   }
@@ -96,14 +93,40 @@ class AdventureSolution extends Component {
     );
   }
 
+  showReviews () {
+    return (
+      <View><Reviews nav={this.props.nav} myAdventure={this.props.myAdventure} stars={this.props.myAdventure.adventureId.stars}/></View>
+    );
+  }
+
+  show() {
+    var riddleView = !this.state.showRiddleView;
+    this.setState({showRiddleView: riddleView});
+    if (this.state.toggletext === "See Reviews") {
+      this.setState({toggletext: "See Riddles"});
+      this.showList();
+    } else {
+      this.setState({toggletext: "See Reviews"});
+      this.showReviews();
+    }
+  }
+
   render () {
     return (
       <View style={{ flex: 1, marginTop:5, flexDirection: 'column', justifyContent: 'space-between'}}>
         <View style={styles.map}>
           {this.showMap()}
         </View>
+
+        {this.state.showRiddleView ? this.showList() : this.showReviews()}
+
         <View>
-        {this.showList()}
+          <TouchableHighlight style={styles.button} onPress={this.show.bind(this)} underlayColor='#00ffff'>
+            <Text style={styles.buttonText}>{this.state.toggletext}</Text>
+          </TouchableHighlight>
+          <TouchableHighlight style={styles.button} onPress={this.deleteAdventure.bind(this)}  underlayColor='#00ffff'>
+              <Text  style={styles.buttonText}> Give Up? </Text>
+          </TouchableHighlight>
         </View>
       </View>
     );
@@ -119,18 +142,14 @@ var styles = {
     // borderWidth: 1,
     flex:1
   },
-  giveup: {
-    padding: 20,
-    marginLeft: 20,
-    marginRight: 20
-  },
   button: {
     height: 36,
     backgroundColor: '#48BBEC',
     borderColor: '#48BBEC',
     borderWidth: 1,
     borderRadius: 8,
-    marginBottom: 5, // changed from 10
+    marginTop: 2,
+    marginBottom: 2, // changed from 10
     alignSelf: 'stretch',
     justifyContent: 'center'
   },
