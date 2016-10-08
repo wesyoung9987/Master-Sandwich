@@ -64,10 +64,11 @@ const Riddle = (props) => {
         onPress={toSubmission}
         underlayColor={'#00ffff'}>
         <View style={styles.listStyle}>
-
-
+          <Text style={styles.title}>
+            Riddle # {props.num}
+          </Text>
+          <View style={styles.viewStyle}>
               {props.completion ? solvedStatus() : unsolvedStatus()}
-
         </View>
       </TouchableHighlight>
     </View>

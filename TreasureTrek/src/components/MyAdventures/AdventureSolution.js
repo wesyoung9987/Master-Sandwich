@@ -4,6 +4,7 @@ import Riddle from './Riddle.js'
 import MyAdventures from './myAdventuresContainer'
 import MenuButton from '../nav/MenuButton';
 import MapScreen from './MapScreen';
+import Reviews from '../Reviews/Reviews.js';
 
 
 class AdventureSolution extends Component {
@@ -96,6 +97,12 @@ class AdventureSolution extends Component {
     );
   }
 
+  showReviews () {
+    return (
+      <ScrollView><Reviews nav={this.props.nav} myAdventure={this.props.myAdventure} stars={this.props.myAdventure.adventureId.stars}/></ScrollView>
+    );
+  }
+
   render () {
     return (
       <View style={{ flex: 1, marginTop:5, flexDirection: 'column', justifyContent: 'space-between'}}>
@@ -103,6 +110,7 @@ class AdventureSolution extends Component {
           {this.showMap()}
         </View>
         <View>
+        {this.showReviews()}
         {this.showList()}
         </View>
       </View>
