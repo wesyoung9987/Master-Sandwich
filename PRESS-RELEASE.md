@@ -38,7 +38,7 @@ Once the project moves into development, the press release can be used as a touc
   Download the app in the app store to start exploring and solving riddles right away.
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  > "I discovered gems in my town I never knew existed! I feel like my city is part of one huge scavenger hunt." - Jane Says
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+Know something about your city no one else does? Create a local challenge that will have them discovering what you've known all along. Do you the best route up PCH? Be Gandolf and lead your hobbits.
