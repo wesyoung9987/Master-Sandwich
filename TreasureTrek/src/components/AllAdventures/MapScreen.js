@@ -90,7 +90,6 @@ class MapScreen extends Component {
   render () {
     return (
 
-
         <MapView
           style={styles.mapStyle}
           showsUserLocation={true}
