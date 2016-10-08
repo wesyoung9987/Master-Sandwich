@@ -27,16 +27,18 @@ var AllAdventureDetail = function (props) {
   }
 
   return (
-    <View>
+    <View style={{flex: 1, marginTop:5, flexDirection: 'column', justifyContent: 'space-between'}}>
+
       <View style={style.map}>
         <MapScreen riddles={props.adven.adventure}/>
       </View>
-      <ScrollView>
-      {showList()}
-        <View>
 
-        </View>
-      </ScrollView>
+      <View style={{flex: 2}}>
+        <ScrollView>
+          {showList()}
+        </ScrollView>
+      </View>
+
     </View>
   );
 
@@ -44,8 +46,10 @@ var AllAdventureDetail = function (props) {
 
 var style = {
   map: {
-    margin: 10,
-    alignItems: 'center'
+    margin: 5, // changed from 5
+    // alignItems: 'center'
+    position: 'relative',
+    flex: 3
   },
   button: {
     height: 36,

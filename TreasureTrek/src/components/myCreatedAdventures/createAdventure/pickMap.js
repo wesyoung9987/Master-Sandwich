@@ -17,7 +17,7 @@ class MapScreen extends Component {
         latitude: props.lat,
         longitude: props.lon
       },
-      errorMsg: ""
+      errorMsg: " "
     };
   }
 
@@ -80,27 +80,31 @@ class MapScreen extends Component {
 
   render () {
     return (
-      <View style={{flex: 1, marginTop:5}}>
+      <View style={{flex: 1, marginTop:5, flexDirection: 'column', justifyContent: 'space-between'}}>
 
-        <MapView
-          style={styles.map}
-          showsUserLocation={true}
-          followUserLocation={true}
-          region={this.state.region}
-          onRegionChange={this.onRegionChange.bind(this)}
-          onPress={this.updateLocation.bind(this)}
-        >
-          <MapView.Marker
-            draggable
-            coordinate={this.state.markerCoords}
-            onDragEnd={this.updateLocation.bind(this)}
-          />
-        </MapView>
+        <View style={{margin: 5, position: 'relative', flex: 1}}>
+          <MapView
+            style={styles.map}
+            showsUserLocation={true}
+            followUserLocation={true}
+            region={this.state.region}
+            onRegionChange={this.onRegionChange.bind(this)}
+            onPress={this.updateLocation.bind(this)}
+          >
+            <MapView.Marker
+              draggable
+              coordinate={this.state.markerCoords}
+              onDragEnd={this.updateLocation.bind(this)}
+            />
+          </MapView>
+        </View>
 
-        <TouchableHighlight style={styles.button} onPress={this.setCoords.bind(this)}  underlayColor='#00ffff'>
-            <Text  style={styles.buttonText}> Set Location </Text>
-        </TouchableHighlight>
-        <Text style={styles.errorText}>{this.state.errorMsg}</Text>
+        <View>
+          <TouchableHighlight style={styles.button} onPress={this.setCoords.bind(this)}  underlayColor='#00ffff'>
+              <Text  style={styles.buttonText}> Set Location </Text>
+          </TouchableHighlight>
+          <Text style={styles.errorText}>{this.state.errorMsg}</Text>
+        </View>
 
       </View>
     );
@@ -110,9 +114,14 @@ class MapScreen extends Component {
 
 var styles = {
   map: {
-    width: 350,
-    height: 350,
-    margin: 10
+    // width: 350,
+    // height: 350,
+    // margin: 10
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0
   },
   giveup: {
     padding: 20,
@@ -136,7 +145,8 @@ var styles = {
   errorText: {
     fontSize: 14,
     color: 'red',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    marginBottom: 5
   }
 }
 
