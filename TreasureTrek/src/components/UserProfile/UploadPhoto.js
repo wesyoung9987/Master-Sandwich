@@ -69,6 +69,10 @@ export default class App extends React.Component {
     });
   }
 
+  getRandomInt (min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
   savePhoto(){
     AsyncStorage.getItem('id_token')
       .then(token=>{
@@ -78,7 +82,8 @@ export default class App extends React.Component {
         var sendPhoto = this.state.avatarSource.uri;
         console.log('here it is ', sendPhoto)
         console.log('here is the user ', this.props.user.username)
-        var photoName = this.props.user.username + '.jpg';
+        var rand = this.getRandomInt(1, 10000);
+        var photoName = this.props.user.username + rand + '.jpg';
         let file = {
               uri: sendPhoto,
               name: photoName,
@@ -90,8 +95,8 @@ export default class App extends React.Component {
             keyPrefix: 'photos/',
             bucket: 'treasuretrek',
             region: 'us-west-2',
-            accessKey: Credenitals.accessKey,
-            secretKey: Credenitals.secretKey,
+            accessKey: Credentials.accessKey,
+            secretKey: Credentials.secretKey,
             successActionStatus: 201
         };
 
