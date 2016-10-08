@@ -167,6 +167,6 @@ const styles = {
     right: 0,
     bottom: 0
   }
-}
+};
 
 export default UserProfile;
