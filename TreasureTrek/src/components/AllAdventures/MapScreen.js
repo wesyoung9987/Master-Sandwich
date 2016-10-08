@@ -89,7 +89,7 @@ class MapScreen extends Component {
 
   render () {
     return (
-      <View>
+
 
         <MapView
           style={styles.mapStyle}
@@ -101,15 +101,19 @@ class MapScreen extends Component {
           {this.placeMarkers()}
         </MapView>
 
-      </View>
     );
   }
 };
 
 const styles = {
   mapStyle: {
-    width: 350,
-    height: 350
+    // width: 350, // switched to absolute
+    // height: 200, // switched to absolute
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0
   }
 };
 

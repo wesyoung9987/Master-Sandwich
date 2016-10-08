@@ -51,26 +51,32 @@ var AllAdventureDetail = function (props) {
       return (
         <View key={riddleNum} style={style.listStyle}>
           <Text style={{ fontSize: 14 }}>{riddleNum} : {riddle.riddle}</Text>
-          <Text style={style.loc}>{riddle.location}</Text>
         </View>
       );
     })
   }
 
+  // (for reference) Removed from list items:
+  // <Text style={style.loc}>{riddle.location}</Text>
 
   return (
-    <View>
+    <View style={{flex: 1, marginTop:5, flexDirection: 'column', justifyContent: 'space-between'}}>
+
       <View style={style.map}>
         <MapScreen riddles={props.adven.adventure}/>
       </View>
-      <ScrollView>
-      {showList()}
+
+      <View style={{flex: 2}}>
+        <ScrollView>
+          {showList()}
+        </ScrollView>
         <View>
           <TouchableHighlight style={style.button} onPress={advenAccept}>
             <Text style={style.buttonText}>Accept</Text>
           </TouchableHighlight>
         </View>
-      </ScrollView>
+      </View>
+
     </View>
   );
 
@@ -78,8 +84,10 @@ var AllAdventureDetail = function (props) {
 
 var style = {
   map: {
-    margin: 10,
-    alignItems: 'center'
+    margin: 5, // changed from 10
+    // alignItems: 'center'
+    position: 'relative',
+    flex: 3
   },
   button: {
     height: 36,
@@ -87,11 +95,13 @@ var style = {
     borderColor: '#48BBEC',
     borderWidth: 1,
     borderRadius: 8,
-    marginBottom: 10,
+    marginLeft: 40,
+    marginRight: 40,
+    marginTop: 20,
+    marginBottom: 15,
     alignSelf: 'stretch',
     justifyContent: 'center',
-    margin: 20,
-    padding: 20
+    // padding: 20
   },
   buttonText: {
     fontSize: 18,
