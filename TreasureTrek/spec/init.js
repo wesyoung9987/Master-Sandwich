@@ -1,0 +1,39 @@
+import fs from 'fs';
+import path from 'path';
+import register from 'babel-core/register';
+import chai from 'chai';
+import chaiEnzyme from 'chai-enzyme';
+import mockery from "mockery";
+import 'airbnb-js-shims'
+
+// Ignore all node_modules except these
+const modulesToCompile = [
+  'react-native'
+  // 'react-native-maps'
+].map((moduleName) => new RegExp(`/node_modules/${moduleName}`));
+const rcPath = path.join(__dirname, '..', '.babelrc');
+const source = fs.readFileSync(rcPath).toString();
+const config = JSON.parse(source);
+config.ignore = function(filename) {
+  if (!(/\/node_modules\//).test(filename)) {
+    return false;
+  } else {
+    const matches = modulesToCompile.filter((regex) => regex.test(filename));
+    const shouldIgnore = matches.length === 0;
+    return shouldIgnore;
+  }
+}
+register(config);
+// Setup globals / chai
+global.__DEV__ = true;
+global.expect = chai.expect;
+chai.use(chaiEnzyme());
+// Setup mocks
+require('react-native-mock/mock');
+mockery.enable();
+// mockery.registerMock('AssetRegistry', 0)
+mockery.registerMock('react-native/Libraries/Image/resolveAssetSource')
+const React = require('react-native')
+React.NavigationExperimental = {
+  AnimatedView: React.View
+};
