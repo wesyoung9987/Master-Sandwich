@@ -46,13 +46,14 @@ const styles = {
     borderWidth: 1,
     borderColor: 'white',
     backgroundColor: '#24CCFD',
-    padding: 10
+    padding: 10,
+    justifyContent: 'space-between'
   },
   detailsStyle: {
     flexDirection: 'column',
     justifyContent: 'space-around',
-    marginLeft: 12,
-    width: 285
+    // marginLeft: 12, // removed
+    // width: 285 // removed
   },
   titleStyle: {
     color: 'white',
