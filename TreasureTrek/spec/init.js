@@ -8,8 +8,10 @@ import 'airbnb-js-shims'
 
 // Ignore all node_modules except these
 const modulesToCompile = [
-  'react-native'
-  // 'react-native-maps'
+  'react-native',
+  'tcomb',
+  // 'react-native-maps',
+  // 'react-native-image-picker'
 ].map((moduleName) => new RegExp(`/node_modules/${moduleName}`));
 const rcPath = path.join(__dirname, '..', '.babelrc');
 const source = fs.readFileSync(rcPath).toString();
@@ -30,9 +32,17 @@ global.expect = chai.expect;
 chai.use(chaiEnzyme());
 // Setup mocks
 require('react-native-mock/mock');
-mockery.enable();
-// mockery.registerMock('AssetRegistry', 0)
+mockery.enable({
+    warnOnReplace: false,
+    warnOnUnregistered: false
+});
+// for react-native-maps
 mockery.registerMock('react-native/Libraries/Image/resolveAssetSource')
+// for tcomb-form-native
+mockery.registerMock('./select')
+mockery.registerMock('./datepicker')
+// aws credentials
+mockery.registerMock('./credentials')
 const React = require('react-native')
 React.NavigationExperimental = {
   AnimatedView: React.View
