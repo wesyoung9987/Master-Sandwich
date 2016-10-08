@@ -25,7 +25,12 @@ const Riddle = (props) => {
   var solvedStatus = function() {
     return (
       <View style={styles.viewStyle}>
-        <View >
+        <View>
+          <Text style={styles.title}>
+            Riddle # {props.num} ---
+          </Text>
+        </View>
+        <View>
           <Text style={styles.statusGreen}>COMPLETED</Text>
         </View>
         <View style={styles.iconContainer}>
@@ -38,6 +43,11 @@ const Riddle = (props) => {
   var unsolvedStatus = function() {
     return (
       <View style={styles.viewStyle}>
+        <View>
+          <Text style={styles.title}>
+            Riddle # {props.num} ---
+          </Text>
+        </View>
         <View >
           <Text style={styles.statusRed}>UNSOLVED</Text>
         </View>
@@ -54,12 +64,10 @@ const Riddle = (props) => {
         onPress={toSubmission}
         underlayColor={'#00ffff'}>
         <View style={styles.listStyle}>
-          <Text style={styles.title}>
-            Riddle # {props.num} ---
-          </Text>
-          <View style={styles.viewStyle}>
+
+
               {props.completion ? solvedStatus() : unsolvedStatus()}
-          </View>
+
         </View>
       </TouchableHighlight>
     </View>
@@ -67,17 +75,21 @@ const Riddle = (props) => {
 }
 
 var styles = {
-  viewStyle: {
+  viewStyle: { // View holding two Texts and Image
     // height: 80,
     //shadowColor: '#000',
     //shadowOffset: { width:0, height: 2 },
     //shadowOpacity: 0.2,
     elevation: 2,
     flexDirection: 'row',
+    justifyContent: 'space-between', // added justify
     //borderWidth: 1,
     //borderColor: 'white',
     //backgroundColor: '#24CCFD',
     //padding: 10
+    // borderColor: 'blue',
+    // borderWidth: 1,
+    flex: 1
   },
   detailsStyle: {
     flexDirection: 'column',
@@ -90,8 +102,8 @@ var styles = {
     fontSize: 14,
     fontFamily: 'Helvetica',
     fontWeight: 'bold',
-    padding: 5,
-    marginLeft: 10,
+    //padding: 5, // removed
+    //marginLeft: 10,
     elevation: 1,
     flexDirection: 'column',
     justifyContent: 'center',
@@ -102,8 +114,8 @@ var styles = {
     fontSize: 14,
     fontFamily: 'Helvetica',
     fontWeight: 'bold',
-    padding: 5,
-    marginLeft: 23,
+    //padding: 5, // removed
+    //marginLeft: 23,
     elevation: 1,
     flexDirection: 'column',
     justifyContent: 'center',
@@ -116,11 +128,11 @@ var styles = {
   },
   iconContainer: {
     flexDirection: 'column',
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
-    marginLeft: 80
+    justifyContent: 'center',
+    alignItems: 'center'
+    //marginLeft: 80 // removed
   },
-  listStyle : {
+  listStyle : { // List item container
     borderWidth: 1,
     borderRadius: 2,
     borderColor: '#ddd',
@@ -137,10 +149,10 @@ var styles = {
     fontWeight: 'bold',
     color: 'blue'
   },
-  title: {
-    padding: 5,
-    marginLeft: 5,
-    marginRight: 5,
+  title: { // Riddle title text
+    //padding: 5, // removed
+    //marginLeft: 5, // removed
+    //marginRight: 5, // removed
     //borderColor: "#ddd",
     fontWeight: 'bold',
     elevation: 1,

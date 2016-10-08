@@ -43,17 +43,18 @@ var styles = {
     flexDirection: 'row',
     borderWidth: 1,
     borderColor: '#ddd',
-    padding: 10
+    padding: 10,
+    justifyContent: 'space-between' // added justify
   },
   detailsStyle: {
     flexDirection: 'column',
-    justifyContent: 'space-around',
-    marginLeft: 12,
-    width: 285
+    justifyContent: 'space-around'
+    //marginLeft: 12, // removed margin
+    //width: 285  // removed width
   },
   titleStyle: {
     //color: 'white',
-    fontSize: 14,
+    fontSize: 14
     //fontWeight: '600'
   },
   arrowsStyle: {

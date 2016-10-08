@@ -89,8 +89,6 @@ class MapScreen extends Component {
 
   render () {
     return (
-      <View>
-
         <MapView
           style={styles.mapStyle}
           showsUserLocation={true}
@@ -100,16 +98,19 @@ class MapScreen extends Component {
         >
           {this.placeMarkers()}
         </MapView>
-
-      </View>
     );
   }
 };
 
 const styles = {
   mapStyle: {
-    width: 350,
-    height: 350
+    // width: 350, // switched to absolute
+    // height: 350, // switched to absolute
+    position: 'absolute', // added
+    left: 0, // added
+    right: 0, // added
+    top: 0, // added
+    bottom: 0 // added
   }
 };
 

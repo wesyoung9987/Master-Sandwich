@@ -190,8 +190,13 @@ var Auth = React.createClass({
 
   render() {
     return (
-      <Image style={{ flex: 1, resizeMode: 'cover'}}
-      source={require('../../resources/land-blue.png')}>
+      <View style={{flex:1}}>
+
+        <View style={{flex: 1, position: 'absolute', top: 0, bottom: 0,left: 0,right: 0}}>
+          <Image style={{flex: 1, resizeMode: 'cover', height: null, width: null}}
+            source={require('../../resources/land-blue.png')} />
+        </View>
+
         <View style={styles.container}>
           <ActivityIndicator
           animating={this.state.waiting}
@@ -219,7 +224,8 @@ var Auth = React.createClass({
               </TouchableHighlight>
           </View>
         </View>
-      </Image>
+
+      </View>
     );
   }
 });

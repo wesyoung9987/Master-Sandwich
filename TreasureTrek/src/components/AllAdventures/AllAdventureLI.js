@@ -28,8 +28,8 @@ const AdvenLI = (props) => {
 
   return (
     <TouchableHighlight
-    onPress={toAllAdventureDetail}
-    underlayColor={'#00ffff'}>
+      onPress={toAllAdventureDetail}
+      underlayColor={'#00ffff'}>
       <View style={viewStyle}>
         <View style={detailsStyle}>
           <Text style={titleStyle}>{props.adven.title}</Text>
@@ -49,13 +49,14 @@ const styles = {
     flexDirection: 'row',
     borderWidth: 1,
     borderColor: '#ddd',
-    padding: 10
+    padding: 10,
+    justifyContent: 'space-between' // added justify
   },
   detailsStyle: {
     flexDirection: 'column',
     justifyContent: 'space-around',
-    marginLeft: 12,
-    width: 285
+    // marginLeft: 12, // removed
+    // width: 285  // removed
   },
   titleStyle: {
     fontSize: 14,
