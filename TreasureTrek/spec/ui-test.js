@@ -5,10 +5,10 @@ import { expect } from 'chai'
 // App components
 import AllAdvDetail from '../src/components/AllAdventures/AllAdventureDetail'
 
-describe('Test runs', () => {
+describe('Up and running', () => {
 
   it('Component should exists', () => {
     const wrapper = shallow(<AllAdvDetail />)
-  s  expect(wrapper.find(View))to.exist
+    expect(wrapper.find(View)).to.exist
   })
 })
