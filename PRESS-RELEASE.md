@@ -1,44 +1,63 @@
-# Project Name #
+# TreasureTrek
+[![Build Status](https://travis-ci.org/Master-Sandwich/Master-Sandwich.svg?branch=master)](https://travis-ci.org/Master-Sandwich/Master-Sandwich)
 
-<!-- 
-> This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
+>TreasureTrek is a geocaching game where users geotag a series of challenges to create a location-based adventure for other users. Collect points to be to top adventurer in your area.
 
-There is an approach called "working backwards" that is widely used at Amazon. They work backwards from the customer, rather than starting with an idea for a product and trying to bolt customers onto it. While working backwards can be applied to any specific product decision, using this approach is especially important when developing new products or features.
+## Team
 
-For new initiatives a product manager typically starts by writing an internal press release announcing the finished product. The target audience for the press release is the new/updated product's customers, which can be retail customers or internal users of a tool or technology. Internal press releases are centered around the customer problem, how current solutions (internal or external) fail, and how the new product will blow away existing solutions.
+  - __Product Owner__: Kyle Van Vleck
+  - __Scrum Master__: Michael Daof
+  - __Development Team Members__: Wes Young, Ali Bhatti
 
-If the benefits listed don't sound very interesting or exciting to customers, then perhaps they're not (and shouldn't be built). Instead, the product manager should keep iterating on the press release until they've come up with benefits that actually sound like benefits. Iterating on a press release is a lot less expensive than iterating on the product itself (and quicker!).
+## Table of Contents
 
-If the press release is more than a page and a half, it is probably too long. Keep it simple. 3-4 sentences for most paragraphs. Cut out the fat. Don't make it into a spec. You can accompany the press release with a FAQ that answers all of the other business or execution questions so the press release can stay focused on what the customer gets. My rule of thumb is that if the press release is hard to write, then the product is probably going to suck. Keep working at it until the outline for each paragraph flows. 
+1. [Usage](#Usage)
+1. [Requirements](#requirements)
+1. [Development](#development)
+    1. [Installing Dependencies](#installing-dependencies)
+    1. [Tasks](#tasks)
+1. [Team](#team)
+1. [Contributing](#contributing)
 
-Oh, and I also like to write press-releases in what I call "Oprah-speak" for mainstream consumer products. Imagine you're sitting on Oprah's couch and have just explained the product to her, and then you listen as she explains it to her audience. That's "Oprah-speak", not "Geek-speak".
+## Usage
 
-Once the project moves into development, the press release can be used as a touchstone; a guiding light. The product team can ask themselves, "Are we building what is in the press release?" If they find they're spending time building things that aren't in the press release (overbuilding), they need to ask themselves why. This keeps product development focused on achieving the customer benefits and not building extraneous stuff that takes longer to build, takes resources to maintain, and doesn't provide real customer benefit (at least not enough to warrant inclusion in the press release).
- -->
- 
-## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+* Signup with email. Choose username and password.
+* Three Main Sections
+ * "All Adventures" shows all adventures except user's
+ * "My Adventures" shows all adventures user has accepted from "All Adventures"
+ * "Create Adventures" show list of adventures user has created and allows for user to create adventure
 
-## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+## Requirements
 
-## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+- see package.json for list of npm modules
+- Xcode (for iOS development)
 
-## Problem ##
-  > All too often our mobile-device experience keeps us indoors and not connecting to the natural world around us.
+## Development
 
-## Solution ##
-  > With Treasure Trek, you can explore geography with your friends while playing games created by new friends.
+### Installing Dependencies
 
-## Quote from You ##
-  Solve and create riddles in your area in order to become the riddle master.
+The client files currently live together with the server files, so you'll have to do an install for both projects.
+From root directory:
 
-## How to Get Started ##
-  Download the app in the app store to start exploring and solving riddles right away.
+```sh
+$ npm install
+$ cd TreasureTrek
+$ npm install
+```
+You could very easily move TreasureTrek to it's own repo to and develop both independently.
 
-## Customer Quote ##
-  > "I discovered gems in my town I never knew existed! I feel like my city is part of one huge scavenger hunt." - Jane Sez
+### iOS Development
+ React Native will launch Xcode's Simulator feature to do hot-reloading during development. From the ./TreasureTrek directory, run:
+ ```sh
+ $ react-native run-ios
+ ```
+ See React-Native [docs](https://facebook.github.io/react-native/)
 
-## Closing and Call to Action ##
-Know something about your city no one else does? Create a local challenge that will have them discovering what you've known all along. Do you the best route up PCH? Be Gandolf and lead your hobbits.
+
+### Tasks
+See [dev docs](https://docs.google.com/spreadsheets/d/1Rxp2hkRO4Y3Itg9LEKWfJBauFICQugJCVr8Qtqydybs/edit#gid=1085523730) for feature roadmap.
+
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
