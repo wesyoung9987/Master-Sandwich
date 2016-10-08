@@ -104,7 +104,7 @@ class UserProfile extends Component {
               <Text style={styles.textInfo2}>Username: {this.state.myInfo.username}</Text>
             </View>
           </View>
-          <UploadPicButton nav={this.props}/>
+          <UploadPicButton nav={this.props} user={this.state.myInfo}/>
         </View>
 
       </View>
@@ -167,6 +167,6 @@ const styles = {
     right: 0,
     bottom: 0
   }
-}
+};
 
 export default UserProfile;

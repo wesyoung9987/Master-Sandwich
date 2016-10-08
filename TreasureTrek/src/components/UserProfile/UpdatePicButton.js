@@ -8,7 +8,8 @@ const UpdatePicButton = (props) => {
     name: 'Upload Profile Picture',
     component: UploadPhoto,
     passProps: {
-      adven: props.nav
+      adven: props.nav,
+      user: props.user
     }
   }
 
