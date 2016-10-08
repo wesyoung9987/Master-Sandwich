@@ -11,11 +11,7 @@ import {
   DeviceEventEmitter,
   AsyncStorage
 } from 'react-native';
-<<<<<<< aeca55914df4f0f39a18a78c3f15b753a4051d39
 import Credentials from './credentials';
-=======
-import Credenitals from './credentials';
->>>>>>> rerouting when user submits profile photo
 import ProfileMain from './ProfileMain';
 import MenuButton from '../nav/MenuButton.js'
 
@@ -94,8 +90,8 @@ export default class App extends React.Component {
             keyPrefix: 'photos/',
             bucket: 'treasuretrek',
             region: 'us-west-2',
-            accessKey: Credenitals.accessKey,
-            secretKey: Credenitals.secretKey,
+            accessKey: Credentials.accessKey,
+            secretKey: Credentials.secretKey,
             successActionStatus: 201
         };
 
