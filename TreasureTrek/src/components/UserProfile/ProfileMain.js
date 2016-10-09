@@ -63,7 +63,7 @@ class UserProfile extends Component {
         <View style={styles.imageContainer}>
 
           <View>
-            <Image style={styles.imageStyle2} source={{uri: this.state.myInfo.photo}} />
+            <Image style={styles.imageStyle2} source={{uri: this.state.myInfo.photo} || require('../../resources/user-placeholder.png')} />
           </View>
 
         </View>

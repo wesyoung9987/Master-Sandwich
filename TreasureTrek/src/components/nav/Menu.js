@@ -19,6 +19,7 @@ import AllAdventures from '../AllAdventures/AllAdventuresContainer';
 import MyCreatedAdventures from '../myCreatedAdventures/myCreatedAdventures';
 import UserProfile from '../UserProfile/ProfileMain';
 import sbContainer from '../Scoreboard/sbContainer';
+import UserButton from './UserButton';
 
 
 var STORAGE_KEY = 'id_token';
@@ -30,7 +31,8 @@ class Menu extends Component {
     this.props.resetToRoute({
       name: "All Adventures",
       component: AllAdventures,
-      leftCorner: MenuButton
+      leftCorner: MenuButton,
+      rightCorner: UserButton
     });
   }
 
@@ -38,7 +40,8 @@ class Menu extends Component {
     this.props.resetToRoute({
       name: "My Adventures",
       component: MyAdventures,
-      leftCorner: MenuButton
+      leftCorner: MenuButton,
+      rightCorner: UserButton
     });
   }
 
@@ -46,7 +49,8 @@ class Menu extends Component {
     this.props.resetToRoute({
       name: "Create Adventures",
       component: MyCreatedAdventures,
-      leftCorner: MenuButton
+      leftCorner: MenuButton,
+      rightCorner: UserButton
     });
   }
 
@@ -62,7 +66,8 @@ class Menu extends Component {
     this.props.resetToRoute({
       name: "Scoreboard",
       component: sbContainer,
-      leftCorner: MenuButton
+      leftCorner: MenuButton,
+      rightCorner: UserButton
     });
   }
 
