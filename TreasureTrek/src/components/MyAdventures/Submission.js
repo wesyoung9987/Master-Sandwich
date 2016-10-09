@@ -213,7 +213,7 @@ class Submission extends Component {
             rating={3}
             selectStar={require('../../resources/select_star.png')}
             unSelectStar={require('../../resources/unselect_star.png')}
-            valueChanged={this.stars}
+            valueChanged={this.starsChanged}
             starSize={50}
             interitemSpacing={20}
           />
