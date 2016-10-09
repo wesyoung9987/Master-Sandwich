@@ -81,7 +81,7 @@ class AdventureSolution extends Component {
     return (
       <ScrollView >
         {this.state.riddles.map((riddle, index) => {
-          return (<Riddle num={index+1} key={index.toString()} completion={this.state.completion[index]} id={this.state.id} nav={this.props.nav} loc={riddle.location} riddle={riddle.riddle} answer={riddle.answer} updateCompletion={this.updateCompletion.bind(this, index)}/>);
+          return (<Riddle num={index+1} key={index.toString()} completion={this.state.completion[index]} id={this.state.id} nav={this.props.nav} loc={riddle.location} riddle={riddle.riddle} answer={riddle.answer} completedArray = {this.state.completion} updateCompletion={this.updateCompletion.bind(this, index)}/>);
         })}
 
       </ScrollView>
