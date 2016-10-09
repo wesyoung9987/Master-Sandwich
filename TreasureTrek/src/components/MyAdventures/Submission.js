@@ -3,7 +3,9 @@ import {Text, View, TextInput, AsyncStorage, TouchableHighlight, AlertIOS, Activ
 import t from 'tcomb-form-native';
 import AdventureSolution from './AdventureSolution';
 import MyAdventures from './myAdventuresContainer';
-import MenuButton from '../nav/MenuButton'
+import MenuButton from '../nav/MenuButton';
+import StarRating from 'react-native-rating-star';
+
 // Riddle Submission Form
 var Form = t.form.Form;
 
@@ -58,7 +60,11 @@ class Submission extends Component {
     this.props.nav.toBack();
   }
 
-  submitAnswer() {
+ submitReview() {
+  console.log('submitReview');
+ }
+
+ submitAnswer() {
     this.clearForm();
     var input = this.refs.form.getValue();
     if (input) {
@@ -190,6 +196,10 @@ class Submission extends Component {
     )
   }
 
+  starsChanged(rating) {
+    console.log('rating: ', rating)
+  }
+
   promptReview() {
     return (
       <View>
@@ -197,13 +207,27 @@ class Submission extends Component {
           <Text style={styles.title}> Great Job! </Text>
           <Text style={styles.riddle}> Rate Your Adventure </Text>
         </View>
-        <View style={styles.row}>
-          <TouchableHighlight style={styles.button}
-            onPress={this.toRiddles.bind(this)}
-            underlayColor='#99d9f4'
-          >
-            <Text style={styles.buttonText}>Submit</Text>
-          </TouchableHighlight>
+        <View>
+          <StarRating
+            maxStars={5}
+            rating={3}
+            selectStar={require('../../resources/select_star.png')}
+            unSelectStar={require('../../resources/unselect_star.png')}
+            valueChanged={this.stars}
+            starSize={50}
+            interitemSpacing={20}
+          />
+          {this.state.waiting ?
+            <ActivityIndicator /> :
+            <View style={styles.row}>
+              <TouchableHighlight style={styles.button}
+                onPress={this.submitReview.bind(this)}
+                underlayColor='#99d9f4'
+              >
+                <Text style={styles.buttonText}>Submit</Text>
+              </TouchableHighlight>
+            </View>
+          }
         </View>
       </View>
     );
