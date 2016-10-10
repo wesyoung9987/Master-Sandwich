@@ -13,7 +13,9 @@ import AllAdventureDetail from './AllAdventureDetail'
 const AdvenLI = (props) => {
 
   const { itemContainer, viewStyle, detailsStyle, arrowsStyle, titleStyle, arrowsContainer } = styles;
-  var photo = props.photo ? {uri: props.photo} : require('../../resources/placeholder.png')
+  var photo = {
+    uri: props.photo || "https://thenypost.files.wordpress.com/2015/08/spongebob-e1441057213584.jpg?quality=90&strip=all&w=664&h=441&crop=1"
+  }
 
   const advenCardRoute = {
     name: props.adven.title,
