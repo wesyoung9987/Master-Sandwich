@@ -8,7 +8,8 @@ import {
   AsyncStorage,
   TouchableHighlight,
   AlertIOS,
-  ActivityIndicator} from 'react-native';
+  ActivityIndicator,
+  KeyboardAvoidingView} from 'react-native';
 import t from 'tcomb-form-native';
 
 // App components
@@ -205,25 +206,29 @@ var Auth = React.createClass({
           size = "large"
           color={"#e6005c"}
           />
-          <View>
+
+          <KeyboardAvoidingView behavior={'padding'} >
+            <View>
               <Form
                   ref="form"
                   type={this.state.onSignup ? Signup : Signin}
                   options={options}
               />
-          </View>
+            </View>
+          </KeyboardAvoidingView>
+
           <View>
-              <TouchableHighlight style={styles.button} onPress={this.state.onSignup ? this.userSignUp : this.userLogin} underlayColor='#99d9f4'>
-                  <Text style={styles.buttonText}>{this.state.onSignup ? 'Signup' : 'Login'}</Text>
-              </TouchableHighlight>
-              <TouchableHighlight style={styles.button} onPress={this.toggleSignup} underlayColor='#99d9f4'>
-                <View style={styles.viewStyle}>
-                  <Text style={styles.buttonText}>{this.state.onSignup ? 'To Login ' : 'To Signup '}</Text>
-                  <View style={styles.arrowsContainer}>
-                    <Image style={styles.arrowsStyle} source={require('../../resources/double-arrows.png')} />
-                  </View>
+            <TouchableHighlight style={styles.button} onPress={this.state.onSignup ? this.userSignUp : this.userLogin} underlayColor='#99d9f4'>
+                <Text style={styles.buttonText}>{this.state.onSignup ? 'Signup' : 'Login'}</Text>
+            </TouchableHighlight>
+            <TouchableHighlight style={styles.button} onPress={this.toggleSignup} underlayColor='#99d9f4'>
+              <View style={styles.viewStyle}>
+                <Text style={styles.buttonText}>{this.state.onSignup ? 'To Login ' : 'To Signup '}</Text>
+                <View style={styles.arrowsContainer}>
+                  <Image style={styles.arrowsStyle} source={require('../../resources/double-arrows.png')} />
                 </View>
-              </TouchableHighlight>
+              </View>
+            </TouchableHighlight>
           </View>
         </View>
 
@@ -256,12 +261,6 @@ const styles = {
     borderColor: 'gray',
     borderWidth: 1
   },
-  // container: {
-  //   justifyContent: 'center',
-  //   marginTop: 340,
-  //   padding: 20,
-  //   backgroundColor: 'rgba(52,52,52,0)'
-  // },
   container: {
     flex: 1,
     flexDirection: 'column',
