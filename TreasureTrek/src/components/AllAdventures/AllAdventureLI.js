@@ -14,7 +14,7 @@ const AdvenLI = (props) => {
 
   const { itemContainer, viewStyle, detailsStyle, arrowsStyle, titleStyle, arrowsContainer, locationStyle } = styles;
   var photo = {
-    uri: props.photo || "https://thenypost.files.wordpress.com/2015/08/spongebob-e1441057213584.jpg?quality=90&strip=all&w=664&h=441&crop=1"
+    uri: props.adven.photo || "https://thenypost.files.wordpress.com/2015/08/spongebob-e1441057213584.jpg?quality=90&strip=all&w=664&h=441&crop=1"
   }
 
   const advenCardRoute = {
@@ -28,7 +28,7 @@ const AdvenLI = (props) => {
   var toAllAdventureDetail = function (){
     props.nav.toRoute(advenCardRoute);
   }
-
+  console.log(props.adven)
   return (
     <Image
       style={itemContainer}
