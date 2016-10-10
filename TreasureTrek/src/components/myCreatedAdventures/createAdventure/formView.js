@@ -7,6 +7,7 @@ import AdventureSubmited from './AdventureSubmited';
 import PickMap from './pickMap';
 import MenuButton from '../../nav/MenuButton';
 import UserButton from '../../nav/UserButton';
+import SetImage from './SetImage';
 
 var val = 0;
 
@@ -21,6 +22,7 @@ class FormView extends Component {
       failed: false,
       title: '',
       where: '',
+      image: '',
       input1: '',
       input2: '',
       input3: '',
@@ -49,6 +51,7 @@ class FormView extends Component {
   async sendData(data){
     form = {
       title: data.title,
+      image: data.image,
       adventure: [
         {
           riddle: data.input3,
@@ -85,7 +88,7 @@ class FormView extends Component {
         }).then(function (res){
           return res.json()
         }).then((data)=> {
-          this.setState({title: '', where: '', failed: false, errorMsg: '', input1: '', input2: '', input3: '', input4: '', input5: '', input6: '', input7: '', input8: '', input9: '', input10: '', input11: '', input12: '', routes: [{view: <SubmitButton/>, index: 0}, {view: <AdventureSubmited/>, index: 1}]
+          this.setState({title: '', where: '', image: '', failed: false, errorMsg: '', input1: '', input2: '', input3: '', input4: '', input5: '', input6: '', input7: '', input8: '', input9: '', input10: '', input11: '', input12: '', routes: [{view: <SubmitButton/>, index: 0}, {view: <AdventureSubmited/>, index: 1}]
           })
           this.redirectToStart();
         }).catch((error) => {
@@ -139,6 +142,17 @@ class FormView extends Component {
           placeholder={'City, State'}
           value={this.state.where}
         />
+
+        <TouchableHighlight style={this.state.image || !this.state.failed ? styles.buttonG : styles.buttonR} onPress={() => this.props.nav.toRoute({
+          name: "Upload Adventure Picture",
+          component: SetImage,
+          passProps: {
+            setImage: this.setAdventureImage.bind(this),
+            img: this.state.image ? this.state.image : ''
+          }
+        })}  underlayColor='#00ffff'>
+          {this.setImageButtonText()}
+        </TouchableHighlight>
 
         <View style={{justifyContent: 'center',
   alignItems: 'center', marginTop: 10}}>
@@ -282,6 +296,12 @@ class FormView extends Component {
     }
   }
 
+  setAdventureImage (url) {
+    this.setState({
+      image: url
+    });
+  }
+
   setRiddle1Coords (lat, lon) {
     this.setState({
       input1: lat,
@@ -311,6 +331,18 @@ class FormView extends Component {
     } else {
       return (
         <Text  style={styles.buttonText}> Set Location </Text>
+      )
+    }
+  }
+
+  setImageButtonText () {
+    if (this.state.image === '') {
+      return (
+        <Text  style={styles.buttonText}> Choose Adventure Picture </Text>
+      )
+    } else {
+      return (
+        <Text  style={styles.buttonText}> Change Adventure Picture </Text>
       )
     }
   }

@@ -20,7 +20,8 @@ var AdventureSchema = new mongoose.Schema({
     threeStar: {type: Number, default: 0},
     fourStar: {type: Number, default: 0},
     fiveStar: {type: Number, default: 0},
-  }
+  },
+  photo: String
 });
 
 var Adventure = mongoose.model('Adventure', AdventureSchema);
