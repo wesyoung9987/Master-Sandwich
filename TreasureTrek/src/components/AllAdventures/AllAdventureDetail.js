@@ -10,7 +10,8 @@ import {
 // App components
 import MenuButton from '../nav/MenuButton';
 import MyAdventures from '../MyAdventures/myAdventuresContainer';
-import MapScreen from './MapScreen'
+import MapScreen from './MapScreen';
+import UserButton from '../nav/UserButton';
 
 var AllAdventureDetail = function (props) {
 
@@ -36,7 +37,8 @@ var AllAdventureDetail = function (props) {
           props.resetToRoute({
             name: "My Adventures",
             component: MyAdventures,
-            leftCorner: MenuButton
+            leftCorner: MenuButton,
+            rightCorner: UserButton
           })
         })
         .catch(err => {

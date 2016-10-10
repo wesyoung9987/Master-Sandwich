@@ -15,6 +15,7 @@ import t from 'tcomb-form-native';
 import Main from '../main/Main.js';
 import MenuButton from '../nav/MenuButton.js';
 import MyAdventures from '../MyAdventures/myAdventuresContainer';
+import UserButton from '../nav/UserButton.js';
 
 // Create Session Storage Key for AsyncStorage
 var STORAGE_KEY = 'id_token';
@@ -145,7 +146,8 @@ var Auth = React.createClass({
           this.props.resetToRoute({
             name: "My Adventures",
             component: MyAdventures,
-            leftCorner: MenuButton
+            leftCorner: MenuButton,
+            rightCorner: UserButton
           });
         } else {
           AlertIOS.alert( "Invalid Email/Password. Try again." );
