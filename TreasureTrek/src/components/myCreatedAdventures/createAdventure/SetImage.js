@@ -9,7 +9,8 @@ import {
   Image,
   Platform,
   DeviceEventEmitter,
-  AsyncStorage
+  AsyncStorage,
+  ActivityIndicator
 } from 'react-native';
 import Credentials from '../../UserProfile/credentials';
 
@@ -22,10 +23,17 @@ export default class SetImage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      waiting: false,
       avatarSource: null,
       imageURL: null
     };
   }
+
+  setSpinner() {
+    this.setState({
+      waiting: !this.state.waiting
+    })
+  };
 
   selectPhotoTapped() {
     const options = {
@@ -113,6 +121,7 @@ export default class SetImage extends React.Component {
 
         })
       });
+      this.setSpinner();
 
   }
 
@@ -133,17 +142,18 @@ export default class SetImage extends React.Component {
           }
           </View>
         </TouchableOpacity>
+        {this.state.waiting ?
+          <ActivityIndicator style={{marginTop: 30}} color={'#48BBEC'} size={'large'}/> :
+          <TouchableOpacity onPress={this.savePhoto.bind(this)}>
 
-        <TouchableOpacity onPress={this.savePhoto.bind(this)}>
+            <View style={styles.viewStyle}>
 
-          <View style={styles.viewStyle}>
+              <Text style={styles.titleStyle}>USE PHOTO</Text>
 
-            <Text style={styles.titleStyle}>USE PHOTO</Text>
+            </View>
 
-          </View>
-
-        </TouchableOpacity>
-
+          </TouchableOpacity>
+        }
       </View>
     );
   }

@@ -137,7 +137,7 @@ class FormView extends Component {
         />
         <TextInput
           autoCapitalize={'none'}
-          style={{height: 40, borderColor: this.state.where || !this.state.failed ? 'grey' : 'red', borderWidth: 1, borderRadius: 10, fontSize: 20, paddingLeft: 15, paddingRight: 15, marginTop: 10}}
+          style={{height: 40, borderColor: this.state.where || !this.state.failed ? 'grey' : 'red', borderWidth: 1, borderRadius: 10, fontSize: 20, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 5}}
           onChangeText={(where) => this.setState({where})}
           placeholder={'City, State'}
           value={this.state.where}
