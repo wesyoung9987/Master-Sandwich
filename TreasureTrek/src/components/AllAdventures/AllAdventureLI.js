@@ -45,6 +45,10 @@ const AdvenLI = (props) => {
 
 
 const styles = {
+  itemContainer: {
+    // heigt:
+    // width:
+  },
   viewStyle: {
     flexDirection: 'row',
     borderWidth: 1,
