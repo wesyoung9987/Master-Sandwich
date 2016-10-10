@@ -28,7 +28,7 @@ const AdvenLI = (props) => {
   var toAllAdventureDetail = function (){
     props.nav.toRoute(advenCardRoute);
   }
-  console.log(props.adven)
+
   return (
     <Image
       style={itemContainer}
