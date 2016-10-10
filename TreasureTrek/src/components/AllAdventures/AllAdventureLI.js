@@ -12,6 +12,11 @@ import AllAdventureDetail from './AllAdventureDetail'
 
 const AdvenLI = (props) => {
 
+  const { itemContainer, viewStyle, detailsStyle, arrowsStyle, titleStyle, arrowsContainer, locationStyle } = styles;
+  var photo = {
+    uri: props.photo || "https://thenypost.files.wordpress.com/2015/08/spongebob-e1441057213584.jpg?quality=90&strip=all&w=664&h=441&crop=1"
+  }
+
   const advenCardRoute = {
     name: props.adven.title,
     component: AllAdventureDetail,
@@ -20,36 +25,52 @@ const AdvenLI = (props) => {
     }
   }
 
-  const { viewStyle, detailsStyle, arrowsStyle, titleStyle, arrowsContainer } = styles;
-
   var toAllAdventureDetail = function (){
     props.nav.toRoute(advenCardRoute);
   }
 
   return (
-    <TouchableHighlight
+    <Image
+      style={itemContainer}
+      source={photo}>
+      <TouchableHighlight
       onPress={toAllAdventureDetail}
       underlayColor={'#00ffff'}>
-      <View style={viewStyle}>
-        <View style={detailsStyle}>
-          <Text style={titleStyle}>{props.adven.title}</Text>
-          <Text style={{ fontSize: 9 }}>{props.adven.startingLocation}</Text>
+        <View style={viewStyle}>
+          <View style={detailsStyle}>
+            <Text style={titleStyle} onPress={toAllAdventureDetail}>{props.adven.title}</Text>
+            <Text style={locationStyle}>{props.adven.startingLocation}</Text>
+          </View>
+          <View style={arrowsContainer}>
+            <Image style={arrowsStyle} source={require('../../resources/red-arrow.png')} />
+          </View>
         </View>
-        <View style={arrowsContainer}>
-          <Image style={arrowsStyle} source={require('../../resources/red-arrow.png')} />
-        </View>
-      </View>
-    </TouchableHighlight>
+      </TouchableHighlight>
+    </Image>
     );
 };
 
 
 const styles = {
+  itemContainer: {
+    height: 200,
+    flex: 1,
+    marginTop: 4,
+    marginBottom: 4,
+    marginLeft: 2,
+    marginRight: 2,
+    // borderColor: 'white'
+    // resizeMode: 'cover',
+    // backgroundColor: 'transparent'
+    // alignItems: 'flex-end'
+    // width: 400
+  },
   viewStyle: {
     flexDirection: 'row',
-    borderWidth: 1,
-    borderColor: '#ddd',
+    // borderWidth: 1,
+    // borderColor: '#ddd',
     padding: 10,
+    flex: 1,
     justifyContent: 'space-between' // added justify
   },
   detailsStyle: {
@@ -59,11 +80,19 @@ const styles = {
     // width: 285  // removed
   },
   titleStyle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white'
+  },
+  locationStyle: {
     fontSize: 14,
+    color: 'white',
+    fontWeight: 'bold'
   },
   arrowsStyle: {
     height: 25,
-    width: 25
+    width: 25,
+    backgroundColor: 'rgba(0,0,0,0)',
   },
   arrowsContainer: {
     flexDirection: 'column',

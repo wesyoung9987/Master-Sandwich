@@ -4,42 +4,26 @@ import { expect } from 'chai'
 
 // App components
 import AllAdventureDetail from '../../src/components/AllAdventures/AllAdventureDetail'
-import AllAdventureLi from '../../src/components/AllAdventures/AllAdventureDetail'
-import AllAdvenContainer from '../../src/components/AllAdventures/AllAdventureDetail'
-import AllAdventureList from '../../src/components/AllAdventures/AllAdventureDetail'
+import AllAdventureLi from '../../src/components/AllAdventures/AllAdventureLI'
+import AllAdventuresContainer from '../../src/components/AllAdventures/AllAdventuresContainer'
+import AllAdventuresList from '../../src/components/AllAdventures/AllAdventuresList'
 
 import { adventure } from '../mockData'
 
-describe('#AllAdventureDetail', () => {
-
-  const wrapper = shallow(<AllAdventureDetail adven={adventure} />)
-
-  it('AllAdventureDetail component should exists', () => {
-    expect(wrapper).to.exist
-  })
-
-})
-
-
-describe('#AllAdventureLi component should exist', function (){
-
-  const wrapper = shallow(<AllAdventureLi adven={adventure}/>)
-
-  it('AllAdventureLi component should exists', () => {
-    expect(wrapper).to.exist
-  })
-
-  it('should have TouchableHighlight')
-
-})
 
 describe('#AllAdvenContainer component should exist', function (){
 
-  const wrapper = shallow(<AllAdvenContainer adven={adventure}/>)
+  var adventures = [adventure, adventure]
+  const wrapper = shallow(<AllAdventuresContainer />)
 
   it('component should exists', () => {
     expect(wrapper).to.exist
   })
+
+  it('should render AllAdventureList'/*, function (){
+    // gotta add props to AllAdventureList somehow
+    expect(wrapper.find('AllAdventureList')).to.exist
+  }*/)
 
   it('getAllAds method should exist')
 
@@ -51,12 +35,44 @@ describe('#AllAdvenContainer component should exist', function (){
 
 describe('#AllAdventureList component should exist', function (){
 
-  const wrapper = shallow(<AllAdventureList adven={adventure}/>)
+  var adventures = [adventure, adventure]
+
+  const wrapper = shallow(<AllAdventuresList advens={adventures}/>)
 
   it('AllAdventureList component should exists', () => {
     expect(wrapper).to.exist
   })
 
-  it('should render as many AllAdventureLi as there are items in props.adven')
+  it('should render as many AllAdventureLi as there are items in props.adven', function() {
+    expect(wrapper.prop('advens')).to.exist
+    // expect(wrapper.find('ScrollView').children()).to.have.length(2)
+  })
+
+})
+
+describe('#AllAdventureLi component should exist', function (){
+
+  const wrapper = shallow(<AllAdventureLi adven={adventure}/>)
+
+  it('AllAdventureLi component should exists', () => {
+    expect(wrapper).to.exist
+  })
+
+  it('should contain description photo'/*, function(){
+    // first create adventure using create adventure, mock a photo
+    // then access wrapper
+    // May prompt test for entire description photo cycle
+    // test db for description photo reception
+  }*/)
+
+})
+
+describe('#AllAdventureDetail', () => {
+
+  const wrapper = shallow(<AllAdventureDetail adven={adventure} />)
+
+  it('AllAdventureDetail component should exists', () => {
+    expect(wrapper).to.exist
+  })
 
 })

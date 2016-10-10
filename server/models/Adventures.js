@@ -21,7 +21,7 @@ var AdventureSchema = new mongoose.Schema({
     fourStar: {type: Number, default: 0},
     fiveStar: {type: Number, default: 0},
   },
-  photo: String
+  photo: { type: String, default: '../../TreasureTrek/src/resources/placeholder.png' }
 });
 
 var Adventure = mongoose.model('Adventure', AdventureSchema);
