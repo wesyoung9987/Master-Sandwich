@@ -12,7 +12,7 @@ import AllAdventureDetail from './AllAdventureDetail'
 
 const AdvenLI = (props) => {
 
-  const { itemContainer, viewStyle, detailsStyle, arrowsStyle, titleStyle, arrowsContainer } = styles;
+  const { itemContainer, viewStyle, detailsStyle, arrowsStyle, titleStyle, arrowsContainer, locationStyle } = styles;
   var photo = {
     uri: props.photo || "https://thenypost.files.wordpress.com/2015/08/spongebob-e1441057213584.jpg?quality=90&strip=all&w=664&h=441&crop=1"
   }
@@ -39,7 +39,7 @@ const AdvenLI = (props) => {
         <View style={viewStyle}>
           <View style={detailsStyle}>
             <Text style={titleStyle} onPress={toAllAdventureDetail}>{props.adven.title}</Text>
-            <Text style={{ fontSize: 9, color: 'white' }}>{props.adven.startingLocation}</Text>
+            <Text style={locationStyle}>{props.adven.startingLocation}</Text>
           </View>
           <View style={arrowsContainer}>
             <Image style={arrowsStyle} source={require('../../resources/red-arrow.png')} />
@@ -55,6 +55,11 @@ const styles = {
   itemContainer: {
     height: 200,
     flex: 1,
+    marginTop: 4,
+    marginBottom: 4,
+    marginLeft: 2,
+    marginRight: 2,
+    // borderColor: 'white'
     // resizeMode: 'cover',
     // backgroundColor: 'transparent'
     // alignItems: 'flex-end'
@@ -75,8 +80,14 @@ const styles = {
     // width: 285  // removed
   },
   titleStyle: {
-    fontSize: 14,
+    fontSize: 20,
+    fontWeight: 'bold',
     color: 'white'
+  },
+  locationStyle: {
+    fontSize: 14,
+    color: 'white',
+    fontWeight: 'bold'
   },
   arrowsStyle: {
     height: 25,
