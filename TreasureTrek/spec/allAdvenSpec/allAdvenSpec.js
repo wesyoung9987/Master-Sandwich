@@ -21,7 +21,7 @@ describe('#AllAdvenContainer component should exist', function (){
   })
 
   it('should render AllAdventureList'/*, function (){
-    // gotta add props to AllAdventureList somehow
+    //gotta add props to AllAdventureList somehow
     expect(wrapper.find('AllAdventureList')).to.exist
   }*/)
 
