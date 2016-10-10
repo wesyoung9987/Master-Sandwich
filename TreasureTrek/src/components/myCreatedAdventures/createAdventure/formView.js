@@ -1,6 +1,6 @@
 // Import a library to help create a component
 import React, { Component } from 'react';
-import { Text, View, TextInput, TouchableHighlight, AsyncStorage, Navigator } from 'react-native';
+import { Text, View, TextInput, TouchableHighlight, AsyncStorage, Navigator, KeyboardAvoidingView } from 'react-native';
 import SubmitButton from './SubmitButton';
 import MyCreatedAdventures from '../myCreatedAdventures';
 import AdventureSubmited from './AdventureSubmited';
@@ -127,6 +127,7 @@ class FormView extends Component {
 
   showForm () {
     return (
+
       <View>
         <TextInput
           autoCapitalize={'none'}
@@ -159,7 +160,6 @@ class FormView extends Component {
           <Text style={{color: '#24CCFD', fontSize: 20}}>Riddle 1</Text>
         </View>
 
-
         <TouchableHighlight style={this.state.input1 || !this.state.failed ? styles.buttonG : styles.buttonR} onPress={() => this.props.nav.toRoute({
           name: "Place Marker",
           component: PickMap,
@@ -171,7 +171,6 @@ class FormView extends Component {
         })}  underlayColor='#00ffff'>
           {this.setButtonText(1)}
         </TouchableHighlight>
-
 
         <TextInput
           multiline = {true}
@@ -189,11 +188,11 @@ class FormView extends Component {
           placeholder={'Answer'}
           value={this.state.input4}
         />
+
         <View style={{justifyContent: 'center',
-  alignItems: 'center', marginTop: 10}}>
+          alignItems: 'center', marginTop: 10}}>
           <Text style={{color: '#24CCFD', fontSize: 20}}>Riddle 2</Text>
         </View>
-
 
         <TouchableHighlight style={this.state.input5 || !this.state.failed ? styles.buttonG : styles.buttonR} onPress={() => this.props.nav.toRoute({
           name: "Place Marker",
@@ -206,7 +205,6 @@ class FormView extends Component {
         })}  underlayColor='#00ffff'>
           {this.setButtonText(5)}
         </TouchableHighlight>
-
 
         <TextInput
           multiline = {true}
@@ -224,11 +222,11 @@ class FormView extends Component {
           placeholder={'Answer'}
           value={this.state.input8}
         />
+
         <View style={{justifyContent: 'center',
-  alignItems: 'center', marginTop: 10}}>
+          alignItems: 'center', marginTop: 10}}>
           <Text style={{color: '#24CCFD', fontSize: 20}}>Riddle 3</Text>
         </View>
-
 
         <TouchableHighlight style={this.state.input9 || !this.state.failed ? styles.buttonG : styles.buttonR} onPress={() => this.props.nav.toRoute({
           name: "Place Marker",
@@ -241,7 +239,6 @@ class FormView extends Component {
         })}  underlayColor='#00ffff'>
           {this.setButtonText(9)}
         </TouchableHighlight>
-
 
         <TextInput
           multiline = {true}
@@ -267,8 +264,8 @@ class FormView extends Component {
           </View>
         </TouchableHighlight>
         <Text style={styles.errorText}>{this.state.errorMsg}</Text>
-
       </View>
+
     );
   }
 
