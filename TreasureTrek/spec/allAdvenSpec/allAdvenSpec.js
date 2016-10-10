@@ -1,4 +1,4 @@
-import React, { View, Text } from 'react-native'
+import React, { View, Text, ListView } from 'react-native'
 import { shallow, mount, render } from 'enzyme';
 import { expect } from 'chai'
 
@@ -8,23 +8,22 @@ import AllAdventureLi from '../../src/components/AllAdventures/AllAdventureDetai
 import AllAdvenContainer from '../../src/components/AllAdventures/AllAdventureDetail'
 import AllAdventureList from '../../src/components/AllAdventures/AllAdventureDetail'
 
-var adven = {
-  adventure: [1, 2, 3]
-}
+import { adventure } from '../mockData'
 
 describe('#AllAdventureDetail', () => {
 
-  const wrapper = shallow(<AllAdventureDetail adven={adven} />)
+  const wrapper = shallow(<AllAdventureDetail adven={adventure} />)
 
   it('AllAdventureDetail component should exists', () => {
     expect(wrapper).to.exist
   })
+
 })
 
 
 describe('#AllAdventureLi component should exist', function (){
 
-  const wrapper = shallow(<AllAdventureLi adven={adven}/>)
+  const wrapper = shallow(<AllAdventureLi adven={adventure}/>)
 
   it('AllAdventureLi component should exists', () => {
     expect(wrapper).to.exist
@@ -36,7 +35,7 @@ describe('#AllAdventureLi component should exist', function (){
 
 describe('#AllAdvenContainer component should exist', function (){
 
-  const wrapper = shallow(<AllAdvenContainer adven={adven}/>)
+  const wrapper = shallow(<AllAdvenContainer adven={adventure}/>)
 
   it('component should exists', () => {
     expect(wrapper).to.exist
@@ -48,16 +47,16 @@ describe('#AllAdvenContainer component should exist', function (){
 
   it('should render AllAdventuresList')
 
-
 })
 
 describe('#AllAdventureList component should exist', function (){
 
-  const wrapper = shallow(<AllAdventureList adven={adven}/>)
+  const wrapper = shallow(<AllAdventureList adven={adventure}/>)
 
   it('AllAdventureList component should exists', () => {
     expect(wrapper).to.exist
   })
 
   it('should render as many AllAdventureLi as there are items in props.adven')
+
 })
