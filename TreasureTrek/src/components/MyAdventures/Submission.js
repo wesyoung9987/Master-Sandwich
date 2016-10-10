@@ -30,7 +30,8 @@ class Submission extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showReviews: false
+      showReviews: false,
+      currentRating: 3
     };
   }
 
@@ -51,17 +52,36 @@ class Submission extends Component {
   }
 
   toRiddles() {
-    //this.props.nav.reset();
-    // this.props.resetToRoute({
-    //   name: "My Adventures",
-    //   component: MyAdventures,
-    //   leftCorner: MenuButton
-    // });
     this.props.nav.toBack();
   }
 
  submitReview() {
-  console.log('submitReview');
+   this.toRiddles();
+   this.setSpinner();
+   AsyncStorage.getItem('id_token')
+     .then(token=>{
+        fetch("https://treasure-trek.herokuapp.com/api/updateAdventureRating", {
+          method: "PUT",
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'x-access-token': token
+          },
+          body: JSON.stringify({
+            rating: this.state.currentRating,
+            adventureid: this.props.id //Adventure ID
+          })
+        }).then(function(res){
+          return res.json()
+        }).then((data)=> {
+          this.setSpinner();
+          AlertIOS.alert( "Thanks for your review!" );
+          this.toRiddles();
+        }).catch((error)=> {
+          console.error("ERROR: ", error);
+          this.handleError();
+        }).done();
+      });
  }
 
  submitAnswer() {
@@ -196,8 +216,12 @@ class Submission extends Component {
     )
   }
 
+
+
   starsChanged(rating) {
-    console.log('rating: ', rating)
+    this.setState({'currentRating': rating});
+    console.log('rating: ', rating);
+    console.log('this.state.currentRating: ', this.state.currentRating);
   }
 
   promptReview() {
@@ -213,7 +237,8 @@ class Submission extends Component {
             rating={3}
             selectStar={require('../../resources/select_star.png')}
             unSelectStar={require('../../resources/unselect_star.png')}
-            valueChanged={this.starsChanged}
+            //valueChanged={this.starsChanged}
+            valueChanged={this.starsChanged.bind(this)}
             starSize={50}
             interitemSpacing={20}
           />
