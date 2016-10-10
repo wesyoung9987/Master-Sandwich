@@ -31,7 +31,7 @@ const Reviews = (props) => {
               <Image style={styles.arrowsStyle} source={require('../../resources/star.png')} />
               <Image style={styles.arrowsStyle} source={require('../../resources/star.png')} />
             <View style={styles.detailsStyle}>
-              <Text style={styles.titleStyle}>({/*props.stars.fiveStar*/})</Text>
+              <Text style={styles.titleStyle}>({props.stars.fiveStar})</Text>
             </View>
           </View>
 
@@ -41,7 +41,7 @@ const Reviews = (props) => {
               <Image style={styles.arrowsStyle} source={require('../../resources/star.png')} />
               <Image style={styles.arrowsStyle} source={require('../../resources/star.png')} />
             <View style={styles.detailsStyle}>
-              <Text style={styles.titleStyle}>({/*props.stars.fourStar*/})</Text>
+              <Text style={styles.titleStyle}>({props.stars.fourStar})</Text>
             </View>
           </View>
 
@@ -50,7 +50,7 @@ const Reviews = (props) => {
               <Image style={styles.arrowsStyle} source={require('../../resources/star.png')} />
               <Image style={styles.arrowsStyle} source={require('../../resources/star.png')} />
             <View style={styles.detailsStyle}>
-              <Text style={styles.titleStyle}>({/*props.stars.threeStar*/})</Text>
+              <Text style={styles.titleStyle}>({props.stars.threeStar})</Text>
             </View>
           </View>
 
@@ -58,7 +58,7 @@ const Reviews = (props) => {
               <Image style={styles.arrowsStyle} source={require('../../resources/star.png')} />
               <Image style={styles.arrowsStyle} source={require('../../resources/star.png')} />
             <View style={styles.detailsStyle}>
-              <Text style={styles.titleStyle}>({/*props.stars.twoStar*/})</Text>
+              <Text style={styles.titleStyle}>({props.stars.twoStar})</Text>
             </View>
           </View>
 
@@ -67,7 +67,7 @@ const Reviews = (props) => {
               <Image style={styles.arrowsStyle} source={require('../../resources/star.png')} />
             </View>
             <View style={styles.detailsStyle}>
-              <Text style={styles.titleStyle}>({/*props.stars.oneStar*/})</Text>
+              <Text style={styles.titleStyle}>({props.stars.oneStar})</Text>
             </View>
           </View>
 

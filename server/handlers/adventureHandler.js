@@ -82,6 +82,56 @@ module.exports = {
     });
   },
 
+  //PUT
+  //Edit adventure (eg. Ratings)
+  // Expects {rating: #, adventureid: 'adventureid'}
+  // Returns the results of the modification
+  updateAdventureRating:  function(req, res){
+    var userid = req.user._id;
+    var rating = req.body.rating;
+    var adventureid = req.body.adventureid;
+
+
+    // Check rating and assign starsParam
+    var starsParam = 'threeStar'; //Default Rating
+    if (rating === 1) {
+      starsParam = 'oneStar';
+    } else if ( rating ===2) {
+      starsParam = 'twoStar';
+    } else if ( rating ===3) {
+      starsParam = 'threeStar';
+    } else if ( rating ===4) {
+      starsParam = 'fourStar';
+    } else if ( rating ===5) {
+      starsParam = 'fiveStar';
+    }
+
+    //Verify userid exists
+    User.findOne({_id: userid}, function(err, user){
+      if (err) {
+        helper.sendError(err, req, res);
+      } else {
+        if (!user) {
+          helper.sendError("No user found", req, res);
+        } else {
+          //Find, update, save ratings to adventure
+          Adventure.findById (adventureid, function(err, adventure) {
+            if (err) {
+              helper.sendError(err);
+            } else {
+                adventure.stars[starsParam] = adventure.stars[starsParam] + 1;
+                adventure.save (function(err, result){
+                  if (err) helper.sendError(err);
+                  res.json(result);
+                });
+              }
+          });
+        }
+      }
+    });
+  },
+
+
   // DELETE
   // Not MVP
   deleteAdventure:  function(req, res){},

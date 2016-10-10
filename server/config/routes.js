@@ -24,6 +24,6 @@ module.exports = function(app) {
   app.get('/api/fetchCreated', helper.checkJWT, adventureHandler.fetchMyCreatedAdventures);
   app.get('/api/fetchRiddle', helper.checkJWT, adventureHandler.fetchSingleRiddle);
   app.put('/api/updateProgress', helper.checkJWT, adventureHandler.updateProgress);
-
+  app.put('/api/updateAdventureRating', helper.checkJWT, adventureHandler.updateAdventureRating);
 
 };
