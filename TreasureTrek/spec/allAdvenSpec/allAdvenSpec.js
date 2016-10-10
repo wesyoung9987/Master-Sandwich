@@ -58,7 +58,12 @@ describe('#AllAdventureLi component should exist', function (){
     expect(wrapper).to.exist
   })
 
-  it('should have TouchableHighlight')
+  it('should contain description photo'/*, function(){
+    // first create adventure using create adventure, mock a photo
+    // then access wrapper
+    // May prompt test for entire description photo cycle
+    // test db for description photo reception
+  }*/)
 
 })
 
