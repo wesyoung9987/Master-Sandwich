@@ -57,6 +57,7 @@ module.exports = {
     var userid = req.user._id;
     var adventureObj = {
       title: req.body.title,
+      photo: req.body.image,
       creator: userid,
       adventure: req.body.adventure,
       startingLocation: req.body.startingLocation
