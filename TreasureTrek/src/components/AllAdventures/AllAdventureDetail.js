@@ -33,7 +33,6 @@ var AllAdventureDetail = function (props) {
           return res.json()
         })
         .then(json => {
-          console.log("Successfully sent Adventure accept: ", json)
           props.resetToRoute({
             name: "My Adventures",
             component: MyAdventures,
@@ -57,9 +56,6 @@ var AllAdventureDetail = function (props) {
       );
     })
   }
-
-  // (for reference) Removed from list items:
-  // <Text style={style.loc}>{riddle.location}</Text>
 
   return (
     <View style={{flex: 1, marginTop:5, flexDirection: 'column', justifyContent: 'space-between'}}>
@@ -87,7 +83,6 @@ var AllAdventureDetail = function (props) {
 var style = {
   map: {
     margin: 5, // changed from 10
-    // alignItems: 'center'
     position: 'relative',
     flex: 3
   },
@@ -102,16 +97,13 @@ var style = {
     marginTop: 20,
     marginBottom: 15,
     alignSelf: 'stretch',
-    justifyContent: 'center',
-    // padding: 20
+    justifyContent: 'center'
   },
   buttonText: {
     fontSize: 18,
     color: 'white',
     alignSelf: 'center'
   },
-  // imported from MyAdventuresDetail
-  // **USING**
   listStyle : {
     borderWidth: 1,
     borderRadius: 2,
@@ -122,7 +114,6 @@ var style = {
     marginTop: 5,
     padding: 5,
   },
-  // **USING**
   loc : {
     fontSize: 10,
     fontFamily: 'Helvetica',
