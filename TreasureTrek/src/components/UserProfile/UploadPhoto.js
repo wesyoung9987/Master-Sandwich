@@ -9,7 +9,8 @@ import {
   Image,
   Platform,
   DeviceEventEmitter,
-  AsyncStorage
+  AsyncStorage,
+  ActivityIndicator
 } from 'react-native';
 import Credentials from './credentials';
 import ProfileMain from './ProfileMain';
@@ -22,8 +23,15 @@ import ImagePicker from 'react-native-image-picker';
 export default class App extends React.Component {
 
   state = {
+    waiting: false,
     avatarSource: null,
     videoSource: null
+  };
+
+  setSpinner() {
+    this.setState({
+      waiting: !this.state.waiting
+    })
   };
 
   selectPhotoTapped() {
@@ -127,6 +135,7 @@ export default class App extends React.Component {
 
         })
       });
+      this.setSpinner();
 
   }
 
@@ -149,17 +158,18 @@ export default class App extends React.Component {
           }
           </View>
         </TouchableOpacity>
+        {this.state.waiting ?
+          <ActivityIndicator style={{marginTop: 30}} color={'#48BBEC'} size={'large'}/> :
+          <TouchableOpacity onPress={this.savePhoto.bind(this)}>
 
-        <TouchableOpacity onPress={this.savePhoto.bind(this)}>
+            <View style={styles.viewStyle}>
 
-          <View style={styles.viewStyle}>
+              <Text style={styles.titleStyle}>USE PHOTO</Text>
 
-            <Text style={styles.titleStyle}>USE PHOTO</Text>
+            </View>
 
-          </View>
-
-        </TouchableOpacity>
-
+          </TouchableOpacity>
+        }
       </View>
     );
   }
