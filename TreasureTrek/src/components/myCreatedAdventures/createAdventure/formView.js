@@ -6,6 +6,7 @@ import MyCreatedAdventures from '../myCreatedAdventures';
 import AdventureSubmited from './AdventureSubmited';
 import PickMap from './pickMap';
 import MenuButton from '../../nav/MenuButton';
+import UserButton from '../../nav/UserButton';
 
 var val = 0;
 
@@ -98,7 +99,8 @@ class FormView extends Component {
     this.props.nav.resetToRoute({
       name: "Create Adventures",
       component: MyCreatedAdventures,
-      leftCorner: MenuButton
+      leftCorner: MenuButton,
+      rightCorner: UserButton
     })
   }
 

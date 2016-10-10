@@ -5,6 +5,7 @@ import MyAdventures from './myAdventuresContainer'
 import MenuButton from '../nav/MenuButton';
 import MapScreen from './MapScreen';
 import Reviews from '../Reviews/Reviews.js';
+import UserButton from '../nav/UserButton';
 
 
 class AdventureSolution extends Component {
@@ -41,7 +42,7 @@ class AdventureSolution extends Component {
             name: "My Adventures",
             component: MyAdventures,
             leftCorner: MenuButton,
-            name: "My Adventures"
+            rightCorner: UserButton
           });
       }).catch((error) => {
         console.log('Delete ERROR: ', error);
