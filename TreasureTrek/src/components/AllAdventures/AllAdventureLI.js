@@ -12,6 +12,9 @@ import AllAdventureDetail from './AllAdventureDetail'
 
 const AdvenLI = (props) => {
 
+  const { itemContainer, viewStyle, detailsStyle, arrowsStyle, titleStyle, arrowsContainer } = styles;
+  var photo = props.photo ? {uri: props.photo} : require('../../resources/placeholder.png')
+
   const advenCardRoute = {
     name: props.adven.title,
     component: AllAdventureDetail,
@@ -20,8 +23,6 @@ const AdvenLI = (props) => {
     }
   }
 
-  const { itemContainer, viewStyle, detailsStyle, arrowsStyle, titleStyle, arrowsContainer } = styles;
-
   var toAllAdventureDetail = function (){
     props.nav.toRoute(advenCardRoute);
   }
@@ -29,7 +30,7 @@ const AdvenLI = (props) => {
   return (
     <Image
       style={itemContainer}
-      source={require('../../resources/placeholder.png')}>
+      source={photo}>
       <TouchableHighlight
       onPress={toAllAdventureDetail}
       underlayColor={'#00ffff'}>
