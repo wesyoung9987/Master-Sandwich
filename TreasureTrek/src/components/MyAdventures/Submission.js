@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import {Text, View, TextInput, AsyncStorage, TouchableHighlight, AlertIOS, ActivityIndicator} from 'react-native';
+import {Text, View, TextInput, AsyncStorage, TouchableHighlight, AlertIOS, ActivityIndicator, KeyboardAvoidingView} from 'react-native';
 import t from 'tcomb-form-native';
 import AdventureSolution from './AdventureSolution';
 import MyAdventures from './myAdventuresContainer';
 import MenuButton from '../nav/MenuButton';
 import StarRating from 'react-native-rating-star';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 // Riddle Submission Form
 var Form = t.form.Form;
@@ -172,40 +173,50 @@ class Submission extends Component {
 
   showInputField () {
     return (
-      <View>
-        <View style={styles.riddleContainer}>
-          <Text style={styles.title}>Riddle Details</Text>
-          <Text style={styles.riddle}> {this.props.riddle} </Text>
-        </View>
-        <View>
-          <View style={styles.row}>
-            <Form
-              ref="form"
-              type={Solution}
-              options={options}
-            />
+      <KeyboardAvoidingView behavior={'padding'} style={{flex:1}}>
+        <View style={styles.container}>
+
+          <View style={styles.riddleContainer}>
+            <Text style={styles.title}>Riddle Details</Text>
           </View>
-          {this.state.waiting ?
-            <ActivityIndicator /> :
-            <View style={styles.row}>
-              <TouchableHighlight style={styles.button}
-                onPress={this.submitAnswer.bind(this)}
-                underlayColor='#99d9f4'
-              >
-                <Text style={styles.buttonText}>Submit</Text>
-              </TouchableHighlight>
+
+          <View>
+            <Text style={styles.riddle}> {this.props.riddle} </Text>
+          </View>
+
+          <View>
+            <View>
+              <Form
+                ref="form"
+                type={Solution}
+                options={options}
+              />
             </View>
-          }
+            {this.state.waiting ?
+              <ActivityIndicator /> :
+              <View>
+                <TouchableHighlight style={styles.button}
+                  onPress={this.submitAnswer.bind(this)}
+                  underlayColor='#99d9f4'
+                >
+                  <Text style={styles.buttonText}>Submit</Text>
+                </TouchableHighlight>
+              </View>
+            }
+          </View>
+
         </View>
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 
   showAnswer () {
     return (
-      <View>
+      <View style={styles.container}>
         <View style={styles.riddleContainer}>
           <Text style={styles.title}>Riddle Completed</Text>
+        </View>
+        <View>
           <Text style={styles.riddle}> {this.props.riddle} </Text>
         </View>
         <View>
@@ -226,12 +237,15 @@ class Submission extends Component {
 
   promptReview() {
     return (
-      <View>
+      <View style={styles.container}>
+
         <View>
           <Text style={styles.title}> Great Job! </Text>
-          <Text style={styles.riddle}> Rate Your Adventure </Text>
         </View>
+
         <View>
+          <Text style={styles.rating}> Rate Your Adventure </Text>
+
           <StarRating
             maxStars={5}
             rating={3}
@@ -240,8 +254,10 @@ class Submission extends Component {
             //valueChanged={this.starsChanged}
             valueChanged={this.starsChanged.bind(this)}
             starSize={50}
-            interitemSpacing={20}
+            interitemSpacing={15}
           />
+        </View>
+        <View>
           {this.state.waiting ?
             <ActivityIndicator /> :
             <View style={styles.row}>
@@ -254,6 +270,7 @@ class Submission extends Component {
             </View>
           }
         </View>
+
       </View>
     );
   }
@@ -262,10 +279,11 @@ class Submission extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View>
+      // <View style={styles.container}>
+      <View style={{flex: 1}}>
+
           {this.state.showReviews ? (this.promptReview()) : (this.props.completion ? this.showAnswer() : this.showInputField())}
-        </View>
+
       </View>
     );
   }
@@ -273,18 +291,6 @@ class Submission extends Component {
 
 
 const styles = {
-  viewStyle: {
-    backgroundColor: '#F8F8F8',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 400,
-    paddingTop: 2,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2 },
-    shadowOpacity: 0.9,
-    elevation: 2,
-    position: 'relative'
-  },
   textStyle1: {
     fontSize: 12,
   },
@@ -297,19 +303,28 @@ const styles = {
     borderWidth: 1
   },
   container: {
-    justifyContent: 'center',
-    marginTop: 50,
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    // marginTop: 50,
     padding: 20,
     backgroundColor: '#ffffff',
+    flex: 1
   },
   riddleContainer: {
     justifyContent: 'center',
-    marginTop: 50,
-    marginBottom: 50,
+    // marginTop: 50,
+    // marginBottom: 50,
     padding: 20,
     backgroundColor: '#ffffff',
   },
   riddle: {
+    fontSize: 16,
+    alignSelf: 'center',
+    // marginBottom: 30,
+    fontFamily: 'Helvetica',
+    padding: 5
+  },
+  rating: {
     fontSize: 16,
     alignSelf: 'center',
     marginBottom: 30,
@@ -319,7 +334,7 @@ const styles = {
   title: {
     fontSize: 32,
     alignSelf: 'center',
-    marginBottom: 30
+    // marginBottom: 30
   },
   buttonText: {
     fontSize: 18,
@@ -335,7 +350,7 @@ const styles = {
     marginBottom: 10,
     alignSelf: 'stretch',
     justifyContent: 'center'
-  },
+  }
 }
 
 // Make componenet available for other parts of the app
