@@ -11,12 +11,19 @@ import AllAdventureDetail from './AllAdventureDetail'
 
 
 const AdvenLI = (props) => {
-  const { itemContainer, viewStyle, detailsStyle, arrowsStyle, titleStyle, arrowsContainer, locationStyle, imageStyle } = styles;
+  console.log("PHOTO: ", props.adven.photo)
+  const {
+    touchContainer,
+    itemContainer,
+    viewStyle,
+    detailsStyle,
+    arrowsStyle,
+    titleStyle,
+    arrowsContainer,
+    locationStyle,
+    imageStyle } = styles;
   var photo = {
-    uri: props.adven.photo !==
-      "../../TreasureTrek/src/resources/placeholder.png" ?
-      props.adven.photo :
-      "https://thenypost.files.wordpress.com/2015/08/spongebob-e1441057213584.jpg?quality=90&strip=all&w=664&h=441&crop=1"
+    uri: props.adven.photo || "https://thenypost.files.wordpress.com/2015/08/spongebob-e1441057213584.jpg"
   }
 
   const advenCardRoute = {
@@ -32,27 +39,28 @@ const AdvenLI = (props) => {
   }
 
   return (
-    <Image
-      style={itemContainer}
-      source={photo}>
-      <TouchableHighlight
-      onPress={toAllAdventureDetail}
-      underlayColor={'#00ffff'}
-      style={{
-        justifyContent: 'flex-end',
-        marginBottom: 10
-      }}>
-        <View style={viewStyle}>
-          <View style={detailsStyle}>
-            <Text style={titleStyle} onPress={toAllAdventureDetail}>{props.adven.title}</Text>
-            <Text style={locationStyle}>{props.adven.startingLocation}</Text>
+    <View style={itemContainer}>
+      <View style={{flex: 1, position: 'absolute', top: 0, bottom: 0,left: 0,right: 0}}>
+        <Image
+          style={{flex: 1, resizeMode: 'cover', height: null, width: null}}
+          source={photo} />
+      </View>
+      <View style={touchContainer}>
+        <TouchableHighlight
+        onPress={toAllAdventureDetail}
+        underlayColor={'#00ffff'}>
+          <View style={viewStyle}>
+            <View style={detailsStyle}>
+              <Text style={titleStyle} onPress={toAllAdventureDetail}>{props.adven.title}</Text>
+              <Text style={locationStyle}>{props.adven.startingLocation}</Text>
+            </View>
+            <View style={arrowsContainer}>
+              <Image style={arrowsStyle} source={require('../../resources/red-arrow.png')} />
+            </View>
           </View>
-          <View style={arrowsContainer}>
-            <Image style={arrowsStyle} source={require('../../resources/red-arrow.png')} />
-          </View>
-        </View>
-      </TouchableHighlight>
-    </Image>
+        </TouchableHighlight>
+      </View>
+      </View>
     );
 };
 
@@ -64,32 +72,24 @@ const styles = {
     marginTop: 4,
     marginBottom: 4,
     marginLeft: 2,
-    marginRight: 2,
-    flexDirection: 'column',
-    // borderColor: 'white'
-    // resizeMode: 'cover',
-    // backgroundColor: 'transparent'
-    // alignItems: 'flex-end'
-    // width: 400
+    marginRight: 2
   },
-  // imageStyle: {
-  //   resizeMode: 'cover',
-  //   flex: 3
-  // },
+  touchContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-end'
+  },
   viewStyle: {
     flexDirection: 'row',
-    flex: 3,
-    // borderWidth: 1,
-    // borderColor: '#ddd',
     padding: 10,
     flex: 1,
-    justifyContent: 'space-between' // added justify
+    justifyContent: 'space-between', // added justify
+    backgroundColor: 'rgba(0,0,0,0.2)',
+
   },
   detailsStyle: {
-    flexDirection: 'column',
-    justifyContent: 'space-around',
-    // marginLeft: 12, // removed
-    // width: 285  // removed
+    // flexDirection: 'column',
+    // justifyContent: 'space-around',
   },
   titleStyle: {
     fontSize: 20,

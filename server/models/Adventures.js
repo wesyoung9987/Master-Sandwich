@@ -21,7 +21,7 @@ var AdventureSchema = new mongoose.Schema({
     fourStar: {type: Number, default: 0},
     fiveStar: {type: Number, default: 0},
   },
-  photo: { type: String, default: '../../TreasureTrek/src/resources/placeholder.png' }
+  photo: { type: String, default: "https://thenypost.files.wordpress.com/2015/08/spongebob-e1441057213584.jpg" }
 });
 
 var Adventure = mongoose.model('Adventure', AdventureSchema);
