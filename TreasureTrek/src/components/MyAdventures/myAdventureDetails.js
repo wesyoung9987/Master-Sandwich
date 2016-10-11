@@ -14,6 +14,10 @@ const MyAdventureDetails = (props) => {
     }
   };
 
+  var photo = {
+    uri: props.myAdventure.adventureId.photo || "https://thenypost.files.wordpress.com/2015/08/spongebob-e1441057213584.jpg"
+  }
+
   var toAdventureSolution = function() {
     console.log('props: ', props)
     props.nav.toRoute(myAdventureRoute);
@@ -106,39 +110,57 @@ const MyAdventureDetails = (props) => {
   }
 
   return (
-    <View>
-      <TouchableHighlight
-        onPress={toAdventureSolution}
-        underlayColor={'#00ffff'}>
-        <View style={styles.viewStyleList}>
-          <View style={styles.detailsStyle}>
-            <Text style={styles.titleStyle}>{props.myAdventure.adventureId.title}</Text>
-            <Text style={{fontSize: 9}}>{props.myAdventure.adventureId.startingLocation}</Text>
 
+    <View style={styles.itemContainer}>
 
-            {averageStars()}
+      <View style={{flex: 1, position: 'absolute', top: 0, bottom: 0,left: 0,right: 0}}>
+        <Image
+          style={{flex: 1, resizeMode: 'cover', height: null, width: null}}
+          source={photo} />
+      </View>
 
-
-
-
-
+      <View style={styles.touchContainer}>
+        <TouchableHighlight
+          onPress={toAdventureSolution}
+          underlayColor={'#00ffff'}>
+          <View style={styles.viewStyle}>
+            <View style={styles.detailsStyle}>
+              <Text style={styles.titleStyle}>{props.myAdventure.adventureId.title}</Text>
+              <Text style={styles.locationStyle}>{props.myAdventure.adventureId.startingLocation}</Text>
+              {averageStars()}
+            </View>
+            <View style={styles.arrowsContainer}>
+              <Image style={styles.arrowsStyle} source={require('../../resources/red-arrow.png')} />
+            </View>
           </View>
-          <View style={styles.arrowsContainer}>
-            <Image style={styles.arrowsStyle} source={require('../../resources/red-arrow.png')} />
-          </View>
-        </View>
-      </TouchableHighlight>
+        </TouchableHighlight>
+      </View>
+
     </View>
+
   );
 };
 
 var styles = {
-  viewStyleList:{
+  itemContainer: {
+    height: 200,
+    flex: 1,
+    marginTop: 4,
+    marginBottom: 4,
+    marginLeft: 2,
+    marginRight: 2
+  },
+  touchContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-end'
+  },
+  viewStyle: {
     flexDirection: 'row',
-    borderWidth: 1,
-    borderColor: '#ddd',
     padding: 10,
-    justifyContent: 'space-between' // added justify
+    flex: 1,
+    justifyContent: 'space-between', // added justify
+    backgroundColor: 'rgba(0,0,0,0.2)',
   },
   viewStyle: {
     flexDirection: 'row',
@@ -148,13 +170,16 @@ var styles = {
   detailsStyle: {
     flexDirection: 'column',
     justifyContent: 'space-around'
-    //marginLeft: 12, // removed margin
-    //width: 285  // removed width
   },
   titleStyle: {
-    //color: 'white',
-    fontSize: 14
-    //fontWeight: '600'
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white'
+  },
+  locationStyle: {
+    fontSize: 14,
+    color: 'white',
+    fontWeight: 'bold'
   },
   totalReviewsStyle: {
     fontSize: 14,

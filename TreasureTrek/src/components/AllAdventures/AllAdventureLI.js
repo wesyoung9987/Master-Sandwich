@@ -60,7 +60,7 @@ const AdvenLI = (props) => {
           </View>
         </TouchableHighlight>
       </View>
-      </View>
+    </View>
     );
 };
 
@@ -84,12 +84,7 @@ const styles = {
     padding: 10,
     flex: 1,
     justifyContent: 'space-between', // added justify
-    backgroundColor: 'rgba(0,0,0,0.2)',
-
-  },
-  detailsStyle: {
-    // flexDirection: 'column',
-    // justifyContent: 'space-around',
+    backgroundColor: 'rgba(0,0,0,0.2)'
   },
   titleStyle: {
     fontSize: 20,
