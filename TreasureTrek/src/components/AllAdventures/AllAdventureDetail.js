@@ -12,10 +12,19 @@ import MenuButton from '../nav/MenuButton';
 import MyAdventures from '../MyAdventures/myAdventuresContainer';
 import MapScreen from './MapScreen';
 import UserButton from '../nav/UserButton';
+import Reviews from '../Reviews/Reviews.js';
 
-var AllAdventureDetail = function (props) {
+class AllAdventureDetail extends Component {
 
-  var advenAccept = function(){
+  constructor(props){
+    super(props)
+    this.state = {
+      showRiddleView: true,
+      toggletext: "See Reviews"
+    }
+  }
+
+  advenAccept(){
     AsyncStorage.getItem('id_token')
       .then(token => {
         fetch("https://treasure-trek.herokuapp.com/api/pickAd", {
@@ -26,14 +35,14 @@ var AllAdventureDetail = function (props) {
             "x-access-token": token
           },
           body: JSON.stringify({
-            adventureid: props.adven._id
+            adventureid: this.props.adven._id
           })
         })
         .then(res => {
           return res.json()
         })
         .then(json => {
-          props.resetToRoute({
+          this.props.resetToRoute({
             name: "My Adventures",
             component: MyAdventures,
             leftCorner: MenuButton,
@@ -46,8 +55,14 @@ var AllAdventureDetail = function (props) {
       })
   }
 
-  var showList = function() {
-    return props.adven.adventure.map((riddle, index) => {
+  showReviews () {
+    return (
+      <View><Reviews nav={this.props.nav} myAdventure={this.props.adven} stars={this.props.adven.stars}/></View>
+    );
+  }
+
+  showRiddles() {
+    var riddleList = this.props.adven.adventure.map((riddle, index) => {
       var riddleNum = index+1
       return (
         <View key={riddleNum} style={style.listStyle}>
@@ -55,36 +70,60 @@ var AllAdventureDetail = function (props) {
         </View>
       );
     })
+
+    return (
+      <ScrollView>
+        {riddleList}
+      </ScrollView>
+    )
   }
 
-  return (
-    <View style={{flex: 1, marginTop:5, flexDirection: 'column', justifyContent: 'space-between'}}>
+  toggleRiddleReview(){
+    this.setState({ showRiddleView: !this.state.showRiddleView})
+    if (this.state.showRiddleView ){
+      this.setState({ toggletext: "See Riddles"})
+    } else {
+      this.setState({ toggletext: "See Reviews"})
+    }
+  }
 
-      <View style={style.map}>
-        <MapScreen riddles={props.adven.adventure}/>
-      </View>
+  render(){
+    return (
+      <View style={style.container}>
 
-      <View style={{flex: 2}}>
-        <ScrollView>
-          {showList()}
-        </ScrollView>
+        <View style={style.map}>
+          <MapScreen riddles={this.props.adven.adventure}/>
+        </View>
+
+
+          {this.state.showRiddleView ? this.showRiddles() : this.showReviews()}
+
         <View>
-          <TouchableHighlight style={style.button} onPress={advenAccept}>
+          <TouchableHighlight style={style.button} underlayColor='#00ffff' onPress={this.toggleRiddleReview.bind(this)}>
+            <Text style={style.buttonText}>{this.state.toggletext}</Text>
+          </TouchableHighlight>
+          <TouchableHighlight style={style.button} onPress={this.advenAccept.bind(this)}>
             <Text style={style.buttonText}>Accept</Text>
           </TouchableHighlight>
         </View>
-      </View>
 
-    </View>
-  );
+      </View>
+    );
+  }
 
 };
 
 var style = {
+  container: {
+    flex: 1,
+    marginTop:5,
+    flexDirection: 'column',
+    justifyContent: 'space-between'
+  },
   map: {
-    margin: 5, // changed from 10
+    margin: 5,
     position: 'relative',
-    flex: 3
+    flex:1
   },
   button: {
     height: 36,
@@ -92,10 +131,8 @@ var style = {
     borderColor: '#48BBEC',
     borderWidth: 1,
     borderRadius: 8,
-    marginLeft: 40,
-    marginRight: 40,
-    marginTop: 20,
-    marginBottom: 15,
+    marginTop: 2,
+    marginBottom: 2, // changed from 10
     alignSelf: 'stretch',
     justifyContent: 'center'
   },

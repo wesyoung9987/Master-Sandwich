@@ -11,7 +11,7 @@ import AllAdventureDetail from './AllAdventureDetail'
 
 
 const AdvenLI = (props) => {
-  console.log("PHOTO: ", props.adven.photo)
+
   const {
     touchContainer,
     itemContainer,
