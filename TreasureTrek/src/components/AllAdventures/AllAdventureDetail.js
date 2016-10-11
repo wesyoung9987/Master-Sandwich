@@ -12,6 +12,7 @@ import MenuButton from '../nav/MenuButton';
 import MyAdventures from '../MyAdventures/myAdventuresContainer';
 import MapScreen from './MapScreen';
 import UserButton from '../nav/UserButton';
+import Reviews from '../Reviews/Reviews.js';
 
 class AllAdventureDetail extends Component {
 
@@ -54,7 +55,13 @@ class AllAdventureDetail extends Component {
       })
   }
 
-  showList() {
+  showReviews () {
+    return (
+      <View><Reviews nav={this.props.nav} myAdventure={this.props.adven} stars={this.props.adven.stars}/></View>
+    );
+  }
+
+  showRiddles() {
     var riddleList = this.props.adven.adventure.map((riddle, index) => {
       var riddleNum = index+1
       return (
@@ -71,6 +78,15 @@ class AllAdventureDetail extends Component {
     )
   }
 
+  toggleRiddleReview(){
+    this.setState({ showRiddleView: !this.state.showRiddleView})
+    if (this.state.showRiddleView ){
+      this.setState({ toggletext: "See Riddles"})
+    } else {
+      this.setState({ toggletext: "See Reviews"})
+    }
+  }
+
   render(){
     return (
       <View style={style.container}>
@@ -80,11 +96,11 @@ class AllAdventureDetail extends Component {
         </View>
 
 
-          {this.showList()}
+          {this.state.showRiddleView ? this.showRiddles() : this.showReviews()}
 
         <View>
-          <TouchableHighlight style={style.button} underlayColor='#00ffff'>
-            <Text style={style.buttonText}>Hi</Text>
+          <TouchableHighlight style={style.button} underlayColor='#00ffff' onPress={this.toggleRiddleReview.bind(this)}>
+            <Text style={style.buttonText}>{this.state.toggletext}</Text>
           </TouchableHighlight>
           <TouchableHighlight style={style.button} onPress={this.advenAccept.bind(this)}>
             <Text style={style.buttonText}>Accept</Text>
