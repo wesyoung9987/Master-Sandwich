@@ -57,7 +57,9 @@ class AllAdventureDetail extends Component {
 
   showReviews () {
     return (
-      <View><Reviews nav={this.props.nav} myAdventure={this.props.adven} stars={this.props.adven.stars}/></View>
+      <View>
+        <Reviews nav={this.props.nav} myAdventure={this.props.adven} stars={this.props.adven.stars}/>
+      </View>
     );
   }
 
@@ -72,7 +74,7 @@ class AllAdventureDetail extends Component {
     })
 
     return (
-      <ScrollView>
+      <ScrollView style={{flex:1}}>
         {riddleList}
       </ScrollView>
     )
@@ -117,13 +119,14 @@ var style = {
   container: {
     flex: 1,
     marginTop:5,
+    marginBottom: 5,
     flexDirection: 'column',
     justifyContent: 'space-between'
   },
   map: {
     margin: 5,
     position: 'relative',
-    flex:1
+    flex:2
   },
   button: {
     height: 36,
@@ -131,8 +134,10 @@ var style = {
     borderColor: '#48BBEC',
     borderWidth: 1,
     borderRadius: 8,
-    marginTop: 2,
-    marginBottom: 2, // changed from 10
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 5,
+    // marginBottom: 2, // changed from 10
     alignSelf: 'stretch',
     justifyContent: 'center'
   },
