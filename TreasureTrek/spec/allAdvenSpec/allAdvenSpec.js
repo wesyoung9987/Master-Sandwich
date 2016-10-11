@@ -7,6 +7,7 @@ import AllAdventureDetail from '../../src/components/AllAdventures/AllAdventureD
 import AllAdventureLi from '../../src/components/AllAdventures/AllAdventureLI'
 import AllAdventuresContainer from '../../src/components/AllAdventures/AllAdventuresContainer'
 import AllAdventuresList from '../../src/components/AllAdventures/AllAdventuresList'
+import AddAdventure from '../../src/components/myCreatedAdventures/AddAdventure';
 
 import { adventure } from '../mockData'
 
@@ -72,6 +73,16 @@ describe('#AllAdventureDetail', () => {
   const wrapper = shallow(<AllAdventureDetail adven={adventure} />)
 
   it('AllAdventureDetail component should exists', () => {
+    expect(wrapper).to.exist
+  })
+
+})
+
+describe('#AddAdventure', () => {
+
+  const wrapper = shallow(<AddAdventure />)
+
+  it('AddAdventure component should exists', () => {
     expect(wrapper).to.exist
   })
 
