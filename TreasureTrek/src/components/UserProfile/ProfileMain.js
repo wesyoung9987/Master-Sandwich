@@ -59,14 +59,41 @@ class UserProfile extends Component {
 
   render(){
     return (
-      <View style={{ flex: 1}}>
-        <View style={styles.imageContainer}>
+      <View style={{ flex: 1, justifyContent: 'space-between'}}>
 
-          <View>
-            <Image style={styles.imageStyle2} source={{uri: this.state.myInfo.photo} || require('../../resources/user-placeholder.png')} />
-          </View>
+        <View style={styles.imageContainer} onLayout={event=>{
+          console.log("LAYOUT:",event.nativeEvent.layout)
+          let {width, height} = event.nativeEvent.layout;
+          dynamicSize.side = Math.min(width, height);
+          dynamicSize.borderRadius = dynamicSize.side/2;
+          console.log("DYN:", dynamicSize);
+        }}>
+
+
+            <Image style={{height: dynamicSize.side, width: dynamicSize.side, borderRadius:dynamicSize.borderRadius}} source={{uri: this.state.myInfo.photo} || require('../../resources/user-placeholder.png')} />
+
+            {/* Workaround to make a text border
+                Made 4 copies of same text and each has its
+                shadow offset a different direction
+             */}
+            <View style={{position: 'absolute', top:10, left: 0, right: 0}}>
+            <Text style={{alignSelf: 'center', fontSize: 25, backgroundColor: 'rgba(255,255,255,0)', fontWeight: '600', color: '#e6005c', textShadowColor: '#48BBEC', textShadowOffset: { width:1, height: 1} }}>{this.state.myInfo.username}</Text>
+            </View>
+
+            <View style={{position: 'absolute', top:10, left: 0, right: 0}}>
+            <Text style={{alignSelf: 'center', fontSize: 25, backgroundColor: 'rgba(255,255,255,0)', fontWeight: '600', color: '#e6005c', textShadowColor: '#48BBEC', textShadowOffset: { width:-1, height: -1} }}>{this.state.myInfo.username}</Text>
+            </View>
+
+            <View style={{position: 'absolute', top:10, left: 0, right: 0}}>
+            <Text style={{alignSelf: 'center', fontSize: 25, backgroundColor: 'rgba(255,255,255,0)', fontWeight: '600', color: '#e6005c', textShadowColor: '#48BBEC', textShadowOffset: { width:1, height: -1} }}>{this.state.myInfo.username}</Text>
+            </View>
+
+            <View style={{position: 'absolute', top:10, left: 0, right: 0}}>
+            <Text style={{alignSelf: 'center', fontSize: 25, backgroundColor: 'rgba(255,255,255,0)', fontWeight: '600', color: '#e6005c', textShadowColor: '#48BBEC', textShadowOffset: { width:-1, height: 1} }}>{this.state.myInfo.username}</Text>
+            </View>
 
         </View>
+
         <View style={styles.fixToBottom}>
           <View style={styles.infoContainer}>
             <View style={styles.contentStyle}>
@@ -99,11 +126,7 @@ class UserProfile extends Component {
               <Text style={styles.textInfo}>Created Adventures: {this.state.myInfo.created || 0}</Text>
             </View>
           </View>
-          <View style={styles.infoContainer2}>
-            <View style={styles.contentStyle}>
-              <Text style={styles.textInfo2}>Username: {this.state.myInfo.username}</Text>
-            </View>
-          </View>
+
           <UploadPicButton nav={this.props} user={this.state.myInfo}/>
         </View>
 
@@ -112,11 +135,20 @@ class UserProfile extends Component {
   }
 };
 
+let dynamicSize = {
+  side: 100,
+  borderRadius: 50
+}
+
 const styles = {
   imageContainer: {
     justifyContent: 'center',
     flexDirection: 'row',
-    marginTop: 10
+    margin: 5,
+    flex: 1,
+    position: 'relative'
+    // borderWidth: 1,
+    // borderColor: 'black'
   },
   contentStyle: {
     flexDirection: 'column',
@@ -128,9 +160,14 @@ const styles = {
     marginRight: 10
   },
   imageStyle2: {
-    height: 250,
-    width: 250,
-    borderRadius: 125
+    // height: 250,
+    // width: 250,
+    // borderRadius: 125,
+    // flex: 1,
+    // resizeMode: 'contain',
+    // height: null,
+    // width: null,
+    // borderRadius: 20
   },
   textInfo: {
     color: 'white',
@@ -162,10 +199,10 @@ const styles = {
     marginLeft: 5
   },
   fixToBottom: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0
+    // position: 'absolute',
+    // left: 0,
+    // right: 0,
+    // bottom: 0
   }
 };
 
