@@ -78,7 +78,7 @@ var styles = {
   viewStyle: { // View holding two Texts and Image
     elevation: 2,
     flexDirection: 'row',
-    justifyContent: 'space-between', // added justify
+    justifyContent: 'space-between',
     flex: 1
   },
   detailsStyle: {
@@ -93,7 +93,6 @@ var styles = {
     fontFamily: 'Helvetica',
     fontWeight: 'bold',
     padding: 5,
-    // marginLeft: 23,
     elevation: 1,
     flexDirection: 'column',
     justifyContent: 'center',
@@ -105,7 +104,6 @@ var styles = {
     fontFamily: 'Helvetica',
     fontWeight: 'bold',
     padding: 5,
-    // marginLeft: 23,
     elevation: 1,
     flexDirection: 'column',
     justifyContent: 'center',
@@ -120,7 +118,6 @@ var styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center'
-    //marginLeft: 80 // removed
   },
   listStyle : { // List item container
     borderWidth: 1,
@@ -141,8 +138,6 @@ var styles = {
   },
   title: { // Riddle title text
     padding: 5,
-    // marginLeft: 5, // removed
-    //marginRight: 5, // removed
     borderColor: "#ddd",
     fontWeight: 'bold',
     elevation: 1,

@@ -90,7 +90,7 @@ class AdventureSolution extends Component {
 
   showMap () {
     return (
-      <MapScreen riddles={this.state.riddles} />
+      <MapScreen riddles={this.state.riddles} completion={this.state.completion}/>
     );
   }
 

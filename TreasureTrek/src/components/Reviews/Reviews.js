@@ -19,9 +19,7 @@ const Reviews = (props) => {
 
   return (
     <View>
-      <TouchableHighlight
-        onPress={toAdventureSolution}
-        underlayColor={'#00ffff'}>
+      <View>
         <View>
 
           <View style={styles.viewStyle}>
@@ -72,7 +70,7 @@ const Reviews = (props) => {
           </View>
 
         </View>
-      </TouchableHighlight>
+      </View>
     </View>
   );
 };
