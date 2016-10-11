@@ -11,10 +11,12 @@ import AllAdventureDetail from './AllAdventureDetail'
 
 
 const AdvenLI = (props) => {
-
-  const { itemContainer, viewStyle, detailsStyle, arrowsStyle, titleStyle, arrowsContainer, locationStyle } = styles;
+  const { itemContainer, viewStyle, detailsStyle, arrowsStyle, titleStyle, arrowsContainer, locationStyle, imageStyle } = styles;
   var photo = {
-    uri: props.adven.photo || "https://thenypost.files.wordpress.com/2015/08/spongebob-e1441057213584.jpg?quality=90&strip=all&w=664&h=441&crop=1"
+    uri: props.adven.photo !==
+      "../../TreasureTrek/src/resources/placeholder.png" ?
+      props.adven.photo :
+      "https://thenypost.files.wordpress.com/2015/08/spongebob-e1441057213584.jpg?quality=90&strip=all&w=664&h=441&crop=1"
   }
 
   const advenCardRoute = {
@@ -35,7 +37,11 @@ const AdvenLI = (props) => {
       source={photo}>
       <TouchableHighlight
       onPress={toAllAdventureDetail}
-      underlayColor={'#00ffff'}>
+      underlayColor={'#00ffff'}
+      style={{
+        justifyContent: 'flex-end',
+        marginBottom: 10
+      }}>
         <View style={viewStyle}>
           <View style={detailsStyle}>
             <Text style={titleStyle} onPress={toAllAdventureDetail}>{props.adven.title}</Text>
@@ -59,14 +65,20 @@ const styles = {
     marginBottom: 4,
     marginLeft: 2,
     marginRight: 2,
+    flexDirection: 'column',
     // borderColor: 'white'
     // resizeMode: 'cover',
     // backgroundColor: 'transparent'
     // alignItems: 'flex-end'
     // width: 400
   },
+  // imageStyle: {
+  //   resizeMode: 'cover',
+  //   flex: 3
+  // },
   viewStyle: {
     flexDirection: 'row',
+    flex: 3,
     // borderWidth: 1,
     // borderColor: '#ddd',
     padding: 10,
