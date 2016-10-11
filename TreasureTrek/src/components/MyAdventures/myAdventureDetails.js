@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View, TouchableHighlight, Image, Linking} from 'react-native';
 import AdventureSolution from './AdventureSolution.js';
-
+import AverageReviews from '../Reviews/AverageReviews.js';
 
 const MyAdventureDetails = (props) => {
 
@@ -23,94 +23,9 @@ const MyAdventureDetails = (props) => {
     props.nav.toRoute(myAdventureRoute);
   }
 
-  var averageStars = function() {
 
-    //Get number of review categories (1 Star, 2 Star, etc.)
-    //that actually have reviews in them
-    var numStarCategories = 0;
-    if (props.myAdventure.adventureId.stars.oneStar > 0) numStarCategories++;
-    if (props.myAdventure.adventureId.stars.twoStar > 0) numStarCategories++;
-    if (props.myAdventure.adventureId.stars.threeStar > 0) numStarCategories++;
-    if (props.myAdventure.adventureId.stars.fourStar > 0) numStarCategories++;
-    if (props.myAdventure.adventureId.stars.fiveStar > 0) numStarCategories++;
-
-    //Calculate average number of stars
-    var avg = numStarCategories ?  Math.floor(((1 * props.myAdventure.adventureId.stars.oneStar + 2 * props.myAdventure.adventureId.stars.twoStar + 3*  props.myAdventure.adventureId.stars.threeStar + 4 * props.myAdventure.adventureId.stars.fourStar + 5 * props.myAdventure.adventureId.stars.fiveStar) / numStarCategories)) : 0 ;
-
-    var totalReviews = props.myAdventure.adventureId.stars.oneStar + props.myAdventure.adventureId.stars.twoStar + props.myAdventure.adventureId.stars.threeStar + props.myAdventure.adventureId.stars.fourStar + props.myAdventure.adventureId.stars.fiveStar;
-
-
-    if (avg === 5) {
-      return(
-        <View style={styles.viewStyle}>
-              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
-              <Text style={styles.totalReviewsStyle}> {totalReviews} reviews</Text>
-        </View>
-      );
-    } else if (avg === 4) {
-      return(
-        <View style={styles.viewStyle}>
-              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/unselect_star.png')} />
-              <Text style={styles.totalReviewsStyle}> {totalReviews} reviews</Text>
-        </View>
-      );
-    } else if (avg === 3) {
-      return(
-        <View style={styles.viewStyle}>
-              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/unselect_star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/unselect_star.png')} />
-              <Text style={styles.totalReviewsStyle}> {totalReviews} reviews</Text>
-        </View>
-      );
-    } else if (avg === 2) {
-      return(
-        <View style={styles.viewStyle}>
-              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/unselect_star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/unselect_star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/unselect_star.png')} />
-              <Text style={styles.totalReviewsStyle}> {totalReviews} reviews</Text>
-        </View>
-      );
-    } else if (avg === 1) {
-      return(
-        <View style={styles.viewStyle}>
-              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/unselect_star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/unselect_star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/unselect_star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/unselect_star.png')} />
-              <Text style={styles.totalReviewsStyle}> {totalReviews} reviews</Text>
-        </View>
-      );
-    } else if (avg === 0) {
-      return(
-        <View style={styles.viewStyle}>
-              <Image style={styles.arrowsStyle} source={require('../../resources/unselect_star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/unselect_star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/unselect_star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/unselect_star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/unselect_star.png')} />
-              <Text style={styles.totalReviewsStyle}> {totalReviews} reviews</Text>
-        </View>
-      );
-    }
-  }
 
   return (
-
     <View style={styles.itemContainer}>
 
       <View style={{flex: 1, position: 'absolute', top: 0, bottom: 0,left: 0,right: 0}}>
@@ -127,7 +42,7 @@ const MyAdventureDetails = (props) => {
             <View style={styles.detailsStyle}>
               <Text style={styles.titleStyle}>{props.myAdventure.adventureId.title}</Text>
               <Text style={styles.locationStyle}>{props.myAdventure.adventureId.startingLocation}</Text>
-              {averageStars()}
+              <AverageReviews myAdventure={props.myAdventure}/>
             </View>
             <View style={styles.arrowsContainer}>
               <Image style={styles.arrowsStyle} source={require('../../resources/red-arrow.png')} />
