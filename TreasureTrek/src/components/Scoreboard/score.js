@@ -9,7 +9,7 @@ export default class Scores extends Component {
 
   renderRowCB(scores) {
     return scores.map((score, i) => {
-      return <ScoreLI key={i.toString()} score={score} />
+      return <ScoreLI key={i.toString()} place={i+1} score={score} />
     });
   }
 

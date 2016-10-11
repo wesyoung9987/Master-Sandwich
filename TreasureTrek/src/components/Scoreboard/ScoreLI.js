@@ -18,13 +18,16 @@ const ScoreLI = (props) => {
 
         <View style={{flexDirection: 'row', justifyContent: 'flex-start', flex: 1}}>
           <View style={arrowsContainer}>
-            <Image style={arrowsStyle} source={require('../../resources/user-placeholder.png')} />
+            <Image style={arrowsStyle} source={props.score.photo!=='../../TreasureTrek/src/resources/placeholder.png' ? {uri: props.score.photo} : require('../../resources/user-placeholder.png')} />
           </View>
 
 
           <View style={detailsStyleL}>
             <Text style={titleStyle}>{props.score.username}</Text>
-            <Text style={{ fontSize: 15 }}>Level {props.score.level}</Text>
+            <View style={{flexDirection: 'row'}}>
+            <Text style={{fontSize: 14, fontWeight: 'bold'}}>{'#'+props.place}</Text>
+            <Text style={{ fontSize: 12 }}>{' | Level ' + props.score.level}</Text>
+            </View>
           </View>
         </View>
 
@@ -43,7 +46,7 @@ const styles = {
     flexDirection: 'row',
     borderWidth: 1,
     borderColor: '#ddd',
-    padding: 10,
+    padding: 5,
     justifyContent: 'space-between'
   },
   detailsStyleL: {
@@ -62,24 +65,26 @@ const styles = {
     // width: 245
   },
   titleStyle: {
-    fontSize: 24,
+    fontSize: 20,
     color: '#ed1558',
     alignItems: 'center',
     flex: 1
   },
   pointStyle: {
-    fontSize: 24,
+    fontSize: 20,
     color: '#ed1558',
   },
   arrowsStyle: {
-    height: 35,
-    width: 35
+    height: 40,
+    width: 40,
+    borderRadius: 20
   },
   arrowsContainer: {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 5
+    marginRight: 5,
+    marginLeft: 5
   }
 };
 
