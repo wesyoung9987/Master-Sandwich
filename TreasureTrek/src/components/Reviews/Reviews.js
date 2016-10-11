@@ -82,7 +82,12 @@ var styles = {
     flexDirection: 'row',
     borderWidth: 1,
     borderColor: '#ddd',
-    padding: 10
+    borderRadius: 2,
+    elevation: 1,
+    padding: 5,
+    marginTop: 5,
+    marginLeft: 5,
+    marginRight: 5
   },
   detailsStyle: {
     flexDirection: 'column',

@@ -115,20 +115,21 @@ class AdventureSolution extends Component {
   render () {
     return (
       <View style={{ flex: 1, marginTop:5, flexDirection: 'column', justifyContent: 'space-between'}}>
+
         <View style={styles.map}>
           {this.showMap()}
         </View>
 
-        {this.state.showRiddleView ? this.showList() : this.showReviews()}
-
         <View>
-          <TouchableHighlight style={styles.button} onPress={this.show.bind(this)} underlayColor='#00ffff'>
+          {this.state.showRiddleView ? this.showList() : this.showReviews()}
+          <TouchableHighlight style={styles.button1} onPress={this.show.bind(this)} underlayColor='#00ffff'>
             <Text style={styles.buttonText}>{this.state.toggletext}</Text>
           </TouchableHighlight>
-          <TouchableHighlight style={styles.button} onPress={this.deleteAdventure.bind(this)}  underlayColor='#00ffff'>
+          <TouchableHighlight style={styles.button2} onPress={this.deleteAdventure.bind(this)}  underlayColor='#00ffff'>
               <Text  style={styles.buttonText}> Give Up? </Text>
           </TouchableHighlight>
         </View>
+
       </View>
     );
   }
@@ -143,14 +144,28 @@ var styles = {
     // borderWidth: 1,
     flex:1
   },
-  button: {
+  button1: {
     height: 36,
     backgroundColor: '#48BBEC',
     borderColor: '#48BBEC',
     borderWidth: 1,
     borderRadius: 8,
-    marginTop: 2,
-    marginBottom: 2, // changed from 10
+    marginTop: 5,
+    marginLeft: 5,
+    marginRight: 5,
+    alignSelf: 'stretch',
+    justifyContent: 'center'
+  },
+  button2: {
+    height: 36,
+    backgroundColor: '#48BBEC',
+    borderColor: '#48BBEC',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginTop: 5,
+    marginBottom: 5, // changed from 10
+    marginLeft: 5,
+    marginRight: 5,
     alignSelf: 'stretch',
     justifyContent: 'center'
   },

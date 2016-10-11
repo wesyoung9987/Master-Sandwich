@@ -93,7 +93,7 @@ var styles = {
     fontFamily: 'Helvetica',
     fontWeight: 'bold',
     padding: 5,
-    marginLeft: 23,
+    // marginLeft: 23,
     elevation: 1,
     flexDirection: 'column',
     justifyContent: 'center',
@@ -105,7 +105,7 @@ var styles = {
     fontFamily: 'Helvetica',
     fontWeight: 'bold',
     padding: 5,
-    marginLeft: 23,
+    // marginLeft: 23,
     elevation: 1,
     flexDirection: 'column',
     justifyContent: 'center',
@@ -141,7 +141,7 @@ var styles = {
   },
   title: { // Riddle title text
     padding: 5,
-    marginLeft: 5, // removed
+    // marginLeft: 5, // removed
     //marginRight: 5, // removed
     borderColor: "#ddd",
     fontWeight: 'bold',
