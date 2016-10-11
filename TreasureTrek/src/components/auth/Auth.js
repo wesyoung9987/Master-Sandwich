@@ -8,7 +8,8 @@ import {
   AsyncStorage,
   TouchableHighlight,
   AlertIOS,
-  ActivityIndicator} from 'react-native';
+  ActivityIndicator,
+  KeyboardAvoidingView} from 'react-native';
 import t from 'tcomb-form-native';
 
 // App components
@@ -20,23 +21,27 @@ import UserButton from '../nav/UserButton.js';
 // Create Session Storage Key for AsyncStorage
 var STORAGE_KEY = 'id_token';
 
+// Email field validation
 var Email = t.refinement(t.String, string => {
   return /^\w+@\w+\.\w+$/i.test(string);
 }, 'Email')
 
 var Form = t.form.Form;
 
+// Signin form fields
 var Signin = t.struct({
   email: Email,
   password: t.String
 });
 
+// Signup form fields
 var Signup = t.struct({
   username: t.String,
   email: Email,
   password: t.String
 });
 
+// These options are passed to the form component
 var options = {
   fields: {
     password: {
@@ -73,9 +78,6 @@ var Auth = React.createClass({
     } catch (error) {
         console.log('AsyncStorage error: ' + error.message);
     }
-    // Test AsyncStorage
-    // var session = AsyncStorage.getItem(STORAGE_KEY);
-    // console.log('stored session: ', session);
   },
 
   // Clear Form
@@ -106,7 +108,6 @@ var Auth = React.createClass({
         //Check for Valid Token
         if (data.userid) {
           this._onValueChange(STORAGE_KEY, data.userid);
-          // AlertIOS.alert( "Signup Success!" );
           this.props.resetToRoute({
             name: "My Adventures",
             component: MyAdventures,
@@ -142,7 +143,6 @@ var Auth = React.createClass({
         this.setSpinner();
         if (data.userid) {
           this._onValueChange(STORAGE_KEY, data.userid);
-          // AlertIOS.alert( "Login Success!" );
           this.props.resetToRoute({
             name: "My Adventures",
             component: MyAdventures,
@@ -160,29 +160,32 @@ var Auth = React.createClass({
 
 
 
-  // Logout Handler
-  async userLogout() {
-    try {
-        await AsyncStorage.removeItem(STORAGE_KEY);
-        AlertIOS.alert("Logout Success!");
-        this.clearForm();
-    } catch (error) {
-        console.log('AsyncStorage error: ' + error.message);
-    }
-  },
+  // // Logout Handler
+  // async userLogout() {
+  //   try {
+  //       await AsyncStorage.removeItem(STORAGE_KEY);
+  //       AlertIOS.alert("Logout Success!");
+  //       this.clearForm();
+  //   } catch (error) {
+  //       console.log('AsyncStorage error: ' + error.message);
+  //   }
+  // },
 
+  // Toggles spinner while awaiting server response
   setSpinner() {
     this.setState({
       waiting: !this.state.waiting
     });
   },
 
+  // Toggles between displaying the sigup/signin forms
   toggleSignup() {
     this.setState({
       onSignup: !this.state.onSignup
     });
   },
 
+  // Initializes the toggles to false on page load
   componentWillMount() {
     this.setState({
       waiting: false,
@@ -205,25 +208,29 @@ var Auth = React.createClass({
           size = "large"
           color={"#e6005c"}
           />
-          <View>
+
+          <KeyboardAvoidingView behavior={'padding'} >
+            <View>
               <Form
                   ref="form"
                   type={this.state.onSignup ? Signup : Signin}
                   options={options}
               />
-          </View>
+            </View>
+          </KeyboardAvoidingView>
+
           <View>
-              <TouchableHighlight style={styles.button} onPress={this.state.onSignup ? this.userSignUp : this.userLogin} underlayColor='#99d9f4'>
-                  <Text style={styles.buttonText}>{this.state.onSignup ? 'Signup' : 'Login'}</Text>
-              </TouchableHighlight>
-              <TouchableHighlight style={styles.button} onPress={this.toggleSignup} underlayColor='#99d9f4'>
-                <View style={styles.viewStyle}>
-                  <Text style={styles.buttonText}>{this.state.onSignup ? 'To Login ' : 'To Signup '}</Text>
-                  <View style={styles.arrowsContainer}>
-                    <Image style={styles.arrowsStyle} source={require('../../resources/double-arrows.png')} />
-                  </View>
+            <TouchableHighlight style={styles.button} onPress={this.state.onSignup ? this.userSignUp : this.userLogin} underlayColor='#99d9f4'>
+                <Text style={styles.buttonText}>{this.state.onSignup ? 'Signup' : 'Login'}</Text>
+            </TouchableHighlight>
+            <TouchableHighlight style={styles.button} onPress={this.toggleSignup} underlayColor='#99d9f4'>
+              <View style={styles.viewStyle}>
+                <Text style={styles.buttonText}>{this.state.onSignup ? 'To Login ' : 'To Signup '}</Text>
+                <View style={styles.arrowsContainer}>
+                  <Image style={styles.arrowsStyle} source={require('../../resources/double-arrows.png')} />
                 </View>
-              </TouchableHighlight>
+              </View>
+            </TouchableHighlight>
           </View>
         </View>
 
@@ -256,12 +263,6 @@ const styles = {
     borderColor: 'gray',
     borderWidth: 1
   },
-  // container: {
-  //   justifyContent: 'center',
-  //   marginTop: 340,
-  //   padding: 20,
-  //   backgroundColor: 'rgba(52,52,52,0)'
-  // },
   container: {
     flex: 1,
     flexDirection: 'column',

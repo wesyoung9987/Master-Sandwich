@@ -8,6 +8,7 @@ class MapScreen extends Component {
     super(props);
     this.state = {
       riddles: props.riddles,
+      completion: props.completion,
       region: {
         latitude: 37.78825,
         longitude: -122.4324,
@@ -51,6 +52,7 @@ class MapScreen extends Component {
           title={'Riddle #'+(i+1)}
           description={riddle.riddle}
           key={i.toString()}
+          pinColor={this.state.completion[i] ? 'green' : 'red'}
         />
       );
     })
