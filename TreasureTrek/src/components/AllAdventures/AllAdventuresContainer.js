@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text, AsyncStorage } from 'react-native';
+import {
+  View,
+  Text,
+  AsyncStorage
+} from 'react-native';
 import AllAdventuresList from './AllAdventuresList.js';
 
 class AllAdventures extends Component {
+
   constructor(){
     super()
     this.state = {
@@ -12,6 +17,8 @@ class AllAdventures extends Component {
     }
   }
 
+  // API call,  should return array of all adventures not by user and not
+  // previously accepted
   getAllAds(){
     var self = this
     AsyncStorage.getItem('id_token')
@@ -35,7 +42,6 @@ class AllAdventures extends Component {
   }
 
   render(){
-    console.log("Containter All Adventures: ", this.state.adventures)
     return (
       <View style={{ flex: 1}}>
         <AllAdventuresList

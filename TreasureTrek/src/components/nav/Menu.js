@@ -12,7 +12,6 @@ import {
 } from 'react-native';
 
 import Auth from '../auth/Auth';
-import Main from '../main/Main';
 import MenuButton from './MenuButton';
 import MyAdventures from '../MyAdventures/myAdventuresContainer';
 import AllAdventures from '../AllAdventures/AllAdventuresContainer';

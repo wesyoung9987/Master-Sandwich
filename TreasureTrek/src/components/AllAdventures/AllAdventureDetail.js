@@ -24,6 +24,7 @@ class AllAdventureDetail extends Component {
     }
   }
 
+  // Adds adventure to MyAdventure category
   advenAccept(){
     AsyncStorage.getItem('id_token')
       .then(token => {
@@ -42,6 +43,7 @@ class AllAdventureDetail extends Component {
           return res.json()
         })
         .then(json => {
+          // reroute back to MyAdventures after successful adventure accept
           this.props.resetToRoute({
             name: "My Adventures",
             component: MyAdventures,
@@ -55,6 +57,7 @@ class AllAdventureDetail extends Component {
       })
   }
 
+  // toggle from showRiddles
   showReviews () {
     return (
       <View>
@@ -63,6 +66,7 @@ class AllAdventureDetail extends Component {
     );
   }
 
+  // toggle from showReviews
   showRiddles() {
     var riddleList = this.props.adven.adventure.map((riddle, index) => {
       var riddleNum = index+1
@@ -80,6 +84,7 @@ class AllAdventureDetail extends Component {
     )
   }
 
+  // button handler to toggle views between showRiddles and showReviews
   toggleRiddleReview(){
     this.setState({ showRiddleView: !this.state.showRiddleView})
     if (this.state.showRiddleView ){
@@ -98,7 +103,7 @@ class AllAdventureDetail extends Component {
         </View>
 
 
-          {this.state.showRiddleView ? this.showRiddles() : this.showReviews()}
+        {this.state.showRiddleView ? this.showRiddles() : this.showReviews()}
 
         <View>
           <TouchableHighlight style={style.button} underlayColor='#00ffff' onPress={this.toggleRiddleReview.bind(this)}>

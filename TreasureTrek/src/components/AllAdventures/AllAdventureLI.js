@@ -44,6 +44,7 @@ const AdvenLI = (props) => {
     props.nav.toRoute(advenCardRoute);
   }
 
+  // total layout for list item
   return (
     <View style={itemContainer}>
       <View style={imageContainer}>
