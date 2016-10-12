@@ -11,7 +11,8 @@ import {
 // App components
 import AllAdventureLI from './AllAdventureLI'
 
-export default class AllAdvens extends Component {
+class AllAdvens extends Component {
+
   constructor(props){
     super(props)
     this.state = {
@@ -19,6 +20,7 @@ export default class AllAdvens extends Component {
     }
   }
 
+  // for search function
   filter(e){
     this.setState({
       query: e.nativeEvent.text,
@@ -32,6 +34,7 @@ export default class AllAdvens extends Component {
   }
 
   render() {
+    // target for search function
     var filtered = this.props.advens.filter(adventure => {
         return adventure.title
           .toLowerCase()
@@ -54,3 +57,5 @@ export default class AllAdvens extends Component {
     );
   }
 }
+
+export default AllAdvens

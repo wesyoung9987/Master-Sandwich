@@ -9,7 +9,8 @@ import {
   TouchableHighlight,
   AlertIOS,
   ActivityIndicator,
-  KeyboardAvoidingView} from 'react-native';
+  KeyboardAvoidingView
+} from 'react-native';
 import t from 'tcomb-form-native';
 
 // App components
