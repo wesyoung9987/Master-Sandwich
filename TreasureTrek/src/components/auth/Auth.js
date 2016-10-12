@@ -14,7 +14,6 @@ import {
 import t from 'tcomb-form-native';
 
 // App components
-import Main from '../main/Main.js';
 import MenuButton from '../nav/MenuButton.js';
 import MyAdventures from '../MyAdventures/myAdventuresContainer';
 import UserButton from '../nav/UserButton.js';

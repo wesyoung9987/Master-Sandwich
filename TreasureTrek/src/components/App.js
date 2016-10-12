@@ -7,7 +7,6 @@ import {
 import Router from 'react-native-simple-router';
 
 // App components
-import Header from './auth/Header';
 import Auth from './auth/Auth';
 
 // Test Routes
