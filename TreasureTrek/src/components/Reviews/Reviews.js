@@ -23,38 +23,38 @@ const Reviews = (props) => {
         <View>
 
           <View style={styles.viewStyle}>
-              <Image style={styles.arrowsStyle} source={require('../../resources/star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/star.png')} />
+              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
+              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
+              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
+              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
+              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
             <View style={styles.detailsStyle}>
               <Text style={styles.titleStyle}>({props.stars.fiveStar})</Text>
             </View>
           </View>
 
           <View style={styles.viewStyle}>
-              <Image style={styles.arrowsStyle} source={require('../../resources/star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/star.png')} />
+              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
+              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
+              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
+              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
             <View style={styles.detailsStyle}>
               <Text style={styles.titleStyle}>({props.stars.fourStar})</Text>
             </View>
           </View>
 
             <View style={styles.viewStyle}>
-              <Image style={styles.arrowsStyle} source={require('../../resources/star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/star.png')} />
+              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
+              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
+              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
             <View style={styles.detailsStyle}>
               <Text style={styles.titleStyle}>({props.stars.threeStar})</Text>
             </View>
           </View>
 
           <View style={styles.viewStyle}>
-              <Image style={styles.arrowsStyle} source={require('../../resources/star.png')} />
-              <Image style={styles.arrowsStyle} source={require('../../resources/star.png')} />
+              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
+              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
             <View style={styles.detailsStyle}>
               <Text style={styles.titleStyle}>({props.stars.twoStar})</Text>
             </View>
@@ -62,7 +62,7 @@ const Reviews = (props) => {
 
           <View style={styles.viewStyle}>
             <View style={styles.arrowsContainer}>
-              <Image style={styles.arrowsStyle} source={require('../../resources/star.png')} />
+              <Image style={styles.arrowsStyle} source={require('../../resources/select_star.png')} />
             </View>
             <View style={styles.detailsStyle}>
               <Text style={styles.titleStyle}>({props.stars.oneStar})</Text>
