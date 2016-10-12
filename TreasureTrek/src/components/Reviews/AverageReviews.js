@@ -94,12 +94,12 @@ var styles = {
     borderWidth: 1,
     borderColor: '#ddd',
     padding: 10,
-    justifyContent: 'space-between' // added justify
+    justifyContent: 'space-between'
   },
   viewStyle: {
     flexDirection: 'row',
     padding: 10,
-    justifyContent: 'space-between' // added justify
+    justifyContent: 'space-between'
   },
   detailsStyle: {
     flexDirection: 'column',

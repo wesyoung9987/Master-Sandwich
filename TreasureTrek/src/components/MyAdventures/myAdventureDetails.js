@@ -77,14 +77,10 @@ var styles = {
     justifyContent: 'space-between', // added justify
     backgroundColor: 'rgba(0,0,0,0.2)',
   },
-  viewStyle: {
-    flexDirection: 'row',
-    padding: 10,
-    justifyContent: 'space-between' // added justify
-  },
   detailsStyle: {
     flexDirection: 'column',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    //backgroundColor: 'rgba(0,0,0,0.2)'
   },
   titleStyle: {
     fontSize: 20,
