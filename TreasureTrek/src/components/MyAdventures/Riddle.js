@@ -23,14 +23,33 @@ const Riddle = (props) => {
     props.nav.toRoute(SubmissionRoute);
   }
 
+  var showNumber = function() {
+    if (props.num === 1) {
+      return(
+        <View style={styles.iconContainer}>
+          <Image style={styles.iconStyle2} source={require('../../resources/one.png')} />
+        </View>
+      );
+    } else if (props.num == 2) {
+      return (
+        <View style={styles.iconContainer}>
+          <Image style={styles.iconStyle2} source={require('../../resources/two.png')} />
+        </View>
+      );
+    } else if (props.num == 3) {
+      return (
+        <View style={styles.iconContainer}>
+          <Image style={styles.iconStyle2} source={require('../../resources/three.png')} />
+        </View>
+      );
+    }
+  }
+
+
   var solvedStatus = function() {
     return (
       <View style={styles.viewStyle}>
-        <View>
-          <Text style={styles.title}>
-            Riddle # {props.num} ---
-          </Text>
-        </View>
+        {showNumber()}
         <View>
           <Text style={styles.statusGreen}>COMPLETED</Text>
         </View>
@@ -44,12 +63,10 @@ const Riddle = (props) => {
   var unsolvedStatus = function() {
     return (
       <View style={styles.viewStyle}>
-        <View>
-          <Text style={styles.title}>
-            Riddle # {props.num} ---
-          </Text>
+        <View style={styles.detailStyle}>
+          {showNumber()}
         </View>
-        <View >
+        <View style={styles.detailStyle}>
           <Text style={styles.statusRed}>UNSOLVED</Text>
         </View>
         <View style={styles.iconContainer}>
@@ -60,17 +77,17 @@ const Riddle = (props) => {
   }
 
   return (
-    <View>
+
       <TouchableHighlight
         onPress={toSubmission}
         underlayColor={'#00ffff'}>
         <View style={styles.listStyle}>
-          <View style={styles.viewStyle}>
+          <View>
               {props.completion ? solvedStatus() : unsolvedStatus()}
+          </View>
         </View>
-      </View>
       </TouchableHighlight>
-    </View>
+
   );
 }
 
@@ -79,12 +96,14 @@ var styles = {
     elevation: 2,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    flex: 1
+    flex: 1,
+    width: 320
   },
   detailsStyle: {
     flexDirection: 'column',
-    justifyContent: 'space-around',
-    marginLeft: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 10,
     width: 285,
     height: 35
   },
@@ -97,7 +116,8 @@ var styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    color: 'green'
+    color: 'green',
+    marginTop: 10
   },
   statusRed: {
     fontSize: 14,
@@ -108,16 +128,23 @@ var styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    color: 'red'
+    color: 'red',
+    marginTop: 10
   },
   iconStyle: {
-    height: 25,
-    width: 25
+    height: 30,
+    width: 30
+  },
+  iconStyle2: {
+    height: 45,
+    width: 30
   },
   iconContainer: {
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    margin: 2,
+    padding: 5
   },
   listStyle : { // List item container
     borderWidth: 1,

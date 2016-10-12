@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {AsyncStorage, AlertIOS, Text, View, TouchableHighlight, ScrollView} from 'react-native';
+import {Image, AsyncStorage, AlertIOS, Text, View, TouchableHighlight, ScrollView} from 'react-native';
 import Riddle from './Riddle.js'
 import MyAdventures from './myAdventuresContainer'
 import MenuButton from '../nav/MenuButton';
@@ -77,11 +77,17 @@ class AdventureSolution extends Component {
     });
   }
 
+
+
   showList () {
     return (
       <ScrollView >
         {this.state.riddles.map((riddle, index) => {
-          return (<Riddle num={index+1} key={index.toString()} completion={this.state.completion[index]} id={this.state.id} nav={this.props.nav} loc={riddle.location} riddle={riddle.riddle} answer={riddle.answer} completedArray = {this.state.completion} updateCompletion={this.updateCompletion.bind(this, index)}/>);
+          return (
+            <View style={styles.listStyle}>
+              <Riddle num={index+1} key={index.toString()} completion={this.state.completion[index]} id={this.state.id} nav={this.props.nav} loc={riddle.location} riddle={riddle.riddle} answer={riddle.answer} completedArray = {this.state.completion} updateCompletion={this.updateCompletion.bind(this, index)}/>
+            </View>
+          );
         })}
 
       </ScrollView>
@@ -196,6 +202,33 @@ var styles = {
     fontSize: 18,
     color: 'white',
     alignSelf: 'center'
+  },
+  iconStyle: {
+    height: 50,
+    width: 35
+  },
+  iconContainer: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  listStyle : { // List item container
+    borderWidth: 1,
+    borderRadius: 2,
+    borderColor: '#ddd',
+    elevation: 1,
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 5,
+    padding: 5,
+    flexDirection: 'row'
+  },
+    detailsStyle: {
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    marginLeft: 12,
+    //width: 285,
+    height: 35
   },
 }
 
