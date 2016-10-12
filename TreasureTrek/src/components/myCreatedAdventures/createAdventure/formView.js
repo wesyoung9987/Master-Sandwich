@@ -47,8 +47,11 @@ class FormView extends Component {
     }
   }
 
-// Expects {title: 'title', adventure: [riddles], startingLocation: 'location'}
+// Expects {title: 'title', image: 'image', adventure: [riddles], startingLocation: 'location'}
   async sendData(data){
+    if(data.image === ''){
+      return;
+    }
     form = {
       title: data.title,
       image: data.image,
@@ -286,6 +289,11 @@ class FormView extends Component {
     } else if (!this.state.title || !this.state.where) {
       this.setState({
         errorMsg: "Give the adventure a name and location",
+        failed: true
+      })
+    } else if (!this.state.image ) {
+      this.setState({
+        errorMsg: "Set a photo for the adventure",
         failed: true
       })
     } else {
