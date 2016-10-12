@@ -21,6 +21,7 @@ class AllAdventures extends Component {
   // previously accepted
   getAllAds(){
     var self = this
+    // API calls require session token
     AsyncStorage.getItem('id_token')
     .then(function(data){
       fetch("https://treasure-trek.herokuapp.com/api/fetchAll", {

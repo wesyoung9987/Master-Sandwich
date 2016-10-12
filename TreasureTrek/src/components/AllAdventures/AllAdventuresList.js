@@ -27,6 +27,7 @@ class AllAdvens extends Component {
     })
   }
 
+  // populates ScrollView
   renderRowCB(advens){
     return advens.map(adven => {
       return <AllAdventureLI key={adven._id} nav={this.props.nav} adven={adven}/>
