@@ -84,9 +84,9 @@ class AdventureSolution extends Component {
       <ScrollView >
         {this.state.riddles.map((riddle, index) => {
           return (
-            <View style={styles.listStyle}>
+
               <Riddle num={index+1} key={index.toString()} completion={this.state.completion[index]} id={this.state.id} nav={this.props.nav} loc={riddle.location} riddle={riddle.riddle} answer={riddle.answer} completedArray = {this.state.completion} updateCompletion={this.updateCompletion.bind(this, index)}/>
-            </View>
+
           );
         })}
 
@@ -191,7 +191,7 @@ var styles = {
     borderColor: '#48BBEC',
     borderWidth: 1,
     borderRadius: 8,
-    marginTop: 5,
+    // marginTop: 5,
     marginBottom: 5, // changed from 10
     marginLeft: 5,
     marginRight: 5,

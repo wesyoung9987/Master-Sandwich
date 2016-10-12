@@ -50,7 +50,7 @@ const Riddle = (props) => {
     return (
       <View style={styles.viewStyle}>
         {showNumber()}
-        <View>
+        <View style={styles.iconContainer}>
           <Text style={styles.statusGreen}>COMPLETED</Text>
         </View>
         <View style={styles.iconContainer}>
@@ -63,10 +63,8 @@ const Riddle = (props) => {
   var unsolvedStatus = function() {
     return (
       <View style={styles.viewStyle}>
-        <View style={styles.detailStyle}>
-          {showNumber()}
-        </View>
-        <View style={styles.detailStyle}>
+        {showNumber()}
+        <View style={styles.iconContainer}>
           <Text style={styles.statusRed}>UNSOLVED</Text>
         </View>
         <View style={styles.iconContainer}>
@@ -82,9 +80,9 @@ const Riddle = (props) => {
         onPress={toSubmission}
         underlayColor={'#00ffff'}>
         <View style={styles.listStyle}>
-          <View>
+
               {props.completion ? solvedStatus() : unsolvedStatus()}
-          </View>
+
         </View>
       </TouchableHighlight>
 
@@ -92,20 +90,20 @@ const Riddle = (props) => {
 }
 
 var styles = {
-  viewStyle: { // View holding two Texts and Image
+  viewStyle: { // View holding two Images and a Text
     elevation: 2,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     flex: 1,
-    width: 320
+    // width: 320
   },
   detailsStyle: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: 10,
-    width: 285,
-    height: 35
+    // flexDirection: 'column',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // margin: 10,
+    // width: 285,
+    // height: 35
   },
   statusGreen: {
     fontSize: 14,
@@ -117,7 +115,7 @@ var styles = {
     justifyContent: 'center',
     alignItems: 'center',
     color: 'green',
-    marginTop: 10
+    // marginTop: 10
   },
   statusRed: {
     fontSize: 14,
@@ -129,22 +127,22 @@ var styles = {
     justifyContent: 'center',
     alignItems: 'center',
     color: 'red',
-    marginTop: 10
+    // marginTop: 10
   },
   iconStyle: {
     height: 30,
     width: 30
   },
   iconStyle2: {
-    height: 45,
-    width: 30
+    height: 35,
+    width: 25
   },
   iconContainer: {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 2,
-    padding: 5
+    // margin: 2,
+    // padding: 5
   },
   listStyle : { // List item container
     borderWidth: 1,
@@ -154,7 +152,7 @@ var styles = {
     marginLeft: 5,
     marginRight: 5,
     marginTop: 5,
-    padding: 5,
+    padding: 2,
     flexDirection: 'row'
   },
   loc : {
