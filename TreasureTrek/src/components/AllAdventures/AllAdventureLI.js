@@ -15,6 +15,8 @@ const AdvenLI = (props) => {
   const {
     touchContainer,
     itemContainer,
+    imageContainer,
+    image,
     viewStyle,
     detailsStyle,
     arrowsStyle,
@@ -22,10 +24,13 @@ const AdvenLI = (props) => {
     arrowsContainer,
     locationStyle,
     imageStyle } = styles;
+
+  // sets default for description photo
   var photo = {
     uri: props.adven.photo || "https://thenypost.files.wordpress.com/2015/08/spongebob-e1441057213584.jpg"
   }
 
+  // routing object
   const advenCardRoute = {
     name: props.adven.title,
     component: AllAdventureDetail,
@@ -34,15 +39,16 @@ const AdvenLI = (props) => {
     }
   }
 
+  // routing handler
   var toAllAdventureDetail = function (){
     props.nav.toRoute(advenCardRoute);
   }
 
   return (
     <View style={itemContainer}>
-      <View style={{flex: 1, position: 'absolute', top: 0, bottom: 0,left: 0,right: 0}}>
+      <View style={imageContainer}>
         <Image
-          style={{flex: 1, resizeMode: 'cover', height: null, width: null}}
+          style={image}
           source={photo} />
       </View>
       <View style={touchContainer}>
@@ -74,6 +80,20 @@ const styles = {
     marginLeft: 2,
     marginRight: 2
   },
+  imageContainer: {
+    flex: 1,
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
+  },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+    height: null,
+    width: null
+  },
   touchContainer: {
     flex: 1,
     flexDirection: 'column',
@@ -89,17 +109,22 @@ const styles = {
   titleStyle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: 'white'
+    color: 'white',
+    textShadowColor: 'gray',
+    textShadowRadius: 1,
+    textShadowOffset: { width: 1, height: 1 }
   },
   locationStyle: {
     fontSize: 14,
     color: 'white',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textShadowColor: 'gray',
+    textShadowRadius: 1,
+    textShadowOffset: { width: 1, height: 1 }
   },
   arrowsStyle: {
     height: 25,
     width: 25,
-    backgroundColor: 'rgba(0,0,0,0)',
   },
   arrowsContainer: {
     flexDirection: 'column',
