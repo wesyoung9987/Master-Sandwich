@@ -12,10 +12,11 @@ const AverageReviews = (props) => {
   if (props.myAdventure.adventureId.stars.fourStar > 0) numStarCategories++;
   if (props.myAdventure.adventureId.stars.fiveStar > 0) numStarCategories++;
 
-  //Calculate average number of stars
-  var avg = numStarCategories ?  Math.floor(((1 * props.myAdventure.adventureId.stars.oneStar + 2 * props.myAdventure.adventureId.stars.twoStar + 3*  props.myAdventure.adventureId.stars.threeStar + 4 * props.myAdventure.adventureId.stars.fourStar + 5 * props.myAdventure.adventureId.stars.fiveStar) / numStarCategories)) : 0 ;
-
+  //Calculate total number of reviews for this adventure
   var totalReviews = props.myAdventure.adventureId.stars.oneStar + props.myAdventure.adventureId.stars.twoStar + props.myAdventure.adventureId.stars.threeStar + props.myAdventure.adventureId.stars.fourStar + props.myAdventure.adventureId.stars.fiveStar;
+
+   //Calculate average number of stars
+  var avg = numStarCategories ?  Math.floor(((1 * props.myAdventure.adventureId.stars.oneStar + 2 * props.myAdventure.adventureId.stars.twoStar + 3*  props.myAdventure.adventureId.stars.threeStar + 4 * props.myAdventure.adventureId.stars.fourStar + 5 * props.myAdventure.adventureId.stars.fiveStar) / totalReviews)) : 0 ;
 
 
   if (avg === 5) {
