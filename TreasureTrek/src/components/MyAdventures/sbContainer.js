@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, AsyncStorage, AlertIOS } from 'react-native';
-import Header from './../auth/Header.js';
 import Auth from '../auth/Auth.js';
 
 class sbContainer extends Component {
