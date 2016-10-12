@@ -73,7 +73,7 @@ const AverageReviews = (props) => {
             <Text style={styles.totalReviewsStyle}> {totalReviews} reviews</Text>
       </View>
     );
-  } else if (avg === 0) {
+  } else {
     return(
       <View style={styles.viewStyle}>
             <Image style={styles.arrowsStyle} source={require('../../resources/unselect_star.png')} />
