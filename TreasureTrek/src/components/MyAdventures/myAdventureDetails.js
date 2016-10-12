@@ -89,12 +89,18 @@ var styles = {
   titleStyle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: 'white'
+    color: 'white',
+    textShadowColor: 'gray',
+    textShadowRadius: 1,
+    textShadowOffset: { width: 1, height: 1 }
   },
   locationStyle: {
     fontSize: 14,
     color: 'white',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textShadowColor: 'gray',
+    textShadowRadius: 1,
+    textShadowOffset: { width: 1, height: 1 }
   },
   totalReviewsStyle: {
     fontSize: 14,
