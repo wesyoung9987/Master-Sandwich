@@ -112,9 +112,33 @@ class AdventureSolution extends Component {
     }
   }
 
+  //Determine if Give Up button should be displayed in riddle list.
+  //It should only display if the user has not completed the adventure.
+  showGiveUp() {
+    var riddlesComplete = true;
+    for (var i=0; i<this.state.completion.length; i++){
+      if (this.state.completion[i] === false) {
+        riddlesComplete = false;
+      }
+    }
+    //If all riddles complete, do not show Give Up button
+    if (riddlesComplete) {
+      return(<View></View>);
+    } else {
+      // Show Give Up button since adventure has not finished yet
+      return (
+        <View>
+          <TouchableHighlight style={styles.button2} onPress={this.deleteAdventure.bind(this)}  underlayColor='#00ffff'>
+              <Text  style={styles.buttonText}> Give Up? </Text>
+          </TouchableHighlight>
+        </View>
+      );
+    }
+  }
+
   render () {
     return (
-      <View style={{ flex: 1, marginTop:5, flexDirection: 'column', justifyContent: 'space-between'}}>
+      <View style={{ flex: 1, marginBottom: 5, marginTop:5, flexDirection: 'column', justifyContent: 'space-between'}}>
 
         <View style={styles.map}>
           {this.showMap()}
@@ -125,9 +149,7 @@ class AdventureSolution extends Component {
           <TouchableHighlight style={styles.button1} onPress={this.show.bind(this)} underlayColor='#00ffff'>
             <Text style={styles.buttonText}>{this.state.toggletext}</Text>
           </TouchableHighlight>
-          <TouchableHighlight style={styles.button2} onPress={this.deleteAdventure.bind(this)}  underlayColor='#00ffff'>
-              <Text  style={styles.buttonText}> Give Up? </Text>
-          </TouchableHighlight>
+          {this.showGiveUp()}
         </View>
 
       </View>
@@ -151,6 +173,7 @@ var styles = {
     borderWidth: 1,
     borderRadius: 8,
     marginTop: 5,
+    marginBottom: 5,
     marginLeft: 5,
     marginRight: 5,
     alignSelf: 'stretch',
