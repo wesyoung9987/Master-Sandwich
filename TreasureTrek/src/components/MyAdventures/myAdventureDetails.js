@@ -42,7 +42,7 @@ const MyAdventureDetails = (props) => {
             <View style={styles.detailsStyle}>
               <Text style={styles.titleStyle}>{props.myAdventure.adventureId.title}</Text>
               <Text style={styles.locationStyle}>{props.myAdventure.adventureId.startingLocation}</Text>
-              <AverageReviews myAdventure={props.myAdventure}/>
+              <AverageReviews adventureId={props.myAdventure.adventureId}/>
             </View>
             <View style={styles.arrowsContainer}>
               <Image style={styles.arrowsStyle} source={require('../../resources/red-arrow.png')} />

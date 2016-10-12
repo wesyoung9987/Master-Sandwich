@@ -7,7 +7,8 @@ import {
 } from 'react-native';
 
 // App components
-import AllAdventureDetail from './AllAdventureDetail'
+import AllAdventureDetail from './AllAdventureDetail';
+import AverageReviews from '../Reviews/AverageReviews.js';
 
 
 const AdvenLI = (props) => {
@@ -60,6 +61,7 @@ const AdvenLI = (props) => {
             <View style={detailsStyle}>
               <Text style={titleStyle} onPress={toAllAdventureDetail}>{props.adven.title}</Text>
               <Text style={locationStyle}>{props.adven.startingLocation}</Text>
+               <AverageReviews adventureId={props.adven}/>
             </View>
             <View style={arrowsContainer}>
               <Image style={arrowsStyle} source={require('../../resources/red-arrow.png')} />
