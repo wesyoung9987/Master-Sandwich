@@ -42,7 +42,7 @@ const MyAdventureDetails = (props) => {
             <View style={styles.detailsStyle}>
               <Text style={styles.titleStyle}>{props.myAdventure.adventureId.title}</Text>
               <Text style={styles.locationStyle}>{props.myAdventure.adventureId.startingLocation}</Text>
-              <AverageReviews myAdventure={props.myAdventure}/>
+              <AverageReviews adventureId={props.myAdventure.adventureId}/>
             </View>
             <View style={styles.arrowsContainer}>
               <Image style={styles.arrowsStyle} source={require('../../resources/red-arrow.png')} />
@@ -77,14 +77,10 @@ var styles = {
     justifyContent: 'space-between', // added justify
     backgroundColor: 'rgba(0,0,0,0.2)',
   },
-  viewStyle: {
-    flexDirection: 'row',
-    padding: 10,
-    justifyContent: 'space-between' // added justify
-  },
   detailsStyle: {
     flexDirection: 'column',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    //backgroundColor: 'rgba(0,0,0,0.2)'
   },
   titleStyle: {
     fontSize: 20,

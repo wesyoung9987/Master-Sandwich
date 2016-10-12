@@ -6,16 +6,17 @@ const AverageReviews = (props) => {
   //Get number of review categories (1 Star, 2 Star, etc.)
   //that actually have reviews in them
   var numStarCategories = 0;
-  if (props.myAdventure.adventureId.stars.oneStar > 0) numStarCategories++;
-  if (props.myAdventure.adventureId.stars.twoStar > 0) numStarCategories++;
-  if (props.myAdventure.adventureId.stars.threeStar > 0) numStarCategories++;
-  if (props.myAdventure.adventureId.stars.fourStar > 0) numStarCategories++;
-  if (props.myAdventure.adventureId.stars.fiveStar > 0) numStarCategories++;
+  if (props.adventureId.stars.oneStar > 0) numStarCategories++;
+  if (props.adventureId.stars.twoStar > 0) numStarCategories++;
+  if (props.adventureId.stars.threeStar > 0) numStarCategories++;
+  if (props.adventureId.stars.fourStar > 0) numStarCategories++;
+  if (props.adventureId.stars.fiveStar > 0) numStarCategories++;
 
-  //Calculate average number of stars
-  var avg = numStarCategories ?  Math.floor(((1 * props.myAdventure.adventureId.stars.oneStar + 2 * props.myAdventure.adventureId.stars.twoStar + 3*  props.myAdventure.adventureId.stars.threeStar + 4 * props.myAdventure.adventureId.stars.fourStar + 5 * props.myAdventure.adventureId.stars.fiveStar) / numStarCategories)) : 0 ;
+  //Calculate total number of reviews for this adventure
+  var totalReviews = props.adventureId.stars.oneStar + props.adventureId.stars.twoStar + props.adventureId.stars.threeStar + props.adventureId.stars.fourStar + props.adventureId.stars.fiveStar;
 
-  var totalReviews = props.myAdventure.adventureId.stars.oneStar + props.myAdventure.adventureId.stars.twoStar + props.myAdventure.adventureId.stars.threeStar + props.myAdventure.adventureId.stars.fourStar + props.myAdventure.adventureId.stars.fiveStar;
+   //Calculate average number of stars
+  var avg = numStarCategories ?  Math.floor(((1 * props.adventureId.stars.oneStar + 2 * props.adventureId.stars.twoStar + 3*  props.adventureId.stars.threeStar + 4 * props.adventureId.stars.fourStar + 5 * props.adventureId.stars.fiveStar) / totalReviews)) : 0 ;
 
 
   if (avg === 5) {
@@ -73,7 +74,7 @@ const AverageReviews = (props) => {
             <Text style={styles.totalReviewsStyle}> {totalReviews} reviews</Text>
       </View>
     );
-  } else if (avg === 0) {
+  } else {
     return(
       <View style={styles.viewStyle}>
             <Image style={styles.arrowsStyle} source={require('../../resources/unselect_star.png')} />
@@ -93,12 +94,12 @@ var styles = {
     borderWidth: 1,
     borderColor: '#ddd',
     padding: 10,
-    justifyContent: 'space-between' // added justify
+    justifyContent: 'space-between'
   },
   viewStyle: {
     flexDirection: 'row',
     padding: 10,
-    justifyContent: 'space-between' // added justify
+    justifyContent: 'space-between'
   },
   detailsStyle: {
     flexDirection: 'column',
