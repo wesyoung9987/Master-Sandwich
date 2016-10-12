@@ -1,6 +1,13 @@
 // Import a library to help create a component
 import React, { Component } from 'react';
-import { Text, View, TextInput, ScrollView, KeyboardAvoidingView } from 'react-native';
+import {
+  Text,
+  View,
+  TextInput,
+  ScrollView,
+  KeyboardAvoidingView
+} from 'react-native';
+
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import FormView from './formView';
 

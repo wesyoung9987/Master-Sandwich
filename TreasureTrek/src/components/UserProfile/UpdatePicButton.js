@@ -1,5 +1,14 @@
-import React, { Component, StyleSheet, DeviceEventEmitter } from 'react';
-import { View, Text, TouchableHighlight } from 'react-native';
+import React, {
+  Component,
+  StyleSheet,
+  DeviceEventEmitter
+} from 'react';
+import {
+  View,
+  Text,
+  TouchableHighlight
+} from 'react-native';
+
 import UploadPhoto from './UploadPhoto';
 
 const UpdatePicButton = (props) => {

@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { ScrollView, AsyncStorage, AlertIOS } from 'react-native';
+import {
+  ScrollView,
+  AsyncStorage,
+  AlertIOS
+} from 'react-native';
+
 import AdventureDetail from './AdventureDetails';
 import Collapsible from 'react-native-collapsible';
 

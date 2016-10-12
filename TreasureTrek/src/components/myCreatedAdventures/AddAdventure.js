@@ -1,6 +1,13 @@
 // Import libraries for making a component
 import React from 'react';
-import { Text, View, Image, Navigator, TouchableHighlight } from 'react-native';
+import {
+  Text,
+  View,
+  Image,
+  Navigator,
+  TouchableHighlight
+} from 'react-native';
+
 import AdventureList from './AdventureList';
 import CreateAdventure from './createAdventure/createAdventure.js';
 import CreateAdventureHeader from './createAdventureHeader';

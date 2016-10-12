@@ -1,6 +1,7 @@
 // Import a library to help create a component
 import React from 'react';
 import { View } from 'react-native';
+
 import AddAdventure from './AddAdventure';
 import AdventureList from './AdventureList';
 

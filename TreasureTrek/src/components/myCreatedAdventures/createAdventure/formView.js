@@ -1,6 +1,15 @@
 // Import a library to help create a component
 import React, { Component } from 'react';
-import { Text, View, TextInput, TouchableHighlight, AsyncStorage, Navigator, KeyboardAvoidingView } from 'react-native';
+import {
+  Text,
+  View,
+  TextInput,
+  TouchableHighlight,
+  AsyncStorage,
+  Navigator,
+  KeyboardAvoidingView
+} from 'react-native';
+
 import SubmitButton from './SubmitButton';
 import MyCreatedAdventures from '../myCreatedAdventures';
 import AdventureSubmited from './AdventureSubmited';

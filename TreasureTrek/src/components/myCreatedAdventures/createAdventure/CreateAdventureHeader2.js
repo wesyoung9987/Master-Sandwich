@@ -1,5 +1,9 @@
 import React from 'react';
-import { Text, View, Image } from 'react-native';
+import {
+  Text,
+  View,
+  Image
+} from 'react-native';
 
 // Make a componenet
 const CreateAdventureHeader2 = (props) => {
@@ -22,9 +26,6 @@ const CreateAdventureHeader2 = (props) => {
 
 const styles = {
   viewStyle: {
-    // shadowColor: '#000',
-    // shadowOffset: { width:0, height: 2 },
-    // shadowOpacity: 0.2,
     elevation: 2,
     flexDirection: 'row',
     borderWidth: 2,

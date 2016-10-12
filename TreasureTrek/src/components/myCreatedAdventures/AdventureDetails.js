@@ -1,7 +1,13 @@
 import React from 'react';
-import { Text, View, Image, Linking, TouchableHighlight } from 'react-native';
-import MyCreatedDetail from './MyCreatedDetail';
+import {
+  Text,
+  View,
+  Image,
+  Linking,
+  TouchableHighlight
+} from 'react-native';
 
+import MyCreatedDetail from './MyCreatedDetail';
 
 const AdventureDetail = ({ singleAdventure, nav }) => {
 

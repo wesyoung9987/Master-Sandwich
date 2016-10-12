@@ -29,6 +29,6 @@ const styles = {
     width: 250,
     borderRadius: 125
   }
-}
+};
 
 export default UserProfile;

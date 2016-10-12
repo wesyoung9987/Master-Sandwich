@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text, AsyncStorage, AlertIOS, Image, TouchableHighlight } from 'react-native';
+import {
+  View,
+  Text,
+  AsyncStorage,
+  AlertIOS,
+  Image,
+  TouchableHighlight
+} from 'react-native';
+
 import UserImage from './UserImage';
 import UploadPicButton from './UpdatePicButton';
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
@@ -12,13 +12,14 @@ import {
   AsyncStorage,
   ActivityIndicator
 } from 'react-native';
+
 import Credentials from '../../UserProfile/credentials';
 
 import { RNS3 } from 'react-native-aws3';
 
 import ImagePicker from 'react-native-image-picker';
 
-export default class SetImage extends React.Component {
+class SetImage extends Component {
 
   constructor(props) {
     super(props);
@@ -203,3 +204,5 @@ const styles = StyleSheet.create({
     marginRight: 75
   }
 });
+
+export default SetImage;

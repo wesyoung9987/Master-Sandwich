@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, AsyncStorage, AlertIOS, TouchableHighlight } from 'react-native';
+import {
+  View,
+  Text,
+  AsyncStorage,
+  AlertIOS,
+  TouchableHighlight
+} from 'react-native';
+
 import MapView from 'react-native-maps';
 
 class MapScreen extends Component {

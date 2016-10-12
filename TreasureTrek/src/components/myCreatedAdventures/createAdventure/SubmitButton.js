@@ -1,6 +1,9 @@
 import React from 'react';
-import { Text, View, Linking } from 'react-native';
-
+import {
+  Text,
+  View,
+  Linking
+} from 'react-native';
 
 const SubmitButton = () => {
   const {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
@@ -12,6 +12,7 @@ import {
   AsyncStorage,
   ActivityIndicator
 } from 'react-native';
+
 import Credentials from './credentials';
 import ProfileMain from './ProfileMain';
 import MenuButton from '../nav/MenuButton.js'
@@ -20,7 +21,7 @@ import { RNS3 } from 'react-native-aws3';
 
 import ImagePicker from 'react-native-image-picker';
 
-export default class App extends React.Component {
+class UploadPhoto extends Component {
 
   state = {
     waiting: false,
@@ -219,3 +220,5 @@ const styles = StyleSheet.create({
     marginRight: 75
   }
 });
+
+export default UploadPhoto;
